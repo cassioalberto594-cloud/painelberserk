@@ -180,74 +180,36 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 <!-- TELA DE LOGIN -->
 <div id="login-screen">
   <div class="login-box">
-    <div class="login-logo">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2l7 7-13 13-3-1-1-3 13-13z"/><path d="M3.5 20.5l2-2"/><path d="M18 8l-2 2"/></svg>
-    </div>
+    <div class="login-logo"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M14.5 2l7 7-13 13-3-1-1-3 13-13z"/><path d="M3.5 20.5l2-2"/><path d="M18 8l-2 2"/></svg></div>
     <div class="login-title">BERSERK</div>
-    <div class="login-sub">ADMIN PANEL v1.0</div>
+    <div class="login-sub">ADMIN PANEL v2.0</div>
     <div class="login-url">
-      <div class="login-url-label">URL da API (ex: https://berserk-api.squareweb.app)</div>
-      <input class="login-url-input" id="api-url-input" type="text" placeholder="https://seu-subdominio.squareweb.app" value="">
+      <div class="login-url-label">URL da API</div>
+      <input class="login-url-input" id="api-url-input" type="text" placeholder="https://berserk-api.squareweb.app" value="https://berserk-api.squareweb.app">
     </div>
-    <input class="login-input" id="login-senha" type="password" placeholder="Senha do painel" onkeydown="if(event.key==='Enter')fazerLogin()">
+    <input class="login-input" id="login-senha" type="password" placeholder="Senha do painel" value="berserk2024admin" onkeydown="if(event.key==='Enter')fazerLogin()">
     <button class="login-btn" onclick="fazerLogin()" id="login-btn">Entrar</button>
-    <div class="login-err" id="login-err">Senha ou URL incorreta</div>
+    <div class="login-err" id="login-err"></div>
   </div>
 </div>
 
-<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
-<symbol id="ic-sword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2l7 7-13 13-3-1-1-3 13-13z"/><path d="M3.5 20.5l2-2"/><path d="M18 8l-2 2"/></symbol>
-<symbol id="ic-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
-<symbol id="ic-diamond" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M2 9h20"/><path d="M6 3l4 6m4 0l4-6"/></symbol>
-<symbol id="ic-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></symbol>
-<symbol id="ic-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5" rx="1"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></symbol>
-<symbol id="ic-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
-<symbol id="ic-unlock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></symbol>
-<symbol id="ic-broadcast" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49"/><path d="M7.76 16.24a6 6 0 0 1 0-8.49"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 19.07a10 10 0 0 1 0-14.14"/></symbol>
-<symbol id="ic-ticket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v2z"/></symbol>
-<symbol id="ic-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
-<symbol id="ic-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol>
-<symbol id="ic-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
-<symbol id="ic-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
-<symbol id="ic-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
-<symbol id="ic-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></symbol>
-<symbol id="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
-<symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
-<symbol id="ic-dollar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></symbol>
-<symbol id="ic-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
-<symbol id="ic-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
-<symbol id="ic-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></symbol>
-<symbol id="ic-wifi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></symbol>
-<symbol id="ic-bar-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
-<symbol id="ic-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></symbol>
-<symbol id="ic-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
-<symbol id="ic-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
-<symbol id="ic-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
-<symbol id="ic-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
-<symbol id="ic-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
-<symbol id="ic-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-2"/><rect x="6" y="18" width="12" height="4"/></symbol>
-<symbol id="ic-pie" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></symbol>
-<symbol id="ic-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
-</svg>
+<svg style="display:none" ...></svg>
 
 <aside class="sidebar" id="sidebar" style="display:none">
-  <div class="sidebar-logo">
-    <div class="logo-icon"><svg width="22" height="22" color="#fff"><use href="#ic-sword"/></svg></div>
-    <div><div class="logo-text">BERSERK</div><div class="logo-sub">ADMIN PANEL</div></div>
-  </div>
+  <div class="sidebar-logo"><div class="logo-icon"><svg width="22" height="22" color="#fff"><use href="#ic-sword"/></svg></div><div><div class="logo-text">BERSERK</div><div class="logo-sub">ADMIN PANEL</div></div></div>
   <nav class="sidebar-nav">
     <div class="nav-section-label">Principal</div>
-    <div class="nav-item active" onclick="showPage('dashboard',this)"><svg width="16" height="16" class="ico"><use href="#ic-dashboard"/></svg><span class="nav-label">Dashboard</span></div>
-    <div class="nav-item" onclick="showPage('vendas',this)"><svg width="16" height="16" class="ico"><use href="#ic-bar-chart"/></svg><span class="nav-label">Vendas</span><span class="nav-badge green" id="badge-vendas-hoje">0</span></div>
-    <div class="nav-item" onclick="showPage('assinaturas',this)"><svg width="16" height="16" class="ico"><use href="#ic-diamond"/></svg><span class="nav-label">Assinaturas</span><span class="nav-badge" id="badge-ativas">0</span></div>
-    <div class="nav-item" onclick="showPage('restritos',this)"><svg width="16" height="16" class="ico"><use href="#ic-mute"/></svg><span class="nav-label">Restritos</span><span class="nav-badge red" id="badge-restritos">0</span></div>
-    <div class="nav-item" onclick="showPage('testes',this)"><svg width="16" height="16" class="ico"><use href="#ic-gift"/></svg><span class="nav-label">Testes Grátis</span><span class="nav-badge green" id="badge-testes">0</span></div>
+    <div class="nav-item active" onclick="showPage('dashboard',this)"><svg width="16" height="16"><use href="#ic-dashboard"/></svg><span class="nav-label">Dashboard</span></div>
+    <div class="nav-item" onclick="showPage('vendas',this)"><svg width="16" height="16"><use href="#ic-bar-chart"/></svg><span class="nav-label">Vendas</span><span class="nav-badge green" id="badge-vendas-hoje">0</span></div>
+    <div class="nav-item" onclick="showPage('assinaturas',this)"><svg width="16" height="16"><use href="#ic-diamond"/></svg><span class="nav-label">Assinaturas</span><span class="nav-badge" id="badge-ativas">0</span></div>
+    <div class="nav-item" onclick="showPage('restritos',this)"><svg width="16" height="16"><use href="#ic-mute"/></svg><span class="nav-label">Restritos</span><span class="nav-badge red" id="badge-restritos">0</span></div>
+    <div class="nav-item" onclick="showPage('testes',this)"><svg width="16" height="16"><use href="#ic-gift"/></svg><span class="nav-label">Testes Grátis</span><span class="nav-badge green" id="badge-testes">0</span></div>
+    <div class="nav-item" onclick="showPage('cupons',this)"><svg width="16" height="16"><use href="#ic-ticket"/></svg><span class="nav-label">Cupons</span><span class="nav-badge purple" id="badge-cupons">0</span></div>
     <div class="nav-section-label">Ferramentas</div>
-    <div class="nav-item" onclick="showPage('liberar',this)"><svg width="16" height="16" class="ico"><use href="#ic-unlock"/></svg><span class="nav-label">Liberar Usuário</span></div>
-    <div class="nav-item" onclick="showPage('cupons',this)"><svg width="16" height="16" class="ico"><use href="#ic-ticket"/></svg><span class="nav-label">Cupons</span></div>
-    <div class="nav-item" onclick="showPage('expirar',this)"><svg width="16" height="16" class="ico"><use href="#ic-clock"/></svg><span class="nav-label">A Expirar</span></div>
+    <div class="nav-item" onclick="showPage('liberar',this)"><svg width="16" height="16"><use href="#ic-unlock"/></svg><span class="nav-label">Liberar Usuário</span></div>
+    <div class="nav-item" onclick="showPage('expirar',this)"><svg width="16" height="16"><use href="#ic-clock"/></svg><span class="nav-label">A Expirar</span></div>
     <div class="nav-section-label">Sistema</div>
-    <div class="nav-item" onclick="showPage('backup',this)"><svg width="16" height="16" class="ico"><use href="#ic-save"/></svg><span class="nav-label">Backup</span></div>
+    <div class="nav-item" onclick="showPage('backup',this)"><svg width="16" height="16"><use href="#ic-save"/></svg><span class="nav-label">Backup</span></div>
   </nav>
   <div class="sidebar-footer">
     <div class="status-pill" onclick="recarregarTudo()">
@@ -263,14 +225,8 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
     <svg width="14" height="14" color="var(--text-3)"><use href="#ic-dashboard"/></svg>
     <div class="breadcrumb">BERSERK <span style="color:var(--text-3);margin:0 2px">›</span> <span id="breadcrumb-text">Dashboard</span></div>
     <div class="topbar-right">
-      <div class="search-wrap">
-        <svg width="14" height="14" color="var(--text-3)" class="ico"><use href="#ic-search"/></svg>
-        <input class="search-bar" type="text" placeholder="Buscar por ID..." id="global-search" onkeydown="if(event.key==='Enter')globalSearch()">
-      </div>
-      <div class="admin-chip">
-        <div class="admin-avatar"><svg width="15" height="15" color="#fff"><use href="#ic-user"/></svg></div>
-        <div><div style="font-size:12px;font-weight:700">Admin</div><div class="api-url-display" id="api-url-show"></div></div>
-      </div>
+      <div class="search-wrap"><svg width="14" height="14" color="var(--text-3)"><use href="#ic-search"/></svg><input class="search-bar" type="text" placeholder="Buscar por ID..." id="global-search" onkeydown="if(event.key==='Enter')globalSearch()"></div>
+      <div class="admin-chip"><div class="admin-avatar"><svg width="15" height="15" color="#fff"><use href="#ic-user"/></svg></div><div><div style="font-size:12px;font-weight:700">Admin</div><div class="api-url-display" id="api-url-show"></div></div></div>
       <button class="btn btn-ghost btn-sm" onclick="logout()" title="Sair"><svg width="14" height="14"><use href="#ic-logout"/></svg></button>
     </div>
   </div>
@@ -282,36 +238,26 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
       <div class="page-title">Dashboard</div>
       <div class="page-sub" id="dash-date"></div>
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="18" height="18" color="var(--purple-3)"><use href="#ic-diamond"/></svg></div><div class="stat-value" id="stat-ativas">—</div><div class="stat-label">Assinaturas Ativas</div><div class="stat-change up" id="stat-mrr"><svg width="11" height="11"><use href="#ic-trending"/></svg> Carregando...</div></div>
-        <div class="stat-card red"><div class="stat-icon-wrap red"><svg width="18" height="18" color="var(--red)"><use href="#ic-mute"/></svg></div><div class="stat-value" id="stat-restritos">—</div><div class="stat-label">Usuários Restritos</div><div class="stat-change neutral">Sem acesso ao grupo</div></div>
-        <div class="stat-card green"><div class="stat-icon-wrap green"><svg width="18" height="18" color="var(--green)"><use href="#ic-gift"/></svg></div><div class="stat-value" id="stat-testes">—</div><div class="stat-label">Testes Ativos</div><div class="stat-change up">Trial de 3 dias</div></div>
-        <div class="stat-card blue"><div class="stat-icon-wrap blue"><svg width="18" height="18" color="var(--blue)"><use href="#ic-users"/></svg></div><div class="stat-value" id="stat-usuarios">—</div><div class="stat-label">Usuários no Bot</div><div class="stat-change neutral">Total registrados</div></div>
+        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="18" height="18"><use href="#ic-diamond"/></svg></div><div class="stat-value" id="stat-ativas">—</div><div class="stat-label">Assinaturas Ativas</div><div class="stat-change up" id="stat-mrr"></div></div>
+        <div class="stat-card red"><div class="stat-icon-wrap red"><svg width="18" height="18"><use href="#ic-mute"/></svg></div><div class="stat-value" id="stat-restritos">—</div><div class="stat-label">Usuários Restritos</div></div>
+        <div class="stat-card green"><div class="stat-icon-wrap green"><svg width="18" height="18"><use href="#ic-gift"/></svg></div><div class="stat-value" id="stat-testes">—</div><div class="stat-label">Testes Ativos</div></div>
+        <div class="stat-card blue"><div class="stat-icon-wrap blue"><svg width="18" height="18"><use href="#ic-users"/></svg></div><div class="stat-value" id="stat-usuarios">—</div><div class="stat-label">Usuários no Bot</div></div>
       </div>
       <div class="sales-row">
-        <div class="sales-card"><div class="sales-label"><svg width="12" height="12" color="var(--purple-3)"><use href="#ic-cart"/></svg>Total de Vendas</div><div class="sales-value" id="d-total-vendas">—</div><div class="sales-revenue" id="d-total-receita">R$ 0</div><div class="sales-bar"><div class="sales-bar-fill" style="width:100%"></div></div></div>
-        <div class="sales-card"><div class="sales-label"><svg width="12" height="12" color="var(--purple-3)"><use href="#ic-calendar"/></svg>Vendas no Mês</div><div class="sales-value" id="d-mes-vendas">—</div><div class="sales-revenue" id="d-mes-receita">R$ 0</div><div class="sales-bar"><div class="sales-bar-fill" id="bar-mes" style="width:0%"></div></div></div>
-        <div class="sales-card"><div class="sales-label"><svg width="12" height="12" color="var(--purple-3)"><use href="#ic-trending"/></svg>Vendas na Semana</div><div class="sales-value" id="d-sem-vendas">—</div><div class="sales-revenue" id="d-sem-receita">R$ 0</div><div class="sales-bar"><div class="sales-bar-fill" id="bar-sem" style="width:0%"></div></div></div>
-        <div class="sales-card"><div class="sales-label"><svg width="12" height="12" color="var(--purple-3)"><use href="#ic-zap"/></svg>Vendas Hoje</div><div class="sales-value" id="d-hoje-vendas">—</div><div class="sales-revenue" id="d-hoje-receita">R$ 0</div><div class="sales-bar"><div class="sales-bar-fill" id="bar-hoje" style="width:0%"></div></div></div>
+        <div class="sales-card"><div class="sales-label"><svg width="12" height="12"><use href="#ic-cart"/></svg>Total de Vendas</div><div class="sales-value" id="d-total-vendas">—</div><div class="sales-revenue" id="d-total-receita">R$ 0</div></div>
+        <div class="sales-card"><div class="sales-label"><svg width="12" height="12"><use href="#ic-calendar"/></svg>Vendas no Mês</div><div class="sales-value" id="d-mes-vendas">—</div><div class="sales-revenue" id="d-mes-receita">R$ 0</div></div>
+        <div class="sales-card"><div class="sales-label"><svg width="12" height="12"><use href="#ic-trending"/></svg>Vendas na Semana</div><div class="sales-value" id="d-sem-vendas">—</div><div class="sales-revenue" id="d-sem-receita">R$ 0</div></div>
+        <div class="sales-card"><div class="sales-label"><svg width="12" height="12"><use href="#ic-zap"/></svg>Vendas Hoje</div><div class="sales-value" id="d-hoje-vendas">—</div><div class="sales-revenue" id="d-hoje-receita">R$ 0</div></div>
       </div>
       <div class="two-col">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title"><svg width="15" height="15" color="var(--purple-3)"><use href="#ic-clock"/></svg>Próximos a Expirar (7 dias)</div>
-            <button class="refresh-btn" onclick="carregarAssinaturas()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
+        <div class="card"><div class="card-header"><div class="card-title"><svg width="15" height="15"><use href="#ic-clock"/></svg>Próximos a Expirar (7 dias)</div><button class="refresh-btn" onclick="carregarAssinaturas()"><svg width="12" height="12"><use href="#ic-refresh"/></svg></button></div><div id="dash-expirar">Carregando...</div></div>
+        <div><div class="card"><div class="card-title" style="margin-bottom:14px"><svg width="15" height="15"><use href="#ic-zap"/></svg>Ações Rápidas</div>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="showPage('liberar',null)"><svg width="14" height="14"><use href="#ic-unlock"/></svg> Liberar Usuário</button>
+            <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openModal('modal-cancelar')"><svg width="14" height="14"><use href="#ic-x"/></svg> Cancelar Assinatura</button>
+            <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openModal('modal-estender')"><svg width="14" height="14"><use href="#ic-plus"/></svg> Estender Todos</button>
           </div>
-          <div id="dash-expirar"><div style="color:var(--text-3);font-size:13px">Carregando...</div></div>
-        </div>
-        <div>
-          <div class="card">
-            <div class="card-title" style="margin-bottom:14px"><svg width="15" height="15" color="var(--purple-3)"><use href="#ic-zap"/></svg>Ações Rápidas</div>
-            <div style="display:flex;flex-direction:column;gap:9px">
-              <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="showPage('liberar',null)"><svg width="14" height="14"><use href="#ic-unlock"/></svg> Liberar Usuário</button>
-              <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openModal('modal-cancelar')"><svg width="14" height="14"><use href="#ic-x"/></svg> Cancelar Assinatura</button>
-              <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openModal('modal-estender')"><svg width="14" height="14"><use href="#ic-plus"/></svg> Estender Todos</button>
-              <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openModal('modal-desrest')"><svg width="14" height="14"><use href="#ic-unlock"/></svg> Desrestringir</button>
-            </div>
-          </div>
-        </div>
+        </div></div>
       </div>
     </div>
 
@@ -320,23 +266,14 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
       <div class="page-title">Vendas</div>
       <div class="page-sub">Histórico completo de receita e transações</div>
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="18" height="18" color="var(--purple-3)"><use href="#ic-cart"/></svg></div><div class="stat-value" id="v-total">—</div><div class="stat-label">Total de Vendas</div><div class="stat-change up" id="v-total-r"></div></div>
-        <div class="stat-card blue"><div class="stat-icon-wrap blue"><svg width="18" height="18" color="var(--blue)"><use href="#ic-calendar"/></svg></div><div class="stat-value" id="v-mes">—</div><div class="stat-label">Vendas no Mês</div><div class="stat-change up" id="v-mes-r"></div></div>
-        <div class="stat-card green"><div class="stat-icon-wrap green"><svg width="18" height="18" color="var(--green)"><use href="#ic-trending"/></svg></div><div class="stat-value" id="v-sem">—</div><div class="stat-label">Vendas na Semana</div><div class="stat-change up" id="v-sem-r"></div></div>
-        <div class="stat-card yellow"><div class="stat-icon-wrap yellow"><svg width="18" height="18" color="var(--yellow)"><use href="#ic-zap"/></svg></div><div class="stat-value" id="v-hoje">—</div><div class="stat-label">Vendas Hoje</div><div class="stat-change up" id="v-hoje-r"></div></div>
+        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="18" height="18"><use href="#ic-cart"/></svg></div><div class="stat-value" id="v-total">—</div><div class="stat-label">Total de Vendas</div><div class="stat-change up" id="v-total-r"></div></div>
+        <div class="stat-card blue"><div class="stat-icon-wrap blue"><svg width="18" height="18"><use href="#ic-calendar"/></svg></div><div class="stat-value" id="v-mes">—</div><div class="stat-label">Vendas no Mês</div><div class="stat-change up" id="v-mes-r"></div></div>
+        <div class="stat-card green"><div class="stat-icon-wrap green"><svg width="18" height="18"><use href="#ic-trending"/></svg></div><div class="stat-value" id="v-sem">—</div><div class="stat-label">Vendas na Semana</div><div class="stat-change up" id="v-sem-r"></div></div>
+        <div class="stat-card yellow"><div class="stat-icon-wrap yellow"><svg width="18" height="18"><use href="#ic-zap"/></svg></div><div class="stat-value" id="v-hoje">—</div><div class="stat-label">Vendas Hoje</div><div class="stat-change up" id="v-hoje-r"></div></div>
       </div>
       <div class="card">
-        <div class="card-header">
-          <div class="card-title"><svg width="15" height="15" color="var(--purple-3)"><use href="#ic-dollar"/></svg>Histórico de Transações</div>
-          <div style="display:flex;gap:8px">
-            <button class="refresh-btn" onclick="carregarVendas()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
-            <button class="card-action" onclick="exportarCSV()"><svg width="12" height="12"><use href="#ic-download"/></svg>Exportar CSV</button>
-          </div>
-        </div>
-        <table class="data-table">
-          <thead><tr><th>Payment ID</th><th>User ID</th><th>Valor</th><th>Data</th><th>Tipo</th><th>Status</th></tr></thead>
-          <tbody id="vendas-table-body"><tr class="loading-row"><td colspan="6"><div class="spinner"></div> Carregando...</td></tr></tbody>
-        </table>
+        <div class="card-header"><div class="card-title"><svg width="15" height="15"><use href="#ic-dollar"/></svg>Histórico de Transações</div><button class="card-action" onclick="exportarCSV()"><svg width="12" height="12"><use href="#ic-download"/></svg>Exportar CSV</button></div>
+        <table class="data-table"><thead><tr><th>Payment ID</th><th>User ID</th><th>Valor</th><th>Data</th><th>Tipo</th><th>Status</th></tr></thead><tbody id="vendas-table-body"><tr class="loading-row"><td colspan="6"><div class="spinner"></div> Carregando...</td></tr></tbody></table>
       </div>
     </div>
 
@@ -345,23 +282,13 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
       <div class="page-title">Assinaturas</div>
       <div class="page-sub">Gerencie todos os planos ativos e histórico</div>
       <div class="stats-grid-3">
-        <div class="stat-card"><div class="stat-icon-wrap green"><svg width="18" height="18" color="var(--green)"><use href="#ic-check"/></svg></div><div class="stat-value" id="sub-ativas">—</div><div class="stat-label">Ativas</div></div>
-        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="18" height="18" color="var(--purple-3)"><use href="#ic-bar-chart"/></svg></div><div class="stat-value" id="sub-total">—</div><div class="stat-label">Total histórico</div></div>
-        <div class="stat-card yellow"><div class="stat-icon-wrap yellow"><svg width="18" height="18" color="var(--yellow)"><use href="#ic-dollar"/></svg></div><div class="stat-value" id="sub-mrr">R$ —</div><div class="stat-label">MRR estimado</div></div>
+        <div class="stat-card"><div class="stat-icon-wrap green"><svg width="18" height="18"><use href="#ic-check"/></svg></div><div class="stat-value" id="sub-ativas">—</div><div class="stat-label">Ativas</div></div>
+        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="18" height="18"><use href="#ic-bar-chart"/></svg></div><div class="stat-value" id="sub-total">—</div><div class="stat-label">Total histórico</div></div>
+        <div class="stat-card yellow"><div class="stat-icon-wrap yellow"><svg width="18" height="18"><use href="#ic-dollar"/></svg></div><div class="stat-value" id="sub-mrr">R$ —</div><div class="stat-label">MRR estimado</div></div>
       </div>
       <div class="card">
-        <div class="card-header">
-          <div class="card-title"><svg width="15" height="15" color="var(--purple-3)"><use href="#ic-diamond"/></svg>Lista de Assinantes</div>
-          <div style="display:flex;gap:8px">
-            <div class="search-wrap"><svg width="13" height="13" color="var(--text-3)" class="ico" style="left:9px"><use href="#ic-search"/></svg><input class="search-bar" style="width:150px" placeholder="Filtrar ID..." id="filter-sub" oninput="renderSubTable()"></div>
-            <button class="refresh-btn" onclick="carregarAssinaturas()"><svg width="12" height="12"><use href="#ic-refresh"/></svg></button>
-            <button class="btn btn-primary btn-sm" onclick="openModal('modal-liberar')"><svg width="12" height="12"><use href="#ic-plus"/></svg> Novo</button>
-          </div>
-        </div>
-        <table class="data-table">
-          <thead><tr><th>USER ID</th><th>Username</th><th>Início</th><th>Expira</th><th>Dias Rest.</th><th>Status</th><th>Ações</th></tr></thead>
-          <tbody id="sub-table-body"><tr class="loading-row"><td colspan="7"><div class="spinner"></div> Carregando...</td></tr></tbody>
-        </table>
+        <div class="card-header"><div class="card-title"><svg width="15" height="15"><use href="#ic-diamond"/></svg>Lista de Assinantes</div><div class="search-wrap"><svg width="13" height="13" class="ico" style="left:9px"><use href="#ic-search"/></svg><input class="search-bar" style="width:150px" placeholder="Filtrar ID..." id="filter-sub" oninput="renderSubTable()"></div></div>
+        <div style="overflow-x:auto"><table class="data-table"><thead><tr><th>USER ID</th><th>Username</th><th>Início</th><th>Expira</th><th>Dias Rest.</th><th>Status</th></tr></thead><tbody id="sub-table-body"><tr class="loading-row"><td colspan="6"><div class="spinner"></div> Carregando...</td></tr></tbody></table></div>
       </div>
     </div>
 
@@ -369,112 +296,57 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
     <div class="page" id="page-restritos">
       <div class="page-title">Usuários Restritos</div>
       <div class="page-sub">Usuários sem permissão de enviar mensagens no grupo</div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title"><svg width="15" height="15" color="var(--red)"><use href="#ic-mute"/></svg>Lista de Restritos</div>
-          <div style="display:flex;gap:8px">
-            <button class="refresh-btn" onclick="carregarRestritos()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
-            <button class="btn btn-ghost btn-sm" onclick="openModal('modal-desrest')"><svg width="13" height="13"><use href="#ic-unlock"/></svg> Desrestringir</button>
-          </div>
-        </div>
-        <table class="data-table">
-          <thead><tr><th>USER ID</th><th>Restrito desde</th><th>Expira restrição</th><th>Horas restantes</th><th>Ações</th></tr></thead>
-          <tbody id="rest-table-body"><tr class="loading-row"><td colspan="5"><div class="spinner"></div> Carregando...</td></tr></tbody>
-        </table>
-      </div>
+      <div class="card"><div class="card-header"><div class="card-title"><svg width="15" height="15"><use href="#ic-mute"/></svg>Lista de Restritos</div><button class="btn btn-ghost btn-sm" onclick="openModal('modal-desrest')"><svg width="13" height="13"><use href="#ic-unlock"/></svg> Desrestringir</button></div>
+      <div style="overflow-x:auto"><table class="data-table"><thead><tr><th>USER ID</th><th>Restrito desde</th><th>Expira restrição</th><th>Horas restantes</th><th>Ações</th></tr></thead><tbody id="rest-table-body"><tr class="loading-row"><td colspan="5"><div class="spinner"></div> Carregando...</td></tr></tbody></table></div></div>
     </div>
 
     <!-- TESTES -->
     <div class="page" id="page-testes">
       <div class="page-title">Testes Grátis</div>
       <div class="page-sub">Usuários no período de trial de 3 dias</div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title"><svg width="15" height="15" color="var(--green)"><use href="#ic-gift"/></svg>Trials Ativos</div>
-          <button class="refresh-btn" onclick="carregarTestes()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
-        </div>
-        <div id="trial-list" style="display:flex;flex-direction:column;gap:14px"><div style="color:var(--text-3);font-size:13px;display:flex;align-items:center;gap:8px"><div class="spinner"></div> Carregando...</div></div>
-      </div>
-    </div>
-
-    <!-- LIBERAR -->
-    <div class="page" id="page-liberar">
-      <div class="page-title">Liberar Usuário</div>
-      <div class="page-sub">Ative ou renove manualmente uma assinatura</div>
-      <div class="two-col">
-        <div class="card">
-          <div class="card-title" style="margin-bottom:18px"><svg width="15" height="15" color="var(--purple-3)"><use href="#ic-unlock"/></svg>Nova Liberação Manual</div>
-          <div class="input-group"><div class="input-label"><svg width="12" height="12"><use href="#ic-user"/></svg>ID do Usuário Telegram</div><input class="input-field" type="number" placeholder="Ex: 123456789" id="lib-uid"></div>
-          <div class="input-group">
-            <div class="input-label"><svg width="12" height="12"><use href="#ic-calendar"/></svg>Duração (dias)</div>
-            <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px">
-              <div class="chip" onclick="setDias(7)">7 dias</div><div class="chip" onclick="setDias(15)">15 dias</div><div class="chip selected" onclick="setDias(30)">30 dias</div><div class="chip" onclick="setDias(60)">60 dias</div><div class="chip" onclick="setDias(90)">90 dias</div>
-            </div>
-            <input class="input-field" type="number" placeholder="Ou digite manualmente" id="lib-dias" value="30">
-          </div>
-          <div style="display:flex;gap:9px">
-            <button class="btn btn-primary" onclick="liberarUsuario()" style="flex:1;justify-content:center" id="btn-liberar"><svg width="14" height="14"><use href="#ic-unlock"/></svg> Liberar</button>
-            <button class="btn btn-ghost" onclick="checkStatus()" style="flex:1;justify-content:center"><svg width="14" height="14"><use href="#ic-search"/></svg> Verificar Status</button>
-          </div>
-          <div id="status-result" style="margin-top:15px;display:none"><div style="height:1px;background:linear-gradient(90deg,transparent,var(--purple-1)55,transparent);margin:18px 0"></div><div class="card" style="margin:0;background:var(--bg-base)"><div id="status-content"></div></div></div>
-        </div>
-        <div>
-          <div class="card">
-            <div class="card-title" style="margin-bottom:15px"><svg width="15" height="15" color="var(--red)"><use href="#ic-x"/></svg>Cancelar Assinatura</div>
-            <div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" placeholder="Ex: 123456789" id="cancel-uid"></div>
-            <button class="btn btn-danger" onclick="cancelarAssinatura()" style="width:100%;justify-content:center"><svg width="14" height="14"><use href="#ic-x"/></svg> Cancelar Plano</button>
-          </div>
-          <div class="card">
-            <div class="card-title" style="margin-bottom:15px"><svg width="15" height="15" color="var(--green)"><use href="#ic-unlock"/></svg>Desrestringir</div>
-            <div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" placeholder="Ex: 123456789" id="desrest-uid"></div>
-            <button class="btn btn-success" onclick="desrestringirUsuario()" style="width:100%;justify-content:center"><svg width="14" height="14"><use href="#ic-unlock"/></svg> Remover Restrição</button>
-          </div>
-        </div>
-      </div>
+      <div class="card"><div class="card-header"><div class="card-title"><svg width="15" height="15"><use href="#ic-gift"/></svg>Trials Ativos</div><button class="refresh-btn" onclick="carregarTestes()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button></div><div id="trial-list" style="display:flex;flex-direction:column;gap:14px"><div class="spinner"></div> Carregando...</div></div>
     </div>
 
     <!-- CUPONS -->
     <div class="page" id="page-cupons">
       <div class="page-title">Cupons de Indicação</div>
       <div class="page-sub">Sistema de afiliados e descontos</div>
-      <div class="three-col">
-        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="18" height="18" color="var(--purple-3)"><use href="#ic-ticket"/></svg></div><div class="stat-value" id="cup-total">—</div><div class="stat-label">Cupons Criados</div></div>
-        <div class="stat-card green"><div class="stat-icon-wrap green"><svg width="18" height="18" color="var(--green)"><use href="#ic-check"/></svg></div><div class="stat-value" id="cup-usos">—</div><div class="stat-label">Total de Usos</div></div>
-        <div class="stat-card yellow"><div class="stat-icon-wrap yellow"><svg width="18" height="18" color="var(--yellow)"><use href="#ic-dollar"/></svg></div><div class="stat-value" id="cup-creditos">—</div><div class="stat-label">Créditos Pendentes</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title"><svg width="15" height="15" color="var(--yellow)"><use href="#ic-trophy"/></svg>Ranking de Indicadores</div>
-          <button class="refresh-btn" onclick="carregarCupons()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
-        </div>
-        <table class="data-table"><thead><tr><th>#</th><th>Usuário</th><th>Código</th><th>Usos</th><th>Créditos</th></tr></thead><tbody id="cupons-table"><tr class="loading-row"><td colspan="5"><div class="spinner"></div> Carregando...</td></tr></tbody></table>
-      </div>
+      <div class="three-col"><div class="stat-card"><div class="stat-icon-wrap purple"><svg width="18" height="18"><use href="#ic-ticket"/></svg></div><div class="stat-value" id="cup-total">—</div><div class="stat-label">Cupons Criados</div></div>
+      <div class="stat-card green"><div class="stat-icon-wrap green"><svg width="18" height="18"><use href="#ic-check"/></svg></div><div class="stat-value" id="cup-usos">—</div><div class="stat-label">Total de Usos</div></div>
+      <div class="stat-card yellow"><div class="stat-icon-wrap yellow"><svg width="18" height="18"><use href="#ic-dollar"/></svg></div><div class="stat-value" id="cup-creditos">—</div><div class="stat-label">Créditos Pendentes</div></div></div>
+      <div class="card"><div class="card-header"><div class="card-title"><svg width="15" height="15"><use href="#ic-trophy"/></svg>Ranking de Indicadores</div><button class="refresh-btn" onclick="carregarCupons()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button></div>
+      <div style="overflow-x:auto"><table class="data-table"><thead><tr><th>#</th><th>Usuário</th><th>Código</th><th>Usos</th><th>Créditos</th></tr></thead><tbody id="cupons-table"><tr class="loading-row"><td colspan="5"><div class="spinner"></div> Carregando...</td></tr></tbody></table></div></div>
     </div>
 
     <!-- A EXPIRAR -->
     <div class="page" id="page-expirar">
       <div class="page-title">A Expirar em Breve</div>
       <div class="page-sub">Assinaturas próximas do vencimento nos próximos 7 dias</div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title"><svg width="15" height="15" color="var(--yellow)"><use href="#ic-clock"/></svg>Próximos 7 dias</div>
-          <div style="display:flex;gap:8px">
-            <button class="refresh-btn" onclick="carregarAssinaturas()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
-            <button class="btn btn-primary btn-sm" onclick="openModal('modal-estender')"><svg width="12" height="12"><use href="#ic-plus"/></svg> Estender Todas</button>
-          </div>
+      <div class="card"><div class="card-header"><div class="card-title"><svg width="15" height="15"><use href="#ic-clock"/></svg>Próximos 7 dias</div><button class="btn btn-primary btn-sm" onclick="openModal('modal-estender')"><svg width="12" height="12"><use href="#ic-plus"/></svg> Estender Todas</button></div><div id="expirar-list">Carregando...</div></div>
+    </div>
+
+    <!-- BACKUP & liberar -->
+    <div class="page" id="page-liberar">
+      <div class="page-title">Liberar Usuário</div>
+      <div class="page-sub">Ative ou renove manualmente uma assinatura</div>
+      <div class="two-col">
+        <div class="card"><div class="card-title" style="margin-bottom:18px"><svg width="15" height="15"><use href="#ic-unlock"/></svg>Nova Liberação Manual</div>
+          <div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" placeholder="Ex: 123456789" id="lib-uid"></div>
+          <div class="input-group"><div class="input-label">Duração (dias)</div><div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px"><div class="chip" onclick="setDias(7)">7 dias</div><div class="chip" onclick="setDias(15)">15 dias</div><div class="chip selected" onclick="setDias(30)">30 dias</div><div class="chip" onclick="setDias(60)">60 dias</div><div class="chip" onclick="setDias(90)">90 dias</div></div><input class="input-field" type="number" id="lib-dias" value="30"></div>
+          <div style="display:flex;gap:9px"><button class="btn btn-primary" onclick="liberarUsuario()" style="flex:1"><svg width="14" height="14"><use href="#ic-unlock"/></svg> Liberar</button><button class="btn btn-ghost" onclick="checkStatus()" style="flex:1"><svg width="14" height="14"><use href="#ic-search"/></svg> Verificar Status</button></div>
+          <div id="status-result" style="margin-top:15px;display:none"><div style="height:1px;background:linear-gradient(90deg,transparent,var(--purple-1)55,transparent);margin:18px 0"></div><div class="card" style="margin:0;background:var(--bg-base)"><div id="status-content"></div></div></div>
         </div>
-        <div id="expirar-list"><div style="color:var(--text-3);font-size:13px;display:flex;align-items:center;gap:8px"><div class="spinner"></div> Carregando...</div></div>
+        <div><div class="card"><div class="card-title" style="margin-bottom:15px"><svg width="15" height="15" color="var(--red)"><use href="#ic-x"/></svg>Cancelar Assinatura</div><div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" id="cancel-uid"></div><button class="btn btn-danger" onclick="cancelarAssinatura()" style="width:100%"><svg width="14" height="14"><use href="#ic-x"/></svg> Cancelar Plano</button></div></div>
       </div>
     </div>
 
-    <!-- BACKUP -->
     <div class="page" id="page-backup">
       <div class="page-title">Backup & Exportação</div>
       <div class="page-sub">Gerencie e exporte os dados do sistema</div>
       <div class="three-col">
-        <div class="card" style="text-align:center"><div style="width:52px;height:52px;border-radius:14px;background:var(--purple-glow);border:1px solid var(--border-glow);display:flex;align-items:center;justify-content:center;margin:0 auto 14px"><svg width="24" height="24" color="var(--purple-3)"><use href="#ic-save"/></svg></div><div style="font-weight:700;margin-bottom:7px">Backup Completo</div><div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Exporta dados via API em JSON</div><button class="btn btn-primary" onclick="gerarBackup()" style="width:100%;justify-content:center"><svg width="14" height="14"><use href="#ic-download"/></svg> Gerar JSON</button></div>
-        <div class="card" style="text-align:center"><div style="width:52px;height:52px;border-radius:14px;background:#22d6a018;border:1px solid #22d6a030;display:flex;align-items:center;justify-content:center;margin:0 auto 14px"><svg width="24" height="24" color="var(--green)"><use href="#ic-bar-chart"/></svg></div><div style="font-weight:700;margin-bottom:7px">Exportar CSV</div><div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Lista de assinantes em planilha</div><button class="btn btn-ghost" onclick="exportarCSV()" style="width:100%;justify-content:center"><svg width="14" height="14"><use href="#ic-download"/></svg> Exportar CSV</button></div>
-        <div class="card" style="text-align:center"><div style="width:52px;height:52px;border-radius:14px;background:#38bdf818;border:1px solid #38bdf830;display:flex;align-items:center;justify-content:center;margin:0 auto 14px"><svg width="24" height="24" color="var(--blue)"><use href="#ic-info"/></svg></div><div style="font-weight:700;margin-bottom:7px">Status do Bot</div><div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Verifica conexão com a API</div><button class="btn btn-success" onclick="verificarConexao()" style="width:100%;justify-content:center"><svg width="14" height="14"><use href="#ic-check"/></svg> Verificar</button></div>
+        <div class="card" style="text-align:center"><div style="width:52px;height:52px;border-radius:14px;background:var(--purple-glow);border:1px solid var(--border-glow);display:flex;align-items:center;justify-content:center;margin:0 auto 14px"><svg width="24" height="24"><use href="#ic-save"/></svg></div><div style="font-weight:700;margin-bottom:7px">Backup Completo</div><button class="btn btn-primary" onclick="gerarBackup()" style="width:100%"><svg width="14" height="14"><use href="#ic-download"/></svg> Gerar JSON</button></div>
+        <div class="card" style="text-align:center"><div style="width:52px;height:52px;border-radius:14px;background:#22d6a018;border:1px solid #22d6a030;display:flex;align-items:center;justify-content:center;margin:0 auto 14px"><svg width="24" height="24"><use href="#ic-bar-chart"/></svg></div><div style="font-weight:700;margin-bottom:7px">Exportar CSV</div><button class="btn btn-ghost" onclick="exportarCSV()" style="width:100%"><svg width="14" height="14"><use href="#ic-download"/></svg> Exportar CSV</button></div>
+        <div class="card" style="text-align:center"><div style="width:52px;height:52px;border-radius:14px;background:#38bdf818;border:1px solid #38bdf830;display:flex;align-items:center;justify-content:center;margin:0 auto 14px"><svg width="24" height="24"><use href="#ic-info"/></svg></div><div style="font-weight:700;margin-bottom:7px">Status do Bot</div><button class="btn btn-success" onclick="verificarConexao()" style="width:100%"><svg width="14" height="14"><use href="#ic-check"/></svg> Verificar</button></div>
       </div>
     </div>
 
@@ -482,7 +354,6 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 </main>
 
 <!-- MODAIS -->
-<div class="modal-overlay" id="modal-liberar"><div class="modal"><div class="modal-header"><div class="modal-title"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-unlock"/></svg>Liberar Usuário</div><button class="modal-close" onclick="closeModal('modal-liberar')"><svg width="13" height="13"><use href="#ic-x"/></svg></button></div><div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" id="m-lib-uid" placeholder="123456789"></div><div class="input-group"><div class="input-label">Dias de acesso</div><input class="input-field" type="number" id="m-lib-dias" value="30"></div><div class="modal-footer"><button class="btn btn-ghost" onclick="closeModal('modal-liberar')">Cancelar</button><button class="btn btn-primary" onclick="liberarModal()"><svg width="13" height="13"><use href="#ic-unlock"/></svg>Liberar</button></div></div></div>
 <div class="modal-overlay" id="modal-cancelar"><div class="modal"><div class="modal-header"><div class="modal-title"><svg width="16" height="16" color="var(--red)"><use href="#ic-x"/></svg>Cancelar Assinatura</div><button class="modal-close" onclick="closeModal('modal-cancelar')"><svg width="13" height="13"><use href="#ic-x"/></svg></button></div><div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" id="m-cancel-uid" placeholder="123456789"></div><div class="modal-footer"><button class="btn btn-ghost" onclick="closeModal('modal-cancelar')">Cancelar</button><button class="btn btn-danger" onclick="cancelarModal()"><svg width="13" height="13"><use href="#ic-x"/></svg>Confirmar</button></div></div></div>
 <div class="modal-overlay" id="modal-estender"><div class="modal"><div class="modal-header"><div class="modal-title"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-plus"/></svg>Estender Todas as Assinaturas</div><button class="modal-close" onclick="closeModal('modal-estender')"><svg width="13" height="13"><use href="#ic-x"/></svg></button></div><div style="font-size:13px;color:var(--text-2);margin-bottom:14px;display:flex;gap:7px;align-items:center"><svg width="14" height="14" color="var(--yellow)"><use href="#ic-info"/></svg>Adiciona dias a TODOS os assinantes ativos.</div><div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px"><div class="chip" onclick="setExtDias(7)">7 dias</div><div class="chip" onclick="setExtDias(15)">15 dias</div><div class="chip selected" onclick="setExtDias(30)">30 dias</div><div class="chip" onclick="setExtDias(60)">60 dias</div></div><div class="input-group"><div class="input-label">Dias a adicionar</div><input class="input-field" type="number" id="m-ext-dias" value="30"></div><div class="modal-footer"><button class="btn btn-ghost" onclick="closeModal('modal-estender')">Cancelar</button><button class="btn btn-primary" onclick="estenderModal()"><svg width="13" height="13"><use href="#ic-plus"/></svg>Estender</button></div></div></div>
 <div class="modal-overlay" id="modal-desrest"><div class="modal"><div class="modal-header"><div class="modal-title"><svg width="16" height="16" color="var(--green)"><use href="#ic-unlock"/></svg>Desrestringir Usuário</div><button class="modal-close" onclick="closeModal('modal-desrest')"><svg width="13" height="13"><use href="#ic-x"/></svg></button></div><div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" id="m-desrest-uid" placeholder="123456789"></div><div class="modal-footer"><button class="btn btn-ghost" onclick="closeModal('modal-desrest')">Cancelar</button><button class="btn btn-success" onclick="desrestModal()"><svg width="13" height="13"><use href="#ic-unlock"/></svg>Remover Restrição</button></div></div></div>
@@ -490,89 +361,45 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 <div class="toast-container" id="toasts"></div>
 
 <script>
-// ============================================================
-// ESTADO GLOBAL
-// ============================================================
 let API_BASE = '';
 let AUTH_TOKEN = '';
 let dadosAssinaturas = [];
-let dadosVendas = null;
 
-// ============================================================
-// LOGIN / AUTH
-// ============================================================
 async function fazerLogin() {
   const url = document.getElementById('api-url-input').value.trim().replace(/\/$/, '');
   const senha = document.getElementById('login-senha').value.trim();
-  if (!url) { mostrarErroLogin('Informe a URL da API'); return; }
-  if (!senha) { mostrarErroLogin('Informe a senha'); return; }
-
   const btn = document.getElementById('login-btn');
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner" style="border-color:#ffffff44;border-top-color:#fff"></span> Entrando...';
-
+  btn.innerHTML = '<span class="spinner"></span> Entrando...';
   try {
-    const res = await fetch(`${url}/api/login`, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({senha})
-    });
+    const res = await fetch(`${url}/api/login`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({senha})});
     const data = await res.json();
     if (data.ok && data.token) {
-      API_BASE = url;
-      AUTH_TOKEN = data.token;
+      API_BASE = url; AUTH_TOKEN = data.token;
+      localStorage.setItem('api_url', url);
+      localStorage.setItem('token', data.token);
       document.getElementById('login-screen').style.display = 'none';
       document.getElementById('sidebar').style.display = 'flex';
       document.getElementById('main-content').style.display = 'flex';
       document.getElementById('api-url-show').textContent = url.replace('https://','').substring(0,22)+'...';
       document.getElementById('dash-date').textContent = new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
       recarregarTudo();
-    } else {
-      mostrarErroLogin('Senha ou URL incorreta');
-    }
-  } catch(e) {
-    mostrarErroLogin('Não foi possível conectar. Verifique a URL.');
-  }
-  btn.disabled = false;
-  btn.innerHTML = 'Entrar';
+      setInterval(recarregarTudo, 30000);
+    } else { document.getElementById('login-err').style.display='block'; setTimeout(()=>document.getElementById('login-err').style.display='none',3000); }
+  } catch(e) { document.getElementById('login-err').style.display='block'; }
+  btn.disabled = false; btn.innerHTML = 'Entrar';
 }
 
-function mostrarErroLogin(msg) {
-  const el = document.getElementById('login-err');
-  el.textContent = msg;
-  el.style.display = 'block';
-  setTimeout(() => el.style.display='none', 4000);
-}
+function logout() { AUTH_TOKEN=''; API_BASE=''; localStorage.removeItem('token'); localStorage.removeItem('api_url'); location.reload(); }
 
-function logout() {
-  AUTH_TOKEN = '';
-  API_BASE = '';
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('sidebar').style.display = 'none';
-  document.getElementById('main-content').style.display = 'none';
-  document.getElementById('login-senha').value = '';
-}
-
-// ============================================================
-// API HELPER
-// ============================================================
 async function api(path, method='GET', body=null) {
-  const opts = {
-    method,
-    headers: {'X-Auth-Token': AUTH_TOKEN, 'Content-Type':'application/json'}
-  };
+  const opts = {method, headers:{'X-Auth-Token':AUTH_TOKEN,'Content-Type':'application/json'}};
   if (body) opts.body = JSON.stringify(body);
   const res = await fetch(`${API_BASE}${path}`, opts);
   return res.json();
 }
 
-// ============================================================
-// CARREGAR DADOS
-// ============================================================
-async function recarregarTudo() {
-  toast('Atualizando dados...', 'info');
-  await Promise.all([carregarStats(), carregarVendas(), carregarAssinaturas(), carregarRestritos(), carregarTestes(), carregarCupons()]);
-}
+async function recarregarTudo() { await Promise.all([carregarStats(), carregarVendas(), carregarAssinaturas(), carregarRestritos(), carregarTestes(), carregarCupons()]); }
 
 async function carregarStats() {
   try {
@@ -582,58 +409,43 @@ async function carregarStats() {
     document.getElementById('stat-restritos').textContent = d.restritos;
     document.getElementById('stat-testes').textContent = d.testes;
     document.getElementById('stat-usuarios').textContent = d.usuarios;
-    document.getElementById('stat-mrr').innerHTML = `<svg width="11" height="11"><use href="#ic-trending"/></svg> ${brl(d.ativas * (d.preco||20))}/mês`;
     document.getElementById('badge-ativas').textContent = d.ativas;
     document.getElementById('badge-restritos').textContent = d.restritos;
     document.getElementById('badge-testes').textContent = d.testes;
-    // sub page stats
+    document.getElementById('badge-cupons').textContent = d.testes || 0;
     document.getElementById('sub-ativas').textContent = d.ativas;
-    document.getElementById('sub-mrr').textContent = brl(d.ativas * (d.preco||20));
-    setStatusOnline(true);
-  } catch(e) {
-    setStatusOnline(false);
-  }
+    document.getElementById('sub-mrr').innerHTML = 'R$ ' + (d.ativas * 20).toFixed(2);
+    document.getElementById('stat-mrr').innerHTML = `<svg width="11" height="11"><use href="#ic-trending"/></svg> R$ ${(d.ativas * 20).toFixed(2)}/mês`;
+    document.getElementById('status-dot').classList.remove('offline');
+    document.getElementById('status-text').textContent = 'Bot Online';
+  } catch(e) { document.getElementById('status-dot').classList.add('offline'); document.getElementById('status-text').textContent = 'Sem conexão'; }
 }
 
 async function carregarVendas() {
   try {
     const d = await api('/api/vendas');
     if (!d.ok) return;
-    dadosVendas = d;
-    // dashboard
     document.getElementById('d-total-vendas').textContent = d.total;
-    document.getElementById('d-total-receita').textContent = brl(d.total_valor);
+    document.getElementById('d-total-receita').innerHTML = `R$ ${d.total_valor?.toFixed(2) || '0.00'}`;
     document.getElementById('d-mes-vendas').textContent = d.mes;
-    document.getElementById('d-mes-receita').textContent = brl(d.mes_valor);
+    document.getElementById('d-mes-receita').innerHTML = `R$ ${d.mes_valor?.toFixed(2) || '0.00'}`;
     document.getElementById('d-sem-vendas').textContent = d.semana;
-    document.getElementById('d-sem-receita').textContent = brl(d.semana_valor);
+    document.getElementById('d-sem-receita').innerHTML = `R$ ${d.semana_valor?.toFixed(2) || '0.00'}`;
     document.getElementById('d-hoje-vendas').textContent = d.dia;
-    document.getElementById('d-hoje-receita').textContent = brl(d.dia_valor);
-    document.getElementById('bar-mes').style.width = d.total ? (d.mes/d.total*100)+'%' : '0%';
-    document.getElementById('bar-sem').style.width = d.mes ? (d.semana/d.mes*100)+'%' : '0%';
-    document.getElementById('bar-hoje').style.width = d.semana ? (d.dia/d.semana*100)+'%' : '0%';
+    document.getElementById('d-hoje-receita').innerHTML = `R$ ${d.dia_valor?.toFixed(2) || '0.00'}`;
     document.getElementById('badge-vendas-hoje').textContent = d.dia;
-    // vendas page
     document.getElementById('v-total').textContent = d.total;
-    document.getElementById('v-total-r').innerHTML = `<svg width="11" height="11"><use href="#ic-dollar"/></svg>${brl(d.total_valor)}`;
+    document.getElementById('v-total-r').innerHTML = `R$ ${d.total_valor?.toFixed(2) || '0.00'}`;
     document.getElementById('v-mes').textContent = d.mes;
-    document.getElementById('v-mes-r').innerHTML = `<svg width="11" height="11"><use href="#ic-dollar"/></svg>${brl(d.mes_valor)}`;
+    document.getElementById('v-mes-r').innerHTML = `R$ ${d.mes_valor?.toFixed(2) || '0.00'}`;
     document.getElementById('v-sem').textContent = d.semana;
-    document.getElementById('v-sem-r').innerHTML = `<svg width="11" height="11"><use href="#ic-dollar"/></svg>${brl(d.semana_valor)}`;
+    document.getElementById('v-sem-r').innerHTML = `R$ ${d.semana_valor?.toFixed(2) || '0.00'}`;
     document.getElementById('v-hoje').textContent = d.dia;
-    document.getElementById('v-hoje-r').innerHTML = `<svg width="11" height="11"><use href="#ic-dollar"/></svg>${brl(d.dia_valor)}`;
-
+    document.getElementById('v-hoje-r').innerHTML = `R$ ${d.dia_valor?.toFixed(2) || '0.00'}`;
     const tbody = document.getElementById('vendas-table-body');
-    if (!d.pagamentos || d.pagamentos.length === 0) {
-      tbody.innerHTML = '<tr class="empty-row"><td colspan="6">Nenhuma transação registrada</td></tr>';
-      return;
-    }
-    const tb = d.tipo==='Cupom'?'green':d.tipo==='Crédito'?'yellow':'purple';
-    tbody.innerHTML = d.pagamentos.map(p => {
-      const tb = p.tipo==='Cupom'?'green':p.tipo==='Crédito'?'yellow':'purple';
-      return `<tr><td class="mono">${p.id||'—'}</td><td class="mono">${p.user_id}</td><td style="font-weight:700;color:var(--green)">${brl(p.valor)}</td><td style="color:var(--text-2)">${fmtDT(p.data)}</td><td><span class="badge ${tb}"><div class="badge-dot"></div>${p.tipo}</span></td><td><span class="badge green"><div class="badge-dot"></div>Aprovado</span></td></tr>`;
-    }).join('');
-  } catch(e) { console.error('Vendas:', e); }
+    if (!d.pagamentos || !d.pagamentos.length) { tbody.innerHTML = '<tr class="empty-row"><td colspan="6">Nenhuma transação</td></tr>'; return; }
+    tbody.innerHTML = d.pagamentos.map(p => `<tr><td class="mono">${p.id||'—'}</td><td class="mono">${p.user_id}</td><td style="color:var(--green)">R$ ${p.valor?.toFixed(2)}</td><td>${fmtDate(p.data)}</td><td><span class="badge ${p.tipo==='Cupom'?'green':p.tipo==='Crédito'?'yellow':'purple'}"><div class="badge-dot"></div>${p.tipo}</span></td><td><span class="badge green"><div class="badge-dot"></div>Aprovado</span></td></tr>`).join('');
+  } catch(e) {}
 }
 
 async function carregarAssinaturas() {
@@ -643,339 +455,87 @@ async function carregarAssinaturas() {
     dadosAssinaturas = d.assinaturas || [];
     document.getElementById('sub-total').textContent = dadosAssinaturas.length;
     renderSubTable();
-    renderExpirar();
-    renderDashExpirar();
-  } catch(e) { console.error('Assinaturas:', e); }
+    const exp = dadosAssinaturas.filter(s => s.ativa && s.dias_rest <= 7);
+    document.getElementById('expirar-list').innerHTML = exp.length ? exp.map(x => `<div style="display:flex;justify-content:space-between;padding:12px;border-bottom:1px solid var(--border)"><span class="mono">${x.uid}</span><span style="color:${x.dias_rest<=1?'var(--red)':'var(--yellow)'}">${x.dias_rest} dias</span><span>${fmtDate(x.data_fim)}</span></div>`).join('') : '<div style="color:var(--green);text-align:center">✅ Nenhum expira em 7 dias</div>';
+    document.getElementById('dash-expirar').innerHTML = exp.slice(0,5).map(x => `<div class="expiry-item"><div class="expiry-header"><span class="expiry-id">${x.uid}</span><span style="color:${x.dias_rest<=1?'var(--red)':'var(--yellow)'}">${x.dias_rest}d</span></div><div class="progress-bar"><div class="progress-fill" style="width:${Math.max(2,x.dias_rest/30*100)}%;background:${x.dias_rest<=1?'var(--red)':'linear-gradient(90deg,var(--purple-1),var(--purple-3))'}"></div></div></div>`).join('');
+  } catch(e) {}
+}
+
+function renderSubTable() {
+  const filter = document.getElementById('filter-sub')?.value.toLowerCase() || '';
+  const rows = dadosAssinaturas.filter(s => !filter || s.uid.includes(filter));
+  if (!rows.length) { document.getElementById('sub-table-body').innerHTML = '<tr class="empty-row"><td colspan="6">Nenhum resultado</td></tr>'; return; }
+  document.getElementById('sub-table-body').innerHTML = rows.map(s => `<tr><td class="mono">${s.uid}</td><td>${s.username||'—'}</td><td>${fmtDate(s.data_inicio)}</td><td>${fmtDate(s.data_fim)}</td><td style="color:${s.dias_rest<=3?'var(--red)':s.dias_rest<=7?'var(--yellow)':'var(--green)'}">${s.dias_rest}</td><td><span class="badge ${s.ativa?'green':'red'}"><div class="badge-dot"></div>${s.ativa?'Ativa':'Expirada'}</span></td></tr>`).join('');
 }
 
 async function carregarRestritos() {
-  try {
-    const d = await api('/api/restritos');
-    if (!d.ok) return;
-    const tbody = document.getElementById('rest-table-body');
-    const lista = d.restritos || [];
-    if (!lista.length) {
-      tbody.innerHTML = '<tr class="empty-row"><td colspan="5" style="color:var(--green)">✓ Nenhum usuário restrito</td></tr>';
-      return;
-    }
-    tbody.innerHTML = lista.map(r => `
-      <tr>
-        <td class="mono">${r.uid}</td>
-        <td>${fmtDate(r.data_restricao)}</td>
-        <td>${fmtDate(r.data_liberacao)}</td>
-        <td style="color:var(--red)">${Number(r.horas_rest).toLocaleString()}h</td>
-        <td><button class="btn btn-success btn-sm" onclick="desrestRapido('${r.uid}')"><svg width="11" height="11"><use href="#ic-unlock"/></svg> Liberar</button></td>
-      </tr>`).join('');
-  } catch(e) { console.error('Restritos:', e); }
+  try { const d = await api('/api/restritos'); if(!d.ok) return; const lista = d.restritos||[]; document.getElementById('rest-table-body').innerHTML = lista.length ? lista.map(r => `<tr><td class="mono">${r.uid}</td><td>${fmtDate(r.data_restricao)}</td><td>${fmtDate(r.data_liberacao)}</td><td style="color:var(--red)">${r.horas_rest}h</td><td><button class="btn btn-success btn-sm" onclick="desrestRapido('${r.uid}')"><svg width="11" height="11"><use href="#ic-unlock"/></svg></button></td></tr>`).join('') : '<tr class="empty-row"><td colspan="5">Nenhum usuário restrito</td></tr>'; } catch(e){}
 }
 
 async function carregarTestes() {
-  try {
-    const d = await api('/api/testes');
-    if (!d.ok) return;
-    const lista = d.testes || [];
-    document.getElementById('trial-list').innerHTML = lista.length
-      ? lista.map(t => {
-          const pct = Math.max(2, (t.dias_rest/3)*100);
-          return `<div>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-              <div><div class="mono" style="margin-bottom:3px">${t.uid}</div><div style="font-size:12px;color:var(--text-2)">${t.username||'Sem username'}</div></div>
-              <div style="text-align:right"><div style="font-size:12px;font-weight:700;color:${t.dias_rest<=1?'var(--red)':'var(--green)'}">+${t.dias_rest} dias</div><div style="font-size:11px;color:var(--text-3)">Expira ${fmtDate(t.data_fim)}</div></div>
-            </div>
-            <div class="progress-bar"><div class="progress-fill green" style="width:${pct}%"></div></div>
-          </div>`;
-        }).join('')
-      : '<div style="color:var(--text-3);font-size:13px">Nenhum trial ativo no momento.</div>';
-  } catch(e) { console.error('Testes:', e); }
+  try { const d = await api('/api/testes'); if(!d.ok) return; const lista = d.testes||[]; document.getElementById('trial-list').innerHTML = lista.length ? lista.map(t => `<div><div style="display:flex;justify-content:space-between"><span class="mono">${t.uid}</span><span>Expira ${fmtDate(t.data_fim)} (${t.dias_rest}d)</span></div><div class="progress-bar"><div class="progress-fill green" style="width:${Math.max(2,t.dias_rest/3*100)}%"></div></div></div>`).join('') : '<div style="color:var(--text-3);text-align:center">Nenhum trial ativo</div>'; } catch(e){}
 }
 
 async function carregarCupons() {
-  try {
-    const d = await api('/api/cupons');
-    if (!d.ok) return;
-    document.getElementById('cup-total').textContent = d.total;
-    document.getElementById('cup-usos').textContent = d.total_usos;
-    document.getElementById('cup-creditos').textContent = d.total_creditos;
-    const lista = d.cupons || [];
-    document.getElementById('cupons-table').innerHTML = lista.length
-      ? lista.map((c, i) => `
-          <tr>
-            <td style="color:var(--text-3);font-weight:700">#${i+1}</td>
-            <td class="mono">${c.uid}</td>
-            <td><code style="background:var(--bg-base);padding:3px 8px;border-radius:6px;color:var(--purple-3);font-size:11px">${c.codigo}</code></td>
-            <td><b>${c.usos}</b></td>
-            <td><span class="badge ${c.creditos>0?'green':'yellow'}"><div class="badge-dot"></div>${c.creditos}</span></td>
-          </tr>`).join('')
-      : '<tr class="empty-row"><td colspan="5">Nenhum cupom cadastrado ainda</td></tr>';
-  } catch(e) { console.error('Cupons:', e); }
+  try { const d = await api('/api/cupons'); if(!d.ok) return; const lista = d.cupons||[]; document.getElementById('cup-total').textContent = d.total; document.getElementById('cup-usos').textContent = d.total_usos; document.getElementById('cup-creditos').textContent = d.total_creditos; document.getElementById('cupons-table').innerHTML = lista.length ? lista.map((c,i)=>`<tr><td>${i+1}</td><td class="mono">${c.uid}</td><td><code>${c.codigo}</code></td><td>${c.usos}</td><td>${c.creditos}</td></tr>`).join('') : '<tr class="empty-row"><td colspan="5">Nenhum cupom</td></tr>'; } catch(e){}
 }
 
-// ============================================================
-// RENDERS LOCAIS
-// ============================================================
-function renderSubTable() {
-  const filter = (document.getElementById('filter-sub')?.value||'').toLowerCase();
-  const ativas = dadosAssinaturas.filter(s => s.ativa).length;
-  document.getElementById('sub-ativas').textContent = ativas;
-  document.getElementById('sub-mrr').textContent = brl(ativas * 20);
-
-  const rows = dadosAssinaturas.filter(s => !filter || s.uid.toString().includes(filter) || (s.username||'').toLowerCase().includes(filter));
-  if (!rows.length) {
-    document.getElementById('sub-table-body').innerHTML = '<tr class="empty-row"><td colspan="7">Nenhum resultado encontrado</td></tr>';
-    return;
-  }
-  document.getElementById('sub-table-body').innerHTML = rows.map(s => {
-    const dias = s.dias_rest;
-    const badge = s.ativa
-      ? (dias <= 2 ? '<span class="badge yellow"><div class="badge-dot"></div>Expirando</span>' : '<span class="badge green"><div class="badge-dot"></div>Ativa</span>')
-      : '<span class="badge red"><div class="badge-dot"></div>Expirada</span>';
-    return `<tr>
-      <td class="mono">${s.uid}</td>
-      <td style="color:var(--text-2)">${s.username||'—'}</td>
-      <td>${fmtDate(s.data_inicio)}</td>
-      <td>${fmtDate(s.data_fim)}</td>
-      <td style="color:${dias<=3?'var(--red)':dias<=7?'var(--yellow)':'var(--green)'};font-weight:700">${dias}</td>
-      <td>${badge}</td>
-      <td><div style="display:flex;gap:5px">
-        <button class="btn btn-danger btn-sm" onclick="cancelarRapido('${s.uid}')"><svg width="11" height="11"><use href="#ic-x"/></svg></button>
-      </div></td>
-    </tr>`;
-  }).join('');
-}
-
-function renderExpirar() {
-  const exp = dadosAssinaturas.filter(s => s.ativa && s.dias_rest <= 7).sort((a,b) => a.dias_rest - b.dias_rest);
-  document.getElementById('expirar-list').innerHTML = exp.length
-    ? exp.map(x => `
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:13px;margin-bottom:8px;background:var(--bg-base);border-radius:12px;border:1px solid var(--border)">
-          <div class="mono">${x.uid}</div>
-          <div style="font-size:12px;color:var(--text-2)">${x.username||''} — Expira ${fmtDate(x.data_fim)}</div>
-          <span style="font-weight:700;color:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'var(--text-1)'}">${x.dias_rest}d</span>
-        </div>`)
-    .join('')
-    : '<div style="color:var(--green);padding:20px;font-size:14px;display:flex;align-items:center;gap:8px"><svg width="16" height="16" color="var(--green)"><use href="#ic-check"/></svg>Nenhuma assinatura expira nos próximos 7 dias</div>';
-}
-
-function renderDashExpirar() {
-  const exp = dadosAssinaturas.filter(s => s.ativa && s.dias_rest <= 7).sort((a,b) => a.dias_rest - b.dias_rest).slice(0,5);
-  document.getElementById('dash-expirar').innerHTML = exp.length
-    ? exp.map(x => `
-        <div class="expiry-item">
-          <div class="expiry-header">
-            <span class="expiry-id">${x.uid} ${x.username?'('+x.username+')':''}</span>
-            <span style="font-size:11px;color:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'var(--text-2)'}">${x.dias_rest}d restantes</span>
-          </div>
-          <div class="progress-bar"><div class="progress-fill" style="width:${Math.max(2,x.dias_rest/30*100)}%;background:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'linear-gradient(90deg,var(--purple-1),var(--purple-3))'}"></div></div>
-        </div>`)
-    .join('')
-    : '<div style="color:var(--green);font-size:12px;display:flex;align-items:center;gap:5px"><svg width="13" height="13"><use href="#ic-check"/></svg>Nenhum expira em 7 dias</div>';
-}
-
-// ============================================================
-// AÇÕES
-// ============================================================
 async function liberarUsuario() {
-  const uid = document.getElementById('lib-uid').value.trim();
-  const dias = parseInt(document.getElementById('lib-dias').value) || 30;
-  if (!uid) { toast('Informe o ID!', 'error'); return; }
-  const btn = document.getElementById('btn-liberar');
-  btn.disabled = true;
-  try {
-    const d = await api('/api/acao/liberar', 'POST', {uid: parseInt(uid), dias});
-    if (d.ok) {
-      toast(`✅ ${uid} liberado por ${dias} dias`, 'success');
-      document.getElementById('lib-uid').value = '';
-      await carregarStats(); await carregarAssinaturas();
-      if (d.aviso) toast('⚠️ ' + d.aviso, 'info');
-    } else {
-      toast('Erro: ' + d.erro, 'error');
-    }
-  } catch(e) { toast('Erro de conexão', 'error'); }
-  btn.disabled = false;
+  const uid = document.getElementById('lib-uid').value.trim(); const dias = parseInt(document.getElementById('lib-dias').value)||30;
+  if(!uid){ toast('Informe o ID!','error'); return; }
+  try{ const d = await api('/api/acao/liberar','POST',{uid:parseInt(uid),dias}); if(d.ok){ toast(`✅ ${uid} liberado por ${dias} dias`); document.getElementById('lib-uid').value=''; recarregarTudo(); } else toast('Erro: '+d.erro,'error'); } catch(e){ toast('Erro de conexão','error'); }
 }
 
 async function checkStatus() {
   const uid = document.getElementById('lib-uid').value.trim();
-  if (!uid) { toast('Informe o ID!', 'error'); return; }
-  try {
-    const d = await api(`/api/status_user/${uid}`);
-    const el = document.getElementById('status-content');
-    if (!d.ok) { el.innerHTML = `<div style="color:var(--red)">Erro: ${d.erro}</div>`; document.getElementById('status-result').style.display='block'; return; }
-    const sub = d.assinatura;
-    const at = sub && sub.ativa;
-    let html = `<div style="font-size:11px;color:var(--text-3);margin-bottom:8px;font-family:'JetBrains Mono',monospace">ID: ${uid}</div>`;
-    html += `<div style="margin-bottom:6px;display:flex;align-items:center;gap:5px"><svg width="13" height="13" color="${at?'var(--green)':'var(--red)'}"><use href="${at?'#ic-check':'#ic-x'}"/></svg>${at?'<b>Assinatura ativa</b>':'Sem assinatura'}</div>`;
-    if (sub) html += `<div style="font-size:12px;color:var(--text-2);margin-bottom:4px">Expira: ${fmtDate(sub.data_fim)} (${sub.dias_rest} dias)</div>`;
-    if (d.restrito) html += `<div style="display:flex;align-items:center;gap:5px;color:var(--red)"><svg width="13" height="13" color="var(--red)"><use href="#ic-mute"/></svg><b>Usuário Restrito</b></div>`;
-    if (d.trial) html += `<div style="display:flex;align-items:center;gap:5px;color:var(--purple-3)"><svg width="13" height="13" color="var(--purple-3)"><use href="#ic-gift"/></svg>${d.trial.ativo?'Trial ativo':'Trial já utilizado'}</div>`;
-    el.innerHTML = html;
-    document.getElementById('status-result').style.display = 'block';
-  } catch(e) { toast('Erro de conexão', 'error'); }
+  if(!uid){ toast('Informe o ID!','error'); return; }
+  try{ const d = await api(`/api/status_user/${uid}`); const el = document.getElementById('status-content'); if(!d.ok){ el.innerHTML='<div style="color:var(--red)">Erro</div>'; document.getElementById('status-result').style.display='block'; return; }
+  let html = `<div>ID: ${uid}</div><div>${d.assinatura?.ativa?'✅ Assinatura ativa':'❌ Sem assinatura'}</div>`;
+  if(d.restrito) html+=`<div>🔇 Usuário restrito</div>`;
+  if(d.trial?.ativo) html+=`<div>🎁 Trial ativo até ${fmtDate(d.trial.data_fim)}</div>`;
+  el.innerHTML=html; document.getElementById('status-result').style.display='block'; } catch(e){ toast('Erro','error'); }
 }
 
 async function cancelarAssinatura() {
   const uid = document.getElementById('cancel-uid').value.trim();
-  if (!uid) { toast('Informe o ID!', 'error'); return; }
-  if (!confirm(`Cancelar assinatura de ${uid}?`)) return;
-  try {
-    const d = await api('/api/acao/cancelar', 'POST', {uid: parseInt(uid)});
-    if (d.ok) { toast(`Assinatura de ${uid} cancelada`); document.getElementById('cancel-uid').value=''; await carregarStats(); await carregarAssinaturas(); }
-    else toast('Erro: ' + d.erro, 'error');
-  } catch(e) { toast('Erro de conexão', 'error'); }
+  if(!uid){ toast('Informe o ID!','error'); return; }
+  if(!confirm(`Cancelar ${uid}?`)) return;
+  try{ const d = await api('/api/acao/cancelar','POST',{uid:parseInt(uid)}); if(d.ok){ toast(`Assinatura ${uid} cancelada`); document.getElementById('cancel-uid').value=''; recarregarTudo(); } else toast('Erro: '+d.erro,'error'); } catch(e){ toast('Erro','error'); }
 }
 
-async function desrestringirUsuario() {
-  const uid = document.getElementById('desrest-uid').value.trim();
-  if (!uid) { toast('Informe o ID!', 'error'); return; }
-  try {
-    const d = await api('/api/acao/desrestringir', 'POST', {uid: parseInt(uid)});
-    if (d.ok) { toast(`Restrição de ${uid} removida`); document.getElementById('desrest-uid').value=''; await carregarStats(); await carregarRestritos(); if(d.aviso) toast('⚠️ '+d.aviso,'info'); }
-    else toast('Erro: ' + d.erro, 'error');
-  } catch(e) { toast('Erro de conexão', 'error'); }
+async function desrestRapido(uid) { try{ const d = await api('/api/acao/desrestringir','POST',{uid:parseInt(uid)}); if(d.ok){ toast(`${uid} desrestringido`); carregarRestritos(); carregarStats(); } } catch(e){} }
+async function cancelarModal() { const uid = document.getElementById('m-cancel-uid').value.trim(); if(!uid){ toast('ID inválido','error'); return; } if(await api('/api/acao/cancelar','POST',{uid:parseInt(uid)})){ toast('Cancelado'); closeModal('modal-cancelar'); recarregarTudo(); } }
+async function estenderModal() { const dias = parseInt(document.getElementById('m-ext-dias').value)||30; const d = await api('/api/acao/estender_todas','POST',{dias}); if(d.ok){ toast(`${d.afetados} assinaturas estendidas`); closeModal('modal-estender'); carregarAssinaturas(); } }
+async function desrestModal() { const uid = document.getElementById('m-desrest-uid').value.trim(); if(!uid){ toast('ID inválido','error'); return; } const d = await api('/api/acao/desrestringir','POST',{uid:parseInt(uid)}); if(d.ok){ toast(`${uid} desrestringido`); closeModal('modal-desrest'); carregarRestritos(); carregarStats(); } }
+async function gerarBackup() { try{ const res=await fetch(`${API_BASE}/api/backup`,{headers:{'X-Auth-Token':AUTH_TOKEN}}); const blob=await res.blob(); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`berserk_backup_${new Date().toISOString().slice(0,10)}.json`; a.click(); toast('Backup gerado!'); } catch(e){ toast('Erro ao gerar backup','error'); } }
+function exportarCSV() { if(!dadosAssinaturas.length){ toast('Carregue os dados primeiro','error'); return; } let csv='user_id,username,data_inicio,data_fim,dias_restantes\n'; dadosAssinaturas.forEach(s=>csv+=`${s.uid},${s.username||''},${s.data_inicio},${fmtDate(s.data_fim)},${s.dias_rest}\n`); const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv])); a.download=`berserk_${new Date().toISOString().slice(0,10)}.csv`; a.click(); toast('CSV exportado!'); }
+async function verificarConexao() { try{ const d=await api('/api/stats'); if(d.ok){ toast(`✅ Bot online — ${d.ativas} ativos`); setStatusOnline(true); } else toast('Erro na resposta','error'); } catch(e){ toast('Sem conexão','error'); setStatusOnline(false); } }
+function setStatusOnline(online){ document.getElementById('status-dot').classList.toggle('offline',!online); document.getElementById('status-text').textContent=online?'Bot Online':'Sem conexão'; }
+function showPage(id,el){ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active')); document.getElementById('page-'+id).classList.add('active'); if(el) el.classList.add('active'); document.getElementById('breadcrumb-text').textContent={dashboard:'Dashboard',vendas:'Vendas',assinaturas:'Assinaturas',restritos:'Restritos',testes:'Testes',liberar:'Liberar',cupons:'Cupons',expirar:'A Expirar',backup:'Backup'}[id]||id; }
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+function toast(msg,type='success'){ const el=document.createElement('div'); el.className=`toast ${type}`; el.innerHTML=`<svg width="16" height="16" color="${type==='success'?'var(--green)':type==='info'?'var(--blue)':'var(--red)'}"><use href="${type==='success'?'#ic-check':'#ic-info'}"/></svg>${msg}`; document.getElementById('toasts').appendChild(el); setTimeout(()=>el.remove(),4000); }
+function fmtDate(d){ if(!d) return '—'; try{ return new Date(d).toLocaleDateString('pt-BR'); } catch(e){ return d; } }
+function setDias(n){ document.getElementById('lib-dias').value=n; document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('selected',c.innerText==`${n} dias`)); }
+function setExtDias(n){ document.getElementById('m-ext-dias').value=n; }
+function globalSearch(){ const uid=document.getElementById('global-search').value.trim(); if(!uid) return; document.getElementById('lib-uid').value=uid; showPage('liberar',null); checkStatus(); }
+
+// Auto login com dados salvos
+const savedUrl = localStorage.getItem('api_url');
+const savedToken = localStorage.getItem('token');
+if(savedUrl && savedToken) {
+  API_BASE = savedUrl;
+  AUTH_TOKEN = savedToken;
+  document.getElementById('api-url-input').value = savedUrl;
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('sidebar').style.display = 'flex';
+  document.getElementById('main-content').style.display = 'flex';
+  document.getElementById('api-url-show').textContent = savedUrl.replace('https://','').substring(0,22)+'...';
+  document.getElementById('dash-date').textContent = new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  recarregarTudo();
+  setInterval(recarregarTudo, 30000);
 }
-
-async function cancelarRapido(uid) {
-  if (!confirm(`Cancelar assinatura de ${uid}?`)) return;
-  try {
-    const d = await api('/api/acao/cancelar', 'POST', {uid: parseInt(uid)});
-    if (d.ok) { toast(`Assinatura ${uid} cancelada`); await carregarStats(); await carregarAssinaturas(); }
-    else toast('Erro: ' + d.erro, 'error');
-  } catch(e) { toast('Erro', 'error'); }
-}
-
-async function desrestRapido(uid) {
-  try {
-    const d = await api('/api/acao/desrestringir', 'POST', {uid: parseInt(uid)});
-    if (d.ok) { toast(`${uid} desrestringido`); await carregarRestritos(); await carregarStats(); }
-    else toast('Erro: ' + d.erro, 'error');
-  } catch(e) { toast('Erro', 'error'); }
-}
-
-async function liberarModal() {
-  const uid = document.getElementById('m-lib-uid').value.trim();
-  const dias = parseInt(document.getElementById('m-lib-dias').value) || 30;
-  if (!uid) { toast('Informe o ID!', 'error'); return; }
-  try {
-    const d = await api('/api/acao/liberar', 'POST', {uid: parseInt(uid), dias});
-    if (d.ok) { toast(`${uid} liberado por ${dias} dias`); closeModal('modal-liberar'); await carregarStats(); await carregarAssinaturas(); }
-    else toast('Erro: ' + d.erro, 'error');
-  } catch(e) { toast('Erro de conexão', 'error'); }
-}
-
-async function cancelarModal() {
-  const uid = document.getElementById('m-cancel-uid').value.trim();
-  if (!uid) { toast('ID inválido!', 'error'); return; }
-  try {
-    const d = await api('/api/acao/cancelar', 'POST', {uid: parseInt(uid)});
-    if (d.ok) { toast('Cancelado'); closeModal('modal-cancelar'); await carregarStats(); await carregarAssinaturas(); }
-    else toast('Erro: ' + d.erro, 'error');
-  } catch(e) { toast('Erro de conexão', 'error'); }
-}
-
-async function estenderModal() {
-  const dias = parseInt(document.getElementById('m-ext-dias').value) || 30;
-  try {
-    const d = await api('/api/acao/estender_todas', 'POST', {dias});
-    if (d.ok) { toast(`${d.afetados} assinaturas estendidas por ${dias} dias`); closeModal('modal-estender'); await carregarAssinaturas(); }
-    else toast('Erro: ' + d.erro, 'error');
-  } catch(e) { toast('Erro de conexão', 'error'); }
-}
-
-async function desrestModal() {
-  const uid = document.getElementById('m-desrest-uid').value.trim();
-  if (!uid) { toast('ID inválido!', 'error'); return; }
-  try {
-    const d = await api('/api/acao/desrestringir', 'POST', {uid: parseInt(uid)});
-    if (d.ok) { toast(`${uid} desrestringido`); closeModal('modal-desrest'); await carregarRestritos(); await carregarStats(); }
-    else toast('Erro: ' + d.erro, 'error');
-  } catch(e) { toast('Erro de conexão', 'error'); }
-}
-
-async function gerarBackup() {
-  try {
-    toast('Gerando backup...', 'info');
-    const res = await fetch(`${API_BASE}/api/backup`, {headers:{'X-Auth-Token':AUTH_TOKEN}});
-    const blob = await res.blob();
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `berserk_backup_${new Date().toISOString().slice(0,10)}.json`;
-    a.click();
-    toast('Backup gerado com sucesso!');
-  } catch(e) { toast('Erro ao gerar backup', 'error'); }
-}
-
-function exportarCSV() {
-  if (!dadosAssinaturas.length) { toast('Carregue os dados primeiro', 'error'); return; }
-  let csv = 'user_id,username,data_inicio,data_fim,dias_restantes,ativa\n';
-  dadosAssinaturas.forEach(s => { csv += `${s.uid},${s.username||''},${s.data_inicio||''},${fmtDate(s.data_fim)},${s.dias_rest},${s.ativa}\n`; });
-  const b = new Blob([csv], {type:'text/csv'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(b);
-  a.download = `berserk_assinaturas_${new Date().toISOString().slice(0,10)}.csv`;
-  a.click();
-  toast('CSV exportado!');
-}
-
-async function verificarConexao() {
-  try {
-    const d = await api('/api/stats');
-    if (d.ok) { toast(`✅ Bot online — ${d.ativas} ativos, ${d.restritos} restritos`); setStatusOnline(true); }
-    else { toast('Bot respondeu com erro', 'error'); setStatusOnline(false); }
-  } catch(e) { toast('Sem conexão com a API', 'error'); setStatusOnline(false); }
-}
-
-// ============================================================
-// UI HELPERS
-// ============================================================
-function showPage(id, el) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  if (el) el.classList.add('active');
-  else document.querySelectorAll('.nav-item').forEach(n => { if(n.getAttribute('onclick')?.includes("'"+id+"'")) n.classList.add('active'); });
-  const labels={dashboard:'Dashboard',vendas:'Vendas',assinaturas:'Assinaturas',restritos:'Restritos',testes:'Testes Grátis',liberar:'Liberar Usuário',cupons:'Cupons',expirar:'A Expirar',backup:'Backup'};
-  document.getElementById('breadcrumb-text').textContent = labels[id]||id;
-}
-
-function openModal(id) { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.classList.remove('open'); }));
-
-function toast(msg, type='success') {
-  const el = document.createElement('div');
-  el.className = `toast ${type}`;
-  const ico = type==='success'?'#ic-check':type==='info'?'#ic-info':'#ic-x';
-  const clr = type==='success'?'var(--green)':type==='info'?'var(--blue)':'var(--red)';
-  el.innerHTML = `<svg width="16" height="16" color="${clr}"><use href="${ico}"/></svg>${msg}`;
-  document.getElementById('toasts').appendChild(el);
-  setTimeout(() => el.remove(), 4000);
-}
-
-function setStatusOnline(online) {
-  document.getElementById('status-dot').className = 'status-dot' + (online?'':' offline');
-  document.getElementById('status-text').textContent = online ? 'Bot Online' : 'Sem conexão';
-}
-
-function setDias(n) {
-  document.getElementById('lib-dias').value = n;
-  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('selected', c.getAttribute('onclick')===`setDias(${n})`));
-}
-function setExtDias(n) { document.getElementById('m-ext-dias').value = n; }
-
-function globalSearch() {
-  const uid = document.getElementById('global-search').value.trim();
-  if (!uid) return;
-  document.getElementById('lib-uid').value = uid;
-  showPage('liberar', null);
-  checkStatus();
-}
-
-function brl(v) { return 'R$ ' + Number(v).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}); }
-function fmtDate(d) { if(!d) return '—'; try{ return new Date(d).toLocaleDateString('pt-BR'); } catch(e){ return d; } }
-function fmtDT(d) { if(!d) return '—'; try{ const dt=new Date(d); return dt.toLocaleDateString('pt-BR')+' '+dt.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}); } catch(e){ return d; } }
-
-// login por Enter
-document.getElementById('login-senha').addEventListener('keydown', e => { if(e.key==='Enter') fazerLogin(); });
+document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
 </script>
 </body>
 </html>
