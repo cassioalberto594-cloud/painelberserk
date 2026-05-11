@@ -9,68 +9,63 @@
 :root{--bg-base:#09080f;--bg-panel:#0f0d1a;--bg-card:#141127;--bg-card2:#1a1730;--bg-hover:#1f1c38;--border:#2a2545;--border-glow:#6c3fff44;--purple-1:#6c3fff;--purple-2:#8b5cf6;--purple-3:#a78bfa;--purple-glow:#6c3fff33;--green:#22d6a0;--red:#ff4d6d;--yellow:#f59e0b;--blue:#38bdf8;--text-1:#f0eeff;--text-2:#9b8ec4;--text-3:#5c4f8a;--sidebar-w:248px}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1);min-height:100vh;display:flex;overflow-x:hidden}
-
-/* LOGIN */
 #login-screen{position:fixed;inset:0;background:var(--bg-base);z-index:9999;display:flex;align-items:center;justify-content:center}
-.login-box{background:var(--bg-panel);border:1px solid var(--border);border-radius:24px;padding:40px;width:380px;max-width:95vw;box-shadow:0 24px 80px #6c3fff22;text-align:center}
+.login-box{background:var(--bg-panel);border:1px solid var(--border);border-radius:24px;padding:40px;width:400px;max-width:95vw;box-shadow:0 24px 80px #6c3fff22;text-align:center}
 .login-logo{width:56px;height:56px;background:linear-gradient(135deg,var(--purple-1),var(--purple-2));border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 32px var(--purple-glow)}
-.login-title{font-size:24px;font-weight:800;margin-bottom:6px}
-.login-sub{font-size:13px;color:var(--text-2);margin-bottom:28px;font-family:'JetBrains Mono',monospace}
-.login-input{width:100%;background:var(--bg-base);border:1px solid var(--border);border-radius:12px;padding:13px 16px;color:var(--text-1);font-family:'Syne',sans-serif;font-size:14px;outline:none;margin-bottom:14px;transition:border .2s;text-align:center}
-.login-input:focus{border-color:var(--purple-1)}
-.login-btn{width:100%;background:linear-gradient(135deg,var(--purple-1),var(--purple-2));color:#fff;border:none;border-radius:12px;padding:13px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 20px var(--purple-glow)}
+.login-title{font-size:26px;font-weight:800;margin-bottom:4px;letter-spacing:2px}
+.login-sub{font-size:12px;color:var(--text-2);margin-bottom:26px;font-family:'JetBrains Mono',monospace;letter-spacing:2px}
+.login-url-label{font-size:11px;color:var(--text-3);margin-bottom:5px;text-align:left;letter-spacing:.5px}
+.login-url-input,.login-input{width:100%;background:var(--bg-base);border:1px solid var(--border);border-radius:12px;padding:12px 16px;color:var(--text-1);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;margin-bottom:10px;transition:border .2s;text-align:left}
+.login-input{font-family:'Syne',sans-serif;text-align:center;letter-spacing:2px}
+.login-url-input:focus,.login-input:focus{border-color:var(--purple-1);box-shadow:0 0 0 3px var(--purple-glow)}
+.login-btn{width:100%;background:linear-gradient(135deg,var(--purple-1),var(--purple-2));color:#fff;border:none;border-radius:12px;padding:13px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 20px var(--purple-glow);letter-spacing:1px;margin-top:4px}
 .login-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px #6c3fff55}
-.login-err{color:var(--red);font-size:12px;margin-top:10px;display:none}
-.login-url{margin-bottom:14px}
-.login-url-label{font-size:11px;color:var(--text-3);margin-bottom:5px;text-align:left}
-.login-url-input{width:100%;background:var(--bg-base);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text-2);font-family:'JetBrains Mono',monospace;font-size:12px;outline:none;transition:border .2s}
-.login-url-input:focus{border-color:var(--purple-1)}
-
+.login-err{color:var(--red);font-size:12px;margin-top:10px;padding:9px 14px;background:#ff4d6d12;border:1px solid #ff4d6d30;border-radius:8px;display:none}
 .ico{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
-.ico svg{display:block}
 .sidebar{width:var(--sidebar-w);min-height:100vh;background:var(--bg-panel);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;padding:24px 0}
-.sidebar-logo{padding:0 20px 26px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:11px}
+.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:11px}
 .logo-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--purple-1),var(--purple-2));border-radius:11px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 24px var(--purple-glow)}
-.logo-text{font-size:18px;font-weight:800;letter-spacing:1px}
+.logo-text{font-size:18px;font-weight:800;letter-spacing:2px}
 .logo-sub{font-size:10px;color:var(--text-3);letter-spacing:2.5px;margin-top:2px;font-family:'JetBrains Mono',monospace}
-.sidebar-nav{flex:1;padding:18px 12px;display:flex;flex-direction:column;gap:3px;overflow-y:auto}
+.sidebar-nav{flex:1;padding:16px 12px;display:flex;flex-direction:column;gap:2px;overflow-y:auto}
 .nav-section-label{font-size:10px;letter-spacing:2px;color:var(--text-3);padding:14px 8px 5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
-.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;cursor:pointer;transition:all .18s;color:var(--text-2);font-size:13.5px;font-weight:500;position:relative;border:1px solid transparent}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;cursor:pointer;transition:all .18s;color:var(--text-2);font-size:13px;font-weight:500;position:relative;border:1px solid transparent}
 .nav-item:hover{background:var(--bg-hover);color:var(--text-1)}
 .nav-item.active{background:linear-gradient(135deg,#1e1640,#1a1335);color:var(--purple-3);border-color:var(--border-glow);box-shadow:0 0 16px #6c3fff18}
 .nav-item.active::before{content:'';position:absolute;left:-1px;top:22%;bottom:22%;width:3px;background:var(--purple-2);border-radius:0 3px 3px 0}
-.nav-item .nav-label{flex:1}
+.nav-label{flex:1}
 .nav-badge{background:var(--purple-1);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;min-width:20px;text-align:center;font-family:'JetBrains Mono',monospace}
 .nav-badge.green{background:var(--green);color:#000}
 .nav-badge.red{background:var(--red)}
 .sidebar-footer{padding:14px 16px;border-top:1px solid var(--border)}
-.status-pill{display:flex;align-items:center;gap:9px;background:var(--bg-card);padding:10px 14px;border-radius:10px;border:1px solid var(--border);font-size:12px;color:var(--text-2);cursor:pointer}
+.status-pill{display:flex;align-items:center;gap:9px;background:var(--bg-card);padding:10px 14px;border-radius:10px;border:1px solid var(--border);font-size:12px;color:var(--text-2);cursor:pointer;transition:all .18s}
 .status-pill:hover{background:var(--bg-hover)}
 .status-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
 .status-dot.offline{background:var(--red);animation:none}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 #22d6a066}50%{box-shadow:0 0 0 5px #22d6a000}}
 .main{margin-left:var(--sidebar-w);flex:1;display:flex;flex-direction:column;min-height:100vh}
 .topbar{height:62px;background:var(--bg-panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 26px;gap:14px;position:sticky;top:0;z-index:50}
-.breadcrumb{font-size:13px;color:var(--text-3);display:flex;align-items:center;gap:7px}
+.breadcrumb{font-size:13px;color:var(--text-3);display:flex;align-items:center;gap:6px}
 .breadcrumb span{color:var(--text-1);font-weight:600}
 .topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px}
 .search-wrap{position:relative;display:flex;align-items:center}
 .search-wrap .ico{position:absolute;left:11px;pointer-events:none}
-.search-bar{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:8px 14px 8px 34px;color:var(--text-1);font-family:'Syne',sans-serif;font-size:13px;width:210px;outline:none;transition:border .2s}
+.search-bar{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:8px 14px 8px 34px;color:var(--text-1);font-family:'Syne',sans-serif;font-size:13px;width:200px;outline:none;transition:border .2s}
 .search-bar:focus{border-color:var(--purple-1)}
 .search-bar::placeholder{color:var(--text-3)}
-.admin-chip{display:flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px}
+.admin-chip{display:flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:12px}
 .admin-avatar{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--purple-1),var(--purple-3));display:flex;align-items:center;justify-content:center}
+.api-url-chip{font-size:10px;color:var(--text-3);font-family:'JetBrains Mono',monospace;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .content{flex:1;padding:26px;overflow-y:auto}
 .page{display:none}
 .page.active{display:block;animation:fadeIn .28s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
-.page-title{font-size:23px;font-weight:800;margin-bottom:5px}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.page-title{font-size:22px;font-weight:800;margin-bottom:4px}
 .page-sub{font-size:13px;color:var(--text-2);margin-bottom:22px}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
-.stats-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
-.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:20px;position:relative;overflow:hidden;transition:all .22s;cursor:default}
-.stat-card:hover{border-color:var(--border-glow);transform:translateY(-2px);box-shadow:0 8px 30px #6c3fff18}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.stats-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:20px;position:relative;overflow:hidden;transition:all .22s}
+.stat-card:hover{border-color:var(--border-glow);transform:translateY(-2px);box-shadow:0 8px 28px #6c3fff18}
 .stat-card::after{content:'';position:absolute;top:-10px;right:-10px;width:80px;height:80px;border-radius:50%;background:var(--purple-glow);filter:blur(28px);pointer-events:none}
 .stat-card.green::after{background:#22d6a022}
 .stat-card.red::after{background:#ff4d6d22}
@@ -87,39 +82,33 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 .stat-change{font-size:11px;margin-top:8px;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:4px}
 .stat-change.up{color:var(--green)}
 .stat-change.neutral{color:var(--text-3)}
-.sales-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.sales-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
 .sales-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden;transition:all .22s}
 .sales-card:hover{border-color:var(--border-glow);transform:translateY(-2px)}
-.sales-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#6c3fff08,transparent);pointer-events:none}
-.sales-label{font-size:11px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-bottom:10px;display:flex;align-items:center;gap:7px}
-.sales-value{font-size:26px;font-weight:800;color:var(--text-1);line-height:1}
+.sales-label{font-size:10px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.sales-value{font-size:26px;font-weight:800;line-height:1}
 .sales-revenue{font-size:13px;color:var(--green);font-family:'JetBrains Mono',monospace;margin-top:5px;font-weight:600}
 .sales-bar{height:3px;background:var(--bg-base);border-radius:10px;margin-top:12px;overflow:hidden}
 .sales-bar-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--purple-1),var(--purple-3));transition:width .8s ease}
-.two-col{display:grid;grid-template-columns:1fr 330px;gap:18px;margin-bottom:18px}
+.two-col{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-bottom:18px}
 .three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
 .card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:18px}
 .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.card-title{font-size:14.5px;font-weight:700;display:flex;align-items:center;gap:8px}
+.card-title{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
 .card-action{font-size:12px;color:var(--purple-3);cursor:pointer;background:var(--purple-glow);border:1px solid var(--border-glow);padding:4px 10px;border-radius:6px;transition:all .2s;display:flex;align-items:center;gap:5px}
 .card-action:hover{background:var(--purple-1);color:#fff}
 .data-table{width:100%;border-collapse:collapse}
-.data-table th{text-align:left;font-size:10.5px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;padding:0 12px 11px;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace}
-.data-table td{padding:12px 12px;font-size:13px;border-bottom:1px solid #1a1730}
+.data-table th{text-align:left;font-size:10px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;padding:0 12px 11px;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace}
+.data-table td{padding:11px 12px;font-size:13px;border-bottom:1px solid #1a1730}
 .data-table tr:last-child td{border-bottom:none}
 .data-table tr:hover td{background:var(--bg-hover)}
-.data-table tr{transition:all .14s}
 .mono{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--purple-3)}
 .badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
 .badge-dot{width:5px;height:5px;border-radius:50%}
-.badge.green{background:#22d6a018;color:var(--green)}
-.badge.green .badge-dot{background:var(--green)}
-.badge.red{background:#ff4d6d18;color:var(--red)}
-.badge.red .badge-dot{background:var(--red)}
-.badge.yellow{background:#f59e0b18;color:var(--yellow)}
-.badge.yellow .badge-dot{background:var(--yellow)}
-.badge.purple{background:var(--purple-glow);color:var(--purple-3)}
-.badge.purple .badge-dot{background:var(--purple-2)}
+.badge.green{background:#22d6a018;color:var(--green)}.badge.green .badge-dot{background:var(--green)}
+.badge.red{background:#ff4d6d18;color:var(--red)}.badge.red .badge-dot{background:var(--red)}
+.badge.yellow{background:#f59e0b18;color:var(--yellow)}.badge.yellow .badge-dot{background:var(--yellow)}
+.badge.purple{background:var(--purple-glow);color:var(--purple-3)}.badge.purple .badge-dot{background:var(--purple-2)}
 .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 17px;border-radius:10px;border:none;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .18s}
 .btn-primary{background:linear-gradient(135deg,var(--purple-1),var(--purple-2));color:#fff;box-shadow:0 4px 16px var(--purple-glow)}
 .btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 24px #6c3fff44}
@@ -138,10 +127,10 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 .input-field::placeholder{color:var(--text-3)}
 .modal-overlay{position:fixed;inset:0;background:#09080fcc;backdrop-filter:blur(6px);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .22s}
 .modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:var(--bg-panel);border:1px solid var(--border);border-radius:20px;padding:26px;width:450px;max-width:95vw;transform:scale(.95);transition:transform .22s;box-shadow:0 24px 80px #6c3fff22}
+.modal{background:var(--bg-panel);border:1px solid var(--border);border-radius:20px;padding:26px;width:440px;max-width:95vw;transform:scale(.95);transition:transform .22s;box-shadow:0 24px 80px #6c3fff22}
 .modal-overlay.open .modal{transform:scale(1)}
 .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.modal-title{font-size:17px;font-weight:800;display:flex;align-items:center;gap:8px}
+.modal-title{font-size:16px;font-weight:800;display:flex;align-items:center;gap:8px}
 .modal-close{width:30px;height:30px;border-radius:8px;background:var(--bg-card2);border:1px solid var(--border);cursor:pointer;color:var(--text-2);display:flex;align-items:center;justify-content:center}
 .modal-close:hover{background:var(--bg-hover);color:var(--text-1)}
 .modal-footer{display:flex;gap:9px;margin-top:18px;justify-content:flex-end}
@@ -160,24 +149,68 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 .expiry-item{margin-bottom:13px}
 .expiry-header{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
 .expiry-id{font-family:'JetBrains Mono',monospace;color:var(--purple-3);font-size:11px}
-.glow-divider{height:1px;background:linear-gradient(90deg,transparent,var(--purple-1)55,transparent);margin:18px 0}
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
 .spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--purple-2);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.loading-row td{text-align:center;padding:32px;color:var(--text-3)}
-.empty-row td{text-align:center;padding:24px;color:var(--text-3)}
+.loading-row td,.empty-row td{text-align:center;padding:28px;color:var(--text-3)}
 .refresh-btn{background:var(--bg-card2);border:1px solid var(--border);border-radius:8px;padding:6px 10px;color:var(--text-2);cursor:pointer;font-size:12px;display:flex;align-items:center;gap:5px;transition:all .18s}
 .refresh-btn:hover{background:var(--bg-hover);color:var(--text-1)}
-.api-url-display{font-size:11px;color:var(--text-3);font-family:'JetBrains Mono',monospace;margin-top:4px}
+.info-box{background:var(--bg-base);border:1px solid var(--border);border-radius:10px;padding:14px 16px;font-size:12px;color:var(--text-2);display:flex;gap:9px;align-items:flex-start;margin-bottom:14px}
+
+/* ── DONUT SECTION ── */
+.donut-section{display:grid;grid-template-columns:1fr 260px;gap:18px;margin-bottom:20px}
+.donut-card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:22px;position:relative;overflow:hidden}
+.donut-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,#6c3fff22 0%,transparent 70%);pointer-events:none}
+.donut-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.donut-card-title{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--text-1)}
+.donut-wrap{display:flex;align-items:center;gap:32px}
+.donut-canvas-wrap{position:relative;width:200px;height:200px;flex-shrink:0}
+#donut-chart{display:block;filter:drop-shadow(0 0 18px #6c3fff44)}
+.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+.donut-center-value{font-size:28px;font-weight:800;line-height:1;background:linear-gradient(135deg,#f0eeff,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.donut-center-label{font-size:11px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-top:3px}
+.donut-legend{display:flex;flex-direction:column;gap:14px;flex:1}
+.legend-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;background:var(--bg-base);border:1px solid var(--border);transition:all .2s;cursor:default}
+.legend-item:hover{border-color:var(--border-glow);background:var(--bg-hover)}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.legend-info{flex:1}
+.legend-name{font-size:12px;font-weight:600;color:var(--text-1);margin-bottom:2px}
+.legend-val{font-size:11px;color:var(--text-3);font-family:'JetBrains Mono',monospace}
+.legend-pct{font-size:13px;font-weight:800;font-family:'JetBrains Mono',monospace}
+
+/* Insight cards laterais */
+.donut-insights{display:flex;flex-direction:column;gap:10px}
+.insight-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;transition:all .22s}
+.insight-card:hover{transform:translateX(3px)}
+.insight-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.insight-purple .insight-icon{background:#6c3fff18;border:1px solid #6c3fff33}
+.insight-red    .insight-icon{background:#ff4d6d18;border:1px solid #ff4d6d33}
+.insight-green  .insight-icon{background:#22d6a018;border:1px solid #22d6a033}
+.insight-blue   .insight-icon{background:#38bdf818;border:1px solid #38bdf833}
+.insight-body{flex:1;min-width:0}
+.insight-value{font-size:22px;font-weight:800;line-height:1}
+.insight-purple .insight-value{color:#a78bfa}
+.insight-red    .insight-value{color:#ff4d6d}
+.insight-green  .insight-value{color:#22d6a0}
+.insight-blue   .insight-value{color:#38bdf8}
+.insight-label{font-size:11px;color:var(--text-2);margin-top:2px;font-weight:600}
+.insight-sub{font-size:10px;color:var(--text-3);margin-top:1px;font-family:'JetBrains Mono',monospace}
+.insight-ring{position:absolute;right:-18px;top:50%;transform:translateY(-50%);width:58px;height:58px;border-radius:50%;opacity:.12}
+.insight-purple .insight-ring{background:radial-gradient(circle,#6c3fff,transparent)}
+.insight-red    .insight-ring{background:radial-gradient(circle,#ff4d6d,transparent)}
+.insight-green  .insight-ring{background:radial-gradient(circle,#22d6a0,transparent)}
+.insight-blue   .insight-ring{background:radial-gradient(circle,#38bdf8,transparent)}
+@media(max-width:1100px){.donut-section{grid-template-columns:1fr}.donut-insights{flex-direction:row;flex-wrap:wrap}.insight-card{flex:1;min-width:120px}}
+@media(max-width:700px){.donut-wrap{flex-direction:column;align-items:center}}
 @media(max-width:1280px){.sales-row{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}}
 @media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)}.three-col{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 
-<!-- TELA DE LOGIN -->
+<!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
     <div class="login-logo">
@@ -185,29 +218,28 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
     </div>
     <div class="login-title">BERSERK</div>
     <div class="login-sub">ADMIN PANEL v1.0</div>
-    <div class="login-url">
-      <div class="login-url-label">URL da API (ex: https://berserk-api.squareweb.app)</div>
-      <input class="login-url-input" id="api-url-input" type="text" placeholder="https://seu-subdominio.squareweb.app" value="">
+    <div style="margin-bottom:10px">
+      <div class="login-url-label">URL DA API (ex: https://berserk.squareweb.app)</div>
+      <input class="login-url-input" id="api-url-input" type="text" placeholder="https://seu-app.squareweb.app">
     </div>
     <input class="login-input" id="login-senha" type="password" placeholder="Senha do painel" onkeydown="if(event.key==='Enter')fazerLogin()">
-    <button class="login-btn" onclick="fazerLogin()" id="login-btn">Entrar</button>
-    <div class="login-err" id="login-err">Senha ou URL incorreta</div>
+    <button class="login-btn" onclick="fazerLogin()" id="login-btn">ENTRAR</button>
+    <div class="login-err" id="login-err">Senha ou URL incorreta. Verifique e tente novamente.</div>
   </div>
 </div>
 
+<!-- ICONS SVG -->
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
 <symbol id="ic-sword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2l7 7-13 13-3-1-1-3 13-13z"/><path d="M3.5 20.5l2-2"/><path d="M18 8l-2 2"/></symbol>
 <symbol id="ic-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
-<symbol id="ic-diamond" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M2 9h20"/><path d="M6 3l4 6m4 0l4-6"/></symbol>
+<symbol id="ic-diamond" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M2 9h20"/></symbol>
 <symbol id="ic-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></symbol>
 <symbol id="ic-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5" rx="1"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></symbol>
 <symbol id="ic-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
-<symbol id="ic-unlock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></symbol>
-<symbol id="ic-broadcast" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49"/><path d="M7.76 16.24a6 6 0 0 1 0-8.49"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 19.07a10 10 0 0 1 0-14.14"/></symbol>
+<symbol id="ic-unlock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></symbol>
 <symbol id="ic-ticket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v2z"/></symbol>
 <symbol id="ic-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
 <symbol id="ic-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol>
-<symbol id="ic-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
 <symbol id="ic-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
 <symbol id="ic-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
 <symbol id="ic-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></symbol>
@@ -215,21 +247,20 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
 <symbol id="ic-dollar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></symbol>
 <symbol id="ic-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
-<symbol id="ic-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+<symbol id="ic-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
 <symbol id="ic-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></symbol>
-<symbol id="ic-wifi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></symbol>
 <symbol id="ic-bar-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
-<symbol id="ic-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></symbol>
-<symbol id="ic-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="ic-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+<symbol id="ic-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-2"/><rect x="6" y="18" width="12" height="4"/></symbol>
 <symbol id="ic-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
 <symbol id="ic-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
 <symbol id="ic-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
-<symbol id="ic-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
-<symbol id="ic-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-2"/><rect x="6" y="18" width="12" height="4"/></symbol>
-<symbol id="ic-pie" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></symbol>
 <symbol id="ic-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+<symbol id="ic-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></symbol>
+<symbol id="ic-pie" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></symbol>
 </svg>
 
+<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar" style="display:none">
   <div class="sidebar-logo">
     <div class="logo-icon"><svg width="22" height="22" color="#fff"><use href="#ic-sword"/></svg></div>
@@ -237,27 +268,49 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
   </div>
   <nav class="sidebar-nav">
     <div class="nav-section-label">Principal</div>
-    <div class="nav-item active" onclick="showPage('dashboard',this)"><svg width="16" height="16" class="ico"><use href="#ic-dashboard"/></svg><span class="nav-label">Dashboard</span></div>
-    <div class="nav-item" onclick="showPage('vendas',this)"><svg width="16" height="16" class="ico"><use href="#ic-bar-chart"/></svg><span class="nav-label">Vendas</span><span class="nav-badge green" id="badge-vendas-hoje">0</span></div>
-    <div class="nav-item" onclick="showPage('assinaturas',this)"><svg width="16" height="16" class="ico"><use href="#ic-diamond"/></svg><span class="nav-label">Assinaturas</span><span class="nav-badge" id="badge-ativas">0</span></div>
-    <div class="nav-item" onclick="showPage('restritos',this)"><svg width="16" height="16" class="ico"><use href="#ic-mute"/></svg><span class="nav-label">Restritos</span><span class="nav-badge red" id="badge-restritos">0</span></div>
-    <div class="nav-item" onclick="showPage('testes',this)"><svg width="16" height="16" class="ico"><use href="#ic-gift"/></svg><span class="nav-label">Testes Grátis</span><span class="nav-badge green" id="badge-testes">0</span></div>
+    <div class="nav-item active" onclick="showPage('dashboard',this)">
+      <svg width="16" height="16" class="ico"><use href="#ic-dashboard"/></svg><span class="nav-label">Dashboard</span>
+    </div>
+    <div class="nav-item" onclick="showPage('assinaturas',this)">
+      <svg width="16" height="16" class="ico"><use href="#ic-diamond"/></svg><span class="nav-label">Assinaturas</span>
+      <span class="nav-badge" id="badge-ativas">0</span>
+    </div>
+    <div class="nav-item" onclick="showPage('restritos',this)">
+      <svg width="16" height="16" class="ico"><use href="#ic-mute"/></svg><span class="nav-label">Restritos</span>
+      <span class="nav-badge red" id="badge-restritos">0</span>
+    </div>
+    <div class="nav-item" onclick="showPage('testes',this)">
+      <svg width="16" height="16" class="ico"><use href="#ic-gift"/></svg><span class="nav-label">Testes Grátis</span>
+      <span class="nav-badge green" id="badge-testes">0</span>
+    </div>
     <div class="nav-section-label">Ferramentas</div>
-    <div class="nav-item" onclick="showPage('liberar',this)"><svg width="16" height="16" class="ico"><use href="#ic-unlock"/></svg><span class="nav-label">Liberar Usuário</span></div>
-    <div class="nav-item" onclick="showPage('cupons',this)"><svg width="16" height="16" class="ico"><use href="#ic-ticket"/></svg><span class="nav-label">Cupons</span></div>
-    <div class="nav-item" onclick="showPage('expirar',this)"><svg width="16" height="16" class="ico"><use href="#ic-clock"/></svg><span class="nav-label">A Expirar</span></div>
+    <div class="nav-item" onclick="showPage('liberar',this)">
+      <svg width="16" height="16" class="ico"><use href="#ic-unlock"/></svg><span class="nav-label">Liberar Usuário</span>
+    </div>
+    <div class="nav-item" onclick="showPage('cupons',this)">
+      <svg width="16" height="16" class="ico"><use href="#ic-ticket"/></svg><span class="nav-label">Cupons</span>
+    </div>
+    <div class="nav-item" onclick="showPage('expirar',this)">
+      <svg width="16" height="16" class="ico"><use href="#ic-clock"/></svg><span class="nav-label">A Expirar</span>
+    </div>
     <div class="nav-section-label">Sistema</div>
-    <div class="nav-item" onclick="showPage('backup',this)"><svg width="16" height="16" class="ico"><use href="#ic-save"/></svg><span class="nav-label">Backup</span></div>
+    <div class="nav-item" onclick="showPage('backup',this)">
+      <svg width="16" height="16" class="ico"><use href="#ic-save"/></svg><span class="nav-label">Backup</span>
+    </div>
   </nav>
   <div class="sidebar-footer">
     <div class="status-pill" onclick="recarregarTudo()">
       <div class="status-dot" id="status-dot"></div>
-      <div><div style="font-weight:700;font-size:12px" id="status-text">Bot Online</div><div style="font-size:10px;color:var(--text-3)">Clique para atualizar</div></div>
-      <svg width="14" height="14" color="var(--green)" style="margin-left:auto"><use href="#ic-refresh"/></svg>
+      <div>
+        <div style="font-weight:700;font-size:12px" id="status-text">Conectando...</div>
+        <div style="font-size:10px;color:var(--text-3)">Clique para atualizar</div>
+      </div>
+      <svg width="13" height="13" style="margin-left:auto;color:var(--text-3)"><use href="#ic-refresh"/></svg>
     </div>
   </div>
 </aside>
 
+<!-- MAIN -->
 <main class="main" id="main-content" style="display:none">
   <div class="topbar">
     <svg width="14" height="14" color="var(--text-3)"><use href="#ic-dashboard"/></svg>
@@ -268,10 +321,15 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
         <input class="search-bar" type="text" placeholder="Buscar por ID..." id="global-search" onkeydown="if(event.key==='Enter')globalSearch()">
       </div>
       <div class="admin-chip">
-        <div class="admin-avatar"><svg width="15" height="15" color="#fff"><use href="#ic-user"/></svg></div>
-        <div><div style="font-size:12px;font-weight:700">Admin</div><div class="api-url-display" id="api-url-show"></div></div>
+        <div class="admin-avatar"><svg width="14" height="14" color="#fff"><use href="#ic-user"/></svg></div>
+        <div>
+          <div style="font-size:12px;font-weight:700">Admin</div>
+          <div class="api-url-chip" id="api-url-show"></div>
+        </div>
       </div>
-      <button class="btn btn-ghost btn-sm" onclick="logout()" title="Sair"><svg width="14" height="14"><use href="#ic-logout"/></svg></button>
+      <button class="btn btn-ghost btn-sm" onclick="logout()" title="Sair">
+        <svg width="14" height="14"><use href="#ic-logout"/></svg>
+      </button>
     </div>
   </div>
 
@@ -280,86 +338,175 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
     <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
       <div class="page-title">Dashboard</div>
-      <div class="page-sub" id="dash-date"></div>
-      <div class="stats-grid">
-        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="18" height="18" color="var(--purple-3)"><use href="#ic-diamond"/></svg></div><div class="stat-value" id="stat-ativas">—</div><div class="stat-label">Assinaturas Ativas</div><div class="stat-change up" id="stat-mrr"><svg width="11" height="11"><use href="#ic-trending"/></svg> Carregando...</div></div>
-        <div class="stat-card red"><div class="stat-icon-wrap red"><svg width="18" height="18" color="var(--red)"><use href="#ic-mute"/></svg></div><div class="stat-value" id="stat-restritos">—</div><div class="stat-label">Usuários Restritos</div><div class="stat-change neutral">Sem acesso ao grupo</div></div>
-        <div class="stat-card green"><div class="stat-icon-wrap green"><svg width="18" height="18" color="var(--green)"><use href="#ic-gift"/></svg></div><div class="stat-value" id="stat-testes">—</div><div class="stat-label">Testes Ativos</div><div class="stat-change up">Trial de 3 dias</div></div>
-        <div class="stat-card blue"><div class="stat-icon-wrap blue"><svg width="18" height="18" color="var(--blue)"><use href="#ic-users"/></svg></div><div class="stat-value" id="stat-usuarios">—</div><div class="stat-label">Usuários no Bot</div><div class="stat-change neutral">Total registrados</div></div>
-      </div>
-      <div class="sales-row">
-        <div class="sales-card"><div class="sales-label"><svg width="12" height="12" color="var(--purple-3)"><use href="#ic-cart"/></svg>Total de Vendas</div><div class="sales-value" id="d-total-vendas">—</div><div class="sales-revenue" id="d-total-receita">R$ 0</div><div class="sales-bar"><div class="sales-bar-fill" style="width:100%"></div></div></div>
-        <div class="sales-card"><div class="sales-label"><svg width="12" height="12" color="var(--purple-3)"><use href="#ic-calendar"/></svg>Vendas no Mês</div><div class="sales-value" id="d-mes-vendas">—</div><div class="sales-revenue" id="d-mes-receita">R$ 0</div><div class="sales-bar"><div class="sales-bar-fill" id="bar-mes" style="width:0%"></div></div></div>
-        <div class="sales-card"><div class="sales-label"><svg width="12" height="12" color="var(--purple-3)"><use href="#ic-trending"/></svg>Vendas na Semana</div><div class="sales-value" id="d-sem-vendas">—</div><div class="sales-revenue" id="d-sem-receita">R$ 0</div><div class="sales-bar"><div class="sales-bar-fill" id="bar-sem" style="width:0%"></div></div></div>
-        <div class="sales-card"><div class="sales-label"><svg width="12" height="12" color="var(--purple-3)"><use href="#ic-zap"/></svg>Vendas Hoje</div><div class="sales-value" id="d-hoje-vendas">—</div><div class="sales-revenue" id="d-hoje-receita">R$ 0</div><div class="sales-bar"><div class="sales-bar-fill" id="bar-hoje" style="width:0%"></div></div></div>
+      <div class="page-sub" id="dash-date">Carregando...</div>
+      <!-- GRÁFICO DE DISTRIBUIÇÃO DE USUÁRIOS -->
+      <div class="donut-section">
+        <!-- Card do gráfico -->
+        <div class="donut-card">
+          <div class="donut-card-header">
+            <div class="donut-card-title">
+              <svg width="15" height="15" color="var(--purple-3)"><use href="#ic-pie"/></svg>
+              Distribuição de Usuários
+            </div>
+            <button class="refresh-btn" onclick="recarregarTudo()">
+              <svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar
+            </button>
+          </div>
+          <div class="donut-wrap">
+            <div class="donut-canvas-wrap">
+              <canvas id="donut-chart" width="200" height="200"></canvas>
+              <div class="donut-center">
+                <div class="donut-center-value" id="donut-total">—</div>
+                <div class="donut-center-label">Total</div>
+              </div>
+            </div>
+            <div class="donut-legend">
+              <div class="legend-item">
+                <div class="legend-dot" style="background:#8b5cf6;box-shadow:0 0 8px #8b5cf688"></div>
+                <div class="legend-info">
+                  <div class="legend-name">Assinantes Ativos</div>
+                  <div class="legend-val" id="leg-ativas">—</div>
+                </div>
+                <div class="legend-pct" id="leg-ativas-pct" style="color:#a78bfa">—%</div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background:#ff4d6d;box-shadow:0 0 8px #ff4d6d88"></div>
+                <div class="legend-info">
+                  <div class="legend-name">Restritos</div>
+                  <div class="legend-val" id="leg-restritos">—</div>
+                </div>
+                <div class="legend-pct" id="leg-restritos-pct" style="color:#ff4d6d">—%</div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background:#22d6a0;box-shadow:0 0 8px #22d6a088"></div>
+                <div class="legend-info">
+                  <div class="legend-name">Testes Grátis</div>
+                  <div class="legend-val" id="leg-testes">—</div>
+                </div>
+                <div class="legend-pct" id="leg-testes-pct" style="color:#22d6a0">—%</div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background:#38bdf8;box-shadow:0 0 8px #38bdf888"></div>
+                <div class="legend-info">
+                  <div class="legend-name">Sem Plano</div>
+                  <div class="legend-val" id="leg-sem">—</div>
+                </div>
+                <div class="legend-pct" id="leg-sem-pct" style="color:#38bdf8">—%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Cards de insight lateral -->
+        <div class="donut-insights">
+          <div class="insight-card insight-purple">
+            <div class="insight-icon">
+              <svg width="18" height="18" color="#a78bfa"><use href="#ic-diamond"/></svg>
+            </div>
+            <div class="insight-body">
+              <div class="insight-value" id="ins-ativas">—</div>
+              <div class="insight-label">Assinantes Ativos</div>
+              <div class="insight-sub" id="ins-mrr">MRR: —</div>
+            </div>
+            <div class="insight-ring" id="ring-ativas"></div>
+          </div>
+          <div class="insight-card insight-red">
+            <div class="insight-icon">
+              <svg width="18" height="18" color="#ff4d6d"><use href="#ic-mute"/></svg>
+            </div>
+            <div class="insight-body">
+              <div class="insight-value" id="ins-restritos">—</div>
+              <div class="insight-label">Usuários Restritos</div>
+              <div class="insight-sub">Sem acesso ao grupo</div>
+            </div>
+            <div class="insight-ring" id="ring-restritos"></div>
+          </div>
+          <div class="insight-card insight-green">
+            <div class="insight-icon">
+              <svg width="18" height="18" color="#22d6a0"><use href="#ic-gift"/></svg>
+            </div>
+            <div class="insight-body">
+              <div class="insight-value" id="ins-testes">—</div>
+              <div class="insight-label">Testes Grátis</div>
+              <div class="insight-sub">Trial de 3 dias</div>
+            </div>
+            <div class="insight-ring" id="ring-testes"></div>
+          </div>
+          <div class="insight-card insight-blue">
+            <div class="insight-icon">
+              <svg width="18" height="18" color="#38bdf8"><use href="#ic-users"/></svg>
+            </div>
+            <div class="insight-body">
+              <div class="insight-value" id="ins-usuarios">—</div>
+              <div class="insight-label">Total no Bot</div>
+              <div class="insight-sub">Usuários registrados</div>
+            </div>
+            <div class="insight-ring" id="ring-usuarios"></div>
+          </div>
+        </div>
       </div>
       <div class="two-col">
         <div class="card">
           <div class="card-header">
-            <div class="card-title"><svg width="15" height="15" color="var(--purple-3)"><use href="#ic-clock"/></svg>Próximos a Expirar (7 dias)</div>
+            <div class="card-title"><svg width="14" height="14" color="var(--yellow)"><use href="#ic-clock"/></svg>Próximos a Expirar (7 dias)</div>
             <button class="refresh-btn" onclick="carregarAssinaturas()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
           </div>
-          <div id="dash-expirar"><div style="color:var(--text-3);font-size:13px">Carregando...</div></div>
+          <div id="dash-expirar"><div style="color:var(--text-3);font-size:13px;display:flex;align-items:center;gap:8px"><div class="spinner"></div> Carregando...</div></div>
         </div>
-        <div>
-          <div class="card">
-            <div class="card-title" style="margin-bottom:14px"><svg width="15" height="15" color="var(--purple-3)"><use href="#ic-zap"/></svg>Ações Rápidas</div>
-            <div style="display:flex;flex-direction:column;gap:9px">
-              <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="showPage('liberar',null)"><svg width="14" height="14"><use href="#ic-unlock"/></svg> Liberar Usuário</button>
-              <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openModal('modal-cancelar')"><svg width="14" height="14"><use href="#ic-x"/></svg> Cancelar Assinatura</button>
-              <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openModal('modal-estender')"><svg width="14" height="14"><use href="#ic-plus"/></svg> Estender Todos</button>
-              <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openModal('modal-desrest')"><svg width="14" height="14"><use href="#ic-unlock"/></svg> Desrestringir</button>
-            </div>
+        <div class="card">
+          <div class="card-title" style="margin-bottom:15px"><svg width="14" height="14" color="var(--purple-3)"><use href="#ic-zap"/></svg>Ações Rápidas</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="showPage('liberar',null)">
+              <svg width="14" height="14"><use href="#ic-unlock"/></svg> Liberar Usuário
+            </button>
+            <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openModal('modal-cancelar')">
+              <svg width="14" height="14"><use href="#ic-x"/></svg> Cancelar Assinatura
+            </button>
+            <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openModal('modal-estender')">
+              <svg width="14" height="14"><use href="#ic-plus"/></svg> Estender Todos
+            </button>
+            <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openModal('modal-desrest')">
+              <svg width="14" height="14"><use href="#ic-unlock"/></svg> Desrestringir
+            </button>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- VENDAS -->
-    <div class="page" id="page-vendas">
-      <div class="page-title">Vendas</div>
-      <div class="page-sub">Histórico completo de receita e transações</div>
-      <div class="stats-grid">
-        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="18" height="18" color="var(--purple-3)"><use href="#ic-cart"/></svg></div><div class="stat-value" id="v-total">—</div><div class="stat-label">Total de Vendas</div><div class="stat-change up" id="v-total-r"></div></div>
-        <div class="stat-card blue"><div class="stat-icon-wrap blue"><svg width="18" height="18" color="var(--blue)"><use href="#ic-calendar"/></svg></div><div class="stat-value" id="v-mes">—</div><div class="stat-label">Vendas no Mês</div><div class="stat-change up" id="v-mes-r"></div></div>
-        <div class="stat-card green"><div class="stat-icon-wrap green"><svg width="18" height="18" color="var(--green)"><use href="#ic-trending"/></svg></div><div class="stat-value" id="v-sem">—</div><div class="stat-label">Vendas na Semana</div><div class="stat-change up" id="v-sem-r"></div></div>
-        <div class="stat-card yellow"><div class="stat-icon-wrap yellow"><svg width="18" height="18" color="var(--yellow)"><use href="#ic-zap"/></svg></div><div class="stat-value" id="v-hoje">—</div><div class="stat-label">Vendas Hoje</div><div class="stat-change up" id="v-hoje-r"></div></div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title"><svg width="15" height="15" color="var(--purple-3)"><use href="#ic-dollar"/></svg>Histórico de Transações</div>
-          <div style="display:flex;gap:8px">
-            <button class="refresh-btn" onclick="carregarVendas()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
-            <button class="card-action" onclick="exportarCSV()"><svg width="12" height="12"><use href="#ic-download"/></svg>Exportar CSV</button>
-          </div>
-        </div>
-        <table class="data-table">
-          <thead><tr><th>Payment ID</th><th>User ID</th><th>Valor</th><th>Data</th><th>Tipo</th><th>Status</th></tr></thead>
-          <tbody id="vendas-table-body"><tr class="loading-row"><td colspan="6"><div class="spinner"></div> Carregando...</td></tr></tbody>
-        </table>
       </div>
     </div>
 
     <!-- ASSINATURAS -->
     <div class="page" id="page-assinaturas">
       <div class="page-title">Assinaturas</div>
-      <div class="page-sub">Gerencie todos os planos ativos e histórico</div>
+      <div class="page-sub">Gerencie todos os planos — endpoint <code style="color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px">/api/assinaturas</code></div>
       <div class="stats-grid-3">
-        <div class="stat-card"><div class="stat-icon-wrap green"><svg width="18" height="18" color="var(--green)"><use href="#ic-check"/></svg></div><div class="stat-value" id="sub-ativas">—</div><div class="stat-label">Ativas</div></div>
-        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="18" height="18" color="var(--purple-3)"><use href="#ic-bar-chart"/></svg></div><div class="stat-value" id="sub-total">—</div><div class="stat-label">Total histórico</div></div>
-        <div class="stat-card yellow"><div class="stat-icon-wrap yellow"><svg width="18" height="18" color="var(--yellow)"><use href="#ic-dollar"/></svg></div><div class="stat-value" id="sub-mrr">R$ —</div><div class="stat-label">MRR estimado</div></div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap green"><svg width="18" height="18" color="var(--green)"><use href="#ic-check"/></svg></div>
+          <div class="stat-value" id="sub-ativas">—</div>
+          <div class="stat-label">Ativas agora</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap purple"><svg width="18" height="18" color="var(--purple-3)"><use href="#ic-bar-chart"/></svg></div>
+          <div class="stat-value" id="sub-total">—</div>
+          <div class="stat-label">Total histórico</div>
+        </div>
+        <div class="stat-card yellow">
+          <div class="stat-icon-wrap yellow"><svg width="18" height="18" color="var(--yellow)"><use href="#ic-dollar"/></svg></div>
+          <div class="stat-value" id="sub-mrr">R$ —</div>
+          <div class="stat-label">MRR estimado (R$20/mês)</div>
+        </div>
       </div>
       <div class="card">
         <div class="card-header">
-          <div class="card-title"><svg width="15" height="15" color="var(--purple-3)"><use href="#ic-diamond"/></svg>Lista de Assinantes</div>
+          <div class="card-title"><svg width="14" height="14" color="var(--purple-3)"><use href="#ic-diamond"/></svg>Lista de Assinantes</div>
           <div style="display:flex;gap:8px">
-            <div class="search-wrap"><svg width="13" height="13" color="var(--text-3)" class="ico" style="left:9px"><use href="#ic-search"/></svg><input class="search-bar" style="width:150px" placeholder="Filtrar ID..." id="filter-sub" oninput="renderSubTable()"></div>
+            <div class="search-wrap">
+              <svg width="13" height="13" color="var(--text-3)" class="ico" style="left:9px"><use href="#ic-search"/></svg>
+              <input class="search-bar" style="width:150px" placeholder="Filtrar ID..." id="filter-sub" oninput="renderSubTable()">
+            </div>
             <button class="refresh-btn" onclick="carregarAssinaturas()"><svg width="12" height="12"><use href="#ic-refresh"/></svg></button>
             <button class="btn btn-primary btn-sm" onclick="openModal('modal-liberar')"><svg width="12" height="12"><use href="#ic-plus"/></svg> Novo</button>
           </div>
         </div>
         <table class="data-table">
-          <thead><tr><th>USER ID</th><th>Username</th><th>Início</th><th>Expira</th><th>Dias Rest.</th><th>Status</th><th>Ações</th></tr></thead>
+          <thead><tr><th>USER ID</th><th>Username</th><th>Início</th><th>Expira</th><th>Dias Rest.</th><th>Status</th><th>Ação</th></tr></thead>
           <tbody id="sub-table-body"><tr class="loading-row"><td colspan="7"><div class="spinner"></div> Carregando...</td></tr></tbody>
         </table>
       </div>
@@ -368,17 +515,21 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
     <!-- RESTRITOS -->
     <div class="page" id="page-restritos">
       <div class="page-title">Usuários Restritos</div>
-      <div class="page-sub">Usuários sem permissão de enviar mensagens no grupo</div>
+      <div class="page-sub">Usuários silenciados no grupo — endpoint <code style="color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px">/api/restritos</code></div>
+      <div class="info-box">
+        <svg width="15" height="15" color="var(--yellow)" style="flex-shrink:0;margin-top:1px"><use href="#ic-info"/></svg>
+        <span>Desrestringir aqui remove apenas dos dados. Para liberar no Telegram também, use o comando <code style="color:var(--purple-3)">/desrestringir &lt;ID&gt;</code> no bot.</span>
+      </div>
       <div class="card">
         <div class="card-header">
-          <div class="card-title"><svg width="15" height="15" color="var(--red)"><use href="#ic-mute"/></svg>Lista de Restritos</div>
+          <div class="card-title"><svg width="14" height="14" color="var(--red)"><use href="#ic-mute"/></svg>Lista de Restritos</div>
           <div style="display:flex;gap:8px">
             <button class="refresh-btn" onclick="carregarRestritos()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
             <button class="btn btn-ghost btn-sm" onclick="openModal('modal-desrest')"><svg width="13" height="13"><use href="#ic-unlock"/></svg> Desrestringir</button>
           </div>
         </div>
         <table class="data-table">
-          <thead><tr><th>USER ID</th><th>Restrito desde</th><th>Expira restrição</th><th>Horas restantes</th><th>Ações</th></tr></thead>
+          <thead><tr><th>USER ID</th><th>Restrito desde</th><th>Expira restrição</th><th>Horas restantes</th><th>Ação</th></tr></thead>
           <tbody id="rest-table-body"><tr class="loading-row"><td colspan="5"><div class="spinner"></div> Carregando...</td></tr></tbody>
         </table>
       </div>
@@ -387,47 +538,71 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
     <!-- TESTES -->
     <div class="page" id="page-testes">
       <div class="page-title">Testes Grátis</div>
-      <div class="page-sub">Usuários no período de trial de 3 dias</div>
+      <div class="page-sub">Usuários no trial de 3 dias — endpoint <code style="color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px">/api/testes</code></div>
       <div class="card">
         <div class="card-header">
-          <div class="card-title"><svg width="15" height="15" color="var(--green)"><use href="#ic-gift"/></svg>Trials Ativos</div>
+          <div class="card-title"><svg width="14" height="14" color="var(--green)"><use href="#ic-gift"/></svg>Trials Ativos</div>
           <button class="refresh-btn" onclick="carregarTestes()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
         </div>
-        <div id="trial-list" style="display:flex;flex-direction:column;gap:14px"><div style="color:var(--text-3);font-size:13px;display:flex;align-items:center;gap:8px"><div class="spinner"></div> Carregando...</div></div>
+        <div id="trial-list" style="display:flex;flex-direction:column;gap:14px">
+          <div style="color:var(--text-3);font-size:13px;display:flex;align-items:center;gap:8px"><div class="spinner"></div> Carregando...</div>
+        </div>
       </div>
     </div>
 
     <!-- LIBERAR -->
     <div class="page" id="page-liberar">
       <div class="page-title">Liberar Usuário</div>
-      <div class="page-sub">Ative ou renove manualmente uma assinatura</div>
+      <div class="page-sub">Ative ou renove assinaturas manualmente — endpoint <code style="color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px">POST /api/acao/liberar</code></div>
+      <div class="info-box">
+        <svg width="15" height="15" color="var(--yellow)" style="flex-shrink:0;margin-top:1px"><use href="#ic-info"/></svg>
+        <span>A liberação via painel atualiza os dados. Para remover a restrição no Telegram, use também o comando <code style="color:var(--purple-3)">/liberar &lt;ID&gt;</code> no bot.</span>
+      </div>
       <div class="two-col">
         <div class="card">
-          <div class="card-title" style="margin-bottom:18px"><svg width="15" height="15" color="var(--purple-3)"><use href="#ic-unlock"/></svg>Nova Liberação Manual</div>
-          <div class="input-group"><div class="input-label"><svg width="12" height="12"><use href="#ic-user"/></svg>ID do Usuário Telegram</div><input class="input-field" type="number" placeholder="Ex: 123456789" id="lib-uid"></div>
+          <div class="card-title" style="margin-bottom:18px"><svg width="14" height="14" color="var(--purple-3)"><use href="#ic-unlock"/></svg>Nova Liberação Manual</div>
+          <div class="input-group">
+            <div class="input-label"><svg width="12" height="12"><use href="#ic-user"/></svg>ID do Usuário Telegram</div>
+            <input class="input-field" type="number" placeholder="Ex: 123456789" id="lib-uid">
+          </div>
           <div class="input-group">
             <div class="input-label"><svg width="12" height="12"><use href="#ic-calendar"/></svg>Duração (dias)</div>
-            <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px">
-              <div class="chip" onclick="setDias(7)">7 dias</div><div class="chip" onclick="setDias(15)">15 dias</div><div class="chip selected" onclick="setDias(30)">30 dias</div><div class="chip" onclick="setDias(60)">60 dias</div><div class="chip" onclick="setDias(90)">90 dias</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+              <div class="chip" onclick="setDias(7)">7 dias</div>
+              <div class="chip" onclick="setDias(15)">15 dias</div>
+              <div class="chip selected" onclick="setDias(30)">30 dias</div>
+              <div class="chip" onclick="setDias(60)">60 dias</div>
+              <div class="chip" onclick="setDias(90)">90 dias</div>
             </div>
             <input class="input-field" type="number" placeholder="Ou digite manualmente" id="lib-dias" value="30">
           </div>
           <div style="display:flex;gap:9px">
-            <button class="btn btn-primary" onclick="liberarUsuario()" style="flex:1;justify-content:center" id="btn-liberar"><svg width="14" height="14"><use href="#ic-unlock"/></svg> Liberar</button>
-            <button class="btn btn-ghost" onclick="checkStatus()" style="flex:1;justify-content:center"><svg width="14" height="14"><use href="#ic-search"/></svg> Verificar Status</button>
+            <button class="btn btn-primary" onclick="liberarUsuario()" style="flex:1;justify-content:center" id="btn-liberar">
+              <svg width="14" height="14"><use href="#ic-unlock"/></svg> Liberar
+            </button>
+            <button class="btn btn-ghost" onclick="checkStatus()" style="flex:1;justify-content:center">
+              <svg width="14" height="14"><use href="#ic-search"/></svg> Verificar Status
+            </button>
           </div>
-          <div id="status-result" style="margin-top:15px;display:none"><div style="height:1px;background:linear-gradient(90deg,transparent,var(--purple-1)55,transparent);margin:18px 0"></div><div class="card" style="margin:0;background:var(--bg-base)"><div id="status-content"></div></div></div>
+          <div id="status-result" style="margin-top:15px;display:none">
+            <div style="height:1px;background:linear-gradient(90deg,transparent,var(--purple-1)55,transparent);margin:16px 0"></div>
+            <div class="card" style="margin:0;background:var(--bg-base)"><div id="status-content"></div></div>
+          </div>
         </div>
         <div>
           <div class="card">
-            <div class="card-title" style="margin-bottom:15px"><svg width="15" height="15" color="var(--red)"><use href="#ic-x"/></svg>Cancelar Assinatura</div>
+            <div class="card-title" style="margin-bottom:15px"><svg width="14" height="14" color="var(--red)"><use href="#ic-x"/></svg>Cancelar Assinatura</div>
             <div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" placeholder="Ex: 123456789" id="cancel-uid"></div>
-            <button class="btn btn-danger" onclick="cancelarAssinatura()" style="width:100%;justify-content:center"><svg width="14" height="14"><use href="#ic-x"/></svg> Cancelar Plano</button>
+            <button class="btn btn-danger" onclick="cancelarAssinatura()" style="width:100%;justify-content:center">
+              <svg width="14" height="14"><use href="#ic-x"/></svg> Cancelar Plano
+            </button>
           </div>
           <div class="card">
-            <div class="card-title" style="margin-bottom:15px"><svg width="15" height="15" color="var(--green)"><use href="#ic-unlock"/></svg>Desrestringir</div>
+            <div class="card-title" style="margin-bottom:15px"><svg width="14" height="14" color="var(--green)"><use href="#ic-unlock"/></svg>Desrestringir</div>
             <div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" placeholder="Ex: 123456789" id="desrest-uid"></div>
-            <button class="btn btn-success" onclick="desrestringirUsuario()" style="width:100%;justify-content:center"><svg width="14" height="14"><use href="#ic-unlock"/></svg> Remover Restrição</button>
+            <button class="btn btn-success" onclick="desrestringirUsuario()" style="width:100%;justify-content:center">
+              <svg width="14" height="14"><use href="#ic-unlock"/></svg> Remover Restrição
+            </button>
           </div>
         </div>
       </div>
@@ -436,45 +611,91 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
     <!-- CUPONS -->
     <div class="page" id="page-cupons">
       <div class="page-title">Cupons de Indicação</div>
-      <div class="page-sub">Sistema de afiliados e descontos</div>
+      <div class="page-sub">Sistema de afiliados — endpoint <code style="color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px">/api/cupons</code></div>
       <div class="three-col">
-        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="18" height="18" color="var(--purple-3)"><use href="#ic-ticket"/></svg></div><div class="stat-value" id="cup-total">—</div><div class="stat-label">Cupons Criados</div></div>
-        <div class="stat-card green"><div class="stat-icon-wrap green"><svg width="18" height="18" color="var(--green)"><use href="#ic-check"/></svg></div><div class="stat-value" id="cup-usos">—</div><div class="stat-label">Total de Usos</div></div>
-        <div class="stat-card yellow"><div class="stat-icon-wrap yellow"><svg width="18" height="18" color="var(--yellow)"><use href="#ic-dollar"/></svg></div><div class="stat-value" id="cup-creditos">—</div><div class="stat-label">Créditos Pendentes</div></div>
+        <div class="stat-card">
+          <div class="stat-icon-wrap purple"><svg width="18" height="18" color="var(--purple-3)"><use href="#ic-ticket"/></svg></div>
+          <div class="stat-value" id="cup-total">—</div>
+          <div class="stat-label">Cupons Criados</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-icon-wrap green"><svg width="18" height="18" color="var(--green)"><use href="#ic-check"/></svg></div>
+          <div class="stat-value" id="cup-usos">—</div>
+          <div class="stat-label">Total de Usos</div>
+        </div>
+        <div class="stat-card yellow">
+          <div class="stat-icon-wrap yellow"><svg width="18" height="18" color="var(--yellow)"><use href="#ic-dollar"/></svg></div>
+          <div class="stat-value" id="cup-creditos">—</div>
+          <div class="stat-label">Créditos Pendentes</div>
+        </div>
       </div>
       <div class="card">
         <div class="card-header">
-          <div class="card-title"><svg width="15" height="15" color="var(--yellow)"><use href="#ic-trophy"/></svg>Ranking de Indicadores</div>
+          <div class="card-title"><svg width="14" height="14" color="var(--yellow)"><use href="#ic-trophy"/></svg>Ranking de Indicadores</div>
           <button class="refresh-btn" onclick="carregarCupons()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
         </div>
-        <table class="data-table"><thead><tr><th>#</th><th>Usuário</th><th>Código</th><th>Usos</th><th>Créditos</th></tr></thead><tbody id="cupons-table"><tr class="loading-row"><td colspan="5"><div class="spinner"></div> Carregando...</td></tr></tbody></table>
+        <table class="data-table">
+          <thead><tr><th>#</th><th>User ID</th><th>Código</th><th>Usos</th><th>Créditos</th></tr></thead>
+          <tbody id="cupons-table"><tr class="loading-row"><td colspan="5"><div class="spinner"></div> Carregando...</td></tr></tbody>
+        </table>
       </div>
     </div>
 
     <!-- A EXPIRAR -->
     <div class="page" id="page-expirar">
       <div class="page-title">A Expirar em Breve</div>
-      <div class="page-sub">Assinaturas próximas do vencimento nos próximos 7 dias</div>
+      <div class="page-sub">Assinaturas que vencem nos próximos 7 dias</div>
       <div class="card">
         <div class="card-header">
-          <div class="card-title"><svg width="15" height="15" color="var(--yellow)"><use href="#ic-clock"/></svg>Próximos 7 dias</div>
+          <div class="card-title"><svg width="14" height="14" color="var(--yellow)"><use href="#ic-clock"/></svg>Próximos 7 dias</div>
           <div style="display:flex;gap:8px">
             <button class="refresh-btn" onclick="carregarAssinaturas()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
-            <button class="btn btn-primary btn-sm" onclick="openModal('modal-estender')"><svg width="12" height="12"><use href="#ic-plus"/></svg> Estender Todas</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('modal-estender')">
+              <svg width="12" height="12"><use href="#ic-plus"/></svg> Estender Todas
+            </button>
           </div>
         </div>
-        <div id="expirar-list"><div style="color:var(--text-3);font-size:13px;display:flex;align-items:center;gap:8px"><div class="spinner"></div> Carregando...</div></div>
+        <div id="expirar-list">
+          <div style="color:var(--text-3);font-size:13px;display:flex;align-items:center;gap:8px"><div class="spinner"></div> Carregando...</div>
+        </div>
       </div>
     </div>
 
     <!-- BACKUP -->
     <div class="page" id="page-backup">
       <div class="page-title">Backup & Exportação</div>
-      <div class="page-sub">Gerencie e exporte os dados do sistema</div>
+      <div class="page-sub">Exporte e verifique os dados do sistema</div>
       <div class="three-col">
-        <div class="card" style="text-align:center"><div style="width:52px;height:52px;border-radius:14px;background:var(--purple-glow);border:1px solid var(--border-glow);display:flex;align-items:center;justify-content:center;margin:0 auto 14px"><svg width="24" height="24" color="var(--purple-3)"><use href="#ic-save"/></svg></div><div style="font-weight:700;margin-bottom:7px">Backup Completo</div><div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Exporta dados via API em JSON</div><button class="btn btn-primary" onclick="gerarBackup()" style="width:100%;justify-content:center"><svg width="14" height="14"><use href="#ic-download"/></svg> Gerar JSON</button></div>
-        <div class="card" style="text-align:center"><div style="width:52px;height:52px;border-radius:14px;background:#22d6a018;border:1px solid #22d6a030;display:flex;align-items:center;justify-content:center;margin:0 auto 14px"><svg width="24" height="24" color="var(--green)"><use href="#ic-bar-chart"/></svg></div><div style="font-weight:700;margin-bottom:7px">Exportar CSV</div><div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Lista de assinantes em planilha</div><button class="btn btn-ghost" onclick="exportarCSV()" style="width:100%;justify-content:center"><svg width="14" height="14"><use href="#ic-download"/></svg> Exportar CSV</button></div>
-        <div class="card" style="text-align:center"><div style="width:52px;height:52px;border-radius:14px;background:#38bdf818;border:1px solid #38bdf830;display:flex;align-items:center;justify-content:center;margin:0 auto 14px"><svg width="24" height="24" color="var(--blue)"><use href="#ic-info"/></svg></div><div style="font-weight:700;margin-bottom:7px">Status do Bot</div><div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Verifica conexão com a API</div><button class="btn btn-success" onclick="verificarConexao()" style="width:100%;justify-content:center"><svg width="14" height="14"><use href="#ic-check"/></svg> Verificar</button></div>
+        <div class="card" style="text-align:center">
+          <div style="width:52px;height:52px;border-radius:14px;background:var(--purple-glow);border:1px solid var(--border-glow);display:flex;align-items:center;justify-content:center;margin:0 auto 14px">
+            <svg width="24" height="24" color="var(--purple-3)"><use href="#ic-save"/></svg>
+          </div>
+          <div style="font-weight:700;margin-bottom:7px">Backup Completo</div>
+          <div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Exporta assinaturas, restritos e cupons via <code style="color:var(--purple-3)">/api/backup</code></div>
+          <button class="btn btn-primary" onclick="gerarBackup()" style="width:100%;justify-content:center">
+            <svg width="14" height="14"><use href="#ic-download"/></svg> Gerar JSON
+          </button>
+        </div>
+        <div class="card" style="text-align:center">
+          <div style="width:52px;height:52px;border-radius:14px;background:#22d6a018;border:1px solid #22d6a030;display:flex;align-items:center;justify-content:center;margin:0 auto 14px">
+            <svg width="24" height="24" color="var(--green)"><use href="#ic-bar-chart"/></svg>
+          </div>
+          <div style="font-weight:700;margin-bottom:7px">Exportar Assinaturas</div>
+          <div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Gera CSV com todos os assinantes para planilha</div>
+          <button class="btn btn-ghost" onclick="exportarCSVAssinaturas()" style="width:100%;justify-content:center">
+            <svg width="14" height="14"><use href="#ic-download"/></svg> Exportar CSV
+          </button>
+        </div>
+        <div class="card" style="text-align:center">
+          <div style="width:52px;height:52px;border-radius:14px;background:#38bdf818;border:1px solid #38bdf830;display:flex;align-items:center;justify-content:center;margin:0 auto 14px">
+            <svg width="24" height="24" color="var(--blue)"><use href="#ic-info"/></svg>
+          </div>
+          <div style="font-weight:700;margin-bottom:7px">Verificar Conexão</div>
+          <div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Testa conectividade com a API Flask do bot</div>
+          <button class="btn btn-success" onclick="verificarConexao()" style="width:100%;justify-content:center">
+            <svg width="14" height="14"><use href="#ic-check"/></svg> Verificar
+          </button>
+        </div>
       </div>
     </div>
 
@@ -482,10 +703,76 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 </main>
 
 <!-- MODAIS -->
-<div class="modal-overlay" id="modal-liberar"><div class="modal"><div class="modal-header"><div class="modal-title"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-unlock"/></svg>Liberar Usuário</div><button class="modal-close" onclick="closeModal('modal-liberar')"><svg width="13" height="13"><use href="#ic-x"/></svg></button></div><div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" id="m-lib-uid" placeholder="123456789"></div><div class="input-group"><div class="input-label">Dias de acesso</div><input class="input-field" type="number" id="m-lib-dias" value="30"></div><div class="modal-footer"><button class="btn btn-ghost" onclick="closeModal('modal-liberar')">Cancelar</button><button class="btn btn-primary" onclick="liberarModal()"><svg width="13" height="13"><use href="#ic-unlock"/></svg>Liberar</button></div></div></div>
-<div class="modal-overlay" id="modal-cancelar"><div class="modal"><div class="modal-header"><div class="modal-title"><svg width="16" height="16" color="var(--red)"><use href="#ic-x"/></svg>Cancelar Assinatura</div><button class="modal-close" onclick="closeModal('modal-cancelar')"><svg width="13" height="13"><use href="#ic-x"/></svg></button></div><div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" id="m-cancel-uid" placeholder="123456789"></div><div class="modal-footer"><button class="btn btn-ghost" onclick="closeModal('modal-cancelar')">Cancelar</button><button class="btn btn-danger" onclick="cancelarModal()"><svg width="13" height="13"><use href="#ic-x"/></svg>Confirmar</button></div></div></div>
-<div class="modal-overlay" id="modal-estender"><div class="modal"><div class="modal-header"><div class="modal-title"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-plus"/></svg>Estender Todas as Assinaturas</div><button class="modal-close" onclick="closeModal('modal-estender')"><svg width="13" height="13"><use href="#ic-x"/></svg></button></div><div style="font-size:13px;color:var(--text-2);margin-bottom:14px;display:flex;gap:7px;align-items:center"><svg width="14" height="14" color="var(--yellow)"><use href="#ic-info"/></svg>Adiciona dias a TODOS os assinantes ativos.</div><div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px"><div class="chip" onclick="setExtDias(7)">7 dias</div><div class="chip" onclick="setExtDias(15)">15 dias</div><div class="chip selected" onclick="setExtDias(30)">30 dias</div><div class="chip" onclick="setExtDias(60)">60 dias</div></div><div class="input-group"><div class="input-label">Dias a adicionar</div><input class="input-field" type="number" id="m-ext-dias" value="30"></div><div class="modal-footer"><button class="btn btn-ghost" onclick="closeModal('modal-estender')">Cancelar</button><button class="btn btn-primary" onclick="estenderModal()"><svg width="13" height="13"><use href="#ic-plus"/></svg>Estender</button></div></div></div>
-<div class="modal-overlay" id="modal-desrest"><div class="modal"><div class="modal-header"><div class="modal-title"><svg width="16" height="16" color="var(--green)"><use href="#ic-unlock"/></svg>Desrestringir Usuário</div><button class="modal-close" onclick="closeModal('modal-desrest')"><svg width="13" height="13"><use href="#ic-x"/></svg></button></div><div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" id="m-desrest-uid" placeholder="123456789"></div><div class="modal-footer"><button class="btn btn-ghost" onclick="closeModal('modal-desrest')">Cancelar</button><button class="btn btn-success" onclick="desrestModal()"><svg width="13" height="13"><use href="#ic-unlock"/></svg>Remover Restrição</button></div></div></div>
+<div class="modal-overlay" id="modal-liberar">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-unlock"/></svg>Liberar Usuário</div>
+      <button class="modal-close" onclick="closeModal('modal-liberar')"><svg width="13" height="13"><use href="#ic-x"/></svg></button>
+    </div>
+    <div class="input-group"><div class="input-label">ID do Usuário Telegram</div><input class="input-field" type="number" id="m-lib-uid" placeholder="123456789"></div>
+    <div class="input-group"><div class="input-label">Dias de acesso</div><input class="input-field" type="number" id="m-lib-dias" value="30"></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('modal-liberar')">Cancelar</button>
+      <button class="btn btn-primary" onclick="liberarModal()"><svg width="13" height="13"><use href="#ic-unlock"/></svg>Liberar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-cancelar">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title"><svg width="16" height="16" color="var(--red)"><use href="#ic-x"/></svg>Cancelar Assinatura</div>
+      <button class="modal-close" onclick="closeModal('modal-cancelar')"><svg width="13" height="13"><use href="#ic-x"/></svg></button>
+    </div>
+    <div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" id="m-cancel-uid" placeholder="123456789"></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('modal-cancelar')">Cancelar</button>
+      <button class="btn btn-danger" onclick="cancelarModal()"><svg width="13" height="13"><use href="#ic-x"/></svg>Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-estender">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-plus"/></svg>Estender Todas as Assinaturas</div>
+      <button class="modal-close" onclick="closeModal('modal-estender')"><svg width="13" height="13"><use href="#ic-x"/></svg></button>
+    </div>
+    <div class="info-box" style="margin-bottom:14px">
+      <svg width="14" height="14" color="var(--yellow)" style="flex-shrink:0"><use href="#ic-info"/></svg>
+      <span>Adiciona dias a <strong>todos</strong> os assinantes ativos via <code style="color:var(--purple-3)">/api/acao/estender_todas</code>.</span>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
+      <div class="chip" onclick="setExtDias(7)">7 dias</div>
+      <div class="chip" onclick="setExtDias(15)">15 dias</div>
+      <div class="chip selected" onclick="setExtDias(30)">30 dias</div>
+      <div class="chip" onclick="setExtDias(60)">60 dias</div>
+    </div>
+    <div class="input-group"><div class="input-label">Dias a adicionar</div><input class="input-field" type="number" id="m-ext-dias" value="30"></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('modal-estender')">Cancelar</button>
+      <button class="btn btn-primary" onclick="estenderModal()"><svg width="13" height="13"><use href="#ic-plus"/></svg>Estender</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-desrest">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title"><svg width="16" height="16" color="var(--green)"><use href="#ic-unlock"/></svg>Desrestringir Usuário</div>
+      <button class="modal-close" onclick="closeModal('modal-desrest')"><svg width="13" height="13"><use href="#ic-x"/></svg></button>
+    </div>
+    <div class="info-box" style="margin-bottom:14px">
+      <svg width="14" height="14" color="var(--yellow)" style="flex-shrink:0"><use href="#ic-info"/></svg>
+      <span>Remove dos dados. Para liberar no Telegram, use <code style="color:var(--purple-3)">/desrestringir &lt;ID&gt;</code> no bot.</span>
+    </div>
+    <div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" id="m-desrest-uid" placeholder="123456789"></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('modal-desrest')">Cancelar</button>
+      <button class="btn btn-success" onclick="desrestModal()"><svg width="13" height="13"><use href="#ic-unlock"/></svg>Remover Restrição</button>
+    </div>
+  </div>
+</div>
 
 <div class="toast-container" id="toasts"></div>
 
@@ -496,164 +783,161 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 let API_BASE = '';
 let AUTH_TOKEN = '';
 let dadosAssinaturas = [];
-let dadosVendas = null;
 
 // ============================================================
-// LOGIN / AUTH
+// LOGIN — POST /api/login  { senha } → { ok, token }
 // ============================================================
 async function fazerLogin() {
-  const url = document.getElementById('api-url-input').value.trim().replace(/\/$/, '');
-  const senha = document.getElementById('login-senha').value.trim();
-  if (!url) { mostrarErroLogin('Informe a URL da API'); return; }
-  if (!senha) { mostrarErroLogin('Informe a senha'); return; }
+  const url   = (document.getElementById('api-url-input').value||'').trim().replace(/\/$/, '');
+  const senha = (document.getElementById('login-senha').value||'').trim();
+  if (!url)   { erroLogin('Informe a URL da API'); return; }
+  if (!senha) { erroLogin('Informe a senha'); return; }
 
   const btn = document.getElementById('login-btn');
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner" style="border-color:#ffffff44;border-top-color:#fff"></span> Entrando...';
+  btn.innerHTML = '<span class="spinner" style="border-color:#ffffff44;border-top-color:#fff;width:14px;height:14px"></span> Entrando...';
 
   try {
-    const res = await fetch(`${url}/api/login`, {
+    const res  = await fetch(`${url}/api/login`, {
       method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({senha})
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ senha })
     });
     const data = await res.json();
+
     if (data.ok && data.token) {
-      API_BASE = url;
+      API_BASE   = url;
       AUTH_TOKEN = data.token;
-      document.getElementById('login-screen').style.display = 'none';
-      document.getElementById('sidebar').style.display = 'flex';
-      document.getElementById('main-content').style.display = 'flex';
-      document.getElementById('api-url-show').textContent = url.replace('https://','').substring(0,22)+'...';
-      document.getElementById('dash-date').textContent = new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-      recarregarTudo();
+      // Persiste na sessão para recarregar sem perder login
+      sessionStorage.setItem('bk_token', AUTH_TOKEN);
+      sessionStorage.setItem('bk_url',   API_BASE);
+
+      mostrarApp();
     } else {
-      mostrarErroLogin('Senha ou URL incorreta');
+      erroLogin(data.erro || 'Senha ou URL incorreta');
     }
   } catch(e) {
-    mostrarErroLogin('Não foi possível conectar. Verifique a URL.');
+    erroLogin('Não foi possível conectar. Verifique a URL e tente novamente.');
   }
   btn.disabled = false;
-  btn.innerHTML = 'Entrar';
+  btn.innerHTML = 'ENTRAR';
 }
 
-function mostrarErroLogin(msg) {
+function erroLogin(msg) {
   const el = document.getElementById('login-err');
   el.textContent = msg;
   el.style.display = 'block';
-  setTimeout(() => el.style.display='none', 4000);
+  setTimeout(() => el.style.display = 'none', 5000);
+}
+
+function mostrarApp() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('sidebar').style.display = 'flex';
+  document.getElementById('main-content').style.display = 'flex';
+  const host = API_BASE.replace(/https?:\/\//, '').substring(0, 26);
+  document.getElementById('api-url-show').textContent = host;
+  document.getElementById('dash-date').textContent =
+    new Date().toLocaleDateString('pt-BR', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  recarregarTudo();
 }
 
 function logout() {
   AUTH_TOKEN = '';
-  API_BASE = '';
+  API_BASE   = '';
+  sessionStorage.removeItem('bk_token');
+  sessionStorage.removeItem('bk_url');
   document.getElementById('login-screen').style.display = 'flex';
   document.getElementById('sidebar').style.display = 'none';
   document.getElementById('main-content').style.display = 'none';
   document.getElementById('login-senha').value = '';
 }
 
+// Restaura sessão ao recarregar a página
+(function restaurarSessao() {
+  const t = sessionStorage.getItem('bk_token');
+  const u = sessionStorage.getItem('bk_url');
+  if (t && u) {
+    AUTH_TOKEN = t;
+    API_BASE   = u;
+    document.getElementById('api-url-input').value = u;
+    mostrarApp();
+  }
+})();
+
 // ============================================================
-// API HELPER
+// CHAMADA AUTENTICADA — header X-Auth-Token
 // ============================================================
-async function api(path, method='GET', body=null) {
+async function api(path, method = 'GET', body = null) {
   const opts = {
     method,
-    headers: {'X-Auth-Token': AUTH_TOKEN, 'Content-Type':'application/json'}
+    headers: { 'X-Auth-Token': AUTH_TOKEN, 'Content-Type': 'application/json' }
   };
   if (body) opts.body = JSON.stringify(body);
   const res = await fetch(`${API_BASE}${path}`, opts);
+  if (res.status === 401) { logout(); throw new Error('Sessão expirada'); }
   return res.json();
 }
 
 // ============================================================
-// CARREGAR DADOS
+// CARREGAMENTO DE DADOS
 // ============================================================
 async function recarregarTudo() {
   toast('Atualizando dados...', 'info');
-  await Promise.all([carregarStats(), carregarVendas(), carregarAssinaturas(), carregarRestritos(), carregarTestes(), carregarCupons()]);
+  await Promise.all([
+    carregarStats(),
+    carregarAssinaturas(),
+    carregarRestritos(),
+    carregarTestes(),
+    carregarCupons()
+  ]);
 }
 
+// GET /api/stats
 async function carregarStats() {
   try {
     const d = await api('/api/stats');
     if (!d.ok) return;
-    document.getElementById('stat-ativas').textContent = d.ativas;
-    document.getElementById('stat-restritos').textContent = d.restritos;
-    document.getElementById('stat-testes').textContent = d.testes;
-    document.getElementById('stat-usuarios').textContent = d.usuarios;
-    document.getElementById('stat-mrr').innerHTML = `<svg width="11" height="11"><use href="#ic-trending"/></svg> ${brl(d.ativas * (d.preco||20))}/mês`;
-    document.getElementById('badge-ativas').textContent = d.ativas;
-    document.getElementById('badge-restritos').textContent = d.restritos;
-    document.getElementById('badge-testes').textContent = d.testes;
-    // sub page stats
-    document.getElementById('sub-ativas').textContent = d.ativas;
-    document.getElementById('sub-mrr').textContent = brl(d.ativas * (d.preco||20));
+    set('stat-ativas',    d.ativas);
+    set('stat-restritos', d.restritos);
+    set('stat-testes',    d.testes);
+    set('stat-usuarios',  d.usuarios);
+    set('stat-mrr', `<svg width="11" height="11"><use href="#ic-trending"/></svg> MRR: ${brl(d.ativas * (d.preco || 20))}/mês`);
+    set('badge-ativas',         d.ativas);
+    set('badge-restritos',      d.restritos);
+    set('badge-testes',         d.testes);
+    set('sub-ativas',           d.ativas);
+    set('sub-mrr',              brl(d.ativas * (d.preco || 20)));
+
+    // Insight cards do MRR
+    set('ins-mrr', 'MRR: ' + brl(d.ativas * (d.preco || 20)));
+
+    // Desenha gráfico donut
+    desenharDonut(d.ativas, d.restritos, d.testes, d.usuarios);
+
     setStatusOnline(true);
-  } catch(e) {
-    setStatusOnline(false);
-  }
+  } catch(e) { setStatusOnline(false); }
 }
 
-async function carregarVendas() {
-  try {
-    const d = await api('/api/vendas');
-    if (!d.ok) return;
-    dadosVendas = d;
-    // dashboard
-    document.getElementById('d-total-vendas').textContent = d.total;
-    document.getElementById('d-total-receita').textContent = brl(d.total_valor);
-    document.getElementById('d-mes-vendas').textContent = d.mes;
-    document.getElementById('d-mes-receita').textContent = brl(d.mes_valor);
-    document.getElementById('d-sem-vendas').textContent = d.semana;
-    document.getElementById('d-sem-receita').textContent = brl(d.semana_valor);
-    document.getElementById('d-hoje-vendas').textContent = d.dia;
-    document.getElementById('d-hoje-receita').textContent = brl(d.dia_valor);
-    document.getElementById('bar-mes').style.width = d.total ? (d.mes/d.total*100)+'%' : '0%';
-    document.getElementById('bar-sem').style.width = d.mes ? (d.semana/d.mes*100)+'%' : '0%';
-    document.getElementById('bar-hoje').style.width = d.semana ? (d.dia/d.semana*100)+'%' : '0%';
-    document.getElementById('badge-vendas-hoje').textContent = d.dia;
-    // vendas page
-    document.getElementById('v-total').textContent = d.total;
-    document.getElementById('v-total-r').innerHTML = `<svg width="11" height="11"><use href="#ic-dollar"/></svg>${brl(d.total_valor)}`;
-    document.getElementById('v-mes').textContent = d.mes;
-    document.getElementById('v-mes-r').innerHTML = `<svg width="11" height="11"><use href="#ic-dollar"/></svg>${brl(d.mes_valor)}`;
-    document.getElementById('v-sem').textContent = d.semana;
-    document.getElementById('v-sem-r').innerHTML = `<svg width="11" height="11"><use href="#ic-dollar"/></svg>${brl(d.semana_valor)}`;
-    document.getElementById('v-hoje').textContent = d.dia;
-    document.getElementById('v-hoje-r').innerHTML = `<svg width="11" height="11"><use href="#ic-dollar"/></svg>${brl(d.dia_valor)}`;
-
-    const tbody = document.getElementById('vendas-table-body');
-    if (!d.pagamentos || d.pagamentos.length === 0) {
-      tbody.innerHTML = '<tr class="empty-row"><td colspan="6">Nenhuma transação registrada</td></tr>';
-      return;
-    }
-    const tb = d.tipo==='Cupom'?'green':d.tipo==='Crédito'?'yellow':'purple';
-    tbody.innerHTML = d.pagamentos.map(p => {
-      const tb = p.tipo==='Cupom'?'green':p.tipo==='Crédito'?'yellow':'purple';
-      return `<tr><td class="mono">${p.id||'—'}</td><td class="mono">${p.user_id}</td><td style="font-weight:700;color:var(--green)">${brl(p.valor)}</td><td style="color:var(--text-2)">${fmtDT(p.data)}</td><td><span class="badge ${tb}"><div class="badge-dot"></div>${p.tipo}</span></td><td><span class="badge green"><div class="badge-dot"></div>Aprovado</span></td></tr>`;
-    }).join('');
-  } catch(e) { console.error('Vendas:', e); }
-}
-
+// GET /api/assinaturas
 async function carregarAssinaturas() {
   try {
     const d = await api('/api/assinaturas');
     if (!d.ok) return;
     dadosAssinaturas = d.assinaturas || [];
-    document.getElementById('sub-total').textContent = dadosAssinaturas.length;
+    set('sub-total', dadosAssinaturas.length);
     renderSubTable();
     renderExpirar();
     renderDashExpirar();
-  } catch(e) { console.error('Assinaturas:', e); }
+  } catch(e) { console.error('carregarAssinaturas:', e); }
 }
 
+// GET /api/restritos
 async function carregarRestritos() {
   try {
     const d = await api('/api/restritos');
     if (!d.ok) return;
-    const tbody = document.getElementById('rest-table-body');
     const lista = d.restritos || [];
+    const tbody = document.getElementById('rest-table-body');
     if (!lista.length) {
       tbody.innerHTML = '<tr class="empty-row"><td colspan="5" style="color:var(--green)">✓ Nenhum usuário restrito</td></tr>';
       return;
@@ -661,14 +945,17 @@ async function carregarRestritos() {
     tbody.innerHTML = lista.map(r => `
       <tr>
         <td class="mono">${r.uid}</td>
-        <td>${fmtDate(r.data_restricao)}</td>
-        <td>${fmtDate(r.data_liberacao)}</td>
-        <td style="color:var(--red)">${Number(r.horas_rest).toLocaleString()}h</td>
-        <td><button class="btn btn-success btn-sm" onclick="desrestRapido('${r.uid}')"><svg width="11" height="11"><use href="#ic-unlock"/></svg> Liberar</button></td>
+        <td style="color:var(--text-2);font-size:12px">${fmtDate(r.data_restricao)}</td>
+        <td style="color:var(--text-2);font-size:12px">${fmtDate(r.data_liberacao)}</td>
+        <td style="color:var(--red);font-weight:700">${Number(r.horas_rest).toLocaleString()}h</td>
+        <td><button class="btn btn-success btn-sm" onclick="desrestRapido('${r.uid}')">
+          <svg width="11" height="11"><use href="#ic-unlock"/></svg> Liberar
+        </button></td>
       </tr>`).join('');
-  } catch(e) { console.error('Restritos:', e); }
+  } catch(e) { console.error('carregarRestritos:', e); }
 }
 
+// GET /api/testes
 async function carregarTestes() {
   try {
     const d = await api('/api/testes');
@@ -676,117 +963,143 @@ async function carregarTestes() {
     const lista = d.testes || [];
     document.getElementById('trial-list').innerHTML = lista.length
       ? lista.map(t => {
-          const pct = Math.max(2, (t.dias_rest/3)*100);
+          const pct = Math.max(2, (t.dias_rest / 3) * 100);
+          const cor = t.dias_rest <= 0 ? 'var(--red)' : t.dias_rest <= 1 ? 'var(--yellow)' : 'var(--green)';
           return `<div>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-              <div><div class="mono" style="margin-bottom:3px">${t.uid}</div><div style="font-size:12px;color:var(--text-2)">${t.username||'Sem username'}</div></div>
-              <div style="text-align:right"><div style="font-size:12px;font-weight:700;color:${t.dias_rest<=1?'var(--red)':'var(--green)'}">+${t.dias_rest} dias</div><div style="font-size:11px;color:var(--text-3)">Expira ${fmtDate(t.data_fim)}</div></div>
+              <div>
+                <div class="mono" style="margin-bottom:3px">${t.uid}</div>
+                <div style="font-size:12px;color:var(--text-2)">${t.username || 'Sem username'}</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:12px;font-weight:700;color:${cor}">+${t.dias_rest} dias</div>
+                <div style="font-size:11px;color:var(--text-3)">Expira ${fmtDate(t.data_fim)}</div>
+              </div>
             </div>
             <div class="progress-bar"><div class="progress-fill green" style="width:${pct}%"></div></div>
           </div>`;
         }).join('')
       : '<div style="color:var(--text-3);font-size:13px">Nenhum trial ativo no momento.</div>';
-  } catch(e) { console.error('Testes:', e); }
+  } catch(e) { console.error('carregarTestes:', e); }
 }
 
+// GET /api/cupons
 async function carregarCupons() {
   try {
     const d = await api('/api/cupons');
     if (!d.ok) return;
-    document.getElementById('cup-total').textContent = d.total;
-    document.getElementById('cup-usos').textContent = d.total_usos;
-    document.getElementById('cup-creditos').textContent = d.total_creditos;
+    set('cup-total',    d.total);
+    set('cup-usos',     d.total_usos);
+    set('cup-creditos', d.total_creditos);
     const lista = d.cupons || [];
     document.getElementById('cupons-table').innerHTML = lista.length
       ? lista.map((c, i) => `
           <tr>
-            <td style="color:var(--text-3);font-weight:700">#${i+1}</td>
+            <td style="color:var(--text-3);font-weight:700">#${i + 1}</td>
             <td class="mono">${c.uid}</td>
-            <td><code style="background:var(--bg-base);padding:3px 8px;border-radius:6px;color:var(--purple-3);font-size:11px">${c.codigo}</code></td>
-            <td><b>${c.usos}</b></td>
-            <td><span class="badge ${c.creditos>0?'green':'yellow'}"><div class="badge-dot"></div>${c.creditos}</span></td>
-          </tr>`).join('')
+            <td><code style="background:var(--bg-base);padding:3px 8px;border-radius:6px;color:var(--purple-3);font-size:11px;font-family:'JetBrains Mono',monospace">${c.codigo}</code></td>
+            <td style="font-weight:700">${c.usos}</td>
+            <td><span class="badge ${c.creditos > 0 ? 'green' : 'yellow'}"><div class="badge-dot"></div>${c.creditos}</span></td>
+          </tr>`)
+        .join('')
       : '<tr class="empty-row"><td colspan="5">Nenhum cupom cadastrado ainda</td></tr>';
-  } catch(e) { console.error('Cupons:', e); }
+  } catch(e) { console.error('carregarCupons:', e); }
 }
 
 // ============================================================
-// RENDERS LOCAIS
+// RENDERS LOCAIS (sem chamada de rede)
 // ============================================================
 function renderSubTable() {
-  const filter = (document.getElementById('filter-sub')?.value||'').toLowerCase();
+  const filter = (document.getElementById('filter-sub')?.value || '').toLowerCase();
   const ativas = dadosAssinaturas.filter(s => s.ativa).length;
-  document.getElementById('sub-ativas').textContent = ativas;
-  document.getElementById('sub-mrr').textContent = brl(ativas * 20);
+  set('sub-ativas', ativas);
+  set('sub-mrr', brl(ativas * 20));
 
-  const rows = dadosAssinaturas.filter(s => !filter || s.uid.toString().includes(filter) || (s.username||'').toLowerCase().includes(filter));
+  const rows = dadosAssinaturas.filter(s =>
+    !filter || String(s.uid).includes(filter) || (s.username || '').toLowerCase().includes(filter)
+  );
   if (!rows.length) {
-    document.getElementById('sub-table-body').innerHTML = '<tr class="empty-row"><td colspan="7">Nenhum resultado encontrado</td></tr>';
+    document.getElementById('sub-table-body').innerHTML =
+      '<tr class="empty-row"><td colspan="7">Nenhum resultado encontrado</td></tr>';
     return;
   }
   document.getElementById('sub-table-body').innerHTML = rows.map(s => {
-    const dias = s.dias_rest;
+    const d = s.dias_rest;
     const badge = s.ativa
-      ? (dias <= 2 ? '<span class="badge yellow"><div class="badge-dot"></div>Expirando</span>' : '<span class="badge green"><div class="badge-dot"></div>Ativa</span>')
+      ? (d <= 2
+          ? '<span class="badge yellow"><div class="badge-dot"></div>Expirando</span>'
+          : '<span class="badge green"><div class="badge-dot"></div>Ativa</span>')
       : '<span class="badge red"><div class="badge-dot"></div>Expirada</span>';
     return `<tr>
       <td class="mono">${s.uid}</td>
-      <td style="color:var(--text-2)">${s.username||'—'}</td>
-      <td>${fmtDate(s.data_inicio)}</td>
-      <td>${fmtDate(s.data_fim)}</td>
-      <td style="color:${dias<=3?'var(--red)':dias<=7?'var(--yellow)':'var(--green)'};font-weight:700">${dias}</td>
+      <td style="color:var(--text-2)">${s.username || '—'}</td>
+      <td style="color:var(--text-2);font-size:12px">${fmtDate(s.data_inicio)}</td>
+      <td style="color:var(--text-2);font-size:12px">${fmtDate(s.data_fim)}</td>
+      <td style="color:${d <= 3 ? 'var(--red)' : d <= 7 ? 'var(--yellow)' : 'var(--green)'};font-weight:700">${d}</td>
       <td>${badge}</td>
-      <td><div style="display:flex;gap:5px">
-        <button class="btn btn-danger btn-sm" onclick="cancelarRapido('${s.uid}')"><svg width="11" height="11"><use href="#ic-x"/></svg></button>
-      </div></td>
+      <td><button class="btn btn-danger btn-sm" onclick="cancelarRapido('${s.uid}')">
+        <svg width="11" height="11"><use href="#ic-x"/></svg>
+      </button></td>
     </tr>`;
   }).join('');
 }
 
 function renderExpirar() {
-  const exp = dadosAssinaturas.filter(s => s.ativa && s.dias_rest <= 7).sort((a,b) => a.dias_rest - b.dias_rest);
+  const exp = dadosAssinaturas
+    .filter(s => s.ativa && s.dias_rest <= 7)
+    .sort((a, b) => a.dias_rest - b.dias_rest);
   document.getElementById('expirar-list').innerHTML = exp.length
     ? exp.map(x => `
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:13px;margin-bottom:8px;background:var(--bg-base);border-radius:12px;border:1px solid var(--border)">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;margin-bottom:8px;background:var(--bg-base);border-radius:12px;border:1px solid var(--border)">
           <div class="mono">${x.uid}</div>
-          <div style="font-size:12px;color:var(--text-2)">${x.username||''} — Expira ${fmtDate(x.data_fim)}</div>
-          <span style="font-weight:700;color:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'var(--text-1)'}">${x.dias_rest}d</span>
-        </div>`)
-    .join('')
+          <div style="font-size:12px;color:var(--text-2)">${x.username || ''} — Expira ${fmtDate(x.data_fim)}</div>
+          <span style="font-weight:700;color:${x.dias_rest <= 1 ? 'var(--red)' : x.dias_rest <= 3 ? 'var(--yellow)' : 'var(--text-1)'}">${x.dias_rest}d</span>
+        </div>`).join('')
     : '<div style="color:var(--green);padding:20px;font-size:14px;display:flex;align-items:center;gap:8px"><svg width="16" height="16" color="var(--green)"><use href="#ic-check"/></svg>Nenhuma assinatura expira nos próximos 7 dias</div>';
 }
 
 function renderDashExpirar() {
-  const exp = dadosAssinaturas.filter(s => s.ativa && s.dias_rest <= 7).sort((a,b) => a.dias_rest - b.dias_rest).slice(0,5);
+  const exp = dadosAssinaturas
+    .filter(s => s.ativa && s.dias_rest <= 7)
+    .sort((a, b) => a.dias_rest - b.dias_rest)
+    .slice(0, 6);
   document.getElementById('dash-expirar').innerHTML = exp.length
     ? exp.map(x => `
         <div class="expiry-item">
           <div class="expiry-header">
-            <span class="expiry-id">${x.uid} ${x.username?'('+x.username+')':''}</span>
-            <span style="font-size:11px;color:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'var(--text-2)'}">${x.dias_rest}d restantes</span>
+            <span class="expiry-id">${x.uid}${x.username ? ' (' + x.username + ')' : ''}</span>
+            <span style="color:${x.dias_rest <= 1 ? 'var(--red)' : x.dias_rest <= 3 ? 'var(--yellow)' : 'var(--text-2)'}">
+              ${x.dias_rest}d restantes
+            </span>
           </div>
-          <div class="progress-bar"><div class="progress-fill" style="width:${Math.max(2,x.dias_rest/30*100)}%;background:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'linear-gradient(90deg,var(--purple-1),var(--purple-3))'}"></div></div>
+          <div class="progress-bar"><div class="progress-fill" style="
+            width:${Math.max(2, x.dias_rest / 30 * 100)}%;
+            background:${x.dias_rest <= 1 ? 'var(--red)' : x.dias_rest <= 3 ? 'var(--yellow)' : 'linear-gradient(90deg,var(--purple-1),var(--purple-3))'}
+          "></div></div>
         </div>`)
     .join('')
-    : '<div style="color:var(--green);font-size:12px;display:flex;align-items:center;gap:5px"><svg width="13" height="13"><use href="#ic-check"/></svg>Nenhum expira em 7 dias</div>';
+    : '<div style="color:var(--green);font-size:12px;display:flex;align-items:center;gap:5px"><svg width="13" height="13" color="var(--green)"><use href="#ic-check"/></svg>Nenhum expira em 7 dias</div>';
 }
 
 // ============================================================
-// AÇÕES
+// AÇÕES — chamam os endpoints reais
 // ============================================================
+
+// POST /api/acao/liberar  { uid, dias }
 async function liberarUsuario() {
-  const uid = document.getElementById('lib-uid').value.trim();
+  const uid  = parseInt(document.getElementById('lib-uid').value);
   const dias = parseInt(document.getElementById('lib-dias').value) || 30;
   if (!uid) { toast('Informe o ID!', 'error'); return; }
   const btn = document.getElementById('btn-liberar');
   btn.disabled = true;
   try {
-    const d = await api('/api/acao/liberar', 'POST', {uid: parseInt(uid), dias});
+    const d = await api('/api/acao/liberar', 'POST', { uid, dias });
     if (d.ok) {
       toast(`✅ ${uid} liberado por ${dias} dias`, 'success');
-      document.getElementById('lib-uid').value = '';
-      await carregarStats(); await carregarAssinaturas();
       if (d.aviso) toast('⚠️ ' + d.aviso, 'info');
+      document.getElementById('lib-uid').value = '';
+      await carregarStats();
+      await carregarAssinaturas();
     } else {
       toast('Erro: ' + d.erro, 'error');
     }
@@ -794,50 +1107,65 @@ async function liberarUsuario() {
   btn.disabled = false;
 }
 
+// GET /api/status_user/:uid
 async function checkStatus() {
-  const uid = document.getElementById('lib-uid').value.trim();
+  const uid = parseInt(document.getElementById('lib-uid').value);
   if (!uid) { toast('Informe o ID!', 'error'); return; }
   try {
     const d = await api(`/api/status_user/${uid}`);
     const el = document.getElementById('status-content');
-    if (!d.ok) { el.innerHTML = `<div style="color:var(--red)">Erro: ${d.erro}</div>`; document.getElementById('status-result').style.display='block'; return; }
+    if (!d.ok) {
+      el.innerHTML = `<div style="color:var(--red)">Erro: ${d.erro}</div>`;
+      document.getElementById('status-result').style.display = 'block';
+      return;
+    }
     const sub = d.assinatura;
-    const at = sub && sub.ativa;
+    const at  = sub && sub.ativa;
     let html = `<div style="font-size:11px;color:var(--text-3);margin-bottom:8px;font-family:'JetBrains Mono',monospace">ID: ${uid}</div>`;
-    html += `<div style="margin-bottom:6px;display:flex;align-items:center;gap:5px"><svg width="13" height="13" color="${at?'var(--green)':'var(--red)'}"><use href="${at?'#ic-check':'#ic-x'}"/></svg>${at?'<b>Assinatura ativa</b>':'Sem assinatura'}</div>`;
+    html += `<div style="margin-bottom:6px;display:flex;align-items:center;gap:6px">
+      <svg width="13" height="13" color="${at ? 'var(--green)' : 'var(--red)'}"><use href="${at ? '#ic-check' : '#ic-x'}"/></svg>
+      ${at ? '<b>Assinatura ativa</b>' : 'Sem assinatura ativa'}
+    </div>`;
     if (sub) html += `<div style="font-size:12px;color:var(--text-2);margin-bottom:4px">Expira: ${fmtDate(sub.data_fim)} (${sub.dias_rest} dias)</div>`;
-    if (d.restrito) html += `<div style="display:flex;align-items:center;gap:5px;color:var(--red)"><svg width="13" height="13" color="var(--red)"><use href="#ic-mute"/></svg><b>Usuário Restrito</b></div>`;
-    if (d.trial) html += `<div style="display:flex;align-items:center;gap:5px;color:var(--purple-3)"><svg width="13" height="13" color="var(--purple-3)"><use href="#ic-gift"/></svg>${d.trial.ativo?'Trial ativo':'Trial já utilizado'}</div>`;
+    if (d.restrito) html += `<div style="display:flex;align-items:center;gap:5px;color:var(--red);margin-top:4px"><svg width="13" height="13" color="var(--red)"><use href="#ic-mute"/></svg><b>Usuário Restrito</b></div>`;
+    if (d.trial) html += `<div style="display:flex;align-items:center;gap:5px;color:var(--purple-3);margin-top:4px"><svg width="13" height="13" color="var(--purple-3)"><use href="#ic-gift"/></svg>${d.trial.ativo ? 'Trial ativo até ' + fmtDate(d.trial.data_fim) : 'Trial já utilizado'}</div>`;
     el.innerHTML = html;
     document.getElementById('status-result').style.display = 'block';
   } catch(e) { toast('Erro de conexão', 'error'); }
 }
 
+// POST /api/acao/cancelar  { uid }
 async function cancelarAssinatura() {
-  const uid = document.getElementById('cancel-uid').value.trim();
+  const uid = parseInt(document.getElementById('cancel-uid').value);
   if (!uid) { toast('Informe o ID!', 'error'); return; }
   if (!confirm(`Cancelar assinatura de ${uid}?`)) return;
   try {
-    const d = await api('/api/acao/cancelar', 'POST', {uid: parseInt(uid)});
-    if (d.ok) { toast(`Assinatura de ${uid} cancelada`); document.getElementById('cancel-uid').value=''; await carregarStats(); await carregarAssinaturas(); }
+    const d = await api('/api/acao/cancelar', 'POST', { uid });
+    if (d.ok) { toast(`Assinatura de ${uid} cancelada`); document.getElementById('cancel-uid').value = ''; await carregarStats(); await carregarAssinaturas(); }
     else toast('Erro: ' + d.erro, 'error');
   } catch(e) { toast('Erro de conexão', 'error'); }
 }
 
+// POST /api/acao/desrestringir  { uid }
 async function desrestringirUsuario() {
-  const uid = document.getElementById('desrest-uid').value.trim();
+  const uid = parseInt(document.getElementById('desrest-uid').value);
   if (!uid) { toast('Informe o ID!', 'error'); return; }
   try {
-    const d = await api('/api/acao/desrestringir', 'POST', {uid: parseInt(uid)});
-    if (d.ok) { toast(`Restrição de ${uid} removida`); document.getElementById('desrest-uid').value=''; await carregarStats(); await carregarRestritos(); if(d.aviso) toast('⚠️ '+d.aviso,'info'); }
-    else toast('Erro: ' + d.erro, 'error');
+    const d = await api('/api/acao/desrestringir', 'POST', { uid });
+    if (d.ok) {
+      toast(`Restrição de ${uid} removida`);
+      if (d.aviso) toast('⚠️ ' + d.aviso, 'info');
+      document.getElementById('desrest-uid').value = '';
+      await carregarStats();
+      await carregarRestritos();
+    } else toast('Erro: ' + d.erro, 'error');
   } catch(e) { toast('Erro de conexão', 'error'); }
 }
 
 async function cancelarRapido(uid) {
   if (!confirm(`Cancelar assinatura de ${uid}?`)) return;
   try {
-    const d = await api('/api/acao/cancelar', 'POST', {uid: parseInt(uid)});
+    const d = await api('/api/acao/cancelar', 'POST', { uid: parseInt(uid) });
     if (d.ok) { toast(`Assinatura ${uid} cancelada`); await carregarStats(); await carregarAssinaturas(); }
     else toast('Erro: ' + d.erro, 'error');
   } catch(e) { toast('Erro', 'error'); }
@@ -845,75 +1173,87 @@ async function cancelarRapido(uid) {
 
 async function desrestRapido(uid) {
   try {
-    const d = await api('/api/acao/desrestringir', 'POST', {uid: parseInt(uid)});
-    if (d.ok) { toast(`${uid} desrestringido`); await carregarRestritos(); await carregarStats(); }
-    else toast('Erro: ' + d.erro, 'error');
+    const d = await api('/api/acao/desrestringir', 'POST', { uid: parseInt(uid) });
+    if (d.ok) {
+      toast(`${uid} desrestringido`);
+      if (d.aviso) toast('⚠️ ' + d.aviso, 'info');
+      await carregarRestritos();
+      await carregarStats();
+    } else toast('Erro: ' + d.erro, 'error');
   } catch(e) { toast('Erro', 'error'); }
 }
 
+// Modais
 async function liberarModal() {
-  const uid = document.getElementById('m-lib-uid').value.trim();
+  const uid  = parseInt(document.getElementById('m-lib-uid').value);
   const dias = parseInt(document.getElementById('m-lib-dias').value) || 30;
   if (!uid) { toast('Informe o ID!', 'error'); return; }
   try {
-    const d = await api('/api/acao/liberar', 'POST', {uid: parseInt(uid), dias});
-    if (d.ok) { toast(`${uid} liberado por ${dias} dias`); closeModal('modal-liberar'); await carregarStats(); await carregarAssinaturas(); }
+    const d = await api('/api/acao/liberar', 'POST', { uid, dias });
+    if (d.ok) { toast(`${uid} liberado por ${dias} dias`); if(d.aviso) toast('⚠️ '+d.aviso,'info'); closeModal('modal-liberar'); await carregarStats(); await carregarAssinaturas(); }
     else toast('Erro: ' + d.erro, 'error');
   } catch(e) { toast('Erro de conexão', 'error'); }
 }
 
 async function cancelarModal() {
-  const uid = document.getElementById('m-cancel-uid').value.trim();
+  const uid = parseInt(document.getElementById('m-cancel-uid').value);
   if (!uid) { toast('ID inválido!', 'error'); return; }
   try {
-    const d = await api('/api/acao/cancelar', 'POST', {uid: parseInt(uid)});
+    const d = await api('/api/acao/cancelar', 'POST', { uid });
     if (d.ok) { toast('Cancelado'); closeModal('modal-cancelar'); await carregarStats(); await carregarAssinaturas(); }
     else toast('Erro: ' + d.erro, 'error');
   } catch(e) { toast('Erro de conexão', 'error'); }
 }
 
+// POST /api/acao/estender_todas  { dias }
 async function estenderModal() {
   const dias = parseInt(document.getElementById('m-ext-dias').value) || 30;
   try {
-    const d = await api('/api/acao/estender_todas', 'POST', {dias});
+    const d = await api('/api/acao/estender_todas', 'POST', { dias });
     if (d.ok) { toast(`${d.afetados} assinaturas estendidas por ${dias} dias`); closeModal('modal-estender'); await carregarAssinaturas(); }
     else toast('Erro: ' + d.erro, 'error');
   } catch(e) { toast('Erro de conexão', 'error'); }
 }
 
 async function desrestModal() {
-  const uid = document.getElementById('m-desrest-uid').value.trim();
+  const uid = parseInt(document.getElementById('m-desrest-uid').value);
   if (!uid) { toast('ID inválido!', 'error'); return; }
   try {
-    const d = await api('/api/acao/desrestringir', 'POST', {uid: parseInt(uid)});
-    if (d.ok) { toast(`${uid} desrestringido`); closeModal('modal-desrest'); await carregarRestritos(); await carregarStats(); }
+    const d = await api('/api/acao/desrestringir', 'POST', { uid });
+    if (d.ok) { toast(`${uid} desrestringido`); if(d.aviso) toast('⚠️ '+d.aviso,'info'); closeModal('modal-desrest'); await carregarRestritos(); await carregarStats(); }
     else toast('Erro: ' + d.erro, 'error');
   } catch(e) { toast('Erro de conexão', 'error'); }
 }
 
+// GET /api/backup — retorna JSON para download
 async function gerarBackup() {
   try {
     toast('Gerando backup...', 'info');
-    const res = await fetch(`${API_BASE}/api/backup`, {headers:{'X-Auth-Token':AUTH_TOKEN}});
+    const res  = await fetch(`${API_BASE}/api/backup`, { headers: { 'X-Auth-Token': AUTH_TOKEN } });
     const blob = await res.blob();
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `berserk_backup_${new Date().toISOString().slice(0,10)}.json`;
+    const a    = document.createElement('a');
+    a.href     = URL.createObjectURL(blob);
+    a.download = `berserk_backup_${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
-    toast('Backup gerado com sucesso!');
+    toast('Backup baixado com sucesso!');
   } catch(e) { toast('Erro ao gerar backup', 'error'); }
 }
 
-function exportarCSV() {
+function exportarCSVAssinaturas() {
   if (!dadosAssinaturas.length) { toast('Carregue os dados primeiro', 'error'); return; }
   let csv = 'user_id,username,data_inicio,data_fim,dias_restantes,ativa\n';
-  dadosAssinaturas.forEach(s => { csv += `${s.uid},${s.username||''},${s.data_inicio||''},${fmtDate(s.data_fim)},${s.dias_rest},${s.ativa}\n`; });
-  const b = new Blob([csv], {type:'text/csv'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(b);
-  a.download = `berserk_assinaturas_${new Date().toISOString().slice(0,10)}.csv`;
-  a.click();
+  dadosAssinaturas.forEach(s => {
+    csv += `${s.uid},${s.username || ''},${s.data_inicio || ''},${fmtDate(s.data_fim)},${s.dias_rest},${s.ativa}\n`;
+  });
+  baixarBlob(csv, `berserk_assinaturas_${new Date().toISOString().slice(0, 10)}.csv`, 'text/csv');
   toast('CSV exportado!');
+}
+
+function baixarBlob(content, filename, type) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([content], { type }));
+  a.download = filename;
+  a.click();
 }
 
 async function verificarConexao() {
@@ -925,57 +1265,203 @@ async function verificarConexao() {
 }
 
 // ============================================================
-// UI HELPERS
+// BUSCA GLOBAL
 // ============================================================
-function showPage(id, el) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  if (el) el.classList.add('active');
-  else document.querySelectorAll('.nav-item').forEach(n => { if(n.getAttribute('onclick')?.includes("'"+id+"'")) n.classList.add('active'); });
-  const labels={dashboard:'Dashboard',vendas:'Vendas',assinaturas:'Assinaturas',restritos:'Restritos',testes:'Testes Grátis',liberar:'Liberar Usuário',cupons:'Cupons',expirar:'A Expirar',backup:'Backup'};
-  document.getElementById('breadcrumb-text').textContent = labels[id]||id;
-}
-
-function openModal(id) { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.classList.remove('open'); }));
-
-function toast(msg, type='success') {
-  const el = document.createElement('div');
-  el.className = `toast ${type}`;
-  const ico = type==='success'?'#ic-check':type==='info'?'#ic-info':'#ic-x';
-  const clr = type==='success'?'var(--green)':type==='info'?'var(--blue)':'var(--red)';
-  el.innerHTML = `<svg width="16" height="16" color="${clr}"><use href="${ico}"/></svg>${msg}`;
-  document.getElementById('toasts').appendChild(el);
-  setTimeout(() => el.remove(), 4000);
-}
-
-function setStatusOnline(online) {
-  document.getElementById('status-dot').className = 'status-dot' + (online?'':' offline');
-  document.getElementById('status-text').textContent = online ? 'Bot Online' : 'Sem conexão';
-}
-
-function setDias(n) {
-  document.getElementById('lib-dias').value = n;
-  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('selected', c.getAttribute('onclick')===`setDias(${n})`));
-}
-function setExtDias(n) { document.getElementById('m-ext-dias').value = n; }
-
 function globalSearch() {
   const uid = document.getElementById('global-search').value.trim();
   if (!uid) return;
   document.getElementById('lib-uid').value = uid;
   showPage('liberar', null);
-  checkStatus();
+  setTimeout(checkStatus, 100);
 }
 
-function brl(v) { return 'R$ ' + Number(v).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}); }
-function fmtDate(d) { if(!d) return '—'; try{ return new Date(d).toLocaleDateString('pt-BR'); } catch(e){ return d; } }
-function fmtDT(d) { if(!d) return '—'; try{ const dt=new Date(d); return dt.toLocaleDateString('pt-BR')+' '+dt.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}); } catch(e){ return d; } }
+// ============================================================
+// HELPERS DE UI
+// ============================================================
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const pg = document.getElementById('page-' + id);
+  if (pg) pg.classList.add('active');
+  if (el) {
+    el.classList.add('active');
+  } else {
+    document.querySelectorAll('.nav-item').forEach(n => {
+      if (n.getAttribute('onclick')?.includes(`'${id}'`)) n.classList.add('active');
+    });
+  }
+  const labels = {
+    dashboard:'Dashboard', assinaturas:'Assinaturas',
+    restritos:'Restritos', testes:'Testes Grátis', liberar:'Liberar Usuário',
+    cupons:'Cupons', expirar:'A Expirar', backup:'Backup'
+  };
+  set('breadcrumb-text', labels[id] || id);
+}
 
-// login por Enter
-document.getElementById('login-senha').addEventListener('keydown', e => { if(e.key==='Enter') fazerLogin(); });
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(m =>
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); })
+);
+
+function toast(msg, type = 'success') {
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  const ico = type === 'success' ? '#ic-check' : type === 'info' ? '#ic-info' : '#ic-x';
+  const clr = type === 'success' ? 'var(--green)' : type === 'info' ? 'var(--blue)' : 'var(--red)';
+  el.innerHTML = `<svg width="16" height="16" color="${clr}"><use href="${ico}"/></svg>${msg}`;
+  document.getElementById('toasts').appendChild(el);
+  setTimeout(() => el.remove(), 4500);
+}
+
+function setStatusOnline(online) {
+  document.getElementById('status-dot').className = 'status-dot' + (online ? '' : ' offline');
+  set('status-text', online ? 'Bot Online' : 'Sem conexão');
+}
+
+function setDias(n) {
+  document.getElementById('lib-dias').value = n;
+  document.querySelectorAll('.chip').forEach(c =>
+    c.classList.toggle('selected', c.getAttribute('onclick') === `setDias(${n})`));
+}
+function setExtDias(n) {
+  document.getElementById('m-ext-dias').value = n;
+  // Atualiza chip visual dentro do modal estender
+  document.querySelectorAll('#modal-estender .chip').forEach(c =>
+    c.classList.toggle('selected', c.getAttribute('onclick') === `setExtDias(${n})`));
+}
+
+// Atalho: atribui innerHTML a um elemento por ID
+function set(id, html) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
+}
+// Atualiza largura de barra de progresso
+function pct(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.style.width = Math.min(100, Math.max(0, val)) + '%';
+}
+function brl(v) { return 'R$ ' + Number(v).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function fmtDate(d) { if (!d) return '—'; try { return new Date(d).toLocaleDateString('pt-BR'); } catch(e) { return d; } }
+function fmtDT(d) {
+  if (!d) return '—';
+  try {
+    const dt = new Date(d);
+    return dt.toLocaleDateString('pt-BR') + ' ' + dt.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  } catch(e) { return d; }
+}
+
+document.getElementById('login-senha').addEventListener('keydown', e => { if (e.key === 'Enter') fazerLogin(); });
+document.getElementById('global-search').addEventListener('keydown', e => { if (e.key === 'Enter') globalSearch(); });
+
+// ============================================================
+// DONUT CHART — Canvas puro, sem dependências
+// ============================================================
+let _donutAnim = null;
+
+function desenharDonut(ativas, restritos, testes, usuarios) {
+  const canvas = document.getElementById('donut-chart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2;
+  const R = 82, r = 52;
+
+  // Dados
+  const semPlano = Math.max(0, usuarios - ativas - restritos - testes);
+  const total    = ativas + restritos + testes + semPlano || 1;
+
+  const segments = [
+    { val: ativas,    color: '#8b5cf6', glow: '#6c3fff' },
+    { val: restritos, color: '#ff4d6d', glow: '#ff4d6d' },
+    { val: testes,    color: '#22d6a0', glow: '#22d6a0' },
+    { val: semPlano,  color: '#38bdf8', glow: '#38bdf8' },
+  ];
+
+  // Anima de 0 a 1
+  let progress = 0;
+  if (_donutAnim) cancelAnimationFrame(_donutAnim);
+
+  function draw(p) {
+    ctx.clearRect(0, 0, W, H);
+
+    // Fundo do anel
+    ctx.beginPath();
+    ctx.arc(cx, cy, R, 0, Math.PI * 2);
+    ctx.arc(cx, cy, r, 0, Math.PI * 2, true);
+    ctx.fillStyle = '#1a1730';
+    ctx.fill();
+
+    let startAngle = -Math.PI / 2;
+    const gap = 0.04;
+
+    segments.forEach(seg => {
+      if (seg.val <= 0) return;
+      const sweep = (seg.val / total) * Math.PI * 2 * p;
+      if (sweep < 0.01) return;
+
+      // Glow
+      ctx.shadowColor = seg.glow;
+      ctx.shadowBlur  = 14;
+
+      // Segmento
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, startAngle + gap / 2, startAngle + sweep - gap / 2);
+      ctx.arc(cx, cy, r, startAngle + sweep - gap / 2, startAngle + gap / 2, true);
+      ctx.closePath();
+      ctx.fillStyle = seg.color;
+      ctx.fill();
+
+      ctx.shadowBlur = 0;
+      startAngle += sweep;
+    });
+
+    // Anel interno brilhante
+    ctx.beginPath();
+    ctx.arc(cx, cy, r - 1, 0, Math.PI * 2);
+    ctx.strokeStyle = '#2a2545';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  function animate() {
+    progress += 0.038;
+    if (progress >= 1) { progress = 1; draw(1); return; }
+    draw(progress);
+    _donutAnim = requestAnimationFrame(animate);
+  }
+  animate();
+
+  // Legenda e insight cards
+  const pct = v => total > 1 ? Math.round(v / total * 100) : 0;
+
+  // Legenda
+  const elav = document.getElementById('leg-ativas');
+  if (elav) elav.textContent = ativas + ' usuários';
+  const elpr = document.getElementById('leg-restritos');
+  if (elpr) elpr.textContent = restritos + ' usuários';
+  const elte = document.getElementById('leg-testes');
+  if (elte) elte.textContent = testes + ' usuários';
+  const else_ = document.getElementById('leg-sem');
+  if (else_) else_.textContent = semPlano + ' usuários';
+
+  const setpct = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = pct(v) + '%'; };
+  setpct('leg-ativas-pct', ativas);
+  setpct('leg-restritos-pct', restritos);
+  setpct('leg-testes-pct', testes);
+  setpct('leg-sem-pct', semPlano);
+
+  // Centro
+  const dc = document.getElementById('donut-total');
+  if (dc) dc.textContent = usuarios;
+
+  // Insight cards
+  const setins = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  setins('ins-ativas',    ativas);
+  setins('ins-restritos', restritos);
+  setins('ins-testes',    testes);
+  setins('ins-usuarios',  usuarios);
+}
 </script>
 </body>
 </html>
