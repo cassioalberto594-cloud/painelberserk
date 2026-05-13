@@ -287,8 +287,8 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
     <div class="nav-item" onclick="showPage('liberar',this)">
       <svg width="16" height="16" class="ico"><use href="#ic-unlock"/></svg><span class="nav-label">Liberar Usuário</span>
     </div>
-    <div class="nav-item" onclick="showPage('cupons',this)">
-      <svg width="16" height="16" class="ico"><use href="#ic-ticket"/></svg><span class="nav-label">Cupons</span>
+    <div class="nav-item" onclick="showPage('afiliados',this)">
+      <svg width="16" height="16" class="ico"><use href="#ic-users"/></svg><span class="nav-label">Afiliados</span>
     </div>
     <div class="nav-item" onclick="showPage('expirar',this)">
       <svg width="16" height="16" class="ico"><use href="#ic-clock"/></svg><span class="nav-label">A Expirar</span>
@@ -608,35 +608,35 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
       </div>
     </div>
 
-    <!-- CUPONS -->
-    <div class="page" id="page-cupons">
-      <div class="page-title">Cupons de Indicação</div>
-      <div class="page-sub">Sistema de afiliados — endpoint <code style="color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px">/api/cupons</code></div>
+    <!-- AFILIADOS -->
+    <div class="page" id="page-afiliados">
+      <div class="page-title">Programa de Afiliados</div>
+      <div class="page-sub">Comissões e indicações — endpoint <code style="color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px">/api/afiliados</code></div>
       <div class="three-col">
         <div class="stat-card">
-          <div class="stat-icon-wrap purple"><svg width="18" height="18" color="var(--purple-3)"><use href="#ic-ticket"/></svg></div>
-          <div class="stat-value" id="cup-total">—</div>
-          <div class="stat-label">Cupons Criados</div>
+          <div class="stat-icon-wrap purple"><svg width="18" height="18" color="var(--purple-3)"><use href="#ic-users"/></svg></div>
+          <div class="stat-value" id="afil-total">—</div>
+          <div class="stat-label">Afiliados Ativos</div>
         </div>
         <div class="stat-card green">
           <div class="stat-icon-wrap green"><svg width="18" height="18" color="var(--green)"><use href="#ic-check"/></svg></div>
-          <div class="stat-value" id="cup-usos">—</div>
-          <div class="stat-label">Total de Usos</div>
+          <div class="stat-value" id="afil-indicados">—</div>
+          <div class="stat-label">Total de Indicações</div>
         </div>
         <div class="stat-card yellow">
           <div class="stat-icon-wrap yellow"><svg width="18" height="18" color="var(--yellow)"><use href="#ic-dollar"/></svg></div>
-          <div class="stat-value" id="cup-creditos">—</div>
-          <div class="stat-label">Créditos Pendentes</div>
+          <div class="stat-value" id="afil-ganhos">—</div>
+          <div class="stat-label">Comissões Pagas (R$)</div>
         </div>
       </div>
       <div class="card">
         <div class="card-header">
-          <div class="card-title"><svg width="14" height="14" color="var(--yellow)"><use href="#ic-trophy"/></svg>Ranking de Indicadores</div>
-          <button class="refresh-btn" onclick="carregarCupons()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
+          <div class="card-title"><svg width="14" height="14" color="var(--yellow)"><use href="#ic-trophy"/></svg>Ranking de Afiliados</div>
+          <button class="refresh-btn" onclick="carregarAfiliados()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
         </div>
         <table class="data-table">
-          <thead><tr><th>#</th><th>User ID</th><th>Código</th><th>Usos</th><th>Créditos</th></tr></thead>
-          <tbody id="cupons-table"><tr class="loading-row"><td colspan="5"><div class="spinner"></div> Carregando...</td></tr></tbody>
+          <thead><tr><th>#</th><th>User ID</th><th>Username</th><th>Indicações</th><th>Ganhos Total</th><th>Saldo</th></tr></thead>
+          <tbody id="afiliados-table"><tr class="loading-row"><td colspan="6"><div class="spinner"></div> Carregando...</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -671,7 +671,7 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
             <svg width="24" height="24" color="var(--purple-3)"><use href="#ic-save"/></svg>
           </div>
           <div style="font-weight:700;margin-bottom:7px">Backup Completo</div>
-          <div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Exporta assinaturas, restritos e cupons via <code style="color:var(--purple-3)">/api/backup</code></div>
+          <div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Exporta assinaturas, restritos e afiliados via <code style="color:var(--purple-3)">/api/backup</code></div>
           <button class="btn btn-primary" onclick="gerarBackup()" style="width:100%;justify-content:center">
             <svg width="14" height="14"><use href="#ic-download"/></svg> Gerar JSON
           </button>
@@ -888,7 +888,7 @@ async function recarregarTudo() {
     carregarAssinaturas(),
     carregarRestritos(),
     carregarTestes(),
-    carregarCupons()
+    carregarAfiliados()
   ]);
 }
 
@@ -983,27 +983,28 @@ async function carregarTestes() {
   } catch(e) { console.error('carregarTestes:', e); }
 }
 
-// GET /api/cupons
-async function carregarCupons() {
+// GET /api/afiliados
+async function carregarAfiliados() {
   try {
-    const d = await api('/api/cupons');
+    const d = await api('/api/afiliados');
     if (!d.ok) return;
-    set('cup-total',    d.total);
-    set('cup-usos',     d.total_usos);
-    set('cup-creditos', d.total_creditos);
-    const lista = d.cupons || [];
-    document.getElementById('cupons-table').innerHTML = lista.length
-      ? lista.map((c, i) => `
+    set('afil-total',    d.total);
+    set('afil-indicados', d.total_indicados);
+    set('afil-ganhos',   'R$ ' + (d.total_ganhos || 0).toFixed(2));
+    const lista = d.afiliados || [];
+    document.getElementById('afiliados-table').innerHTML = lista.length
+      ? lista.map((a, i) => `
           <tr>
             <td style="color:var(--text-3);font-weight:700">#${i + 1}</td>
-            <td class="mono">${c.uid}</td>
-            <td><code style="background:var(--bg-base);padding:3px 8px;border-radius:6px;color:var(--purple-3);font-size:11px;font-family:'JetBrains Mono',monospace">${c.codigo}</code></td>
-            <td style="font-weight:700">${c.usos}</td>
-            <td><span class="badge ${c.creditos > 0 ? 'green' : 'yellow'}"><div class="badge-dot"></div>${c.creditos}</span></td>
+            <td class="mono">${a.uid}</td>
+            <td style="color:var(--text-2)">${a.username ? '@' + a.username : '—'}</td>
+            <td style="font-weight:700;color:var(--purple-3)">${a.indicados}</td>
+            <td style="color:var(--green);font-weight:700">R$ ${(a.ganhos_total || 0).toFixed(2)}</td>
+            <td><span class="badge ${a.saldo > 0 ? 'yellow' : 'green'}"><div class="badge-dot"></div>R$ ${(a.saldo || 0).toFixed(2)}</span></td>
           </tr>`)
         .join('')
-      : '<tr class="empty-row"><td colspan="5">Nenhum cupom cadastrado ainda</td></tr>';
-  } catch(e) { console.error('carregarCupons:', e); }
+      : '<tr class="empty-row"><td colspan="6">Nenhum afiliado cadastrado ainda</td></tr>';
+  } catch(e) { console.error('carregarAfiliados:', e); }
 }
 
 // ============================================================
@@ -1293,7 +1294,7 @@ function showPage(id, el) {
   const labels = {
     dashboard:'Dashboard', assinaturas:'Assinaturas',
     restritos:'Restritos', testes:'Testes Grátis', liberar:'Liberar Usuário',
-    cupons:'Cupons', expirar:'A Expirar', backup:'Backup'
+    afiliados:'Afiliados', expirar:'A Expirar', backup:'Backup'
   };
   set('breadcrumb-text', labels[id] || id);
 }
