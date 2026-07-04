@@ -158,8 +158,15 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 .refresh-btn{background:var(--bg-card2);border:1px solid var(--border);border-radius:8px;padding:6px 10px;color:var(--text-2);cursor:pointer;font-size:12px;display:flex;align-items:center;gap:5px;transition:all .18s}
 .refresh-btn:hover{background:var(--bg-hover);color:var(--text-1)}
 .info-box{background:var(--bg-base);border:1px solid var(--border);border-radius:10px;padding:14px 16px;font-size:12px;color:var(--text-2);display:flex;gap:9px;align-items:flex-start;margin-bottom:14px}
-
-/* ── DONUT SECTION ── */
+/* planos grid */
+.planos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.plano-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:16px;text-align:center;transition:all .2s}
+.plano-card:hover{border-color:var(--border-glow);transform:translateY(-2px)}
+.plano-emoji{font-size:22px;margin-bottom:6px}
+.plano-nome{font-size:13px;font-weight:700;margin-bottom:4px}
+.plano-valor{font-size:18px;font-weight:800;color:var(--purple-3)}
+.plano-comissao{font-size:11px;color:var(--green);margin-top:3px;font-family:'JetBrains Mono',monospace}
+/* donut */
 .donut-section{display:grid;grid-template-columns:1fr 260px;gap:18px;margin-bottom:20px}
 .donut-card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:22px;position:relative;overflow:hidden}
 .donut-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,#6c3fff22 0%,transparent 70%);pointer-events:none}
@@ -179,8 +186,6 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 .legend-name{font-size:12px;font-weight:600;color:var(--text-1);margin-bottom:2px}
 .legend-val{font-size:11px;color:var(--text-3);font-family:'JetBrains Mono',monospace}
 .legend-pct{font-size:13px;font-weight:800;font-family:'JetBrains Mono',monospace}
-
-/* Insight cards laterais */
 .donut-insights{display:flex;flex-direction:column;gap:10px}
 .insight-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;transition:all .22s}
 .insight-card:hover{transform:translateX(3px)}
@@ -202,8 +207,8 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 .insight-red    .insight-ring{background:radial-gradient(circle,#ff4d6d,transparent)}
 .insight-green  .insight-ring{background:radial-gradient(circle,#22d6a0,transparent)}
 .insight-blue   .insight-ring{background:radial-gradient(circle,#38bdf8,transparent)}
-@media(max-width:1100px){.donut-section{grid-template-columns:1fr}.donut-insights{flex-direction:row;flex-wrap:wrap}.insight-card{flex:1;min-width:120px}}
-@media(max-width:700px){.donut-wrap{flex-direction:column;align-items:center}}
+@media(max-width:1100px){.donut-section{grid-template-columns:1fr}.donut-insights{flex-direction:row;flex-wrap:wrap}.insight-card{flex:1;min-width:120px}.planos-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.donut-wrap{flex-direction:column;align-items:center}.planos-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:1280px){.sales-row{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}}
 @media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)}.three-col{grid-template-columns:1fr 1fr}}
 </style>
@@ -217,10 +222,10 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2l7 7-13 13-3-1-1-3 13-13z"/><path d="M3.5 20.5l2-2"/><path d="M18 8l-2 2"/></svg>
     </div>
     <div class="login-title">BERSERK</div>
-    <div class="login-sub">ADMIN PANEL v1.0</div>
+    <div class="login-sub">ADMIN PANEL v2.0</div>
     <div style="margin-bottom:10px">
-      <div class="login-url-label">URL DA API (ex: https://berserk.squareweb.app)</div>
-      <input class="login-url-input" id="api-url-input" type="text" placeholder="https://seu-app.squareweb.app">
+      <div class="login-url-label">URL DA API (ex: https://berserk-oficial.squareweb.app)</div>
+      <input class="login-url-input" id="api-url-input" type="text" placeholder="https://berserk-oficial.squareweb.app">
     </div>
     <input class="login-input" id="login-senha" type="password" placeholder="Senha do painel" onkeydown="if(event.key==='Enter')fazerLogin()">
     <button class="login-btn" onclick="fazerLogin()" id="login-btn">ENTRAR</button>
@@ -237,7 +242,7 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 <symbol id="ic-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5" rx="1"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></symbol>
 <symbol id="ic-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
 <symbol id="ic-unlock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></symbol>
-<symbol id="ic-ticket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v2z"/></symbol>
+<symbol id="ic-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></symbol>
 <symbol id="ic-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
 <symbol id="ic-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol>
 <symbol id="ic-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
@@ -248,7 +253,6 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 <symbol id="ic-dollar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></symbol>
 <symbol id="ic-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
 <symbol id="ic-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
-<symbol id="ic-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></symbol>
 <symbol id="ic-bar-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
 <symbol id="ic-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
 <symbol id="ic-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-2"/><rect x="6" y="18" width="12" height="4"/></symbol>
@@ -256,7 +260,6 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 <symbol id="ic-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
 <symbol id="ic-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
 <symbol id="ic-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
-<symbol id="ic-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></symbol>
 <symbol id="ic-pie" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></symbol>
 </svg>
 
@@ -270,6 +273,9 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
     <div class="nav-section-label">Principal</div>
     <div class="nav-item active" onclick="showPage('dashboard',this)">
       <svg width="16" height="16" class="ico"><use href="#ic-dashboard"/></svg><span class="nav-label">Dashboard</span>
+    </div>
+    <div class="nav-item" onclick="showPage('planos',this)">
+      <svg width="16" height="16" class="ico"><use href="#ic-tag"/></svg><span class="nav-label">Planos</span>
     </div>
     <div class="nav-item" onclick="showPage('assinaturas',this)">
       <svg width="16" height="16" class="ico"><use href="#ic-diamond"/></svg><span class="nav-label">Assinaturas</span>
@@ -339,9 +345,7 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
     <div class="page active" id="page-dashboard">
       <div class="page-title">Dashboard</div>
       <div class="page-sub" id="dash-date">Carregando...</div>
-      <!-- GRÁFICO DE DISTRIBUIÇÃO DE USUÁRIOS -->
       <div class="donut-section">
-        <!-- Card do gráfico -->
         <div class="donut-card">
           <div class="donut-card-header">
             <div class="donut-card-title">
@@ -363,84 +367,63 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
             <div class="donut-legend">
               <div class="legend-item">
                 <div class="legend-dot" style="background:#8b5cf6;box-shadow:0 0 8px #8b5cf688"></div>
-                <div class="legend-info">
-                  <div class="legend-name">Assinantes Ativos</div>
-                  <div class="legend-val" id="leg-ativas">—</div>
-                </div>
+                <div class="legend-info"><div class="legend-name">Assinantes Ativos</div><div class="legend-val" id="leg-ativas">—</div></div>
                 <div class="legend-pct" id="leg-ativas-pct" style="color:#a78bfa">—%</div>
               </div>
               <div class="legend-item">
                 <div class="legend-dot" style="background:#ff4d6d;box-shadow:0 0 8px #ff4d6d88"></div>
-                <div class="legend-info">
-                  <div class="legend-name">Restritos</div>
-                  <div class="legend-val" id="leg-restritos">—</div>
-                </div>
+                <div class="legend-info"><div class="legend-name">Restritos</div><div class="legend-val" id="leg-restritos">—</div></div>
                 <div class="legend-pct" id="leg-restritos-pct" style="color:#ff4d6d">—%</div>
               </div>
               <div class="legend-item">
                 <div class="legend-dot" style="background:#22d6a0;box-shadow:0 0 8px #22d6a088"></div>
-                <div class="legend-info">
-                  <div class="legend-name">Testes Grátis</div>
-                  <div class="legend-val" id="leg-testes">—</div>
-                </div>
+                <div class="legend-info"><div class="legend-name">Testes Grátis</div><div class="legend-val" id="leg-testes">—</div></div>
                 <div class="legend-pct" id="leg-testes-pct" style="color:#22d6a0">—%</div>
               </div>
               <div class="legend-item">
                 <div class="legend-dot" style="background:#38bdf8;box-shadow:0 0 8px #38bdf888"></div>
-                <div class="legend-info">
-                  <div class="legend-name">Sem Plano</div>
-                  <div class="legend-val" id="leg-sem">—</div>
-                </div>
+                <div class="legend-info"><div class="legend-name">Sem Plano</div><div class="legend-val" id="leg-sem">—</div></div>
                 <div class="legend-pct" id="leg-sem-pct" style="color:#38bdf8">—%</div>
               </div>
             </div>
           </div>
         </div>
-        <!-- Cards de insight lateral -->
         <div class="donut-insights">
           <div class="insight-card insight-purple">
-            <div class="insight-icon">
-              <svg width="18" height="18" color="#a78bfa"><use href="#ic-diamond"/></svg>
-            </div>
+            <div class="insight-icon"><svg width="18" height="18" color="#a78bfa"><use href="#ic-diamond"/></svg></div>
             <div class="insight-body">
               <div class="insight-value" id="ins-ativas">—</div>
               <div class="insight-label">Assinantes Ativos</div>
-              <div class="insight-sub" id="ins-mrr">MRR: —</div>
+              <div class="insight-sub" id="ins-mrr">Receita: —</div>
             </div>
-            <div class="insight-ring" id="ring-ativas"></div>
+            <div class="insight-ring"></div>
           </div>
           <div class="insight-card insight-red">
-            <div class="insight-icon">
-              <svg width="18" height="18" color="#ff4d6d"><use href="#ic-mute"/></svg>
-            </div>
+            <div class="insight-icon"><svg width="18" height="18" color="#ff4d6d"><use href="#ic-mute"/></svg></div>
             <div class="insight-body">
               <div class="insight-value" id="ins-restritos">—</div>
               <div class="insight-label">Usuários Restritos</div>
               <div class="insight-sub">Sem acesso ao grupo</div>
             </div>
-            <div class="insight-ring" id="ring-restritos"></div>
+            <div class="insight-ring"></div>
           </div>
           <div class="insight-card insight-green">
-            <div class="insight-icon">
-              <svg width="18" height="18" color="#22d6a0"><use href="#ic-gift"/></svg>
-            </div>
+            <div class="insight-icon"><svg width="18" height="18" color="#22d6a0"><use href="#ic-gift"/></svg></div>
             <div class="insight-body">
               <div class="insight-value" id="ins-testes">—</div>
               <div class="insight-label">Testes Grátis</div>
               <div class="insight-sub">Trial de 3 dias</div>
             </div>
-            <div class="insight-ring" id="ring-testes"></div>
+            <div class="insight-ring"></div>
           </div>
           <div class="insight-card insight-blue">
-            <div class="insight-icon">
-              <svg width="18" height="18" color="#38bdf8"><use href="#ic-users"/></svg>
-            </div>
+            <div class="insight-icon"><svg width="18" height="18" color="#38bdf8"><use href="#ic-users"/></svg></div>
             <div class="insight-body">
               <div class="insight-value" id="ins-usuarios">—</div>
               <div class="insight-label">Total no Bot</div>
               <div class="insight-sub">Usuários registrados</div>
             </div>
-            <div class="insight-ring" id="ring-usuarios"></div>
+            <div class="insight-ring"></div>
           </div>
         </div>
       </div>
@@ -472,6 +455,24 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
       </div>
     </div>
 
+    <!-- PLANOS -->
+    <div class="page" id="page-planos">
+      <div class="page-title">Planos Disponíveis</div>
+      <div class="page-sub">Tabela de preços e comissões do programa de afiliados (50% por venda)</div>
+      <div class="planos-grid" id="planos-grid">
+        <!-- preenchido por JS -->
+      </div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:16px"><svg width="14" height="14" color="var(--purple-3)"><use href="#ic-dollar"/></svg>Resumo de Comissões</div>
+        <table class="data-table">
+          <thead><tr><th>Plano</th><th>Valor</th><th>Comissão (50%)</th><th>Seu Lucro</th></tr></thead>
+          <tbody id="planos-table">
+            <tr class="loading-row"><td colspan="4"><div class="spinner"></div> Carregando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <!-- ASSINATURAS -->
     <div class="page" id="page-assinaturas">
       <div class="page-title">Assinaturas</div>
@@ -489,8 +490,8 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
         </div>
         <div class="stat-card yellow">
           <div class="stat-icon-wrap yellow"><svg width="18" height="18" color="var(--yellow)"><use href="#ic-dollar"/></svg></div>
-          <div class="stat-value" id="sub-mrr">R$ —</div>
-          <div class="stat-label">MRR estimado (R$20/mês)</div>
+          <div class="stat-value" id="sub-mrr">—</div>
+          <div class="stat-label">Assinantes com plano ativo</div>
         </div>
       </div>
       <div class="card">
@@ -553,7 +554,7 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
     <!-- LIBERAR -->
     <div class="page" id="page-liberar">
       <div class="page-title">Liberar Usuário</div>
-      <div class="page-sub">Ative ou renove assinaturas manualmente — endpoint <code style="color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px">POST /api/acao/liberar</code></div>
+      <div class="page-sub">Ative ou renove assinaturas manualmente</div>
       <div class="info-box">
         <svg width="15" height="15" color="var(--yellow)" style="flex-shrink:0;margin-top:1px"><use href="#ic-info"/></svg>
         <span>A liberação via painel atualiza os dados. Para remover a restrição no Telegram, use também o comando <code style="color:var(--purple-3)">/liberar &lt;ID&gt;</code> no bot.</span>
@@ -566,13 +567,17 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
             <input class="input-field" type="number" placeholder="Ex: 123456789" id="lib-uid">
           </div>
           <div class="input-group">
-            <div class="input-label"><svg width="12" height="12"><use href="#ic-calendar"/></svg>Duração (dias)</div>
+            <div class="input-label"><svg width="12" height="12"><use href="#ic-calendar"/></svg>Plano / Duração</div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
-              <div class="chip" onclick="setDias(7)">7 dias</div>
-              <div class="chip" onclick="setDias(15)">15 dias</div>
-              <div class="chip selected" onclick="setDias(30)">30 dias</div>
-              <div class="chip" onclick="setDias(60)">60 dias</div>
-              <div class="chip" onclick="setDias(90)">90 dias</div>
+              <div class="chip" onclick="setDias(1)">🟢 1 dia</div>
+              <div class="chip" onclick="setDias(3)">🔵 3 dias</div>
+              <div class="chip" onclick="setDias(7)">🟣 7 dias</div>
+              <div class="chip" onclick="setDias(15)">🟡 15 dias</div>
+              <div class="chip selected" onclick="setDias(30)">🔴 30 dias</div>
+              <div class="chip" onclick="setDias(60)">🟠 60 dias</div>
+              <div class="chip" onclick="setDias(90)">⚫ 90 dias</div>
+              <div class="chip" onclick="setDias(180)">💎 180 dias</div>
+              <div class="chip" onclick="setDias(365)">👑 365 dias</div>
             </div>
             <input class="input-field" type="number" placeholder="Ou digite manualmente" id="lib-dias" value="30">
           </div>
@@ -611,12 +616,12 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
     <!-- AFILIADOS -->
     <div class="page" id="page-afiliados">
       <div class="page-title">Programa de Afiliados</div>
-      <div class="page-sub">Comissões e indicações — endpoint <code style="color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px">/api/afiliados</code></div>
+      <div class="page-sub">50% de comissão por venda — endpoint <code style="color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px">/api/afiliados</code></div>
       <div class="three-col">
         <div class="stat-card">
           <div class="stat-icon-wrap purple"><svg width="18" height="18" color="var(--purple-3)"><use href="#ic-users"/></svg></div>
           <div class="stat-value" id="afil-total">—</div>
-          <div class="stat-label">Afiliados Ativos</div>
+          <div class="stat-label">Afiliados Cadastrados</div>
         </div>
         <div class="stat-card green">
           <div class="stat-icon-wrap green"><svg width="18" height="18" color="var(--green)"><use href="#ic-check"/></svg></div>
@@ -635,7 +640,7 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
           <button class="refresh-btn" onclick="carregarAfiliados()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
         </div>
         <table class="data-table">
-          <thead><tr><th>#</th><th>User ID</th><th>Username</th><th>Indicações</th><th>Ganhos Total</th><th>Saldo</th></tr></thead>
+          <thead><tr><th>#</th><th>User ID</th><th>Username</th><th>Indicações</th><th>Ganhos Total</th><th>Saldo Pendente</th></tr></thead>
           <tbody id="afiliados-table"><tr class="loading-row"><td colspan="6"><div class="spinner"></div> Carregando...</td></tr></tbody>
         </table>
       </div>
@@ -671,7 +676,7 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
             <svg width="24" height="24" color="var(--purple-3)"><use href="#ic-save"/></svg>
           </div>
           <div style="font-weight:700;margin-bottom:7px">Backup Completo</div>
-          <div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Exporta assinaturas, restritos e afiliados via <code style="color:var(--purple-3)">/api/backup</code></div>
+          <div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Exporta assinaturas, restritos e afiliados em JSON</div>
           <button class="btn btn-primary" onclick="gerarBackup()" style="width:100%;justify-content:center">
             <svg width="14" height="14"><use href="#ic-download"/></svg> Gerar JSON
           </button>
@@ -740,7 +745,7 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
     </div>
     <div class="info-box" style="margin-bottom:14px">
       <svg width="14" height="14" color="var(--yellow)" style="flex-shrink:0"><use href="#ic-info"/></svg>
-      <span>Adiciona dias a <strong>todos</strong> os assinantes ativos via <code style="color:var(--purple-3)">/api/acao/estender_todas</code>.</span>
+      <span>Adiciona dias a <strong>todos</strong> os assinantes ativos.</span>
     </div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
       <div class="chip" onclick="setExtDias(7)">7 dias</div>
@@ -778,6 +783,39 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 
 <script>
 // ============================================================
+// PLANOS (espelho do bot)
+// ============================================================
+const PLANOS = [
+  { id:'plano_1d',   emoji:'🟢', nome:'1 Dia',    dias:1,   valor:5.00,   comissao:2.50  },
+  { id:'plano_3d',   emoji:'🔵', nome:'3 Dias',   dias:3,   valor:10.00,  comissao:5.00  },
+  { id:'plano_7d',   emoji:'🟣', nome:'7 Dias',   dias:7,   valor:15.00,  comissao:7.50  },
+  { id:'plano_15d',  emoji:'🟡', nome:'15 Dias',  dias:15,  valor:18.00,  comissao:9.00  },
+  { id:'plano_30d',  emoji:'🔴', nome:'30 Dias',  dias:30,  valor:20.00,  comissao:10.00 },
+  { id:'plano_60d',  emoji:'🟠', nome:'60 Dias',  dias:60,  valor:35.00,  comissao:17.50 },
+  { id:'plano_90d',  emoji:'⚫', nome:'90 Dias',  dias:90,  valor:50.00,  comissao:25.00 },
+  { id:'plano_180d', emoji:'💎', nome:'180 Dias', dias:180, valor:90.00,  comissao:45.00 },
+  { id:'plano_365d', emoji:'👑', nome:'365 Dias', dias:365, valor:160.00, comissao:80.00 },
+];
+
+function renderPlanos() {
+  document.getElementById('planos-grid').innerHTML = PLANOS.map(p => `
+    <div class="plano-card">
+      <div class="plano-emoji">${p.emoji}</div>
+      <div class="plano-nome">${p.nome}</div>
+      <div class="plano-valor">R$ ${p.valor.toFixed(2)}</div>
+      <div class="plano-comissao">Comissão: R$ ${p.comissao.toFixed(2)}</div>
+    </div>`).join('');
+
+  document.getElementById('planos-table').innerHTML = PLANOS.map(p => `
+    <tr>
+      <td>${p.emoji} ${p.nome}</td>
+      <td style="color:var(--purple-3);font-weight:700">R$ ${p.valor.toFixed(2)}</td>
+      <td style="color:var(--green);font-weight:700">R$ ${p.comissao.toFixed(2)}</td>
+      <td style="color:var(--yellow);font-weight:700">R$ ${p.comissao.toFixed(2)}</td>
+    </tr>`).join('');
+}
+
+// ============================================================
 // ESTADO GLOBAL
 // ============================================================
 let API_BASE = '';
@@ -785,93 +823,60 @@ let AUTH_TOKEN = '';
 let dadosAssinaturas = [];
 
 // ============================================================
-// LOGIN — POST /api/login  { senha } → { ok, token }
+// LOGIN
 // ============================================================
 async function fazerLogin() {
   const url   = (document.getElementById('api-url-input').value||'').trim().replace(/\/$/, '');
   const senha = (document.getElementById('login-senha').value||'').trim();
   if (!url)   { erroLogin('Informe a URL da API'); return; }
   if (!senha) { erroLogin('Informe a senha'); return; }
-
   const btn = document.getElementById('login-btn');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner" style="border-color:#ffffff44;border-top-color:#fff;width:14px;height:14px"></span> Entrando...';
-
   try {
-    const res  = await fetch(`${url}/api/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ senha })
-    });
+    const res  = await fetch(`${url}/api/login`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({senha}) });
     const data = await res.json();
-
     if (data.ok && data.token) {
-      API_BASE   = url;
-      AUTH_TOKEN = data.token;
-      // Persiste na sessão para recarregar sem perder login
+      API_BASE = url; AUTH_TOKEN = data.token;
       sessionStorage.setItem('bk_token', AUTH_TOKEN);
       sessionStorage.setItem('bk_url',   API_BASE);
-
       mostrarApp();
-    } else {
-      erroLogin(data.erro || 'Senha ou URL incorreta');
-    }
-  } catch(e) {
-    erroLogin('Não foi possível conectar. Verifique a URL e tente novamente.');
-  }
-  btn.disabled = false;
-  btn.innerHTML = 'ENTRAR';
+    } else { erroLogin(data.erro || 'Senha ou URL incorreta'); }
+  } catch(e) { erroLogin('Não foi possível conectar. Verifique a URL.'); }
+  btn.disabled = false; btn.innerHTML = 'ENTRAR';
 }
-
 function erroLogin(msg) {
   const el = document.getElementById('login-err');
-  el.textContent = msg;
-  el.style.display = 'block';
+  el.textContent = msg; el.style.display = 'block';
   setTimeout(() => el.style.display = 'none', 5000);
 }
-
 function mostrarApp() {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('sidebar').style.display = 'flex';
   document.getElementById('main-content').style.display = 'flex';
-  const host = API_BASE.replace(/https?:\/\//, '').substring(0, 26);
-  document.getElementById('api-url-show').textContent = host;
-  document.getElementById('dash-date').textContent =
-    new Date().toLocaleDateString('pt-BR', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  document.getElementById('api-url-show').textContent = API_BASE.replace(/https?:\/\//,'').substring(0,26);
+  document.getElementById('dash-date').textContent = new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  renderPlanos();
   recarregarTudo();
 }
-
 function logout() {
-  AUTH_TOKEN = '';
-  API_BASE   = '';
-  sessionStorage.removeItem('bk_token');
-  sessionStorage.removeItem('bk_url');
+  AUTH_TOKEN = ''; API_BASE = '';
+  sessionStorage.removeItem('bk_token'); sessionStorage.removeItem('bk_url');
   document.getElementById('login-screen').style.display = 'flex';
   document.getElementById('sidebar').style.display = 'none';
   document.getElementById('main-content').style.display = 'none';
   document.getElementById('login-senha').value = '';
 }
-
-// Restaura sessão ao recarregar a página
 (function restaurarSessao() {
-  const t = sessionStorage.getItem('bk_token');
-  const u = sessionStorage.getItem('bk_url');
-  if (t && u) {
-    AUTH_TOKEN = t;
-    API_BASE   = u;
-    document.getElementById('api-url-input').value = u;
-    mostrarApp();
-  }
+  const t = sessionStorage.getItem('bk_token'), u = sessionStorage.getItem('bk_url');
+  if (t && u) { AUTH_TOKEN=t; API_BASE=u; document.getElementById('api-url-input').value=u; mostrarApp(); }
 })();
 
 // ============================================================
-// CHAMADA AUTENTICADA — header X-Auth-Token
+// API
 // ============================================================
-async function api(path, method = 'GET', body = null) {
-  const opts = {
-    method,
-    headers: { 'X-Auth-Token': AUTH_TOKEN, 'Content-Type': 'application/json' }
-  };
+async function api(path, method='GET', body=null) {
+  const opts = { method, headers:{'X-Auth-Token':AUTH_TOKEN,'Content-Type':'application/json'} };
   if (body) opts.body = JSON.stringify(body);
   const res = await fetch(`${API_BASE}${path}`, opts);
   if (res.status === 401) { logout(); throw new Error('Sessão expirada'); }
@@ -879,46 +884,32 @@ async function api(path, method = 'GET', body = null) {
 }
 
 // ============================================================
-// CARREGAMENTO DE DADOS
+// CARREGAMENTO
 // ============================================================
 async function recarregarTudo() {
-  toast('Atualizando dados...', 'info');
-  await Promise.all([
-    carregarStats(),
-    carregarAssinaturas(),
-    carregarRestritos(),
-    carregarTestes(),
-    carregarAfiliados()
-  ]);
+  toast('Atualizando dados...','info');
+  await Promise.all([carregarStats(),carregarAssinaturas(),carregarRestritos(),carregarTestes(),carregarAfiliados()]);
 }
 
-// GET /api/stats
 async function carregarStats() {
   try {
     const d = await api('/api/stats');
     if (!d.ok) return;
-    set('stat-ativas',    d.ativas);
-    set('stat-restritos', d.restritos);
-    set('stat-testes',    d.testes);
-    set('stat-usuarios',  d.usuarios);
-    set('stat-mrr', `<svg width="11" height="11"><use href="#ic-trending"/></svg> MRR: ${brl(d.ativas * (d.preco || 20))}/mês`);
-    set('badge-ativas',         d.ativas);
-    set('badge-restritos',      d.restritos);
-    set('badge-testes',         d.testes);
-    set('sub-ativas',           d.ativas);
-    set('sub-mrr',              brl(d.ativas * (d.preco || 20)));
-
-    // Insight cards do MRR
-    set('ins-mrr', 'MRR: ' + brl(d.ativas * (d.preco || 20)));
-
-    // Desenha gráfico donut
+    set('badge-ativas',   d.ativas);
+    set('badge-restritos',d.restritos);
+    set('badge-testes',   d.testes);
+    set('ins-ativas',     d.ativas);
+    set('ins-restritos',  d.restritos);
+    set('ins-testes',     d.testes);
+    set('ins-usuarios',   d.usuarios);
+    // Receita estimada: usa plano de 30 dias como base (mais comum)
+    const receitaEst = d.ativas * 20;
+    set('ins-mrr', 'Estimativa: ' + brl(receitaEst));
     desenharDonut(d.ativas, d.restritos, d.testes, d.usuarios);
-
     setStatusOnline(true);
   } catch(e) { setStatusOnline(false); }
 }
 
-// GET /api/assinaturas
 async function carregarAssinaturas() {
   try {
     const d = await api('/api/assinaturas');
@@ -928,10 +919,9 @@ async function carregarAssinaturas() {
     renderSubTable();
     renderExpirar();
     renderDashExpirar();
-  } catch(e) { console.error('carregarAssinaturas:', e); }
+  } catch(e) { console.error('carregarAssinaturas:',e); }
 }
 
-// GET /api/restritos
 async function carregarRestritos() {
   try {
     const d = await api('/api/restritos');
@@ -952,10 +942,9 @@ async function carregarRestritos() {
           <svg width="11" height="11"><use href="#ic-unlock"/></svg> Liberar
         </button></td>
       </tr>`).join('');
-  } catch(e) { console.error('carregarRestritos:', e); }
+  } catch(e) { console.error('carregarRestritos:',e); }
 }
 
-// GET /api/testes
 async function carregarTestes() {
   try {
     const d = await api('/api/testes');
@@ -963,14 +952,11 @@ async function carregarTestes() {
     const lista = d.testes || [];
     document.getElementById('trial-list').innerHTML = lista.length
       ? lista.map(t => {
-          const pct = Math.max(2, (t.dias_rest / 3) * 100);
-          const cor = t.dias_rest <= 0 ? 'var(--red)' : t.dias_rest <= 1 ? 'var(--yellow)' : 'var(--green)';
+          const pct = Math.max(2,(t.dias_rest/3)*100);
+          const cor = t.dias_rest<=0?'var(--red)':t.dias_rest<=1?'var(--yellow)':'var(--green)';
           return `<div>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-              <div>
-                <div class="mono" style="margin-bottom:3px">${t.uid}</div>
-                <div style="font-size:12px;color:var(--text-2)">${t.username || 'Sem username'}</div>
-              </div>
+              <div><div class="mono" style="margin-bottom:3px">${t.uid}</div><div style="font-size:12px;color:var(--text-2)">${t.username||'Sem username'}</div></div>
               <div style="text-align:right">
                 <div style="font-size:12px;font-weight:700;color:${cor}">+${t.dias_rest} dias</div>
                 <div style="font-size:11px;color:var(--text-3)">Expira ${fmtDate(t.data_fim)}</div>
@@ -980,63 +966,57 @@ async function carregarTestes() {
           </div>`;
         }).join('')
       : '<div style="color:var(--text-3);font-size:13px">Nenhum trial ativo no momento.</div>';
-  } catch(e) { console.error('carregarTestes:', e); }
+  } catch(e) { console.error('carregarTestes:',e); }
 }
 
-// GET /api/afiliados
 async function carregarAfiliados() {
   try {
     const d = await api('/api/afiliados');
     if (!d.ok) return;
     set('afil-total',    d.total);
-    set('afil-indicados', d.total_indicados);
-    set('afil-ganhos',   'R$ ' + (d.total_ganhos || 0).toFixed(2));
+    set('afil-indicados',d.total_indicados);
+    set('afil-ganhos',   'R$ '+(d.total_ganhos||0).toFixed(2));
     const lista = d.afiliados || [];
     document.getElementById('afiliados-table').innerHTML = lista.length
-      ? lista.map((a, i) => `
+      ? lista.map((a,i) => `
           <tr>
-            <td style="color:var(--text-3);font-weight:700">#${i + 1}</td>
+            <td style="color:var(--text-3);font-weight:700">#${i+1}</td>
             <td class="mono">${a.uid}</td>
-            <td style="color:var(--text-2)">${a.username ? '@' + a.username : '—'}</td>
+            <td style="color:var(--text-2)">${a.username?'@'+a.username:'—'}</td>
             <td style="font-weight:700;color:var(--purple-3)">${a.indicados}</td>
-            <td style="color:var(--green);font-weight:700">R$ ${(a.ganhos_total || 0).toFixed(2)}</td>
-            <td><span class="badge ${a.saldo > 0 ? 'yellow' : 'green'}"><div class="badge-dot"></div>R$ ${(a.saldo || 0).toFixed(2)}</span></td>
-          </tr>`)
-        .join('')
+            <td style="color:var(--green);font-weight:700">R$ ${(a.ganhos_total||0).toFixed(2)}</td>
+            <td><span class="badge ${a.saldo>0?'yellow':'green'}"><div class="badge-dot"></div>R$ ${(a.saldo||0).toFixed(2)}</span></td>
+          </tr>`).join('')
       : '<tr class="empty-row"><td colspan="6">Nenhum afiliado cadastrado ainda</td></tr>';
-  } catch(e) { console.error('carregarAfiliados:', e); }
+  } catch(e) { console.error('carregarAfiliados:',e); }
 }
 
 // ============================================================
-// RENDERS LOCAIS (sem chamada de rede)
+// RENDERS LOCAIS
 // ============================================================
 function renderSubTable() {
-  const filter = (document.getElementById('filter-sub')?.value || '').toLowerCase();
-  const ativas = dadosAssinaturas.filter(s => s.ativa).length;
+  const filter = (document.getElementById('filter-sub')?.value||'').toLowerCase();
+  const ativas = dadosAssinaturas.filter(s=>s.ativa).length;
   set('sub-ativas', ativas);
-  set('sub-mrr', brl(ativas * 20));
-
+  set('sub-mrr', ativas + ' ativos');
   const rows = dadosAssinaturas.filter(s =>
-    !filter || String(s.uid).includes(filter) || (s.username || '').toLowerCase().includes(filter)
-  );
+    !filter || String(s.uid).includes(filter) || (s.username||'').toLowerCase().includes(filter));
   if (!rows.length) {
-    document.getElementById('sub-table-body').innerHTML =
-      '<tr class="empty-row"><td colspan="7">Nenhum resultado encontrado</td></tr>';
+    document.getElementById('sub-table-body').innerHTML = '<tr class="empty-row"><td colspan="7">Nenhum resultado</td></tr>';
     return;
   }
   document.getElementById('sub-table-body').innerHTML = rows.map(s => {
     const d = s.dias_rest;
     const badge = s.ativa
-      ? (d <= 2
-          ? '<span class="badge yellow"><div class="badge-dot"></div>Expirando</span>'
-          : '<span class="badge green"><div class="badge-dot"></div>Ativa</span>')
+      ? (d<=2?'<span class="badge yellow"><div class="badge-dot"></div>Expirando</span>'
+             :'<span class="badge green"><div class="badge-dot"></div>Ativa</span>')
       : '<span class="badge red"><div class="badge-dot"></div>Expirada</span>';
     return `<tr>
       <td class="mono">${s.uid}</td>
-      <td style="color:var(--text-2)">${s.username || '—'}</td>
+      <td style="color:var(--text-2)">${s.username||'—'}</td>
       <td style="color:var(--text-2);font-size:12px">${fmtDate(s.data_inicio)}</td>
       <td style="color:var(--text-2);font-size:12px">${fmtDate(s.data_fim)}</td>
-      <td style="color:${d <= 3 ? 'var(--red)' : d <= 7 ? 'var(--yellow)' : 'var(--green)'};font-weight:700">${d}</td>
+      <td style="color:${d<=3?'var(--red)':d<=7?'var(--yellow)':'var(--green)'};font-weight:700">${d}</td>
       <td>${badge}</td>
       <td><button class="btn btn-danger btn-sm" onclick="cancelarRapido('${s.uid}')">
         <svg width="11" height="11"><use href="#ic-x"/></svg>
@@ -1046,422 +1026,277 @@ function renderSubTable() {
 }
 
 function renderExpirar() {
-  const exp = dadosAssinaturas
-    .filter(s => s.ativa && s.dias_rest <= 7)
-    .sort((a, b) => a.dias_rest - b.dias_rest);
+  const exp = dadosAssinaturas.filter(s=>s.ativa&&s.dias_rest<=7).sort((a,b)=>a.dias_rest-b.dias_rest);
   document.getElementById('expirar-list').innerHTML = exp.length
-    ? exp.map(x => `
+    ? exp.map(x=>`
         <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;margin-bottom:8px;background:var(--bg-base);border-radius:12px;border:1px solid var(--border)">
           <div class="mono">${x.uid}</div>
-          <div style="font-size:12px;color:var(--text-2)">${x.username || ''} — Expira ${fmtDate(x.data_fim)}</div>
-          <span style="font-weight:700;color:${x.dias_rest <= 1 ? 'var(--red)' : x.dias_rest <= 3 ? 'var(--yellow)' : 'var(--text-1)'}">${x.dias_rest}d</span>
+          <div style="font-size:12px;color:var(--text-2)">${x.username||''} — Expira ${fmtDate(x.data_fim)}</div>
+          <span style="font-weight:700;color:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'var(--text-1)'}">${x.dias_rest}d</span>
         </div>`).join('')
-    : '<div style="color:var(--green);padding:20px;font-size:14px;display:flex;align-items:center;gap:8px"><svg width="16" height="16" color="var(--green)"><use href="#ic-check"/></svg>Nenhuma assinatura expira nos próximos 7 dias</div>';
+    : '<div style="color:var(--green);padding:20px;font-size:14px;display:flex;align-items:center;gap:8px"><svg width="16" height="16" color="var(--green)"><use href="#ic-check"/></svg>Nenhuma expira em 7 dias</div>';
 }
 
 function renderDashExpirar() {
-  const exp = dadosAssinaturas
-    .filter(s => s.ativa && s.dias_rest <= 7)
-    .sort((a, b) => a.dias_rest - b.dias_rest)
-    .slice(0, 6);
+  const exp = dadosAssinaturas.filter(s=>s.ativa&&s.dias_rest<=7).sort((a,b)=>a.dias_rest-b.dias_rest).slice(0,6);
   document.getElementById('dash-expirar').innerHTML = exp.length
-    ? exp.map(x => `
+    ? exp.map(x=>`
         <div class="expiry-item">
           <div class="expiry-header">
-            <span class="expiry-id">${x.uid}${x.username ? ' (' + x.username + ')' : ''}</span>
-            <span style="color:${x.dias_rest <= 1 ? 'var(--red)' : x.dias_rest <= 3 ? 'var(--yellow)' : 'var(--text-2)'}">
-              ${x.dias_rest}d restantes
-            </span>
+            <span class="expiry-id">${x.uid}${x.username?' ('+x.username+')':''}</span>
+            <span style="color:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'var(--text-2)'}">${x.dias_rest}d restantes</span>
           </div>
-          <div class="progress-bar"><div class="progress-fill" style="
-            width:${Math.max(2, x.dias_rest / 30 * 100)}%;
-            background:${x.dias_rest <= 1 ? 'var(--red)' : x.dias_rest <= 3 ? 'var(--yellow)' : 'linear-gradient(90deg,var(--purple-1),var(--purple-3))'}
-          "></div></div>
-        </div>`)
-    .join('')
+          <div class="progress-bar"><div class="progress-fill" style="width:${Math.max(2,x.dias_rest/30*100)}%;background:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'linear-gradient(90deg,var(--purple-1),var(--purple-3))'}"></div></div>
+        </div>`).join('')
     : '<div style="color:var(--green);font-size:12px;display:flex;align-items:center;gap:5px"><svg width="13" height="13" color="var(--green)"><use href="#ic-check"/></svg>Nenhum expira em 7 dias</div>';
 }
 
 // ============================================================
-// AÇÕES — chamam os endpoints reais
+// AÇÕES
 // ============================================================
-
-// POST /api/acao/liberar  { uid, dias }
 async function liberarUsuario() {
-  const uid  = parseInt(document.getElementById('lib-uid').value);
-  const dias = parseInt(document.getElementById('lib-dias').value) || 30;
-  if (!uid) { toast('Informe o ID!', 'error'); return; }
-  const btn = document.getElementById('btn-liberar');
-  btn.disabled = true;
+  const uid=parseInt(document.getElementById('lib-uid').value);
+  const dias=parseInt(document.getElementById('lib-dias').value)||30;
+  if (!uid){toast('Informe o ID!','error');return;}
+  const btn=document.getElementById('btn-liberar'); btn.disabled=true;
   try {
-    const d = await api('/api/acao/liberar', 'POST', { uid, dias });
-    if (d.ok) {
-      toast(`✅ ${uid} liberado por ${dias} dias`, 'success');
-      if (d.aviso) toast('⚠️ ' + d.aviso, 'info');
-      document.getElementById('lib-uid').value = '';
-      await carregarStats();
-      await carregarAssinaturas();
-    } else {
-      toast('Erro: ' + d.erro, 'error');
-    }
-  } catch(e) { toast('Erro de conexão', 'error'); }
-  btn.disabled = false;
+    const d=await api('/api/acao/liberar','POST',{uid,dias});
+    if(d.ok){toast(`✅ ${uid} liberado por ${dias} dias`,'success');if(d.aviso)toast('⚠️ '+d.aviso,'info');document.getElementById('lib-uid').value='';await carregarStats();await carregarAssinaturas();}
+    else toast('Erro: '+d.erro,'error');
+  } catch(e){toast('Erro de conexão','error');}
+  btn.disabled=false;
 }
 
-// GET /api/status_user/:uid
 async function checkStatus() {
-  const uid = parseInt(document.getElementById('lib-uid').value);
-  if (!uid) { toast('Informe o ID!', 'error'); return; }
+  const uid=parseInt(document.getElementById('lib-uid').value);
+  if(!uid){toast('Informe o ID!','error');return;}
   try {
-    const d = await api(`/api/status_user/${uid}`);
-    const el = document.getElementById('status-content');
-    if (!d.ok) {
-      el.innerHTML = `<div style="color:var(--red)">Erro: ${d.erro}</div>`;
-      document.getElementById('status-result').style.display = 'block';
-      return;
-    }
-    const sub = d.assinatura;
-    const at  = sub && sub.ativa;
-    let html = `<div style="font-size:11px;color:var(--text-3);margin-bottom:8px;font-family:'JetBrains Mono',monospace">ID: ${uid}</div>`;
-    html += `<div style="margin-bottom:6px;display:flex;align-items:center;gap:6px">
-      <svg width="13" height="13" color="${at ? 'var(--green)' : 'var(--red)'}"><use href="${at ? '#ic-check' : '#ic-x'}"/></svg>
-      ${at ? '<b>Assinatura ativa</b>' : 'Sem assinatura ativa'}
-    </div>`;
-    if (sub) html += `<div style="font-size:12px;color:var(--text-2);margin-bottom:4px">Expira: ${fmtDate(sub.data_fim)} (${sub.dias_rest} dias)</div>`;
-    if (d.restrito) html += `<div style="display:flex;align-items:center;gap:5px;color:var(--red);margin-top:4px"><svg width="13" height="13" color="var(--red)"><use href="#ic-mute"/></svg><b>Usuário Restrito</b></div>`;
-    if (d.trial) html += `<div style="display:flex;align-items:center;gap:5px;color:var(--purple-3);margin-top:4px"><svg width="13" height="13" color="var(--purple-3)"><use href="#ic-gift"/></svg>${d.trial.ativo ? 'Trial ativo até ' + fmtDate(d.trial.data_fim) : 'Trial já utilizado'}</div>`;
-    el.innerHTML = html;
-    document.getElementById('status-result').style.display = 'block';
-  } catch(e) { toast('Erro de conexão', 'error'); }
+    const d=await api(`/api/status_user/${uid}`);
+    const el=document.getElementById('status-content');
+    if(!d.ok){el.innerHTML=`<div style="color:var(--red)">Erro: ${d.erro}</div>`;document.getElementById('status-result').style.display='block';return;}
+    const sub=d.assinatura, at=sub&&sub.ativa;
+    let html=`<div style="font-size:11px;color:var(--text-3);margin-bottom:8px;font-family:'JetBrains Mono',monospace">ID: ${uid}</div>`;
+    html+=`<div style="margin-bottom:6px;display:flex;align-items:center;gap:6px"><svg width="13" height="13" color="${at?'var(--green)':'var(--red)'}"><use href="${at?'#ic-check':'#ic-x'}"/></svg>${at?'<b>Assinatura ativa</b>':'Sem assinatura ativa'}</div>`;
+    if(sub) html+=`<div style="font-size:12px;color:var(--text-2);margin-bottom:4px">Expira: ${fmtDate(sub.data_fim)} (${sub.dias_rest} dias)</div>`;
+    if(d.restrito) html+=`<div style="display:flex;align-items:center;gap:5px;color:var(--red);margin-top:4px"><svg width="13" height="13" color="var(--red)"><use href="#ic-mute"/></svg><b>Usuário Restrito</b></div>`;
+    if(d.trial) html+=`<div style="display:flex;align-items:center;gap:5px;color:var(--purple-3);margin-top:4px"><svg width="13" height="13" color="var(--purple-3)"><use href="#ic-gift"/></svg>${d.trial.ativo?'Trial ativo até '+fmtDate(d.trial.data_fim):'Trial já utilizado'}</div>`;
+    if(d.afiliado) html+=`<div style="display:flex;align-items:center;gap:5px;color:var(--green);margin-top:4px"><svg width="13" height="13" color="var(--green)"><use href="#ic-users"/></svg>Afiliado | Indicações: ${d.afiliado.indicados} | Saldo: R$ ${d.afiliado.saldo.toFixed(2)}</div>`;
+    el.innerHTML=html;
+    document.getElementById('status-result').style.display='block';
+  } catch(e){toast('Erro de conexão','error');}
 }
 
-// POST /api/acao/cancelar  { uid }
 async function cancelarAssinatura() {
-  const uid = parseInt(document.getElementById('cancel-uid').value);
-  if (!uid) { toast('Informe o ID!', 'error'); return; }
-  if (!confirm(`Cancelar assinatura de ${uid}?`)) return;
+  const uid=parseInt(document.getElementById('cancel-uid').value);
+  if(!uid){toast('Informe o ID!','error');return;}
+  if(!confirm(`Cancelar assinatura de ${uid}?`))return;
   try {
-    const d = await api('/api/acao/cancelar', 'POST', { uid });
-    if (d.ok) { toast(`Assinatura de ${uid} cancelada`); document.getElementById('cancel-uid').value = ''; await carregarStats(); await carregarAssinaturas(); }
-    else toast('Erro: ' + d.erro, 'error');
-  } catch(e) { toast('Erro de conexão', 'error'); }
+    const d=await api('/api/acao/cancelar','POST',{uid});
+    if(d.ok){toast(`Assinatura de ${uid} cancelada`);document.getElementById('cancel-uid').value='';await carregarStats();await carregarAssinaturas();}
+    else toast('Erro: '+d.erro,'error');
+  } catch(e){toast('Erro de conexão','error');}
 }
 
-// POST /api/acao/desrestringir  { uid }
 async function desrestringirUsuario() {
-  const uid = parseInt(document.getElementById('desrest-uid').value);
-  if (!uid) { toast('Informe o ID!', 'error'); return; }
+  const uid=parseInt(document.getElementById('desrest-uid').value);
+  if(!uid){toast('Informe o ID!','error');return;}
   try {
-    const d = await api('/api/acao/desrestringir', 'POST', { uid });
-    if (d.ok) {
-      toast(`Restrição de ${uid} removida`);
-      if (d.aviso) toast('⚠️ ' + d.aviso, 'info');
-      document.getElementById('desrest-uid').value = '';
-      await carregarStats();
-      await carregarRestritos();
-    } else toast('Erro: ' + d.erro, 'error');
-  } catch(e) { toast('Erro de conexão', 'error'); }
+    const d=await api('/api/acao/desrestringir','POST',{uid});
+    if(d.ok){toast(`Restrição de ${uid} removida`);if(d.aviso)toast('⚠️ '+d.aviso,'info');document.getElementById('desrest-uid').value='';await carregarStats();await carregarRestritos();}
+    else toast('Erro: '+d.erro,'error');
+  } catch(e){toast('Erro de conexão','error');}
 }
 
 async function cancelarRapido(uid) {
-  if (!confirm(`Cancelar assinatura de ${uid}?`)) return;
+  if(!confirm(`Cancelar assinatura de ${uid}?`))return;
   try {
-    const d = await api('/api/acao/cancelar', 'POST', { uid: parseInt(uid) });
-    if (d.ok) { toast(`Assinatura ${uid} cancelada`); await carregarStats(); await carregarAssinaturas(); }
-    else toast('Erro: ' + d.erro, 'error');
-  } catch(e) { toast('Erro', 'error'); }
+    const d=await api('/api/acao/cancelar','POST',{uid:parseInt(uid)});
+    if(d.ok){toast(`Assinatura ${uid} cancelada`);await carregarStats();await carregarAssinaturas();}
+    else toast('Erro: '+d.erro,'error');
+  } catch(e){toast('Erro','error');}
 }
 
 async function desrestRapido(uid) {
   try {
-    const d = await api('/api/acao/desrestringir', 'POST', { uid: parseInt(uid) });
-    if (d.ok) {
-      toast(`${uid} desrestringido`);
-      if (d.aviso) toast('⚠️ ' + d.aviso, 'info');
-      await carregarRestritos();
-      await carregarStats();
-    } else toast('Erro: ' + d.erro, 'error');
-  } catch(e) { toast('Erro', 'error'); }
+    const d=await api('/api/acao/desrestringir','POST',{uid:parseInt(uid)});
+    if(d.ok){toast(`${uid} desrestringido`);if(d.aviso)toast('⚠️ '+d.aviso,'info');await carregarRestritos();await carregarStats();}
+    else toast('Erro: '+d.erro,'error');
+  } catch(e){toast('Erro','error');}
 }
 
-// Modais
 async function liberarModal() {
-  const uid  = parseInt(document.getElementById('m-lib-uid').value);
-  const dias = parseInt(document.getElementById('m-lib-dias').value) || 30;
-  if (!uid) { toast('Informe o ID!', 'error'); return; }
+  const uid=parseInt(document.getElementById('m-lib-uid').value);
+  const dias=parseInt(document.getElementById('m-lib-dias').value)||30;
+  if(!uid){toast('Informe o ID!','error');return;}
   try {
-    const d = await api('/api/acao/liberar', 'POST', { uid, dias });
-    if (d.ok) { toast(`${uid} liberado por ${dias} dias`); if(d.aviso) toast('⚠️ '+d.aviso,'info'); closeModal('modal-liberar'); await carregarStats(); await carregarAssinaturas(); }
-    else toast('Erro: ' + d.erro, 'error');
-  } catch(e) { toast('Erro de conexão', 'error'); }
+    const d=await api('/api/acao/liberar','POST',{uid,dias});
+    if(d.ok){toast(`${uid} liberado por ${dias} dias`);if(d.aviso)toast('⚠️ '+d.aviso,'info');closeModal('modal-liberar');await carregarStats();await carregarAssinaturas();}
+    else toast('Erro: '+d.erro,'error');
+  } catch(e){toast('Erro de conexão','error');}
 }
 
 async function cancelarModal() {
-  const uid = parseInt(document.getElementById('m-cancel-uid').value);
-  if (!uid) { toast('ID inválido!', 'error'); return; }
+  const uid=parseInt(document.getElementById('m-cancel-uid').value);
+  if(!uid){toast('ID inválido!','error');return;}
   try {
-    const d = await api('/api/acao/cancelar', 'POST', { uid });
-    if (d.ok) { toast('Cancelado'); closeModal('modal-cancelar'); await carregarStats(); await carregarAssinaturas(); }
-    else toast('Erro: ' + d.erro, 'error');
-  } catch(e) { toast('Erro de conexão', 'error'); }
+    const d=await api('/api/acao/cancelar','POST',{uid});
+    if(d.ok){toast('Cancelado');closeModal('modal-cancelar');await carregarStats();await carregarAssinaturas();}
+    else toast('Erro: '+d.erro,'error');
+  } catch(e){toast('Erro de conexão','error');}
 }
 
-// POST /api/acao/estender_todas  { dias }
 async function estenderModal() {
-  const dias = parseInt(document.getElementById('m-ext-dias').value) || 30;
+  const dias=parseInt(document.getElementById('m-ext-dias').value)||30;
   try {
-    const d = await api('/api/acao/estender_todas', 'POST', { dias });
-    if (d.ok) { toast(`${d.afetados} assinaturas estendidas por ${dias} dias`); closeModal('modal-estender'); await carregarAssinaturas(); }
-    else toast('Erro: ' + d.erro, 'error');
-  } catch(e) { toast('Erro de conexão', 'error'); }
+    const d=await api('/api/acao/estender_todas','POST',{dias});
+    if(d.ok){toast(`${d.afetados} assinaturas estendidas por ${dias} dias`);closeModal('modal-estender');await carregarAssinaturas();}
+    else toast('Erro: '+d.erro,'error');
+  } catch(e){toast('Erro de conexão','error');}
 }
 
 async function desrestModal() {
-  const uid = parseInt(document.getElementById('m-desrest-uid').value);
-  if (!uid) { toast('ID inválido!', 'error'); return; }
+  const uid=parseInt(document.getElementById('m-desrest-uid').value);
+  if(!uid){toast('ID inválido!','error');return;}
   try {
-    const d = await api('/api/acao/desrestringir', 'POST', { uid });
-    if (d.ok) { toast(`${uid} desrestringido`); if(d.aviso) toast('⚠️ '+d.aviso,'info'); closeModal('modal-desrest'); await carregarRestritos(); await carregarStats(); }
-    else toast('Erro: ' + d.erro, 'error');
-  } catch(e) { toast('Erro de conexão', 'error'); }
+    const d=await api('/api/acao/desrestringir','POST',{uid});
+    if(d.ok){toast(`${uid} desrestringido`);if(d.aviso)toast('⚠️ '+d.aviso,'info');closeModal('modal-desrest');await carregarRestritos();await carregarStats();}
+    else toast('Erro: '+d.erro,'error');
+  } catch(e){toast('Erro de conexão','error');}
 }
 
-// GET /api/backup — retorna JSON para download
 async function gerarBackup() {
   try {
-    toast('Gerando backup...', 'info');
-    const res  = await fetch(`${API_BASE}/api/backup`, { headers: { 'X-Auth-Token': AUTH_TOKEN } });
-    const blob = await res.blob();
-    const a    = document.createElement('a');
-    a.href     = URL.createObjectURL(blob);
-    a.download = `berserk_backup_${new Date().toISOString().slice(0, 10)}.json`;
+    toast('Gerando backup...','info');
+    const res=await fetch(`${API_BASE}/api/backup`,{headers:{'X-Auth-Token':AUTH_TOKEN}});
+    const blob=await res.blob();
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download=`berserk_backup_${new Date().toISOString().slice(0,10)}.json`;
     a.click();
     toast('Backup baixado com sucesso!');
-  } catch(e) { toast('Erro ao gerar backup', 'error'); }
+  } catch(e){toast('Erro ao gerar backup','error');}
 }
 
 function exportarCSVAssinaturas() {
-  if (!dadosAssinaturas.length) { toast('Carregue os dados primeiro', 'error'); return; }
-  let csv = 'user_id,username,data_inicio,data_fim,dias_restantes,ativa\n';
-  dadosAssinaturas.forEach(s => {
-    csv += `${s.uid},${s.username || ''},${s.data_inicio || ''},${fmtDate(s.data_fim)},${s.dias_rest},${s.ativa}\n`;
-  });
-  baixarBlob(csv, `berserk_assinaturas_${new Date().toISOString().slice(0, 10)}.csv`, 'text/csv');
-  toast('CSV exportado!');
-}
-
-function baixarBlob(content, filename, type) {
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([content], { type }));
-  a.download = filename;
+  if(!dadosAssinaturas.length){toast('Carregue os dados primeiro','error');return;}
+  let csv='user_id,username,data_inicio,data_fim,dias_restantes,ativa\n';
+  dadosAssinaturas.forEach(s=>{csv+=`${s.uid},${s.username||''},${s.data_inicio||''},${fmtDate(s.data_fim)},${s.dias_rest},${s.ativa}\n`;});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download=`berserk_assinaturas_${new Date().toISOString().slice(0,10)}.csv`;
   a.click();
+  toast('CSV exportado!');
 }
 
 async function verificarConexao() {
   try {
-    const d = await api('/api/stats');
-    if (d.ok) { toast(`✅ Bot online — ${d.ativas} ativos, ${d.restritos} restritos`); setStatusOnline(true); }
-    else { toast('Bot respondeu com erro', 'error'); setStatusOnline(false); }
-  } catch(e) { toast('Sem conexão com a API', 'error'); setStatusOnline(false); }
+    const d=await api('/api/stats');
+    if(d.ok){toast(`✅ Bot online — ${d.ativas} ativos, ${d.restritos} restritos`);setStatusOnline(true);}
+    else{toast('Bot respondeu com erro','error');setStatusOnline(false);}
+  } catch(e){toast('Sem conexão com a API','error');setStatusOnline(false);}
 }
 
 // ============================================================
 // BUSCA GLOBAL
 // ============================================================
 function globalSearch() {
-  const uid = document.getElementById('global-search').value.trim();
-  if (!uid) return;
-  document.getElementById('lib-uid').value = uid;
-  showPage('liberar', null);
-  setTimeout(checkStatus, 100);
+  const uid=document.getElementById('global-search').value.trim();
+  if(!uid)return;
+  document.getElementById('lib-uid').value=uid;
+  showPage('liberar',null);
+  setTimeout(checkStatus,100);
 }
 
 // ============================================================
-// HELPERS DE UI
+// UI HELPERS
 // ============================================================
-function showPage(id, el) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const pg = document.getElementById('page-' + id);
-  if (pg) pg.classList.add('active');
-  if (el) {
-    el.classList.add('active');
-  } else {
-    document.querySelectorAll('.nav-item').forEach(n => {
-      if (n.getAttribute('onclick')?.includes(`'${id}'`)) n.classList.add('active');
-    });
-  }
-  const labels = {
-    dashboard:'Dashboard', assinaturas:'Assinaturas',
-    restritos:'Restritos', testes:'Testes Grátis', liberar:'Liberar Usuário',
-    afiliados:'Afiliados', expirar:'A Expirar', backup:'Backup'
-  };
-  set('breadcrumb-text', labels[id] || id);
+function showPage(id,el) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const pg=document.getElementById('page-'+id);
+  if(pg) pg.classList.add('active');
+  if(el){el.classList.add('active');}
+  else{document.querySelectorAll('.nav-item').forEach(n=>{if(n.getAttribute('onclick')?.includes(`'${id}'`))n.classList.add('active');});}
+  const labels={dashboard:'Dashboard',planos:'Planos',assinaturas:'Assinaturas',restritos:'Restritos',testes:'Testes Grátis',liberar:'Liberar Usuário',afiliados:'Afiliados',expirar:'A Expirar',backup:'Backup'};
+  set('breadcrumb-text',labels[id]||id);
 }
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
 
-function openModal(id)  { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.modal-overlay').forEach(m =>
-  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); })
-);
-
-function toast(msg, type = 'success') {
-  const el = document.createElement('div');
-  el.className = `toast ${type}`;
-  const ico = type === 'success' ? '#ic-check' : type === 'info' ? '#ic-info' : '#ic-x';
-  const clr = type === 'success' ? 'var(--green)' : type === 'info' ? 'var(--blue)' : 'var(--red)';
-  el.innerHTML = `<svg width="16" height="16" color="${clr}"><use href="${ico}"/></svg>${msg}`;
+function toast(msg,type='success') {
+  const el=document.createElement('div'); el.className=`toast ${type}`;
+  const ico=type==='success'?'#ic-check':type==='info'?'#ic-info':'#ic-x';
+  const clr=type==='success'?'var(--green)':type==='info'?'var(--blue)':'var(--red)';
+  el.innerHTML=`<svg width="16" height="16" color="${clr}"><use href="${ico}"/></svg>${msg}`;
   document.getElementById('toasts').appendChild(el);
-  setTimeout(() => el.remove(), 4500);
+  setTimeout(()=>el.remove(),4500);
 }
-
 function setStatusOnline(online) {
-  document.getElementById('status-dot').className = 'status-dot' + (online ? '' : ' offline');
-  set('status-text', online ? 'Bot Online' : 'Sem conexão');
+  document.getElementById('status-dot').className='status-dot'+(online?'':' offline');
+  set('status-text',online?'Bot Online':'Sem conexão');
 }
-
 function setDias(n) {
-  document.getElementById('lib-dias').value = n;
-  document.querySelectorAll('.chip').forEach(c =>
-    c.classList.toggle('selected', c.getAttribute('onclick') === `setDias(${n})`));
+  document.getElementById('lib-dias').value=n;
+  document.querySelectorAll('#page-liberar .chip').forEach(c=>c.classList.toggle('selected',c.getAttribute('onclick')===`setDias(${n})`));
 }
 function setExtDias(n) {
-  document.getElementById('m-ext-dias').value = n;
-  // Atualiza chip visual dentro do modal estender
-  document.querySelectorAll('#modal-estender .chip').forEach(c =>
-    c.classList.toggle('selected', c.getAttribute('onclick') === `setExtDias(${n})`));
+  document.getElementById('m-ext-dias').value=n;
+  document.querySelectorAll('#modal-estender .chip').forEach(c=>c.classList.toggle('selected',c.getAttribute('onclick')===`setExtDias(${n})`));
 }
+function set(id,html){const el=document.getElementById(id);if(el)el.innerHTML=html;}
+function brl(v){return 'R$ '+Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function fmtDate(d){if(!d)return '—';try{return new Date(d).toLocaleDateString('pt-BR');}catch(e){return d;}}
 
-// Atalho: atribui innerHTML a um elemento por ID
-function set(id, html) {
-  const el = document.getElementById(id);
-  if (el) el.innerHTML = html;
-}
-// Atualiza largura de barra de progresso
-function pct(id, val) {
-  const el = document.getElementById(id);
-  if (el) el.style.width = Math.min(100, Math.max(0, val)) + '%';
-}
-function brl(v) { return 'R$ ' + Number(v).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
-function fmtDate(d) { if (!d) return '—'; try { return new Date(d).toLocaleDateString('pt-BR'); } catch(e) { return d; } }
-function fmtDT(d) {
-  if (!d) return '—';
-  try {
-    const dt = new Date(d);
-    return dt.toLocaleDateString('pt-BR') + ' ' + dt.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-  } catch(e) { return d; }
-}
-
-document.getElementById('login-senha').addEventListener('keydown', e => { if (e.key === 'Enter') fazerLogin(); });
-document.getElementById('global-search').addEventListener('keydown', e => { if (e.key === 'Enter') globalSearch(); });
+document.getElementById('login-senha').addEventListener('keydown',e=>{if(e.key==='Enter')fazerLogin();});
+document.getElementById('global-search').addEventListener('keydown',e=>{if(e.key==='Enter')globalSearch();});
 
 // ============================================================
-// DONUT CHART — Canvas puro, sem dependências
+// DONUT CHART
 // ============================================================
-let _donutAnim = null;
-
-function desenharDonut(ativas, restritos, testes, usuarios) {
-  const canvas = document.getElementById('donut-chart');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const W = canvas.width, H = canvas.height;
-  const cx = W / 2, cy = H / 2;
-  const R = 82, r = 52;
-
-  // Dados
-  const semPlano = Math.max(0, usuarios - ativas - restritos - testes);
-  const total    = ativas + restritos + testes + semPlano || 1;
-
-  const segments = [
-    { val: ativas,    color: '#8b5cf6', glow: '#6c3fff' },
-    { val: restritos, color: '#ff4d6d', glow: '#ff4d6d' },
-    { val: testes,    color: '#22d6a0', glow: '#22d6a0' },
-    { val: semPlano,  color: '#38bdf8', glow: '#38bdf8' },
+let _donutAnim=null;
+function desenharDonut(ativas,restritos,testes,usuarios) {
+  const canvas=document.getElementById('donut-chart');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,R=82,r=52;
+  const semPlano=Math.max(0,usuarios-ativas-restritos-testes);
+  const total=ativas+restritos+testes+semPlano||1;
+  const segments=[
+    {val:ativas,   color:'#8b5cf6',glow:'#6c3fff'},
+    {val:restritos,color:'#ff4d6d',glow:'#ff4d6d'},
+    {val:testes,   color:'#22d6a0',glow:'#22d6a0'},
+    {val:semPlano, color:'#38bdf8',glow:'#38bdf8'},
   ];
-
-  // Anima de 0 a 1
-  let progress = 0;
-  if (_donutAnim) cancelAnimationFrame(_donutAnim);
-
+  let progress=0;
+  if(_donutAnim)cancelAnimationFrame(_donutAnim);
   function draw(p) {
-    ctx.clearRect(0, 0, W, H);
-
-    // Fundo do anel
-    ctx.beginPath();
-    ctx.arc(cx, cy, R, 0, Math.PI * 2);
-    ctx.arc(cx, cy, r, 0, Math.PI * 2, true);
-    ctx.fillStyle = '#1a1730';
-    ctx.fill();
-
-    let startAngle = -Math.PI / 2;
-    const gap = 0.04;
-
-    segments.forEach(seg => {
-      if (seg.val <= 0) return;
-      const sweep = (seg.val / total) * Math.PI * 2 * p;
-      if (sweep < 0.01) return;
-
-      // Glow
-      ctx.shadowColor = seg.glow;
-      ctx.shadowBlur  = 14;
-
-      // Segmento
-      ctx.beginPath();
-      ctx.arc(cx, cy, R, startAngle + gap / 2, startAngle + sweep - gap / 2);
-      ctx.arc(cx, cy, r, startAngle + sweep - gap / 2, startAngle + gap / 2, true);
-      ctx.closePath();
-      ctx.fillStyle = seg.color;
-      ctx.fill();
-
-      ctx.shadowBlur = 0;
-      startAngle += sweep;
+    ctx.clearRect(0,0,W,H);
+    ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.arc(cx,cy,r,0,Math.PI*2,true);ctx.fillStyle='#1a1730';ctx.fill();
+    let startAngle=-Math.PI/2; const gap=0.04;
+    segments.forEach(seg=>{
+      if(seg.val<=0)return;
+      const sweep=(seg.val/total)*Math.PI*2*p;
+      if(sweep<0.01)return;
+      ctx.shadowColor=seg.glow; ctx.shadowBlur=14;
+      ctx.beginPath();ctx.arc(cx,cy,R,startAngle+gap/2,startAngle+sweep-gap/2);ctx.arc(cx,cy,r,startAngle+sweep-gap/2,startAngle+gap/2,true);ctx.closePath();ctx.fillStyle=seg.color;ctx.fill();
+      ctx.shadowBlur=0; startAngle+=sweep;
     });
-
-    // Anel interno brilhante
-    ctx.beginPath();
-    ctx.arc(cx, cy, r - 1, 0, Math.PI * 2);
-    ctx.strokeStyle = '#2a2545';
-    ctx.lineWidth = 1;
-    ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy,r-1,0,Math.PI*2);ctx.strokeStyle='#2a2545';ctx.lineWidth=1;ctx.stroke();
   }
-
-  function animate() {
-    progress += 0.038;
-    if (progress >= 1) { progress = 1; draw(1); return; }
-    draw(progress);
-    _donutAnim = requestAnimationFrame(animate);
-  }
+  function animate(){progress+=0.038;if(progress>=1){progress=1;draw(1);return;}draw(progress);_donutAnim=requestAnimationFrame(animate);}
   animate();
-
-  // Legenda e insight cards
-  const pct = v => total > 1 ? Math.round(v / total * 100) : 0;
-
-  // Legenda
-  const elav = document.getElementById('leg-ativas');
-  if (elav) elav.textContent = ativas + ' usuários';
-  const elpr = document.getElementById('leg-restritos');
-  if (elpr) elpr.textContent = restritos + ' usuários';
-  const elte = document.getElementById('leg-testes');
-  if (elte) elte.textContent = testes + ' usuários';
-  const else_ = document.getElementById('leg-sem');
-  if (else_) else_.textContent = semPlano + ' usuários';
-
-  const setpct = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = pct(v) + '%'; };
-  setpct('leg-ativas-pct', ativas);
-  setpct('leg-restritos-pct', restritos);
-  setpct('leg-testes-pct', testes);
-  setpct('leg-sem-pct', semPlano);
-
-  // Centro
-  const dc = document.getElementById('donut-total');
-  if (dc) dc.textContent = usuarios;
-
-  // Insight cards
-  const setins = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-  setins('ins-ativas',    ativas);
-  setins('ins-restritos', restritos);
-  setins('ins-testes',    testes);
-  setins('ins-usuarios',  usuarios);
+  const pct=v=>total>1?Math.round(v/total*100):0;
+  const setleg=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  setleg('leg-ativas',    ativas+' usuários');
+  setleg('leg-restritos', restritos+' usuários');
+  setleg('leg-testes',    testes+' usuários');
+  setleg('leg-sem',       semPlano+' usuários');
+  setleg('leg-ativas-pct',    pct(ativas)+'%');
+  setleg('leg-restritos-pct', pct(restritos)+'%');
+  setleg('leg-testes-pct',    pct(testes)+'%');
+  setleg('leg-sem-pct',       pct(semPlano)+'%');
+  setleg('donut-total', usuarios);
 }
 </script>
 </body>
