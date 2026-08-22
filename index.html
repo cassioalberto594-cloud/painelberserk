@@ -2,238 +2,212 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BERSERK — Admin Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#09080f">
+<title>BERSERK — Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg-base:#09080f;--bg-panel:#0f0d1a;--bg-card:#141127;--bg-card2:#1a1730;--bg-hover:#1f1c38;--border:#2a2545;--border-glow:#6c3fff44;--purple-1:#6c3fff;--purple-2:#8b5cf6;--purple-3:#a78bfa;--purple-glow:#6c3fff33;--green:#22d6a0;--red:#ff4d6d;--yellow:#f59e0b;--blue:#38bdf8;--text-1:#f0eeff;--text-2:#9b8ec4;--text-3:#5c4f8a;--sidebar-w:248px}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1);min-height:100vh;display:flex;overflow-x:hidden}
-#login-screen{position:fixed;inset:0;background:var(--bg-base);z-index:9999;display:flex;align-items:center;justify-content:center}
-.login-box{background:var(--bg-panel);border:1px solid var(--border);border-radius:24px;padding:40px;width:400px;max-width:95vw;box-shadow:0 24px 80px #6c3fff22;text-align:center}
-.login-logo{width:56px;height:56px;background:linear-gradient(135deg,var(--purple-1),var(--purple-2));border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 0 32px var(--purple-glow)}
-.login-title{font-size:26px;font-weight:800;margin-bottom:4px;letter-spacing:2px}
-.login-sub{font-size:12px;color:var(--text-2);margin-bottom:26px;font-family:'JetBrains Mono',monospace;letter-spacing:2px}
-.login-url-label{font-size:11px;color:var(--text-3);margin-bottom:5px;text-align:left;letter-spacing:.5px}
-.login-url-input,.login-input{width:100%;background:var(--bg-base);border:1px solid var(--border);border-radius:12px;padding:12px 16px;color:var(--text-1);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;margin-bottom:10px;transition:border .2s;text-align:left}
-.login-input{font-family:'Syne',sans-serif;text-align:center;letter-spacing:2px}
+:root{
+  --bg-base:#09080f;--bg-panel:#0f0d1a;--bg-card:#141127;--bg-card2:#1a1730;--bg-hover:#1f1c38;
+  --border:#2a2545;--border-glow:#6c3fff44;
+  --purple-1:#6c3fff;--purple-2:#8b5cf6;--purple-3:#a78bfa;--purple-glow:#6c3fff33;
+  --green:#22d6a0;--red:#ff4d6d;--yellow:#f59e0b;--blue:#38bdf8;
+  --text-1:#f0eeff;--text-2:#9b8ec4;--text-3:#5c4f8a;
+  --safe-b:env(safe-area-inset-bottom,0px);--safe-t:env(safe-area-inset-top,0px);
+  --tabbar-h:64px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{overscroll-behavior-y:none}
+body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1);min-height:100vh}
+button,input{font-family:inherit}
+::-webkit-scrollbar{display:none}
+
+/* ============ LOGIN ============ */
+#login-screen{position:fixed;inset:0;background:radial-gradient(ellipse at 50% -10%,#1a1335 0%,var(--bg-base) 60%);z-index:9999;display:flex;flex-direction:column;justify-content:center;padding:28px 22px;padding-bottom:calc(28px + var(--safe-b))}
+.login-logo{width:64px;height:64px;background:linear-gradient(135deg,var(--purple-1),var(--purple-2));border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;box-shadow:0 0 40px var(--purple-glow)}
+.login-title{font-size:30px;font-weight:800;letter-spacing:3px;text-align:center}
+.login-sub{font-size:11px;color:var(--text-3);text-align:center;margin-bottom:36px;font-family:'JetBrains Mono',monospace;letter-spacing:3px}
+.login-url-label{font-size:11px;color:var(--text-3);margin-bottom:6px;letter-spacing:.4px}
+.login-url-input,.login-input{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:15px 16px;color:var(--text-1);font-family:'JetBrains Mono',monospace;font-size:14px;outline:none;margin-bottom:12px;transition:border .2s}
+.login-input{font-family:'Syne',sans-serif;letter-spacing:1px;text-align:center;font-size:16px}
 .login-url-input:focus,.login-input:focus{border-color:var(--purple-1);box-shadow:0 0 0 3px var(--purple-glow)}
-.login-btn{width:100%;background:linear-gradient(135deg,var(--purple-1),var(--purple-2));color:#fff;border:none;border-radius:12px;padding:13px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 20px var(--purple-glow);letter-spacing:1px;margin-top:4px}
-.login-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px #6c3fff55}
-.login-err{color:var(--red);font-size:12px;margin-top:10px;padding:9px 14px;background:#ff4d6d12;border:1px solid #ff4d6d30;border-radius:8px;display:none}
-.ico{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
-.sidebar{width:var(--sidebar-w);min-height:100vh;background:var(--bg-panel);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;padding:24px 0}
-.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:11px}
-.logo-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--purple-1),var(--purple-2));border-radius:11px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 24px var(--purple-glow)}
-.logo-text{font-size:18px;font-weight:800;letter-spacing:2px}
-.logo-sub{font-size:10px;color:var(--text-3);letter-spacing:2.5px;margin-top:2px;font-family:'JetBrains Mono',monospace}
-.sidebar-nav{flex:1;padding:16px 12px;display:flex;flex-direction:column;gap:2px;overflow-y:auto}
-.nav-section-label{font-size:10px;letter-spacing:2px;color:var(--text-3);padding:14px 8px 5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
-.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;cursor:pointer;transition:all .18s;color:var(--text-2);font-size:13px;font-weight:500;position:relative;border:1px solid transparent}
-.nav-item:hover{background:var(--bg-hover);color:var(--text-1)}
-.nav-item.active{background:linear-gradient(135deg,#1e1640,#1a1335);color:var(--purple-3);border-color:var(--border-glow);box-shadow:0 0 16px #6c3fff18}
-.nav-item.active::before{content:'';position:absolute;left:-1px;top:22%;bottom:22%;width:3px;background:var(--purple-2);border-radius:0 3px 3px 0}
-.nav-label{flex:1}
-.nav-badge{background:var(--purple-1);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;min-width:20px;text-align:center;font-family:'JetBrains Mono',monospace}
-.nav-badge.green{background:var(--green);color:#000}
-.nav-badge.red{background:var(--red)}
-.sidebar-footer{padding:14px 16px;border-top:1px solid var(--border)}
-.status-pill{display:flex;align-items:center;gap:9px;background:var(--bg-card);padding:10px 14px;border-radius:10px;border:1px solid var(--border);font-size:12px;color:var(--text-2);cursor:pointer;transition:all .18s}
-.status-pill:hover{background:var(--bg-hover)}
-.status-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
-.status-dot.offline{background:var(--red);animation:none}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #22d6a066}50%{box-shadow:0 0 0 5px #22d6a000}}
-.main{margin-left:var(--sidebar-w);flex:1;display:flex;flex-direction:column;min-height:100vh}
-.topbar{height:62px;background:var(--bg-panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 26px;gap:14px;position:sticky;top:0;z-index:50}
-.breadcrumb{font-size:13px;color:var(--text-3);display:flex;align-items:center;gap:6px}
-.breadcrumb span{color:var(--text-1);font-weight:600}
-.topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px}
-.search-wrap{position:relative;display:flex;align-items:center}
-.search-wrap .ico{position:absolute;left:11px;pointer-events:none}
-.search-bar{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:8px 14px 8px 34px;color:var(--text-1);font-family:'Syne',sans-serif;font-size:13px;width:200px;outline:none;transition:border .2s}
-.search-bar:focus{border-color:var(--purple-1)}
-.search-bar::placeholder{color:var(--text-3)}
-.admin-chip{display:flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:12px}
-.admin-avatar{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--purple-1),var(--purple-3));display:flex;align-items:center;justify-content:center}
-.api-url-chip{font-size:10px;color:var(--text-3);font-family:'JetBrains Mono',monospace;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.content{flex:1;padding:26px;overflow-y:auto}
+.login-btn{width:100%;background:linear-gradient(135deg,var(--purple-1),var(--purple-2));color:#fff;border:none;border-radius:14px;padding:16px;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:1px;box-shadow:0 6px 24px var(--purple-glow);margin-top:6px}
+.login-btn:active{transform:scale(.98)}
+.login-err{color:var(--red);font-size:12.5px;margin-top:12px;padding:11px 14px;background:#ff4d6d12;border:1px solid #ff4d6d30;border-radius:10px;display:none;text-align:center}
+
+/* ============ APP SHELL ============ */
+#app{display:none;flex-direction:column;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:80;background:#0f0d1acc;backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:calc(12px + var(--safe-t)) 16px 12px;display:flex;align-items:center;gap:10px}
+.topbar-logo{width:32px;height:32px;background:linear-gradient(135deg,var(--purple-1),var(--purple-2));border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.topbar-title{font-size:15px;font-weight:800;letter-spacing:1.5px}
+.topbar-page{font-size:10.5px;color:var(--text-3);font-family:'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.icon-btn{width:36px;height:36px;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-2);flex-shrink:0}
+.icon-btn:active{background:var(--bg-hover)}
+.status-dot-sm{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0}
+.status-dot-sm.offline{background:var(--red)}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #22d6a066}50%{box-shadow:0 0 0 4px #22d6a000}}
+.status-dot-sm:not(.offline){animation:pulse 2s infinite}
+
+.search-overlay{position:fixed;top:0;left:0;right:0;z-index:90;background:var(--bg-panel);border-bottom:1px solid var(--border);padding:calc(12px + var(--safe-t)) 16px 12px;display:flex;gap:8px;transform:translateY(-100%);transition:transform .22s ease}
+.search-overlay.open{transform:translateY(0)}
+.search-input{flex:1;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;color:var(--text-1);font-size:14px;outline:none}
+.search-input:focus{border-color:var(--purple-1)}
+
+.content{flex:1;padding:16px;padding-bottom:calc(var(--tabbar-h) + 24px + var(--safe-b))}
 .page{display:none}
-.page.active{display:block;animation:fadeIn .28s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.page-title{font-size:22px;font-weight:800;margin-bottom:4px}
-.page-sub{font-size:13px;color:var(--text-2);margin-bottom:22px}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
-.stats-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
-.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:20px;position:relative;overflow:hidden;transition:all .22s}
-.stat-card:hover{border-color:var(--border-glow);transform:translateY(-2px);box-shadow:0 8px 28px #6c3fff18}
-.stat-card::after{content:'';position:absolute;top:-10px;right:-10px;width:80px;height:80px;border-radius:50%;background:var(--purple-glow);filter:blur(28px);pointer-events:none}
-.stat-card.green::after{background:#22d6a022}
-.stat-card.red::after{background:#ff4d6d22}
-.stat-card.yellow::after{background:#f59e0b22}
-.stat-card.blue::after{background:#38bdf822}
-.stat-icon-wrap{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.page.active{display:block;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.page-title{font-size:20px;font-weight:800;margin-bottom:3px}
+.page-sub{font-size:12.5px;color:var(--text-2);margin-bottom:18px;line-height:1.5}
+.page-sub code{color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px}
+
+/* ============ BOTTOM TAB BAR ============ */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:80;height:calc(var(--tabbar-h) + var(--safe-b));background:#0f0d1aee;backdrop-filter:blur(16px);border-top:1px solid var(--border);display:flex;padding-bottom:var(--safe-b)}
+.tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text-3);position:relative;transition:color .15s}
+.tab-item.active{color:var(--purple-3)}
+.tab-item.active::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:28px;height:2.5px;background:var(--purple-2);border-radius:0 0 3px 3px}
+.tab-label{font-size:10px;font-weight:600;letter-spacing:.2px}
+.tab-dot{position:absolute;top:6px;right:calc(50% - 17px);width:15px;height:15px;border-radius:50%;background:var(--red);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace}
+
+/* ============ STAT CARDS ============ */
+.stat-scroll{display:flex;gap:10px;overflow-x:auto;margin:0 -16px 18px;padding:0 16px 4px;scroll-snap-type:x mandatory}
+.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px;min-width:130px;scroll-snap-align:start;position:relative;overflow:hidden;flex-shrink:0}
+.stat-card::after{content:'';position:absolute;top:-10px;right:-10px;width:60px;height:60px;border-radius:50%;background:var(--purple-glow);filter:blur(22px)}
+.stat-card.green::after{background:#22d6a022}.stat-card.red::after{background:#ff4d6d22}
+.stat-card.yellow::after{background:#f59e0b22}.stat-card.blue::after{background:#38bdf822}
+.stat-icon-wrap{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
 .stat-icon-wrap.purple{background:var(--purple-glow);border:1px solid var(--border-glow)}
 .stat-icon-wrap.green{background:#22d6a018;border:1px solid #22d6a030}
 .stat-icon-wrap.red{background:#ff4d6d18;border:1px solid #ff4d6d30}
 .stat-icon-wrap.yellow{background:#f59e0b18;border:1px solid #f59e0b30}
 .stat-icon-wrap.blue{background:#38bdf818;border:1px solid #38bdf830}
-.stat-value{font-size:30px;font-weight:800;line-height:1;margin-bottom:4px}
-.stat-label{font-size:11.5px;color:var(--text-2);letter-spacing:.4px}
-.stat-change{font-size:11px;margin-top:8px;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:4px}
-.stat-change.up{color:var(--green)}
-.stat-change.neutral{color:var(--text-3)}
-.sales-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
-.sales-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden;transition:all .22s}
-.sales-card:hover{border-color:var(--border-glow);transform:translateY(-2px)}
-.sales-label{font-size:10px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.sales-value{font-size:26px;font-weight:800;line-height:1}
-.sales-revenue{font-size:13px;color:var(--green);font-family:'JetBrains Mono',monospace;margin-top:5px;font-weight:600}
-.sales-bar{height:3px;background:var(--bg-base);border-radius:10px;margin-top:12px;overflow:hidden}
-.sales-bar-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--purple-1),var(--purple-3));transition:width .8s ease}
-.two-col{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-bottom:18px}
-.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
-.card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:18px}
-.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.card-title{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
-.card-action{font-size:12px;color:var(--purple-3);cursor:pointer;background:var(--purple-glow);border:1px solid var(--border-glow);padding:4px 10px;border-radius:6px;transition:all .2s;display:flex;align-items:center;gap:5px}
-.card-action:hover{background:var(--purple-1);color:#fff}
-.data-table{width:100%;border-collapse:collapse}
-.data-table th{text-align:left;font-size:10px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;padding:0 12px 11px;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace}
-.data-table td{padding:11px 12px;font-size:13px;border-bottom:1px solid #1a1730}
-.data-table tr:last-child td{border-bottom:none}
-.data-table tr:hover td{background:var(--bg-hover)}
-.mono{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--purple-3)}
-.badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
+.stat-value{font-size:24px;font-weight:800;line-height:1;margin-bottom:3px}
+.stat-label{font-size:11px;color:var(--text-2);line-height:1.3}
+
+/* ============ CARDS / SECTIONS ============ */
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:14px}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px}
+.card-title{font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:7px}
+.refresh-btn{background:var(--bg-card2);border:1px solid var(--border);border-radius:9px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--text-2);flex-shrink:0}
+.refresh-btn:active{background:var(--bg-hover)}
+
+/* ============ ROW CARDS (replaces desktop tables) ============ */
+.row-list{display:flex;flex-direction:column;gap:9px}
+.row-card{background:var(--bg-base);border:1px solid var(--border);border-radius:14px;padding:13px 14px}
+.row-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.row-id{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--purple-3);font-weight:600}
+.row-uname{font-size:11.5px;color:var(--text-2)}
+.row-meta{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;color:var(--text-3);margin-bottom:10px}
+.row-meta b{color:var(--text-2);font-weight:600}
+.row-actions{display:flex;gap:8px}
+.empty-state{text-align:center;padding:36px 20px;color:var(--text-3);font-size:13px}
+.empty-state svg{margin-bottom:10px;opacity:.5}
+.loading-state{display:flex;align-items:center;gap:9px;justify-content:center;padding:30px;color:var(--text-3);font-size:13px}
+
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.2px}
 .badge-dot{width:5px;height:5px;border-radius:50%}
 .badge.green{background:#22d6a018;color:var(--green)}.badge.green .badge-dot{background:var(--green)}
 .badge.red{background:#ff4d6d18;color:var(--red)}.badge.red .badge-dot{background:var(--red)}
 .badge.yellow{background:#f59e0b18;color:var(--yellow)}.badge.yellow .badge-dot{background:var(--yellow)}
 .badge.purple{background:var(--purple-glow);color:var(--purple-3)}.badge.purple .badge-dot{background:var(--purple-2)}
-.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 17px;border-radius:10px;border:none;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .18s}
-.btn-primary{background:linear-gradient(135deg,var(--purple-1),var(--purple-2));color:#fff;box-shadow:0 4px 16px var(--purple-glow)}
-.btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 24px #6c3fff44}
+
+/* ============ BUTTONS ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 18px;border-radius:12px;border:none;font-size:13.5px;font-weight:700;cursor:pointer;min-height:44px}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:linear-gradient(135deg,var(--purple-1),var(--purple-2));color:#fff;box-shadow:0 4px 18px var(--purple-glow)}
 .btn-ghost{background:var(--bg-card2);color:var(--text-2);border:1px solid var(--border)}
-.btn-ghost:hover{background:var(--bg-hover);color:var(--text-1)}
 .btn-danger{background:#ff4d6d18;color:var(--red);border:1px solid #ff4d6d30}
-.btn-danger:hover{background:#ff4d6d28}
 .btn-success{background:#22d6a018;color:var(--green);border:1px solid #22d6a030}
-.btn-success:hover{background:#22d6a028}
-.btn-sm{padding:5px 11px;font-size:12px;border-radius:7px}
-.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-block{width:100%}
+.btn-sm{padding:8px 13px;font-size:12px;min-height:36px;border-radius:9px}
+.btn:disabled{opacity:.5}
+.btn-row{display:flex;gap:9px}
+.btn-row .btn{flex:1}
+
+/* ============ INPUTS ============ */
 .input-group{margin-bottom:14px}
-.input-label{font-size:11.5px;color:var(--text-2);margin-bottom:6px;letter-spacing:.4px;display:flex;align-items:center;gap:5px}
-.input-field{width:100%;background:var(--bg-base);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text-1);font-family:'Syne',sans-serif;font-size:13px;outline:none;transition:border .2s}
+.input-label{font-size:11.5px;color:var(--text-2);margin-bottom:7px;display:flex;align-items:center;gap:5px;font-weight:600}
+.input-field{width:100%;background:var(--bg-base);border:1px solid var(--border);border-radius:12px;padding:13px 15px;color:var(--text-1);font-size:15px;outline:none}
 .input-field:focus{border-color:var(--purple-1)}
 .input-field::placeholder{color:var(--text-3)}
-.modal-overlay{position:fixed;inset:0;background:#09080fcc;backdrop-filter:blur(6px);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .22s}
-.modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:var(--bg-panel);border:1px solid var(--border);border-radius:20px;padding:26px;width:440px;max-width:95vw;transform:scale(.95);transition:transform .22s;box-shadow:0 24px 80px #6c3fff22}
-.modal-overlay.open .modal{transform:scale(1)}
-.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.modal-title{font-size:16px;font-weight:800;display:flex;align-items:center;gap:8px}
-.modal-close{width:30px;height:30px;border-radius:8px;background:var(--bg-card2);border:1px solid var(--border);cursor:pointer;color:var(--text-2);display:flex;align-items:center;justify-content:center}
-.modal-close:hover{background:var(--bg-hover);color:var(--text-1)}
-.modal-footer{display:flex;gap:9px;margin-top:18px;justify-content:flex-end}
-.progress-bar{height:5px;background:var(--bg-base);border-radius:10px;overflow:hidden}
+.chip-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.chip{background:var(--bg-card2);border:1px solid var(--border);border-radius:10px;padding:9px 13px;font-size:12.5px;color:var(--text-2)}
+.chip.selected{background:var(--purple-glow);border-color:var(--border-glow);color:var(--purple-3);font-weight:700}
+.info-box{background:var(--bg-base);border:1px solid var(--border);border-radius:12px;padding:13px 14px;font-size:12px;color:var(--text-2);display:flex;gap:9px;align-items:flex-start;margin-bottom:14px;line-height:1.5}
+.info-box code{color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px}
+
+/* ============ PLANOS GRID ============ */
+.planos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px}
+.plano-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px 12px;text-align:center}
+.plano-emoji{font-size:24px;margin-bottom:7px}
+.plano-nome{font-size:12.5px;font-weight:700;margin-bottom:4px}
+.plano-valor{font-size:17px;font-weight:800;color:var(--purple-3)}
+.plano-comissao{font-size:10.5px;color:var(--green);margin-top:4px;font-family:'JetBrains Mono',monospace}
+
+/* ============ DONUT ============ */
+.donut-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:14px;position:relative;overflow:hidden}
+.donut-card::before{content:'';position:absolute;top:-50px;right:-50px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,#6c3fff22 0%,transparent 70%)}
+.donut-flex{display:flex;flex-direction:column;align-items:center;gap:18px}
+.donut-canvas-wrap{position:relative;width:170px;height:170px}
+#donut-chart{display:block;filter:drop-shadow(0 0 16px #6c3fff44)}
+.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.donut-center-value{font-size:26px;font-weight:800;line-height:1;background:linear-gradient(135deg,#f0eeff,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.donut-center-label{font-size:10px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-top:3px}
+.donut-legend{width:100%;display:flex;flex-direction:column;gap:9px}
+.legend-item{display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:12px;background:var(--bg-base);border:1px solid var(--border)}
+.legend-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.legend-info{flex:1;min-width:0}
+.legend-name{font-size:11.5px;font-weight:600;margin-bottom:1px}
+.legend-val{font-size:10.5px;color:var(--text-3);font-family:'JetBrains Mono',monospace}
+.legend-pct{font-size:13px;font-weight:800;font-family:'JetBrains Mono',monospace;flex-shrink:0}
+
+.progress-bar{height:5px;background:var(--bg-card2);border-radius:10px;overflow:hidden}
 .progress-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--purple-1),var(--purple-3));transition:width .6s ease}
 .progress-fill.green{background:linear-gradient(90deg,#22d6a0,#38bdf8)}
-.progress-fill.red{background:var(--red)}
-.toast-container{position:fixed;bottom:22px;right:22px;z-index:999;display:flex;flex-direction:column;gap:8px}
-.toast{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:13px 17px;min-width:270px;display:flex;align-items:center;gap:10px;animation:slideIn .28s ease;font-size:13px;box-shadow:0 8px 32px #00000066}
-.toast.success{border-color:#22d6a040}
-.toast.error{border-color:#ff4d6d40}
-.toast.info{border-color:#38bdf840}
-@keyframes slideIn{from{transform:translateX(36px);opacity:0}to{transform:none;opacity:1}}
-.chip{display:inline-flex;align-items:center;gap:6px;background:var(--bg-card2);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--text-2);cursor:pointer;transition:all .18s;margin:3px}
-.chip.selected{background:var(--purple-glow);border-color:var(--border-glow);color:var(--purple-3)}
-.expiry-item{margin-bottom:13px}
-.expiry-header{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
-.expiry-id{font-family:'JetBrains Mono',monospace;color:var(--purple-3);font-size:11px}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-.spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--purple-2);border-radius:50%;animation:spin .7s linear infinite}
+
+/* ============ MAIS (grid menu sheet) ============ */
+.mais-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mais-item{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:18px 8px;display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center}
+.mais-item:active{background:var(--bg-hover)}
+.mais-icon{width:42px;height:42px;border-radius:12px;background:var(--purple-glow);border:1px solid var(--border-glow);display:flex;align-items:center;justify-content:center;color:var(--purple-3)}
+.mais-label{font-size:11.5px;font-weight:600;line-height:1.3}
+
+/* ============ BOTTOM SHEET MODALS ============ */
+.sheet-overlay{position:fixed;inset:0;background:#09080fcc;backdrop-filter:blur(4px);z-index:200;opacity:0;pointer-events:none;transition:opacity .22s}
+.sheet-overlay.open{opacity:1;pointer-events:all}
+.sheet{position:fixed;left:0;right:0;bottom:0;background:var(--bg-panel);border:1px solid var(--border);border-bottom:none;border-radius:22px 22px 0 0;padding:10px 20px calc(22px + var(--safe-b));transform:translateY(100%);transition:transform .28s cubic-bezier(.32,.72,0,1);max-height:85vh;overflow-y:auto}
+.sheet-overlay.open .sheet{transform:translateY(0)}
+.sheet-handle{width:36px;height:4px;border-radius:3px;background:var(--border);margin:0 auto 16px}
+.sheet-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.sheet-title{font-size:16px;font-weight:800;display:flex;align-items:center;gap:8px}
+.sheet-close{width:32px;height:32px;border-radius:9px;background:var(--bg-card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-2)}
+
+.toast-container{position:fixed;top:calc(12px + var(--safe-t));left:16px;right:16px;z-index:999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{background:var(--bg-card);border:1px solid var(--border);border-radius:13px;padding:13px 16px;display:flex;align-items:center;gap:10px;animation:slideDown .28s ease;font-size:13px;box-shadow:0 8px 28px #00000066}
+.toast.success{border-color:#22d6a040}.toast.error{border-color:#ff4d6d40}.toast.info{border-color:#38bdf840}
+@keyframes slideDown{from{transform:translateY(-16px);opacity:0}to{transform:none;opacity:1}}
+
+.spinner{display:inline-block;width:15px;height:15px;border:2px solid var(--border);border-top-color:var(--purple-2);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
-.loading-row td,.empty-row td{text-align:center;padding:28px;color:var(--text-3)}
-.refresh-btn{background:var(--bg-card2);border:1px solid var(--border);border-radius:8px;padding:6px 10px;color:var(--text-2);cursor:pointer;font-size:12px;display:flex;align-items:center;gap:5px;transition:all .18s}
-.refresh-btn:hover{background:var(--bg-hover);color:var(--text-1)}
-.info-box{background:var(--bg-base);border:1px solid var(--border);border-radius:10px;padding:14px 16px;font-size:12px;color:var(--text-2);display:flex;gap:9px;align-items:flex-start;margin-bottom:14px}
-/* planos grid */
-.planos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
-.plano-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:16px;text-align:center;transition:all .2s}
-.plano-card:hover{border-color:var(--border-glow);transform:translateY(-2px)}
-.plano-emoji{font-size:22px;margin-bottom:6px}
-.plano-nome{font-size:13px;font-weight:700;margin-bottom:4px}
-.plano-valor{font-size:18px;font-weight:800;color:var(--purple-3)}
-.plano-comissao{font-size:11px;color:var(--green);margin-top:3px;font-family:'JetBrains Mono',monospace}
-/* donut */
-.donut-section{display:grid;grid-template-columns:1fr 260px;gap:18px;margin-bottom:20px}
-.donut-card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:22px;position:relative;overflow:hidden}
-.donut-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,#6c3fff22 0%,transparent 70%);pointer-events:none}
-.donut-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.donut-card-title{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--text-1)}
-.donut-wrap{display:flex;align-items:center;gap:32px}
-.donut-canvas-wrap{position:relative;width:200px;height:200px;flex-shrink:0}
-#donut-chart{display:block;filter:drop-shadow(0 0 18px #6c3fff44)}
-.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
-.donut-center-value{font-size:28px;font-weight:800;line-height:1;background:linear-gradient(135deg,#f0eeff,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.donut-center-label{font-size:11px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-top:3px}
-.donut-legend{display:flex;flex-direction:column;gap:14px;flex:1}
-.legend-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;background:var(--bg-base);border:1px solid var(--border);transition:all .2s;cursor:default}
-.legend-item:hover{border-color:var(--border-glow);background:var(--bg-hover)}
-.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.legend-info{flex:1}
-.legend-name{font-size:12px;font-weight:600;color:var(--text-1);margin-bottom:2px}
-.legend-val{font-size:11px;color:var(--text-3);font-family:'JetBrains Mono',monospace}
-.legend-pct{font-size:13px;font-weight:800;font-family:'JetBrains Mono',monospace}
-.donut-insights{display:flex;flex-direction:column;gap:10px}
-.insight-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;transition:all .22s}
-.insight-card:hover{transform:translateX(3px)}
-.insight-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.insight-purple .insight-icon{background:#6c3fff18;border:1px solid #6c3fff33}
-.insight-red    .insight-icon{background:#ff4d6d18;border:1px solid #ff4d6d33}
-.insight-green  .insight-icon{background:#22d6a018;border:1px solid #22d6a033}
-.insight-blue   .insight-icon{background:#38bdf818;border:1px solid #38bdf833}
-.insight-body{flex:1;min-width:0}
-.insight-value{font-size:22px;font-weight:800;line-height:1}
-.insight-purple .insight-value{color:#a78bfa}
-.insight-red    .insight-value{color:#ff4d6d}
-.insight-green  .insight-value{color:#22d6a0}
-.insight-blue   .insight-value{color:#38bdf8}
-.insight-label{font-size:11px;color:var(--text-2);margin-top:2px;font-weight:600}
-.insight-sub{font-size:10px;color:var(--text-3);margin-top:1px;font-family:'JetBrains Mono',monospace}
-.insight-ring{position:absolute;right:-18px;top:50%;transform:translateY(-50%);width:58px;height:58px;border-radius:50%;opacity:.12}
-.insight-purple .insight-ring{background:radial-gradient(circle,#6c3fff,transparent)}
-.insight-red    .insight-ring{background:radial-gradient(circle,#ff4d6d,transparent)}
-.insight-green  .insight-ring{background:radial-gradient(circle,#22d6a0,transparent)}
-.insight-blue   .insight-ring{background:radial-gradient(circle,#38bdf8,transparent)}
-@media(max-width:1100px){.donut-section{grid-template-columns:1fr}.donut-insights{flex-direction:row;flex-wrap:wrap}.insight-card{flex:1;min-width:120px}.planos-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:700px){.donut-wrap{flex-direction:column;align-items:center}.planos-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:1280px){.sales-row{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}}
-@media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)}.three-col{grid-template-columns:1fr 1fr}}
+.ico{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
 </style>
 </head>
 <body>
 
 <!-- LOGIN -->
 <div id="login-screen">
-  <div class="login-box">
-    <div class="login-logo">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2l7 7-13 13-3-1-1-3 13-13z"/><path d="M3.5 20.5l2-2"/><path d="M18 8l-2 2"/></svg>
-    </div>
-    <div class="login-title">BERSERK</div>
-    <div class="login-sub">ADMIN PANEL v2.0</div>
-    <div style="margin-bottom:10px">
-      <div class="login-url-label">URL DA API (ex: https://berserk-oficial.squareweb.app)</div>
-      <input class="login-url-input" id="api-url-input" type="text" placeholder="https://berserk-oficial.squareweb.app">
-    </div>
-    <input class="login-input" id="login-senha" type="password" placeholder="Senha do painel" onkeydown="if(event.key==='Enter')fazerLogin()">
-    <button class="login-btn" onclick="fazerLogin()" id="login-btn">ENTRAR</button>
-    <div class="login-err" id="login-err">Senha ou URL incorreta. Verifique e tente novamente.</div>
-  </div>
+  <div class="login-logo"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2l7 7-13 13-3-1-1-3 13-13z"/><path d="M3.5 20.5l2-2"/><path d="M18 8l-2 2"/></svg></div>
+  <div class="login-title">BERSERK</div>
+  <div class="login-sub">ADMIN · MOBILE</div>
+  <div class="login-url-label">URL DA API</div>
+  <input class="login-url-input" id="api-url-input" type="text" placeholder="https://berserk-oficial.squareweb.app" autocapitalize="off" autocorrect="off">
+  <input class="login-input" id="login-senha" type="password" placeholder="Senha do painel">
+  <button class="login-btn" onclick="fazerLogin()" id="login-btn">ENTRAR</button>
+  <div class="login-err" id="login-err">Senha ou URL incorreta. Verifique e tente novamente.</div>
 </div>
 
-<!-- ICONS SVG -->
+<!-- ICONS -->
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
 <symbol id="ic-sword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2l7 7-13 13-3-1-1-3 13-13z"/><path d="M3.5 20.5l2-2"/><path d="M18 8l-2 2"/></symbol>
 <symbol id="ic-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
@@ -251,92 +225,35 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 <symbol id="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
 <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
 <symbol id="ic-dollar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></symbol>
-<symbol id="ic-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
 <symbol id="ic-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
-<symbol id="ic-bar-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
 <symbol id="ic-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
 <symbol id="ic-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-2"/><rect x="6" y="18" width="12" height="4"/></symbol>
 <symbol id="ic-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
 <symbol id="ic-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
 <symbol id="ic-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
-<symbol id="ic-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
 <symbol id="ic-pie" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></symbol>
+<symbol id="ic-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></symbol>
+<symbol id="ic-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
 </svg>
 
-<!-- SIDEBAR -->
-<aside class="sidebar" id="sidebar" style="display:none">
-  <div class="sidebar-logo">
-    <div class="logo-icon"><svg width="22" height="22" color="#fff"><use href="#ic-sword"/></svg></div>
-    <div><div class="logo-text">BERSERK</div><div class="logo-sub">ADMIN PANEL</div></div>
-  </div>
-  <nav class="sidebar-nav">
-    <div class="nav-section-label">Principal</div>
-    <div class="nav-item active" onclick="showPage('dashboard',this)">
-      <svg width="16" height="16" class="ico"><use href="#ic-dashboard"/></svg><span class="nav-label">Dashboard</span>
-    </div>
-    <div class="nav-item" onclick="showPage('planos',this)">
-      <svg width="16" height="16" class="ico"><use href="#ic-tag"/></svg><span class="nav-label">Planos</span>
-    </div>
-    <div class="nav-item" onclick="showPage('assinaturas',this)">
-      <svg width="16" height="16" class="ico"><use href="#ic-diamond"/></svg><span class="nav-label">Assinaturas</span>
-      <span class="nav-badge" id="badge-ativas">0</span>
-    </div>
-    <div class="nav-item" onclick="showPage('restritos',this)">
-      <svg width="16" height="16" class="ico"><use href="#ic-mute"/></svg><span class="nav-label">Restritos</span>
-      <span class="nav-badge red" id="badge-restritos">0</span>
-    </div>
-    <div class="nav-item" onclick="showPage('testes',this)">
-      <svg width="16" height="16" class="ico"><use href="#ic-gift"/></svg><span class="nav-label">Testes Grátis</span>
-      <span class="nav-badge green" id="badge-testes">0</span>
-    </div>
-    <div class="nav-section-label">Ferramentas</div>
-    <div class="nav-item" onclick="showPage('liberar',this)">
-      <svg width="16" height="16" class="ico"><use href="#ic-unlock"/></svg><span class="nav-label">Liberar Usuário</span>
-    </div>
-    <div class="nav-item" onclick="showPage('afiliados',this)">
-      <svg width="16" height="16" class="ico"><use href="#ic-users"/></svg><span class="nav-label">Afiliados</span>
-    </div>
-    <div class="nav-item" onclick="showPage('expirar',this)">
-      <svg width="16" height="16" class="ico"><use href="#ic-clock"/></svg><span class="nav-label">A Expirar</span>
-    </div>
-    <div class="nav-section-label">Sistema</div>
-    <div class="nav-item" onclick="showPage('backup',this)">
-      <svg width="16" height="16" class="ico"><use href="#ic-save"/></svg><span class="nav-label">Backup</span>
-    </div>
-  </nav>
-  <div class="sidebar-footer">
-    <div class="status-pill" onclick="recarregarTudo()">
-      <div class="status-dot" id="status-dot"></div>
-      <div>
-        <div style="font-weight:700;font-size:12px" id="status-text">Conectando...</div>
-        <div style="font-size:10px;color:var(--text-3)">Clique para atualizar</div>
-      </div>
-      <svg width="13" height="13" style="margin-left:auto;color:var(--text-3)"><use href="#ic-refresh"/></svg>
-    </div>
-  </div>
-</aside>
-
-<!-- MAIN -->
-<main class="main" id="main-content" style="display:none">
+<!-- APP -->
+<div id="app">
   <div class="topbar">
-    <svg width="14" height="14" color="var(--text-3)"><use href="#ic-dashboard"/></svg>
-    <div class="breadcrumb">BERSERK <span style="color:var(--text-3);margin:0 2px">›</span> <span id="breadcrumb-text">Dashboard</span></div>
-    <div class="topbar-right">
-      <div class="search-wrap">
-        <svg width="14" height="14" color="var(--text-3)" class="ico"><use href="#ic-search"/></svg>
-        <input class="search-bar" type="text" placeholder="Buscar por ID..." id="global-search" onkeydown="if(event.key==='Enter')globalSearch()">
-      </div>
-      <div class="admin-chip">
-        <div class="admin-avatar"><svg width="14" height="14" color="#fff"><use href="#ic-user"/></svg></div>
-        <div>
-          <div style="font-size:12px;font-weight:700">Admin</div>
-          <div class="api-url-chip" id="api-url-show"></div>
-        </div>
-      </div>
-      <button class="btn btn-ghost btn-sm" onclick="logout()" title="Sair">
-        <svg width="14" height="14"><use href="#ic-logout"/></svg>
-      </button>
+    <div class="topbar-logo"><svg width="17" height="17" color="#fff"><use href="#ic-sword"/></svg></div>
+    <div>
+      <div class="topbar-title">BERSERK</div>
+      <div class="topbar-page" id="topbar-page">Dashboard</div>
     </div>
+    <div class="topbar-right">
+      <div class="icon-btn" onclick="toggleSearch()"><svg width="16" height="16"><use href="#ic-search"/></svg></div>
+      <div class="icon-btn" onclick="recarregarTudo()"><div class="status-dot-sm" id="status-dot"></div></div>
+      <div class="icon-btn" onclick="logout()"><svg width="15" height="15"><use href="#ic-logout"/></svg></div>
+    </div>
+  </div>
+
+  <div class="search-overlay" id="search-overlay">
+    <input class="search-input" id="global-search" placeholder="Buscar por ID do usuário..." autofocus>
+    <div class="icon-btn" onclick="toggleSearch()"><svg width="15" height="15"><use href="#ic-x"/></svg></div>
   </div>
 
   <div class="content">
@@ -345,111 +262,48 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
     <div class="page active" id="page-dashboard">
       <div class="page-title">Dashboard</div>
       <div class="page-sub" id="dash-date">Carregando...</div>
-      <div class="donut-section">
-        <div class="donut-card">
-          <div class="donut-card-header">
-            <div class="donut-card-title">
-              <svg width="15" height="15" color="var(--purple-3)"><use href="#ic-pie"/></svg>
-              Distribuição de Usuários
-            </div>
-            <button class="refresh-btn" onclick="recarregarTudo()">
-              <svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar
-            </button>
-          </div>
-          <div class="donut-wrap">
-            <div class="donut-canvas-wrap">
-              <canvas id="donut-chart" width="200" height="200"></canvas>
-              <div class="donut-center">
-                <div class="donut-center-value" id="donut-total">—</div>
-                <div class="donut-center-label">Total</div>
-              </div>
-            </div>
-            <div class="donut-legend">
-              <div class="legend-item">
-                <div class="legend-dot" style="background:#8b5cf6;box-shadow:0 0 8px #8b5cf688"></div>
-                <div class="legend-info"><div class="legend-name">Assinantes Ativos</div><div class="legend-val" id="leg-ativas">—</div></div>
-                <div class="legend-pct" id="leg-ativas-pct" style="color:#a78bfa">—%</div>
-              </div>
-              <div class="legend-item">
-                <div class="legend-dot" style="background:#ff4d6d;box-shadow:0 0 8px #ff4d6d88"></div>
-                <div class="legend-info"><div class="legend-name">Restritos</div><div class="legend-val" id="leg-restritos">—</div></div>
-                <div class="legend-pct" id="leg-restritos-pct" style="color:#ff4d6d">—%</div>
-              </div>
-              <div class="legend-item">
-                <div class="legend-dot" style="background:#22d6a0;box-shadow:0 0 8px #22d6a088"></div>
-                <div class="legend-info"><div class="legend-name">Testes Grátis</div><div class="legend-val" id="leg-testes">—</div></div>
-                <div class="legend-pct" id="leg-testes-pct" style="color:#22d6a0">—%</div>
-              </div>
-              <div class="legend-item">
-                <div class="legend-dot" style="background:#38bdf8;box-shadow:0 0 8px #38bdf888"></div>
-                <div class="legend-info"><div class="legend-name">Sem Plano</div><div class="legend-val" id="leg-sem">—</div></div>
-                <div class="legend-pct" id="leg-sem-pct" style="color:#38bdf8">—%</div>
-              </div>
-            </div>
-          </div>
+
+      <div class="donut-card">
+        <div class="card-header">
+          <div class="card-title"><svg width="14" height="14" color="var(--purple-3)"><use href="#ic-pie"/></svg>Distribuição</div>
+          <button class="refresh-btn" onclick="recarregarTudo()"><svg width="13" height="13"><use href="#ic-refresh"/></svg></button>
         </div>
-        <div class="donut-insights">
-          <div class="insight-card insight-purple">
-            <div class="insight-icon"><svg width="18" height="18" color="#a78bfa"><use href="#ic-diamond"/></svg></div>
-            <div class="insight-body">
-              <div class="insight-value" id="ins-ativas">—</div>
-              <div class="insight-label">Assinantes Ativos</div>
-              <div class="insight-sub" id="ins-mrr">Receita: —</div>
-            </div>
-            <div class="insight-ring"></div>
+        <div class="donut-flex">
+          <div class="donut-canvas-wrap">
+            <canvas id="donut-chart" width="170" height="170"></canvas>
+            <div class="donut-center"><div class="donut-center-value" id="donut-total">—</div><div class="donut-center-label">Total</div></div>
           </div>
-          <div class="insight-card insight-red">
-            <div class="insight-icon"><svg width="18" height="18" color="#ff4d6d"><use href="#ic-mute"/></svg></div>
-            <div class="insight-body">
-              <div class="insight-value" id="ins-restritos">—</div>
-              <div class="insight-label">Usuários Restritos</div>
-              <div class="insight-sub">Sem acesso ao grupo</div>
-            </div>
-            <div class="insight-ring"></div>
-          </div>
-          <div class="insight-card insight-green">
-            <div class="insight-icon"><svg width="18" height="18" color="#22d6a0"><use href="#ic-gift"/></svg></div>
-            <div class="insight-body">
-              <div class="insight-value" id="ins-testes">—</div>
-              <div class="insight-label">Testes Grátis</div>
-              <div class="insight-sub">Trial de 3 dias</div>
-            </div>
-            <div class="insight-ring"></div>
-          </div>
-          <div class="insight-card insight-blue">
-            <div class="insight-icon"><svg width="18" height="18" color="#38bdf8"><use href="#ic-users"/></svg></div>
-            <div class="insight-body">
-              <div class="insight-value" id="ins-usuarios">—</div>
-              <div class="insight-label">Total no Bot</div>
-              <div class="insight-sub">Usuários registrados</div>
-            </div>
-            <div class="insight-ring"></div>
+          <div class="donut-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6;box-shadow:0 0 8px #8b5cf688"></div><div class="legend-info"><div class="legend-name">Ativos</div><div class="legend-val" id="leg-ativas">—</div></div><div class="legend-pct" style="color:#a78bfa" id="leg-ativas-pct">—%</div></div>
+            <div class="legend-item"><div class="legend-dot" style="background:#ff4d6d;box-shadow:0 0 8px #ff4d6d88"></div><div class="legend-info"><div class="legend-name">Restritos</div><div class="legend-val" id="leg-restritos">—</div></div><div class="legend-pct" style="color:#ff4d6d" id="leg-restritos-pct">—%</div></div>
+            <div class="legend-item"><div class="legend-dot" style="background:#22d6a0;box-shadow:0 0 8px #22d6a088"></div><div class="legend-info"><div class="legend-name">Testes</div><div class="legend-val" id="leg-testes">—</div></div><div class="legend-pct" style="color:#22d6a0" id="leg-testes-pct">—%</div></div>
+            <div class="legend-item"><div class="legend-dot" style="background:#38bdf8;box-shadow:0 0 8px #38bdf888"></div><div class="legend-info"><div class="legend-name">Sem plano</div><div class="legend-val" id="leg-sem">—</div></div><div class="legend-pct" style="color:#38bdf8" id="leg-sem-pct">—%</div></div>
           </div>
         </div>
       </div>
-      <div class="two-col">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title"><svg width="14" height="14" color="var(--yellow)"><use href="#ic-clock"/></svg>Próximos a Expirar (7 dias)</div>
-            <button class="refresh-btn" onclick="carregarAssinaturas()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
-          </div>
-          <div id="dash-expirar"><div style="color:var(--text-3);font-size:13px;display:flex;align-items:center;gap:8px"><div class="spinner"></div> Carregando...</div></div>
+
+      <div class="stat-scroll">
+        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-diamond"/></svg></div><div class="stat-value" id="ins-ativas">—</div><div class="stat-label">Assinantes ativos</div></div>
+        <div class="stat-card red"><div class="stat-icon-wrap red"><svg width="16" height="16" color="var(--red)"><use href="#ic-mute"/></svg></div><div class="stat-value" id="ins-restritos">—</div><div class="stat-label">Restritos</div></div>
+        <div class="stat-card green"><div class="stat-icon-wrap green"><svg width="16" height="16" color="var(--green)"><use href="#ic-gift"/></svg></div><div class="stat-value" id="ins-testes">—</div><div class="stat-label">Testes grátis</div></div>
+        <div class="stat-card blue"><div class="stat-icon-wrap blue"><svg width="16" height="16" color="var(--blue)"><use href="#ic-users"/></svg></div><div class="stat-value" id="ins-usuarios">—</div><div class="stat-label">Total no bot</div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><svg width="14" height="14" color="var(--yellow)"><use href="#ic-clock"/></svg>A expirar (7 dias)</div>
+          <button class="refresh-btn" onclick="carregarAssinaturas()"><svg width="13" height="13"><use href="#ic-refresh"/></svg></button>
         </div>
-        <div class="card">
-          <div class="card-title" style="margin-bottom:15px"><svg width="14" height="14" color="var(--purple-3)"><use href="#ic-zap"/></svg>Ações Rápidas</div>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="showPage('liberar',null)">
-              <svg width="14" height="14"><use href="#ic-unlock"/></svg> Liberar Usuário
-            </button>
-            <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openModal('modal-cancelar')">
-              <svg width="14" height="14"><use href="#ic-x"/></svg> Cancelar Assinatura
-            </button>
-            <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openModal('modal-estender')">
-              <svg width="14" height="14"><use href="#ic-plus"/></svg> Estender Todos
-            </button>
-            <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openModal('modal-desrest')">
-              <svg width="14" height="14"><use href="#ic-unlock"/></svg> Desrestringir
-            </button>
+        <div id="dash-expirar" class="row-list"><div class="loading-state"><div class="spinner"></div>Carregando...</div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom:13px"><svg width="14" height="14" color="var(--purple-3)"><use href="#ic-zap"/></svg>Ações rápidas</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <button class="btn btn-primary btn-block" onclick="goTab('liberar')"><svg width="14" height="14"><use href="#ic-unlock"/></svg>Liberar usuário</button>
+          <div class="btn-row">
+            <button class="btn btn-ghost" onclick="openSheet('sheet-cancelar')"><svg width="13" height="13"><use href="#ic-x"/></svg>Cancelar</button>
+            <button class="btn btn-ghost" onclick="openSheet('sheet-estender')"><svg width="13" height="13"><use href="#ic-plus"/></svg>Estender</button>
           </div>
         </div>
       </div>
@@ -457,97 +311,57 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
 
     <!-- PLANOS -->
     <div class="page" id="page-planos">
-      <div class="page-title">Planos Disponíveis</div>
-      <div class="page-sub">Tabela de preços e comissões do programa de afiliados (50% por venda)</div>
-      <div class="planos-grid" id="planos-grid">
-        <!-- preenchido por JS -->
-      </div>
+      <div class="page-title">Planos</div>
+      <div class="page-sub">Tabela de preços e comissões (50% por venda)</div>
+      <div class="planos-grid" id="planos-grid"></div>
       <div class="card">
-        <div class="card-title" style="margin-bottom:16px"><svg width="14" height="14" color="var(--purple-3)"><use href="#ic-dollar"/></svg>Resumo de Comissões</div>
-        <table class="data-table">
-          <thead><tr><th>Plano</th><th>Valor</th><th>Comissão (50%)</th><th>Seu Lucro</th></tr></thead>
-          <tbody id="planos-table">
-            <tr class="loading-row"><td colspan="4"><div class="spinner"></div> Carregando...</td></tr>
-          </tbody>
-        </table>
+        <div class="card-title" style="margin-bottom:12px"><svg width="14" height="14" color="var(--purple-3)"><use href="#ic-dollar"/></svg>Resumo de comissões</div>
+        <div class="row-list" id="planos-list"></div>
       </div>
     </div>
 
     <!-- ASSINATURAS -->
     <div class="page" id="page-assinaturas">
       <div class="page-title">Assinaturas</div>
-      <div class="page-sub">Gerencie todos os planos — endpoint <code style="color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px">/api/assinaturas</code></div>
-      <div class="stats-grid-3">
-        <div class="stat-card">
-          <div class="stat-icon-wrap green"><svg width="18" height="18" color="var(--green)"><use href="#ic-check"/></svg></div>
-          <div class="stat-value" id="sub-ativas">—</div>
-          <div class="stat-label">Ativas agora</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon-wrap purple"><svg width="18" height="18" color="var(--purple-3)"><use href="#ic-bar-chart"/></svg></div>
-          <div class="stat-value" id="sub-total">—</div>
-          <div class="stat-label">Total histórico</div>
-        </div>
-        <div class="stat-card yellow">
-          <div class="stat-icon-wrap yellow"><svg width="18" height="18" color="var(--yellow)"><use href="#ic-dollar"/></svg></div>
-          <div class="stat-value" id="sub-mrr">—</div>
-          <div class="stat-label">Assinantes com plano ativo</div>
-        </div>
+      <div class="page-sub">Endpoint <code>/api/assinaturas</code></div>
+      <div class="stat-scroll">
+        <div class="stat-card green"><div class="stat-icon-wrap green"><svg width="16" height="16" color="var(--green)"><use href="#ic-check"/></svg></div><div class="stat-value" id="sub-ativas">—</div><div class="stat-label">Ativas agora</div></div>
+        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-diamond"/></svg></div><div class="stat-value" id="sub-total">—</div><div class="stat-label">Total histórico</div></div>
       </div>
       <div class="card">
         <div class="card-header">
-          <div class="card-title"><svg width="14" height="14" color="var(--purple-3)"><use href="#ic-diamond"/></svg>Lista de Assinantes</div>
-          <div style="display:flex;gap:8px">
-            <div class="search-wrap">
-              <svg width="13" height="13" color="var(--text-3)" class="ico" style="left:9px"><use href="#ic-search"/></svg>
-              <input class="search-bar" style="width:150px" placeholder="Filtrar ID..." id="filter-sub" oninput="renderSubTable()">
-            </div>
-            <button class="refresh-btn" onclick="carregarAssinaturas()"><svg width="12" height="12"><use href="#ic-refresh"/></svg></button>
-            <button class="btn btn-primary btn-sm" onclick="openModal('modal-liberar')"><svg width="12" height="12"><use href="#ic-plus"/></svg> Novo</button>
-          </div>
+          <div class="card-title"><svg width="14" height="14" color="var(--purple-3)"><use href="#ic-diamond"/></svg>Assinantes</div>
+          <button class="btn btn-primary btn-sm" onclick="openSheet('sheet-liberar')"><svg width="12" height="12"><use href="#ic-plus"/></svg>Novo</button>
         </div>
-        <table class="data-table">
-          <thead><tr><th>USER ID</th><th>Username</th><th>Início</th><th>Expira</th><th>Dias Rest.</th><th>Status</th><th>Ação</th></tr></thead>
-          <tbody id="sub-table-body"><tr class="loading-row"><td colspan="7"><div class="spinner"></div> Carregando...</td></tr></tbody>
-        </table>
+        <input class="input-field" style="margin-bottom:12px" placeholder="Filtrar por ID ou username..." id="filter-sub" oninput="renderSubTable()">
+        <div class="row-list" id="sub-list"><div class="loading-state"><div class="spinner"></div>Carregando...</div></div>
       </div>
     </div>
 
     <!-- RESTRITOS -->
     <div class="page" id="page-restritos">
-      <div class="page-title">Usuários Restritos</div>
-      <div class="page-sub">Usuários silenciados no grupo — endpoint <code style="color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px">/api/restritos</code></div>
-      <div class="info-box">
-        <svg width="15" height="15" color="var(--yellow)" style="flex-shrink:0;margin-top:1px"><use href="#ic-info"/></svg>
-        <span>Desrestringir aqui remove apenas dos dados. Para liberar no Telegram também, use o comando <code style="color:var(--purple-3)">/desrestringir &lt;ID&gt;</code> no bot.</span>
-      </div>
+      <div class="page-title">Restritos</div>
+      <div class="page-sub">Endpoint <code>/api/restritos</code></div>
+      <div class="info-box"><svg width="15" height="15" color="var(--yellow)" style="flex-shrink:0;margin-top:1px"><use href="#ic-info"/></svg><span>Desrestringir aqui remove só dos dados. Use <code>/desrestringir &lt;ID&gt;</code> no bot para liberar no Telegram também.</span></div>
       <div class="card">
         <div class="card-header">
-          <div class="card-title"><svg width="14" height="14" color="var(--red)"><use href="#ic-mute"/></svg>Lista de Restritos</div>
-          <div style="display:flex;gap:8px">
-            <button class="refresh-btn" onclick="carregarRestritos()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
-            <button class="btn btn-ghost btn-sm" onclick="openModal('modal-desrest')"><svg width="13" height="13"><use href="#ic-unlock"/></svg> Desrestringir</button>
-          </div>
+          <div class="card-title"><svg width="14" height="14" color="var(--red)"><use href="#ic-mute"/></svg>Lista de restritos</div>
+          <button class="refresh-btn" onclick="carregarRestritos()"><svg width="13" height="13"><use href="#ic-refresh"/></svg></button>
         </div>
-        <table class="data-table">
-          <thead><tr><th>USER ID</th><th>Restrito desde</th><th>Expira restrição</th><th>Horas restantes</th><th>Ação</th></tr></thead>
-          <tbody id="rest-table-body"><tr class="loading-row"><td colspan="5"><div class="spinner"></div> Carregando...</td></tr></tbody>
-        </table>
+        <div class="row-list" id="rest-list"><div class="loading-state"><div class="spinner"></div>Carregando...</div></div>
       </div>
     </div>
 
     <!-- TESTES -->
     <div class="page" id="page-testes">
       <div class="page-title">Testes Grátis</div>
-      <div class="page-sub">Usuários no trial de 3 dias — endpoint <code style="color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px">/api/testes</code></div>
+      <div class="page-sub">Endpoint <code>/api/testes</code></div>
       <div class="card">
         <div class="card-header">
-          <div class="card-title"><svg width="14" height="14" color="var(--green)"><use href="#ic-gift"/></svg>Trials Ativos</div>
-          <button class="refresh-btn" onclick="carregarTestes()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
+          <div class="card-title"><svg width="14" height="14" color="var(--green)"><use href="#ic-gift"/></svg>Trials ativos</div>
+          <button class="refresh-btn" onclick="carregarTestes()"><svg width="13" height="13"><use href="#ic-refresh"/></svg></button>
         </div>
-        <div id="trial-list" style="display:flex;flex-direction:column;gap:14px">
-          <div style="color:var(--text-3);font-size:13px;display:flex;align-items:center;gap:8px"><div class="spinner"></div> Carregando...</div>
-        </div>
+        <div id="trial-list" class="row-list"><div class="loading-state"><div class="spinner"></div>Carregando...</div></div>
       </div>
     </div>
 
@@ -555,226 +369,177 @@ body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1)
     <div class="page" id="page-liberar">
       <div class="page-title">Liberar Usuário</div>
       <div class="page-sub">Ative ou renove assinaturas manualmente</div>
-      <div class="info-box">
-        <svg width="15" height="15" color="var(--yellow)" style="flex-shrink:0;margin-top:1px"><use href="#ic-info"/></svg>
-        <span>A liberação via painel atualiza os dados. Para remover a restrição no Telegram, use também o comando <code style="color:var(--purple-3)">/liberar &lt;ID&gt;</code> no bot.</span>
+      <div class="info-box"><svg width="15" height="15" color="var(--yellow)" style="flex-shrink:0;margin-top:1px"><use href="#ic-info"/></svg><span>Use também <code>/liberar &lt;ID&gt;</code> no bot para liberar no Telegram.</span></div>
+      <div class="card">
+        <div class="input-group"><div class="input-label"><svg width="12" height="12"><use href="#ic-user"/></svg>ID do usuário Telegram</div><input class="input-field" type="number" inputmode="numeric" placeholder="Ex: 123456789" id="lib-uid"></div>
+        <div class="input-group">
+          <div class="input-label"><svg width="12" height="12"><use href="#ic-calendar"/></svg>Plano / duração</div>
+          <div class="chip-row">
+            <div class="chip" onclick="setDias(1)">🟢 1d</div><div class="chip" onclick="setDias(3)">🔵 3d</div>
+            <div class="chip" onclick="setDias(7)">🟣 7d</div><div class="chip" onclick="setDias(15)">🟡 15d</div>
+            <div class="chip selected" onclick="setDias(30)">🔴 30d</div><div class="chip" onclick="setDias(60)">🟠 60d</div>
+            <div class="chip" onclick="setDias(90)">⚫ 90d</div><div class="chip" onclick="setDias(180)">💎 180d</div>
+            <div class="chip" onclick="setDias(365)">👑 365d</div>
+          </div>
+          <input class="input-field" type="number" inputmode="numeric" placeholder="Ou digite os dias" id="lib-dias" value="30">
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="liberarUsuario()" id="btn-liberar"><svg width="14" height="14"><use href="#ic-unlock"/></svg>Liberar</button>
+          <button class="btn btn-ghost" onclick="checkStatus()"><svg width="14" height="14"><use href="#ic-search"/></svg>Status</button>
+        </div>
+        <div id="status-result" style="margin-top:14px;display:none">
+          <div class="card" style="margin:0;background:var(--bg-base)"><div id="status-content"></div></div>
+        </div>
       </div>
-      <div class="two-col">
-        <div class="card">
-          <div class="card-title" style="margin-bottom:18px"><svg width="14" height="14" color="var(--purple-3)"><use href="#ic-unlock"/></svg>Nova Liberação Manual</div>
-          <div class="input-group">
-            <div class="input-label"><svg width="12" height="12"><use href="#ic-user"/></svg>ID do Usuário Telegram</div>
-            <input class="input-field" type="number" placeholder="Ex: 123456789" id="lib-uid">
-          </div>
-          <div class="input-group">
-            <div class="input-label"><svg width="12" height="12"><use href="#ic-calendar"/></svg>Plano / Duração</div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
-              <div class="chip" onclick="setDias(1)">🟢 1 dia</div>
-              <div class="chip" onclick="setDias(3)">🔵 3 dias</div>
-              <div class="chip" onclick="setDias(7)">🟣 7 dias</div>
-              <div class="chip" onclick="setDias(15)">🟡 15 dias</div>
-              <div class="chip selected" onclick="setDias(30)">🔴 30 dias</div>
-              <div class="chip" onclick="setDias(60)">🟠 60 dias</div>
-              <div class="chip" onclick="setDias(90)">⚫ 90 dias</div>
-              <div class="chip" onclick="setDias(180)">💎 180 dias</div>
-              <div class="chip" onclick="setDias(365)">👑 365 dias</div>
-            </div>
-            <input class="input-field" type="number" placeholder="Ou digite manualmente" id="lib-dias" value="30">
-          </div>
-          <div style="display:flex;gap:9px">
-            <button class="btn btn-primary" onclick="liberarUsuario()" style="flex:1;justify-content:center" id="btn-liberar">
-              <svg width="14" height="14"><use href="#ic-unlock"/></svg> Liberar
-            </button>
-            <button class="btn btn-ghost" onclick="checkStatus()" style="flex:1;justify-content:center">
-              <svg width="14" height="14"><use href="#ic-search"/></svg> Verificar Status
-            </button>
-          </div>
-          <div id="status-result" style="margin-top:15px;display:none">
-            <div style="height:1px;background:linear-gradient(90deg,transparent,var(--purple-1)55,transparent);margin:16px 0"></div>
-            <div class="card" style="margin:0;background:var(--bg-base)"><div id="status-content"></div></div>
-          </div>
-        </div>
-        <div>
-          <div class="card">
-            <div class="card-title" style="margin-bottom:15px"><svg width="14" height="14" color="var(--red)"><use href="#ic-x"/></svg>Cancelar Assinatura</div>
-            <div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" placeholder="Ex: 123456789" id="cancel-uid"></div>
-            <button class="btn btn-danger" onclick="cancelarAssinatura()" style="width:100%;justify-content:center">
-              <svg width="14" height="14"><use href="#ic-x"/></svg> Cancelar Plano
-            </button>
-          </div>
-          <div class="card">
-            <div class="card-title" style="margin-bottom:15px"><svg width="14" height="14" color="var(--green)"><use href="#ic-unlock"/></svg>Desrestringir</div>
-            <div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" placeholder="Ex: 123456789" id="desrest-uid"></div>
-            <button class="btn btn-success" onclick="desrestringirUsuario()" style="width:100%;justify-content:center">
-              <svg width="14" height="14"><use href="#ic-unlock"/></svg> Remover Restrição
-            </button>
-          </div>
-        </div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:13px"><svg width="14" height="14" color="var(--red)"><use href="#ic-x"/></svg>Cancelar assinatura</div>
+        <div class="input-group"><input class="input-field" type="number" inputmode="numeric" placeholder="ID do usuário" id="cancel-uid"></div>
+        <button class="btn btn-danger btn-block" onclick="cancelarAssinatura()"><svg width="14" height="14"><use href="#ic-x"/></svg>Cancelar plano</button>
+      </div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:13px"><svg width="14" height="14" color="var(--green)"><use href="#ic-unlock"/></svg>Desrestringir</div>
+        <div class="input-group"><input class="input-field" type="number" inputmode="numeric" placeholder="ID do usuário" id="desrest-uid"></div>
+        <button class="btn btn-success btn-block" onclick="desrestringirUsuario()"><svg width="14" height="14"><use href="#ic-unlock"/></svg>Remover restrição</button>
       </div>
     </div>
 
     <!-- AFILIADOS -->
     <div class="page" id="page-afiliados">
-      <div class="page-title">Programa de Afiliados</div>
-      <div class="page-sub">50% de comissão por venda — endpoint <code style="color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px">/api/afiliados</code></div>
-      <div class="three-col">
-        <div class="stat-card">
-          <div class="stat-icon-wrap purple"><svg width="18" height="18" color="var(--purple-3)"><use href="#ic-users"/></svg></div>
-          <div class="stat-value" id="afil-total">—</div>
-          <div class="stat-label">Afiliados Cadastrados</div>
-        </div>
-        <div class="stat-card green">
-          <div class="stat-icon-wrap green"><svg width="18" height="18" color="var(--green)"><use href="#ic-check"/></svg></div>
-          <div class="stat-value" id="afil-indicados">—</div>
-          <div class="stat-label">Total de Indicações</div>
-        </div>
-        <div class="stat-card yellow">
-          <div class="stat-icon-wrap yellow"><svg width="18" height="18" color="var(--yellow)"><use href="#ic-dollar"/></svg></div>
-          <div class="stat-value" id="afil-ganhos">—</div>
-          <div class="stat-label">Comissões Pagas (R$)</div>
-        </div>
+      <div class="page-title">Afiliados</div>
+      <div class="page-sub">50% de comissão por venda — <code>/api/afiliados</code></div>
+      <div class="stat-scroll">
+        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-users"/></svg></div><div class="stat-value" id="afil-total">—</div><div class="stat-label">Afiliados</div></div>
+        <div class="stat-card green"><div class="stat-icon-wrap green"><svg width="16" height="16" color="var(--green)"><use href="#ic-check"/></svg></div><div class="stat-value" id="afil-indicados">—</div><div class="stat-label">Indicações</div></div>
+        <div class="stat-card yellow"><div class="stat-icon-wrap yellow"><svg width="16" height="16" color="var(--yellow)"><use href="#ic-dollar"/></svg></div><div class="stat-value" id="afil-ganhos">—</div><div class="stat-label">Comissões pagas</div></div>
       </div>
       <div class="card">
         <div class="card-header">
-          <div class="card-title"><svg width="14" height="14" color="var(--yellow)"><use href="#ic-trophy"/></svg>Ranking de Afiliados</div>
-          <button class="refresh-btn" onclick="carregarAfiliados()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
+          <div class="card-title"><svg width="14" height="14" color="var(--yellow)"><use href="#ic-trophy"/></svg>Ranking</div>
+          <button class="refresh-btn" onclick="carregarAfiliados()"><svg width="13" height="13"><use href="#ic-refresh"/></svg></button>
         </div>
-        <table class="data-table">
-          <thead><tr><th>#</th><th>User ID</th><th>Username</th><th>Indicações</th><th>Ganhos Total</th><th>Saldo Pendente</th></tr></thead>
-          <tbody id="afiliados-table"><tr class="loading-row"><td colspan="6"><div class="spinner"></div> Carregando...</td></tr></tbody>
-        </table>
+        <div class="row-list" id="afiliados-list"><div class="loading-state"><div class="spinner"></div>Carregando...</div></div>
       </div>
     </div>
 
     <!-- A EXPIRAR -->
     <div class="page" id="page-expirar">
-      <div class="page-title">A Expirar em Breve</div>
+      <div class="page-title">A Expirar</div>
       <div class="page-sub">Assinaturas que vencem nos próximos 7 dias</div>
+      <button class="btn btn-primary btn-block" style="margin-bottom:14px" onclick="openSheet('sheet-estender')"><svg width="14" height="14"><use href="#ic-plus"/></svg>Estender todas</button>
       <div class="card">
         <div class="card-header">
           <div class="card-title"><svg width="14" height="14" color="var(--yellow)"><use href="#ic-clock"/></svg>Próximos 7 dias</div>
-          <div style="display:flex;gap:8px">
-            <button class="refresh-btn" onclick="carregarAssinaturas()"><svg width="12" height="12"><use href="#ic-refresh"/></svg> Atualizar</button>
-            <button class="btn btn-primary btn-sm" onclick="openModal('modal-estender')">
-              <svg width="12" height="12"><use href="#ic-plus"/></svg> Estender Todas
-            </button>
-          </div>
+          <button class="refresh-btn" onclick="carregarAssinaturas()"><svg width="13" height="13"><use href="#ic-refresh"/></svg></button>
         </div>
-        <div id="expirar-list">
-          <div style="color:var(--text-3);font-size:13px;display:flex;align-items:center;gap:8px"><div class="spinner"></div> Carregando...</div>
-        </div>
+        <div id="expirar-list" class="row-list"><div class="loading-state"><div class="spinner"></div>Carregando...</div></div>
       </div>
     </div>
 
     <!-- BACKUP -->
     <div class="page" id="page-backup">
-      <div class="page-title">Backup & Exportação</div>
+      <div class="page-title">Backup</div>
       <div class="page-sub">Exporte e verifique os dados do sistema</div>
-      <div class="three-col">
-        <div class="card" style="text-align:center">
-          <div style="width:52px;height:52px;border-radius:14px;background:var(--purple-glow);border:1px solid var(--border-glow);display:flex;align-items:center;justify-content:center;margin:0 auto 14px">
-            <svg width="24" height="24" color="var(--purple-3)"><use href="#ic-save"/></svg>
-          </div>
-          <div style="font-weight:700;margin-bottom:7px">Backup Completo</div>
-          <div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Exporta assinaturas, restritos e afiliados em JSON</div>
-          <button class="btn btn-primary" onclick="gerarBackup()" style="width:100%;justify-content:center">
-            <svg width="14" height="14"><use href="#ic-download"/></svg> Gerar JSON
-          </button>
-        </div>
-        <div class="card" style="text-align:center">
-          <div style="width:52px;height:52px;border-radius:14px;background:#22d6a018;border:1px solid #22d6a030;display:flex;align-items:center;justify-content:center;margin:0 auto 14px">
-            <svg width="24" height="24" color="var(--green)"><use href="#ic-bar-chart"/></svg>
-          </div>
-          <div style="font-weight:700;margin-bottom:7px">Exportar Assinaturas</div>
-          <div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Gera CSV com todos os assinantes para planilha</div>
-          <button class="btn btn-ghost" onclick="exportarCSVAssinaturas()" style="width:100%;justify-content:center">
-            <svg width="14" height="14"><use href="#ic-download"/></svg> Exportar CSV
-          </button>
-        </div>
-        <div class="card" style="text-align:center">
-          <div style="width:52px;height:52px;border-radius:14px;background:#38bdf818;border:1px solid #38bdf830;display:flex;align-items:center;justify-content:center;margin:0 auto 14px">
-            <svg width="24" height="24" color="var(--blue)"><use href="#ic-info"/></svg>
-          </div>
-          <div style="font-weight:700;margin-bottom:7px">Verificar Conexão</div>
-          <div style="font-size:12px;color:var(--text-2);margin-bottom:16px">Testa conectividade com a API Flask do bot</div>
-          <button class="btn btn-success" onclick="verificarConexao()" style="width:100%;justify-content:center">
-            <svg width="14" height="14"><use href="#ic-check"/></svg> Verificar
-          </button>
-        </div>
+      <div class="card" style="text-align:center">
+        <div style="width:48px;height:48px;border-radius:13px;background:var(--purple-glow);border:1px solid var(--border-glow);display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><svg width="22" height="22" color="var(--purple-3)"><use href="#ic-save"/></svg></div>
+        <div style="font-weight:700;margin-bottom:6px">Backup completo</div>
+        <div style="font-size:12px;color:var(--text-2);margin-bottom:14px">Exporta assinaturas, restritos e afiliados em JSON</div>
+        <button class="btn btn-primary btn-block" onclick="gerarBackup()"><svg width="14" height="14"><use href="#ic-download"/></svg>Gerar JSON</button>
+      </div>
+      <div class="card" style="text-align:center">
+        <div style="width:48px;height:48px;border-radius:13px;background:#22d6a018;border:1px solid #22d6a030;display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><svg width="22" height="22" color="var(--green)"><use href="#ic-dollar"/></svg></div>
+        <div style="font-weight:700;margin-bottom:6px">Exportar assinaturas</div>
+        <div style="font-size:12px;color:var(--text-2);margin-bottom:14px">Gera CSV com todos os assinantes</div>
+        <button class="btn btn-ghost btn-block" onclick="exportarCSVAssinaturas()"><svg width="14" height="14"><use href="#ic-download"/></svg>Exportar CSV</button>
+      </div>
+      <div class="card" style="text-align:center">
+        <div style="width:48px;height:48px;border-radius:13px;background:#38bdf818;border:1px solid #38bdf830;display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><svg width="22" height="22" color="var(--blue)"><use href="#ic-info"/></svg></div>
+        <div style="font-weight:700;margin-bottom:6px">Verificar conexão</div>
+        <div style="font-size:12px;color:var(--text-2);margin-bottom:14px">Testa conectividade com a API do bot</div>
+        <button class="btn btn-success btn-block" onclick="verificarConexao()"><svg width="14" height="14"><use href="#ic-check"/></svg>Verificar</button>
       </div>
     </div>
 
   </div>
-</main>
 
-<!-- MODAIS -->
-<div class="modal-overlay" id="modal-liberar">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-unlock"/></svg>Liberar Usuário</div>
-      <button class="modal-close" onclick="closeModal('modal-liberar')"><svg width="13" height="13"><use href="#ic-x"/></svg></button>
+  <!-- BOTTOM TAB BAR -->
+  <div class="tabbar">
+    <div class="tab-item active" data-tab="dashboard" onclick="goTab('dashboard')"><svg width="21" height="21"><use href="#ic-dashboard"/></svg><span class="tab-label">Início</span></div>
+    <div class="tab-item" data-tab="planos" onclick="goTab('planos')"><svg width="21" height="21"><use href="#ic-tag"/></svg><span class="tab-label">Planos</span></div>
+    <div class="tab-item" data-tab="assinaturas" onclick="goTab('assinaturas')" style="position:relative"><svg width="21" height="21"><use href="#ic-diamond"/></svg><span class="tab-label">Ativas</span><span class="tab-dot" id="badge-ativas" style="display:none">0</span></div>
+    <div class="tab-item" data-tab="restritos" onclick="goTab('restritos')" style="position:relative"><svg width="21" height="21"><use href="#ic-mute"/></svg><span class="tab-label">Restritos</span><span class="tab-dot" id="badge-restritos" style="display:none">0</span></div>
+    <div class="tab-item" data-tab="mais" onclick="openSheet('sheet-mais')"><svg width="21" height="21"><use href="#ic-grid"/></svg><span class="tab-label">Mais</span></div>
+  </div>
+</div>
+
+<!-- SHEET: MAIS -->
+<div class="sheet-overlay" id="sheet-mais">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header"><div class="sheet-title">Mais opções</div><div class="sheet-close" onclick="closeSheet('sheet-mais')"><svg width="13" height="13"><use href="#ic-x"/></svg></div></div>
+    <div class="mais-grid">
+      <div class="mais-item" onclick="goTab('testes');closeSheet('sheet-mais')"><div class="mais-icon"><svg width="19" height="19"><use href="#ic-gift"/></svg></div><div class="mais-label">Testes Grátis</div></div>
+      <div class="mais-item" onclick="goTab('liberar');closeSheet('sheet-mais')"><div class="mais-icon"><svg width="19" height="19"><use href="#ic-unlock"/></svg></div><div class="mais-label">Liberar Usuário</div></div>
+      <div class="mais-item" onclick="goTab('afiliados');closeSheet('sheet-mais')"><div class="mais-icon"><svg width="19" height="19"><use href="#ic-users"/></svg></div><div class="mais-label">Afiliados</div></div>
+      <div class="mais-item" onclick="goTab('expirar');closeSheet('sheet-mais')"><div class="mais-icon"><svg width="19" height="19"><use href="#ic-clock"/></svg></div><div class="mais-label">A Expirar</div></div>
+      <div class="mais-item" onclick="goTab('backup');closeSheet('sheet-mais')"><div class="mais-icon"><svg width="19" height="19"><use href="#ic-save"/></svg></div><div class="mais-label">Backup</div></div>
     </div>
-    <div class="input-group"><div class="input-label">ID do Usuário Telegram</div><input class="input-field" type="number" id="m-lib-uid" placeholder="123456789"></div>
-    <div class="input-group"><div class="input-label">Dias de acesso</div><input class="input-field" type="number" id="m-lib-dias" value="30"></div>
-    <div class="modal-footer">
-      <button class="btn btn-ghost" onclick="closeModal('modal-liberar')">Cancelar</button>
+  </div>
+</div>
+
+<!-- SHEET: LIBERAR (rápido, usado pelo botão "Novo" em Assinaturas) -->
+<div class="sheet-overlay" id="sheet-liberar">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header"><div class="sheet-title"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-unlock"/></svg>Liberar usuário</div><div class="sheet-close" onclick="closeSheet('sheet-liberar')"><svg width="13" height="13"><use href="#ic-x"/></svg></div></div>
+    <div class="input-group"><div class="input-label">ID do usuário Telegram</div><input class="input-field" type="number" inputmode="numeric" id="m-lib-uid" placeholder="123456789"></div>
+    <div class="input-group"><div class="input-label">Dias de acesso</div><input class="input-field" type="number" inputmode="numeric" id="m-lib-dias" value="30"></div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="closeSheet('sheet-liberar')">Cancelar</button>
       <button class="btn btn-primary" onclick="liberarModal()"><svg width="13" height="13"><use href="#ic-unlock"/></svg>Liberar</button>
     </div>
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-cancelar">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title"><svg width="16" height="16" color="var(--red)"><use href="#ic-x"/></svg>Cancelar Assinatura</div>
-      <button class="modal-close" onclick="closeModal('modal-cancelar')"><svg width="13" height="13"><use href="#ic-x"/></svg></button>
-    </div>
-    <div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" id="m-cancel-uid" placeholder="123456789"></div>
-    <div class="modal-footer">
-      <button class="btn btn-ghost" onclick="closeModal('modal-cancelar')">Cancelar</button>
+<!-- SHEET: CANCELAR -->
+<div class="sheet-overlay" id="sheet-cancelar">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header"><div class="sheet-title"><svg width="16" height="16" color="var(--red)"><use href="#ic-x"/></svg>Cancelar assinatura</div><div class="sheet-close" onclick="closeSheet('sheet-cancelar')"><svg width="13" height="13"><use href="#ic-x"/></svg></div></div>
+    <div class="input-group"><div class="input-label">ID do usuário</div><input class="input-field" type="number" inputmode="numeric" id="m-cancel-uid" placeholder="123456789"></div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="closeSheet('sheet-cancelar')">Voltar</button>
       <button class="btn btn-danger" onclick="cancelarModal()"><svg width="13" height="13"><use href="#ic-x"/></svg>Confirmar</button>
     </div>
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-estender">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-plus"/></svg>Estender Todas as Assinaturas</div>
-      <button class="modal-close" onclick="closeModal('modal-estender')"><svg width="13" height="13"><use href="#ic-x"/></svg></button>
+<!-- SHEET: ESTENDER -->
+<div class="sheet-overlay" id="sheet-estender">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header"><div class="sheet-title"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-plus"/></svg>Estender todas</div><div class="sheet-close" onclick="closeSheet('sheet-estender')"><svg width="13" height="13"><use href="#ic-x"/></svg></div></div>
+    <div class="info-box"><svg width="14" height="14" color="var(--yellow)" style="flex-shrink:0"><use href="#ic-info"/></svg><span>Adiciona dias a <b>todos</b> os assinantes ativos.</span></div>
+    <div class="chip-row">
+      <div class="chip" onclick="setExtDias(7)">7 dias</div><div class="chip" onclick="setExtDias(15)">15 dias</div>
+      <div class="chip selected" onclick="setExtDias(30)">30 dias</div><div class="chip" onclick="setExtDias(60)">60 dias</div>
     </div>
-    <div class="info-box" style="margin-bottom:14px">
-      <svg width="14" height="14" color="var(--yellow)" style="flex-shrink:0"><use href="#ic-info"/></svg>
-      <span>Adiciona dias a <strong>todos</strong> os assinantes ativos.</span>
-    </div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
-      <div class="chip" onclick="setExtDias(7)">7 dias</div>
-      <div class="chip" onclick="setExtDias(15)">15 dias</div>
-      <div class="chip selected" onclick="setExtDias(30)">30 dias</div>
-      <div class="chip" onclick="setExtDias(60)">60 dias</div>
-    </div>
-    <div class="input-group"><div class="input-label">Dias a adicionar</div><input class="input-field" type="number" id="m-ext-dias" value="30"></div>
-    <div class="modal-footer">
-      <button class="btn btn-ghost" onclick="closeModal('modal-estender')">Cancelar</button>
+    <div class="input-group"><div class="input-label">Dias a adicionar</div><input class="input-field" type="number" inputmode="numeric" id="m-ext-dias" value="30"></div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="closeSheet('sheet-estender')">Cancelar</button>
       <button class="btn btn-primary" onclick="estenderModal()"><svg width="13" height="13"><use href="#ic-plus"/></svg>Estender</button>
     </div>
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-desrest">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title"><svg width="16" height="16" color="var(--green)"><use href="#ic-unlock"/></svg>Desrestringir Usuário</div>
-      <button class="modal-close" onclick="closeModal('modal-desrest')"><svg width="13" height="13"><use href="#ic-x"/></svg></button>
-    </div>
-    <div class="info-box" style="margin-bottom:14px">
-      <svg width="14" height="14" color="var(--yellow)" style="flex-shrink:0"><use href="#ic-info"/></svg>
-      <span>Remove dos dados. Para liberar no Telegram, use <code style="color:var(--purple-3)">/desrestringir &lt;ID&gt;</code> no bot.</span>
-    </div>
-    <div class="input-group"><div class="input-label">ID do Usuário</div><input class="input-field" type="number" id="m-desrest-uid" placeholder="123456789"></div>
-    <div class="modal-footer">
-      <button class="btn btn-ghost" onclick="closeModal('modal-desrest')">Cancelar</button>
-      <button class="btn btn-success" onclick="desrestModal()"><svg width="13" height="13"><use href="#ic-unlock"/></svg>Remover Restrição</button>
+<!-- SHEET: DESRESTRINGIR -->
+<div class="sheet-overlay" id="sheet-desrest">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header"><div class="sheet-title"><svg width="16" height="16" color="var(--green)"><use href="#ic-unlock"/></svg>Desrestringir</div><div class="sheet-close" onclick="closeSheet('sheet-desrest')"><svg width="13" height="13"><use href="#ic-x"/></svg></div></div>
+    <div class="input-group"><div class="input-label">ID do usuário</div><input class="input-field" type="number" inputmode="numeric" id="m-desrest-uid" placeholder="123456789"></div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="closeSheet('sheet-desrest')">Cancelar</button>
+      <button class="btn btn-success" onclick="desrestModal()"><svg width="13" height="13"><use href="#ic-unlock"/></svg>Remover</button>
     </div>
   </div>
 </div>
@@ -803,16 +568,14 @@ function renderPlanos() {
       <div class="plano-emoji">${p.emoji}</div>
       <div class="plano-nome">${p.nome}</div>
       <div class="plano-valor">R$ ${p.valor.toFixed(2)}</div>
-      <div class="plano-comissao">Comissão: R$ ${p.comissao.toFixed(2)}</div>
+      <div class="plano-comissao">Com.: R$ ${p.comissao.toFixed(2)}</div>
     </div>`).join('');
 
-  document.getElementById('planos-table').innerHTML = PLANOS.map(p => `
-    <tr>
-      <td>${p.emoji} ${p.nome}</td>
-      <td style="color:var(--purple-3);font-weight:700">R$ ${p.valor.toFixed(2)}</td>
-      <td style="color:var(--green);font-weight:700">R$ ${p.comissao.toFixed(2)}</td>
-      <td style="color:var(--yellow);font-weight:700">R$ ${p.comissao.toFixed(2)}</td>
-    </tr>`).join('');
+  document.getElementById('planos-list').innerHTML = PLANOS.map(p => `
+    <div class="row-card">
+      <div class="row-top"><div class="row-uname">${p.emoji} ${p.nome}</div><div class="row-id" style="color:var(--purple-3)">R$ ${p.valor.toFixed(2)}</div></div>
+      <div class="row-meta"><span>Comissão: <b style="color:var(--green)">R$ ${p.comissao.toFixed(2)}</b></span></div>
+    </div>`).join('');
 }
 
 // ============================================================
@@ -831,8 +594,7 @@ async function fazerLogin() {
   if (!url)   { erroLogin('Informe a URL da API'); return; }
   if (!senha) { erroLogin('Informe a senha'); return; }
   const btn = document.getElementById('login-btn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner" style="border-color:#ffffff44;border-top-color:#fff;width:14px;height:14px"></span> Entrando...';
+  btn.disabled = true; btn.textContent = 'Entrando...';
   try {
     const res  = await fetch(`${url}/api/login`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({senha}) });
     const data = await res.json();
@@ -843,7 +605,7 @@ async function fazerLogin() {
       mostrarApp();
     } else { erroLogin(data.erro || 'Senha ou URL incorreta'); }
   } catch(e) { erroLogin('Não foi possível conectar. Verifique a URL.'); }
-  btn.disabled = false; btn.innerHTML = 'ENTRAR';
+  btn.disabled = false; btn.textContent = 'ENTRAR';
 }
 function erroLogin(msg) {
   const el = document.getElementById('login-err');
@@ -852,10 +614,8 @@ function erroLogin(msg) {
 }
 function mostrarApp() {
   document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('sidebar').style.display = 'flex';
-  document.getElementById('main-content').style.display = 'flex';
-  document.getElementById('api-url-show').textContent = API_BASE.replace(/https?:\/\//,'').substring(0,26);
-  document.getElementById('dash-date').textContent = new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('app').style.display = 'flex';
+  document.getElementById('dash-date').textContent = new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});
   renderPlanos();
   recarregarTudo();
 }
@@ -863,8 +623,7 @@ function logout() {
   AUTH_TOKEN = ''; API_BASE = '';
   sessionStorage.removeItem('bk_token'); sessionStorage.removeItem('bk_url');
   document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('sidebar').style.display = 'none';
-  document.getElementById('main-content').style.display = 'none';
+  document.getElementById('app').style.display = 'none';
   document.getElementById('login-senha').value = '';
 }
 (function restaurarSessao() {
@@ -887,7 +646,6 @@ async function api(path, method='GET', body=null) {
 // CARREGAMENTO
 // ============================================================
 async function recarregarTudo() {
-  toast('Atualizando dados...','info');
   await Promise.all([carregarStats(),carregarAssinaturas(),carregarRestritos(),carregarTestes(),carregarAfiliados()]);
 }
 
@@ -895,19 +653,19 @@ async function carregarStats() {
   try {
     const d = await api('/api/stats');
     if (!d.ok) return;
-    set('badge-ativas',   d.ativas);
-    set('badge-restritos',d.restritos);
-    set('badge-testes',   d.testes);
-    set('ins-ativas',     d.ativas);
-    set('ins-restritos',  d.restritos);
-    set('ins-testes',     d.testes);
-    set('ins-usuarios',   d.usuarios);
-    // Receita estimada: usa plano de 30 dias como base (mais comum)
-    const receitaEst = d.ativas * 20;
-    set('ins-mrr', 'Estimativa: ' + brl(receitaEst));
+    setBadge('badge-ativas', d.ativas);
+    setBadge('badge-restritos', d.restritos);
+    set('ins-ativas', d.ativas); set('ins-restritos', d.restritos);
+    set('ins-testes', d.testes); set('ins-usuarios', d.usuarios);
     desenharDonut(d.ativas, d.restritos, d.testes, d.usuarios);
     setStatusOnline(true);
   } catch(e) { setStatusOnline(false); }
+}
+function setBadge(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = v;
+  el.style.display = v > 0 ? 'flex' : 'none';
 }
 
 async function carregarAssinaturas() {
@@ -927,21 +685,14 @@ async function carregarRestritos() {
     const d = await api('/api/restritos');
     if (!d.ok) return;
     const lista = d.restritos || [];
-    const tbody = document.getElementById('rest-table-body');
-    if (!lista.length) {
-      tbody.innerHTML = '<tr class="empty-row"><td colspan="5" style="color:var(--green)">✓ Nenhum usuário restrito</td></tr>';
-      return;
-    }
-    tbody.innerHTML = lista.map(r => `
-      <tr>
-        <td class="mono">${r.uid}</td>
-        <td style="color:var(--text-2);font-size:12px">${fmtDate(r.data_restricao)}</td>
-        <td style="color:var(--text-2);font-size:12px">${fmtDate(r.data_liberacao)}</td>
-        <td style="color:var(--red);font-weight:700">${Number(r.horas_rest).toLocaleString()}h</td>
-        <td><button class="btn btn-success btn-sm" onclick="desrestRapido('${r.uid}')">
-          <svg width="11" height="11"><use href="#ic-unlock"/></svg> Liberar
-        </button></td>
-      </tr>`).join('');
+    const el = document.getElementById('rest-list');
+    if (!lista.length) { el.innerHTML = emptyState('ic-check','Nenhum usuário restrito','var(--green)'); return; }
+    el.innerHTML = lista.map(r => `
+      <div class="row-card">
+        <div class="row-top"><div class="row-id">${r.uid}</div><span style="color:var(--red);font-weight:700;font-size:12px">${Number(r.horas_rest).toLocaleString()}h</span></div>
+        <div class="row-meta"><span>Desde <b>${fmtDate(r.data_restricao)}</b></span><span>Expira <b>${fmtDate(r.data_liberacao)}</b></span></div>
+        <div class="row-actions"><button class="btn btn-success btn-sm" style="flex:1" onclick="desrestRapido('${r.uid}')"><svg width="12" height="12"><use href="#ic-unlock"/></svg>Liberar</button></div>
+      </div>`).join('');
   } catch(e) { console.error('carregarRestritos:',e); }
 }
 
@@ -954,18 +705,14 @@ async function carregarTestes() {
       ? lista.map(t => {
           const pct = Math.max(2,(t.dias_rest/3)*100);
           const cor = t.dias_rest<=0?'var(--red)':t.dias_rest<=1?'var(--yellow)':'var(--green)';
-          return `<div>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-              <div><div class="mono" style="margin-bottom:3px">${t.uid}</div><div style="font-size:12px;color:var(--text-2)">${t.username||'Sem username'}</div></div>
-              <div style="text-align:right">
-                <div style="font-size:12px;font-weight:700;color:${cor}">+${t.dias_rest} dias</div>
-                <div style="font-size:11px;color:var(--text-3)">Expira ${fmtDate(t.data_fim)}</div>
-              </div>
+          return `<div class="row-card">
+            <div class="row-top"><div><div class="row-id">${t.uid}</div><div class="row-uname">${t.username||'Sem username'}</div></div>
+              <div style="text-align:right"><div style="font-size:12px;font-weight:700;color:${cor}">+${t.dias_rest}d</div><div style="font-size:10.5px;color:var(--text-3)">até ${fmtDate(t.data_fim)}</div></div>
             </div>
             <div class="progress-bar"><div class="progress-fill green" style="width:${pct}%"></div></div>
           </div>`;
         }).join('')
-      : '<div style="color:var(--text-3);font-size:13px">Nenhum trial ativo no momento.</div>';
+      : emptyState('ic-gift','Nenhum trial ativo no momento','var(--text-3)');
   } catch(e) { console.error('carregarTestes:',e); }
 }
 
@@ -973,22 +720,23 @@ async function carregarAfiliados() {
   try {
     const d = await api('/api/afiliados');
     if (!d.ok) return;
-    set('afil-total',    d.total);
-    set('afil-indicados',d.total_indicados);
-    set('afil-ganhos',   'R$ '+(d.total_ganhos||0).toFixed(2));
+    set('afil-total', d.total);
+    set('afil-indicados', d.total_indicados);
+    set('afil-ganhos', 'R$ '+(d.total_ganhos||0).toFixed(2));
     const lista = d.afiliados || [];
-    document.getElementById('afiliados-table').innerHTML = lista.length
+    document.getElementById('afiliados-list').innerHTML = lista.length
       ? lista.map((a,i) => `
-          <tr>
-            <td style="color:var(--text-3);font-weight:700">#${i+1}</td>
-            <td class="mono">${a.uid}</td>
-            <td style="color:var(--text-2)">${a.username?'@'+a.username:'—'}</td>
-            <td style="font-weight:700;color:var(--purple-3)">${a.indicados}</td>
-            <td style="color:var(--green);font-weight:700">R$ ${(a.ganhos_total||0).toFixed(2)}</td>
-            <td><span class="badge ${a.saldo>0?'yellow':'green'}"><div class="badge-dot"></div>R$ ${(a.saldo||0).toFixed(2)}</span></td>
-          </tr>`).join('')
-      : '<tr class="empty-row"><td colspan="6">Nenhum afiliado cadastrado ainda</td></tr>';
+          <div class="row-card">
+            <div class="row-top"><div><span style="color:var(--text-3);font-weight:700;font-size:11px">#${i+1}</span> <span class="row-id">${a.uid}</span></div>
+              <span class="badge ${a.saldo>0?'yellow':'green'}"><div class="badge-dot"></div>R$ ${(a.saldo||0).toFixed(2)}</span></div>
+            <div class="row-meta"><span>${a.username?'@'+a.username:'—'}</span><span><b style="color:var(--purple-3)">${a.indicados}</b> indicações</span><span>Ganhos: <b style="color:var(--green)">R$ ${(a.ganhos_total||0).toFixed(2)}</b></span></div>
+          </div>`).join('')
+      : emptyState('ic-users','Nenhum afiliado cadastrado ainda','var(--text-3)');
   } catch(e) { console.error('carregarAfiliados:',e); }
+}
+
+function emptyState(icon,msg,color){
+  return `<div class="empty-state"><svg width="30" height="30" color="${color}"><use href="#${icon}"/></svg><div>${msg}</div></div>`;
 }
 
 // ============================================================
@@ -998,57 +746,48 @@ function renderSubTable() {
   const filter = (document.getElementById('filter-sub')?.value||'').toLowerCase();
   const ativas = dadosAssinaturas.filter(s=>s.ativa).length;
   set('sub-ativas', ativas);
-  set('sub-mrr', ativas + ' ativos');
   const rows = dadosAssinaturas.filter(s =>
     !filter || String(s.uid).includes(filter) || (s.username||'').toLowerCase().includes(filter));
-  if (!rows.length) {
-    document.getElementById('sub-table-body').innerHTML = '<tr class="empty-row"><td colspan="7">Nenhum resultado</td></tr>';
-    return;
-  }
-  document.getElementById('sub-table-body').innerHTML = rows.map(s => {
+  const el = document.getElementById('sub-list');
+  if (!rows.length) { el.innerHTML = emptyState('ic-search','Nenhum resultado','var(--text-3)'); return; }
+  el.innerHTML = rows.map(s => {
     const d = s.dias_rest;
     const badge = s.ativa
       ? (d<=2?'<span class="badge yellow"><div class="badge-dot"></div>Expirando</span>'
              :'<span class="badge green"><div class="badge-dot"></div>Ativa</span>')
       : '<span class="badge red"><div class="badge-dot"></div>Expirada</span>';
-    return `<tr>
-      <td class="mono">${s.uid}</td>
-      <td style="color:var(--text-2)">${s.username||'—'}</td>
-      <td style="color:var(--text-2);font-size:12px">${fmtDate(s.data_inicio)}</td>
-      <td style="color:var(--text-2);font-size:12px">${fmtDate(s.data_fim)}</td>
-      <td style="color:${d<=3?'var(--red)':d<=7?'var(--yellow)':'var(--green)'};font-weight:700">${d}</td>
-      <td>${badge}</td>
-      <td><button class="btn btn-danger btn-sm" onclick="cancelarRapido('${s.uid}')">
-        <svg width="11" height="11"><use href="#ic-x"/></svg>
-      </button></td>
-    </tr>`;
+    return `<div class="row-card">
+      <div class="row-top"><div><div class="row-id">${s.uid}</div><div class="row-uname">${s.username||'—'}</div></div>${badge}</div>
+      <div class="row-meta"><span>Expira <b>${fmtDate(s.data_fim)}</b></span><span style="color:${d<=3?'var(--red)':d<=7?'var(--yellow)':'var(--green)'};font-weight:700">${d} dias rest.</span></div>
+      <div class="row-actions"><button class="btn btn-danger btn-sm" style="flex:1" onclick="cancelarRapido('${s.uid}')"><svg width="12" height="12"><use href="#ic-x"/></svg>Cancelar</button></div>
+    </div>`;
   }).join('');
 }
 
 function renderExpirar() {
   const exp = dadosAssinaturas.filter(s=>s.ativa&&s.dias_rest<=7).sort((a,b)=>a.dias_rest-b.dias_rest);
-  document.getElementById('expirar-list').innerHTML = exp.length
+  const el = document.getElementById('expirar-list');
+  el.innerHTML = exp.length
     ? exp.map(x=>`
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;margin-bottom:8px;background:var(--bg-base);border-radius:12px;border:1px solid var(--border)">
-          <div class="mono">${x.uid}</div>
-          <div style="font-size:12px;color:var(--text-2)">${x.username||''} — Expira ${fmtDate(x.data_fim)}</div>
-          <span style="font-weight:700;color:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'var(--text-1)'}">${x.dias_rest}d</span>
+        <div class="row-card">
+          <div class="row-top"><div><div class="row-id">${x.uid}</div><div class="row-uname">${x.username||''}</div></div>
+            <span style="font-weight:800;font-size:15px;color:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'var(--text-1)'}">${x.dias_rest}d</span></div>
+          <div class="row-meta"><span>Expira <b>${fmtDate(x.data_fim)}</b></span></div>
         </div>`).join('')
-    : '<div style="color:var(--green);padding:20px;font-size:14px;display:flex;align-items:center;gap:8px"><svg width="16" height="16" color="var(--green)"><use href="#ic-check"/></svg>Nenhuma expira em 7 dias</div>';
+    : emptyState('ic-check','Nenhuma expira em 7 dias','var(--green)');
 }
 
 function renderDashExpirar() {
-  const exp = dadosAssinaturas.filter(s=>s.ativa&&s.dias_rest<=7).sort((a,b)=>a.dias_rest-b.dias_rest).slice(0,6);
-  document.getElementById('dash-expirar').innerHTML = exp.length
+  const exp = dadosAssinaturas.filter(s=>s.ativa&&s.dias_rest<=7).sort((a,b)=>a.dias_rest-b.dias_rest).slice(0,5);
+  const el = document.getElementById('dash-expirar');
+  el.innerHTML = exp.length
     ? exp.map(x=>`
-        <div class="expiry-item">
-          <div class="expiry-header">
-            <span class="expiry-id">${x.uid}${x.username?' ('+x.username+')':''}</span>
-            <span style="color:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'var(--text-2)'}">${x.dias_rest}d restantes</span>
-          </div>
+        <div class="row-card">
+          <div class="row-top"><span class="row-id">${x.uid}${x.username?' · '+x.username:''}</span>
+            <span style="font-size:11.5px;font-weight:700;color:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'var(--text-2)'}">${x.dias_rest}d</span></div>
           <div class="progress-bar"><div class="progress-fill" style="width:${Math.max(2,x.dias_rest/30*100)}%;background:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'linear-gradient(90deg,var(--purple-1),var(--purple-3))'}"></div></div>
         </div>`).join('')
-    : '<div style="color:var(--green);font-size:12px;display:flex;align-items:center;gap:5px"><svg width="13" height="13" color="var(--green)"><use href="#ic-check"/></svg>Nenhum expira em 7 dias</div>';
+    : emptyState('ic-check','Nenhum expira em 7 dias','var(--green)');
 }
 
 // ============================================================
@@ -1061,7 +800,7 @@ async function liberarUsuario() {
   const btn=document.getElementById('btn-liberar'); btn.disabled=true;
   try {
     const d=await api('/api/acao/liberar','POST',{uid,dias});
-    if(d.ok){toast(`✅ ${uid} liberado por ${dias} dias`,'success');if(d.aviso)toast('⚠️ '+d.aviso,'info');document.getElementById('lib-uid').value='';await carregarStats();await carregarAssinaturas();}
+    if(d.ok){toast(`${uid} liberado por ${dias} dias`,'success');document.getElementById('lib-uid').value='';await carregarStats();await carregarAssinaturas();}
     else toast('Erro: '+d.erro,'error');
   } catch(e){toast('Erro de conexão','error');}
   btn.disabled=false;
@@ -1078,9 +817,9 @@ async function checkStatus() {
     let html=`<div style="font-size:11px;color:var(--text-3);margin-bottom:8px;font-family:'JetBrains Mono',monospace">ID: ${uid}</div>`;
     html+=`<div style="margin-bottom:6px;display:flex;align-items:center;gap:6px"><svg width="13" height="13" color="${at?'var(--green)':'var(--red)'}"><use href="${at?'#ic-check':'#ic-x'}"/></svg>${at?'<b>Assinatura ativa</b>':'Sem assinatura ativa'}</div>`;
     if(sub) html+=`<div style="font-size:12px;color:var(--text-2);margin-bottom:4px">Expira: ${fmtDate(sub.data_fim)} (${sub.dias_rest} dias)</div>`;
-    if(d.restrito) html+=`<div style="display:flex;align-items:center;gap:5px;color:var(--red);margin-top:4px"><svg width="13" height="13" color="var(--red)"><use href="#ic-mute"/></svg><b>Usuário Restrito</b></div>`;
+    if(d.restrito) html+=`<div style="display:flex;align-items:center;gap:5px;color:var(--red);margin-top:4px"><svg width="13" height="13" color="var(--red)"><use href="#ic-mute"/></svg><b>Usuário restrito</b></div>`;
     if(d.trial) html+=`<div style="display:flex;align-items:center;gap:5px;color:var(--purple-3);margin-top:4px"><svg width="13" height="13" color="var(--purple-3)"><use href="#ic-gift"/></svg>${d.trial.ativo?'Trial ativo até '+fmtDate(d.trial.data_fim):'Trial já utilizado'}</div>`;
-    if(d.afiliado) html+=`<div style="display:flex;align-items:center;gap:5px;color:var(--green);margin-top:4px"><svg width="13" height="13" color="var(--green)"><use href="#ic-users"/></svg>Afiliado | Indicações: ${d.afiliado.indicados} | Saldo: R$ ${d.afiliado.saldo.toFixed(2)}</div>`;
+    if(d.afiliado) html+=`<div style="display:flex;align-items:center;gap:5px;color:var(--green);margin-top:4px"><svg width="13" height="13" color="var(--green)"><use href="#ic-users"/></svg>Indicações: ${d.afiliado.indicados} | Saldo: R$ ${d.afiliado.saldo.toFixed(2)}</div>`;
     el.innerHTML=html;
     document.getElementById('status-result').style.display='block';
   } catch(e){toast('Erro de conexão','error');}
@@ -1102,7 +841,7 @@ async function desrestringirUsuario() {
   if(!uid){toast('Informe o ID!','error');return;}
   try {
     const d=await api('/api/acao/desrestringir','POST',{uid});
-    if(d.ok){toast(`Restrição de ${uid} removida`);if(d.aviso)toast('⚠️ '+d.aviso,'info');document.getElementById('desrest-uid').value='';await carregarStats();await carregarRestritos();}
+    if(d.ok){toast(`Restrição de ${uid} removida`);document.getElementById('desrest-uid').value='';await carregarStats();await carregarRestritos();}
     else toast('Erro: '+d.erro,'error');
   } catch(e){toast('Erro de conexão','error');}
 }
@@ -1119,7 +858,7 @@ async function cancelarRapido(uid) {
 async function desrestRapido(uid) {
   try {
     const d=await api('/api/acao/desrestringir','POST',{uid:parseInt(uid)});
-    if(d.ok){toast(`${uid} desrestringido`);if(d.aviso)toast('⚠️ '+d.aviso,'info');await carregarRestritos();await carregarStats();}
+    if(d.ok){toast(`${uid} desrestringido`);await carregarRestritos();await carregarStats();}
     else toast('Erro: '+d.erro,'error');
   } catch(e){toast('Erro','error');}
 }
@@ -1130,7 +869,7 @@ async function liberarModal() {
   if(!uid){toast('Informe o ID!','error');return;}
   try {
     const d=await api('/api/acao/liberar','POST',{uid,dias});
-    if(d.ok){toast(`${uid} liberado por ${dias} dias`);if(d.aviso)toast('⚠️ '+d.aviso,'info');closeModal('modal-liberar');await carregarStats();await carregarAssinaturas();}
+    if(d.ok){toast(`${uid} liberado por ${dias} dias`);closeSheet('sheet-liberar');await carregarStats();await carregarAssinaturas();}
     else toast('Erro: '+d.erro,'error');
   } catch(e){toast('Erro de conexão','error');}
 }
@@ -1140,7 +879,7 @@ async function cancelarModal() {
   if(!uid){toast('ID inválido!','error');return;}
   try {
     const d=await api('/api/acao/cancelar','POST',{uid});
-    if(d.ok){toast('Cancelado');closeModal('modal-cancelar');await carregarStats();await carregarAssinaturas();}
+    if(d.ok){toast('Cancelado');closeSheet('sheet-cancelar');await carregarStats();await carregarAssinaturas();}
     else toast('Erro: '+d.erro,'error');
   } catch(e){toast('Erro de conexão','error');}
 }
@@ -1149,7 +888,7 @@ async function estenderModal() {
   const dias=parseInt(document.getElementById('m-ext-dias').value)||30;
   try {
     const d=await api('/api/acao/estender_todas','POST',{dias});
-    if(d.ok){toast(`${d.afetados} assinaturas estendidas por ${dias} dias`);closeModal('modal-estender');await carregarAssinaturas();}
+    if(d.ok){toast(`${d.afetados} assinaturas estendidas por ${dias} dias`);closeSheet('sheet-estender');await carregarAssinaturas();}
     else toast('Erro: '+d.erro,'error');
   } catch(e){toast('Erro de conexão','error');}
 }
@@ -1159,7 +898,7 @@ async function desrestModal() {
   if(!uid){toast('ID inválido!','error');return;}
   try {
     const d=await api('/api/acao/desrestringir','POST',{uid});
-    if(d.ok){toast(`${uid} desrestringido`);if(d.aviso)toast('⚠️ '+d.aviso,'info');closeModal('modal-desrest');await carregarRestritos();await carregarStats();}
+    if(d.ok){toast(`${uid} desrestringido`);closeSheet('sheet-desrest');await carregarRestritos();await carregarStats();}
     else toast('Erro: '+d.erro,'error');
   } catch(e){toast('Erro de conexão','error');}
 }
@@ -1191,38 +930,45 @@ function exportarCSVAssinaturas() {
 async function verificarConexao() {
   try {
     const d=await api('/api/stats');
-    if(d.ok){toast(`✅ Bot online — ${d.ativas} ativos, ${d.restritos} restritos`);setStatusOnline(true);}
+    if(d.ok){toast(`Bot online — ${d.ativas} ativos, ${d.restritos} restritos`);setStatusOnline(true);}
     else{toast('Bot respondeu com erro','error');setStatusOnline(false);}
   } catch(e){toast('Sem conexão com a API','error');setStatusOnline(false);}
 }
 
 // ============================================================
-// BUSCA GLOBAL
+// NAVEGAÇÃO / UI
 // ============================================================
-function globalSearch() {
-  const uid=document.getElementById('global-search').value.trim();
-  if(!uid)return;
-  document.getElementById('lib-uid').value=uid;
-  showPage('liberar',null);
-  setTimeout(checkStatus,100);
-}
-
-// ============================================================
-// UI HELPERS
-// ============================================================
-function showPage(id,el) {
+function goTab(id) {
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelectorAll('.tab-item').forEach(n=>n.classList.remove('active'));
   const pg=document.getElementById('page-'+id);
   if(pg) pg.classList.add('active');
-  if(el){el.classList.add('active');}
-  else{document.querySelectorAll('.nav-item').forEach(n=>{if(n.getAttribute('onclick')?.includes(`'${id}'`))n.classList.add('active');});}
+  const tab=document.querySelector(`.tab-item[data-tab="${id}"]`);
+  if(tab) tab.classList.add('active');
   const labels={dashboard:'Dashboard',planos:'Planos',assinaturas:'Assinaturas',restritos:'Restritos',testes:'Testes Grátis',liberar:'Liberar Usuário',afiliados:'Afiliados',expirar:'A Expirar',backup:'Backup'};
-  set('breadcrumb-text',labels[id]||id);
+  set('topbar-page', labels[id]||id);
+  document.querySelector('.content').scrollTo(0,0);
+  window.scrollTo(0,0);
 }
-function openModal(id){document.getElementById(id).classList.add('open');}
-function closeModal(id){document.getElementById(id).classList.remove('open');}
-document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
+function openSheet(id){document.getElementById(id).classList.add('open');}
+function closeSheet(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.sheet-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
+
+function toggleSearch(){
+  const el=document.getElementById('search-overlay');
+  el.classList.toggle('open');
+  if(el.classList.contains('open')) document.getElementById('global-search').focus();
+}
+document.getElementById('global-search').addEventListener('keydown',e=>{
+  if(e.key==='Enter'){
+    const uid=e.target.value.trim();
+    if(!uid)return;
+    document.getElementById('lib-uid').value=uid;
+    toggleSearch();
+    goTab('liberar');
+    setTimeout(checkStatus,150);
+  }
+});
 
 function toast(msg,type='success') {
   const el=document.createElement('div'); el.className=`toast ${type}`;
@@ -1230,11 +976,10 @@ function toast(msg,type='success') {
   const clr=type==='success'?'var(--green)':type==='info'?'var(--blue)':'var(--red)';
   el.innerHTML=`<svg width="16" height="16" color="${clr}"><use href="${ico}"/></svg>${msg}`;
   document.getElementById('toasts').appendChild(el);
-  setTimeout(()=>el.remove(),4500);
+  setTimeout(()=>el.remove(),4000);
 }
 function setStatusOnline(online) {
-  document.getElementById('status-dot').className='status-dot'+(online?'':' offline');
-  set('status-text',online?'Bot Online':'Sem conexão');
+  document.getElementById('status-dot').className='status-dot-sm'+(online?'':' offline');
 }
 function setDias(n) {
   document.getElementById('lib-dias').value=n;
@@ -1242,14 +987,10 @@ function setDias(n) {
 }
 function setExtDias(n) {
   document.getElementById('m-ext-dias').value=n;
-  document.querySelectorAll('#modal-estender .chip').forEach(c=>c.classList.toggle('selected',c.getAttribute('onclick')===`setExtDias(${n})`));
+  document.querySelectorAll('#sheet-estender .chip').forEach(c=>c.classList.toggle('selected',c.getAttribute('onclick')===`setExtDias(${n})`));
 }
 function set(id,html){const el=document.getElementById(id);if(el)el.innerHTML=html;}
-function brl(v){return 'R$ '+Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
 function fmtDate(d){if(!d)return '—';try{return new Date(d).toLocaleDateString('pt-BR');}catch(e){return d;}}
-
-document.getElementById('login-senha').addEventListener('keydown',e=>{if(e.key==='Enter')fazerLogin();});
-document.getElementById('global-search').addEventListener('keydown',e=>{if(e.key==='Enter')globalSearch();});
 
 // ============================================================
 // DONUT CHART
@@ -1259,7 +1000,7 @@ function desenharDonut(ativas,restritos,testes,usuarios) {
   const canvas=document.getElementById('donut-chart');
   if(!canvas)return;
   const ctx=canvas.getContext('2d');
-  const W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,R=82,r=52;
+  const W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,R=72,r=45;
   const semPlano=Math.max(0,usuarios-ativas-restritos-testes);
   const total=ativas+restritos+testes+semPlano||1;
   const segments=[
@@ -1273,12 +1014,12 @@ function desenharDonut(ativas,restritos,testes,usuarios) {
   function draw(p) {
     ctx.clearRect(0,0,W,H);
     ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.arc(cx,cy,r,0,Math.PI*2,true);ctx.fillStyle='#1a1730';ctx.fill();
-    let startAngle=-Math.PI/2; const gap=0.04;
+    let startAngle=-Math.PI/2; const gap=0.045;
     segments.forEach(seg=>{
       if(seg.val<=0)return;
       const sweep=(seg.val/total)*Math.PI*2*p;
       if(sweep<0.01)return;
-      ctx.shadowColor=seg.glow; ctx.shadowBlur=14;
+      ctx.shadowColor=seg.glow; ctx.shadowBlur=12;
       ctx.beginPath();ctx.arc(cx,cy,R,startAngle+gap/2,startAngle+sweep-gap/2);ctx.arc(cx,cy,r,startAngle+sweep-gap/2,startAngle+gap/2,true);ctx.closePath();ctx.fillStyle=seg.color;ctx.fill();
       ctx.shadowBlur=0; startAngle+=sweep;
     });
@@ -1288,10 +1029,10 @@ function desenharDonut(ativas,restritos,testes,usuarios) {
   animate();
   const pct=v=>total>1?Math.round(v/total*100):0;
   const setleg=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
-  setleg('leg-ativas',    ativas+' usuários');
-  setleg('leg-restritos', restritos+' usuários');
-  setleg('leg-testes',    testes+' usuários');
-  setleg('leg-sem',       semPlano+' usuários');
+  setleg('leg-ativas',    ativas);
+  setleg('leg-restritos', restritos);
+  setleg('leg-testes',    testes);
+  setleg('leg-sem',       semPlano);
   setleg('leg-ativas-pct',    pct(ativas)+'%');
   setleg('leg-restritos-pct', pct(restritos)+'%');
   setleg('leg-testes-pct',    pct(testes)+'%');
