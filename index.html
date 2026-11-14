@@ -2,1043 +2,323 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#09080f">
 <title>BERSERK — Admin</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg-base:#09080f;--bg-panel:#0f0d1a;--bg-card:#141127;--bg-card2:#1a1730;--bg-hover:#1f1c38;
-  --border:#2a2545;--border-glow:#6c3fff44;
-  --purple-1:#6c3fff;--purple-2:#8b5cf6;--purple-3:#a78bfa;--purple-glow:#6c3fff33;
-  --green:#22d6a0;--red:#ff4d6d;--yellow:#f59e0b;--blue:#38bdf8;
-  --text-1:#f0eeff;--text-2:#9b8ec4;--text-3:#5c4f8a;
-  --safe-b:env(safe-area-inset-bottom,0px);--safe-t:env(safe-area-inset-top,0px);
-  --tabbar-h:64px;
-}
+:root{--bg:#09080f;--panel:#0f0d1a;--card:#141127;--card2:#1a1730;--hover:#1f1c38;--bd:#2a2545;--glow:#6c3fff33;
+--p1:#6c3fff;--p2:#8b5cf6;--p3:#a78bfa;--green:#22d6a0;--red:#ff4d6d;--yellow:#f59e0b;--blue:#38bdf8;
+--t1:#f0eeff;--t2:#9b8ec4;--t3:#5c4f8a;--sb:env(safe-area-inset-bottom,0px);--st:env(safe-area-inset-top,0px);--tab:62px}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{overscroll-behavior-y:none}
-body{font-family:'Syne',sans-serif;background:var(--bg-base);color:var(--text-1);min-height:100vh}
-button,input{font-family:inherit}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh}
+button,input{font-family:inherit}code,.mono,.id{font-family:'JetBrains Mono',monospace}
 ::-webkit-scrollbar{display:none}
-
-/* ============ LOGIN ============ */
-#login-screen{position:fixed;inset:0;background:radial-gradient(ellipse at 50% -10%,#1a1335 0%,var(--bg-base) 60%);z-index:9999;display:flex;flex-direction:column;justify-content:center;padding:28px 22px;padding-bottom:calc(28px + var(--safe-b))}
-.login-logo{width:64px;height:64px;background:linear-gradient(135deg,var(--purple-1),var(--purple-2));border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;box-shadow:0 0 40px var(--purple-glow)}
-.login-title{font-size:30px;font-weight:800;letter-spacing:3px;text-align:center}
-.login-sub{font-size:11px;color:var(--text-3);text-align:center;margin-bottom:36px;font-family:'JetBrains Mono',monospace;letter-spacing:3px}
-.login-url-label{font-size:11px;color:var(--text-3);margin-bottom:6px;letter-spacing:.4px}
-.login-url-input,.login-input{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:15px 16px;color:var(--text-1);font-family:'JetBrains Mono',monospace;font-size:14px;outline:none;margin-bottom:12px;transition:border .2s}
-.login-input{font-family:'Syne',sans-serif;letter-spacing:1px;text-align:center;font-size:16px}
-.login-url-input:focus,.login-input:focus{border-color:var(--purple-1);box-shadow:0 0 0 3px var(--purple-glow)}
-.login-btn{width:100%;background:linear-gradient(135deg,var(--purple-1),var(--purple-2));color:#fff;border:none;border-radius:14px;padding:16px;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:1px;box-shadow:0 6px 24px var(--purple-glow);margin-top:6px}
-.login-btn:active{transform:scale(.98)}
-.login-err{color:var(--red);font-size:12.5px;margin-top:12px;padding:11px 14px;background:#ff4d6d12;border:1px solid #ff4d6d30;border-radius:10px;display:none;text-align:center}
-
-/* ============ APP SHELL ============ */
-#app{display:none;flex-direction:column;min-height:100vh}
-.topbar{position:sticky;top:0;z-index:80;background:#0f0d1acc;backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:calc(12px + var(--safe-t)) 16px 12px;display:flex;align-items:center;gap:10px}
-.topbar-logo{width:32px;height:32px;background:linear-gradient(135deg,var(--purple-1),var(--purple-2));border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.topbar-title{font-size:15px;font-weight:800;letter-spacing:1.5px}
-.topbar-page{font-size:10.5px;color:var(--text-3);font-family:'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase}
-.topbar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
-.icon-btn{width:36px;height:36px;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-2);flex-shrink:0}
-.icon-btn:active{background:var(--bg-hover)}
-.status-dot-sm{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0}
-.status-dot-sm.offline{background:var(--red)}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #22d6a066}50%{box-shadow:0 0 0 4px #22d6a000}}
-.status-dot-sm:not(.offline){animation:pulse 2s infinite}
-
-.search-overlay{position:fixed;top:0;left:0;right:0;z-index:90;background:var(--bg-panel);border-bottom:1px solid var(--border);padding:calc(12px + var(--safe-t)) 16px 12px;display:flex;gap:8px;transform:translateY(-100%);transition:transform .22s ease}
-.search-overlay.open{transform:translateY(0)}
-.search-input{flex:1;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;color:var(--text-1);font-size:14px;outline:none}
-.search-input:focus{border-color:var(--purple-1)}
-
-.content{flex:1;padding:16px;padding-bottom:calc(var(--tabbar-h) + 24px + var(--safe-b))}
-.page{display:none}
-.page.active{display:block;animation:fadeIn .25s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.page-title{font-size:20px;font-weight:800;margin-bottom:3px}
-.page-sub{font-size:12.5px;color:var(--text-2);margin-bottom:18px;line-height:1.5}
-.page-sub code{color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px}
-
-/* ============ BOTTOM TAB BAR ============ */
-.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:80;height:calc(var(--tabbar-h) + var(--safe-b));background:#0f0d1aee;backdrop-filter:blur(16px);border-top:1px solid var(--border);display:flex;padding-bottom:var(--safe-b)}
-.tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text-3);position:relative;transition:color .15s}
-.tab-item.active{color:var(--purple-3)}
-.tab-item.active::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:28px;height:2.5px;background:var(--purple-2);border-radius:0 0 3px 3px}
-.tab-label{font-size:10px;font-weight:600;letter-spacing:.2px}
-.tab-dot{position:absolute;top:6px;right:calc(50% - 17px);width:15px;height:15px;border-radius:50%;background:var(--red);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace}
-
-/* ============ STAT CARDS ============ */
-.stat-scroll{display:flex;gap:10px;overflow-x:auto;margin:0 -16px 18px;padding:0 16px 4px;scroll-snap-type:x mandatory}
-.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px;min-width:130px;scroll-snap-align:start;position:relative;overflow:hidden;flex-shrink:0}
-.stat-card::after{content:'';position:absolute;top:-10px;right:-10px;width:60px;height:60px;border-radius:50%;background:var(--purple-glow);filter:blur(22px)}
-.stat-card.green::after{background:#22d6a022}.stat-card.red::after{background:#ff4d6d22}
-.stat-card.yellow::after{background:#f59e0b22}.stat-card.blue::after{background:#38bdf822}
-.stat-icon-wrap{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
-.stat-icon-wrap.purple{background:var(--purple-glow);border:1px solid var(--border-glow)}
-.stat-icon-wrap.green{background:#22d6a018;border:1px solid #22d6a030}
-.stat-icon-wrap.red{background:#ff4d6d18;border:1px solid #ff4d6d30}
-.stat-icon-wrap.yellow{background:#f59e0b18;border:1px solid #f59e0b30}
-.stat-icon-wrap.blue{background:#38bdf818;border:1px solid #38bdf830}
-.stat-value{font-size:24px;font-weight:800;line-height:1;margin-bottom:3px}
-.stat-label{font-size:11px;color:var(--text-2);line-height:1.3}
-
-/* ============ CARDS / SECTIONS ============ */
-.card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:14px}
-.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px}
-.card-title{font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:7px}
-.refresh-btn{background:var(--bg-card2);border:1px solid var(--border);border-radius:9px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--text-2);flex-shrink:0}
-.refresh-btn:active{background:var(--bg-hover)}
-
-/* ============ ROW CARDS (replaces desktop tables) ============ */
-.row-list{display:flex;flex-direction:column;gap:9px}
-.row-card{background:var(--bg-base);border:1px solid var(--border);border-radius:14px;padding:13px 14px}
-.row-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
-.row-id{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--purple-3);font-weight:600}
-.row-uname{font-size:11.5px;color:var(--text-2)}
-.row-meta{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;color:var(--text-3);margin-bottom:10px}
-.row-meta b{color:var(--text-2);font-weight:600}
-.row-actions{display:flex;gap:8px}
-.empty-state{text-align:center;padding:36px 20px;color:var(--text-3);font-size:13px}
-.empty-state svg{margin-bottom:10px;opacity:.5}
-.loading-state{display:flex;align-items:center;gap:9px;justify-content:center;padding:30px;color:var(--text-3);font-size:13px}
-
-.badge{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.2px}
-.badge-dot{width:5px;height:5px;border-radius:50%}
-.badge.green{background:#22d6a018;color:var(--green)}.badge.green .badge-dot{background:var(--green)}
-.badge.red{background:#ff4d6d18;color:var(--red)}.badge.red .badge-dot{background:var(--red)}
-.badge.yellow{background:#f59e0b18;color:var(--yellow)}.badge.yellow .badge-dot{background:var(--yellow)}
-.badge.purple{background:var(--purple-glow);color:var(--purple-3)}.badge.purple .badge-dot{background:var(--purple-2)}
-
-/* ============ BUTTONS ============ */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 18px;border-radius:12px;border:none;font-size:13.5px;font-weight:700;cursor:pointer;min-height:44px}
-.btn:active{transform:scale(.97)}
-.btn-primary{background:linear-gradient(135deg,var(--purple-1),var(--purple-2));color:#fff;box-shadow:0 4px 18px var(--purple-glow)}
-.btn-ghost{background:var(--bg-card2);color:var(--text-2);border:1px solid var(--border)}
-.btn-danger{background:#ff4d6d18;color:var(--red);border:1px solid #ff4d6d30}
-.btn-success{background:#22d6a018;color:var(--green);border:1px solid #22d6a030}
-.btn-block{width:100%}
-.btn-sm{padding:8px 13px;font-size:12px;min-height:36px;border-radius:9px}
-.btn:disabled{opacity:.5}
-.btn-row{display:flex;gap:9px}
-.btn-row .btn{flex:1}
-
-/* ============ INPUTS ============ */
-.input-group{margin-bottom:14px}
-.input-label{font-size:11.5px;color:var(--text-2);margin-bottom:7px;display:flex;align-items:center;gap:5px;font-weight:600}
-.input-field{width:100%;background:var(--bg-base);border:1px solid var(--border);border-radius:12px;padding:13px 15px;color:var(--text-1);font-size:15px;outline:none}
-.input-field:focus{border-color:var(--purple-1)}
-.input-field::placeholder{color:var(--text-3)}
-.chip-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-.chip{background:var(--bg-card2);border:1px solid var(--border);border-radius:10px;padding:9px 13px;font-size:12.5px;color:var(--text-2)}
-.chip.selected{background:var(--purple-glow);border-color:var(--border-glow);color:var(--purple-3);font-weight:700}
-.info-box{background:var(--bg-base);border:1px solid var(--border);border-radius:12px;padding:13px 14px;font-size:12px;color:var(--text-2);display:flex;gap:9px;align-items:flex-start;margin-bottom:14px;line-height:1.5}
-.info-box code{color:var(--purple-3);font-family:'JetBrains Mono',monospace;font-size:11px}
-
-/* ============ PLANOS GRID ============ */
-.planos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px}
-.plano-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px 12px;text-align:center}
-.plano-emoji{font-size:24px;margin-bottom:7px}
-.plano-nome{font-size:12.5px;font-weight:700;margin-bottom:4px}
-.plano-valor{font-size:17px;font-weight:800;color:var(--purple-3)}
-.plano-comissao{font-size:10.5px;color:var(--green);margin-top:4px;font-family:'JetBrains Mono',monospace}
-
-/* ============ DONUT ============ */
-.donut-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:14px;position:relative;overflow:hidden}
-.donut-card::before{content:'';position:absolute;top:-50px;right:-50px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,#6c3fff22 0%,transparent 70%)}
-.donut-flex{display:flex;flex-direction:column;align-items:center;gap:18px}
-.donut-canvas-wrap{position:relative;width:170px;height:170px}
-#donut-chart{display:block;filter:drop-shadow(0 0 16px #6c3fff44)}
-.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.donut-center-value{font-size:26px;font-weight:800;line-height:1;background:linear-gradient(135deg,#f0eeff,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.donut-center-label{font-size:10px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-top:3px}
-.donut-legend{width:100%;display:flex;flex-direction:column;gap:9px}
-.legend-item{display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:12px;background:var(--bg-base);border:1px solid var(--border)}
-.legend-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-.legend-info{flex:1;min-width:0}
-.legend-name{font-size:11.5px;font-weight:600;margin-bottom:1px}
-.legend-val{font-size:10.5px;color:var(--text-3);font-family:'JetBrains Mono',monospace}
-.legend-pct{font-size:13px;font-weight:800;font-family:'JetBrains Mono',monospace;flex-shrink:0}
-
-.progress-bar{height:5px;background:var(--bg-card2);border-radius:10px;overflow:hidden}
-.progress-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--purple-1),var(--purple-3));transition:width .6s ease}
-.progress-fill.green{background:linear-gradient(90deg,#22d6a0,#38bdf8)}
-
-/* ============ MAIS (grid menu sheet) ============ */
-.mais-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.mais-item{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:18px 8px;display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center}
-.mais-item:active{background:var(--bg-hover)}
-.mais-icon{width:42px;height:42px;border-radius:12px;background:var(--purple-glow);border:1px solid var(--border-glow);display:flex;align-items:center;justify-content:center;color:var(--purple-3)}
-.mais-label{font-size:11.5px;font-weight:600;line-height:1.3}
-
-/* ============ BOTTOM SHEET MODALS ============ */
-.sheet-overlay{position:fixed;inset:0;background:#09080fcc;backdrop-filter:blur(4px);z-index:200;opacity:0;pointer-events:none;transition:opacity .22s}
-.sheet-overlay.open{opacity:1;pointer-events:all}
-.sheet{position:fixed;left:0;right:0;bottom:0;background:var(--bg-panel);border:1px solid var(--border);border-bottom:none;border-radius:22px 22px 0 0;padding:10px 20px calc(22px + var(--safe-b));transform:translateY(100%);transition:transform .28s cubic-bezier(.32,.72,0,1);max-height:85vh;overflow-y:auto}
-.sheet-overlay.open .sheet{transform:translateY(0)}
-.sheet-handle{width:36px;height:4px;border-radius:3px;background:var(--border);margin:0 auto 16px}
-.sheet-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.sheet-title{font-size:16px;font-weight:800;display:flex;align-items:center;gap:8px}
-.sheet-close{width:32px;height:32px;border-radius:9px;background:var(--bg-card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-2)}
-
-.toast-container{position:fixed;top:calc(12px + var(--safe-t));left:16px;right:16px;z-index:999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
-.toast{background:var(--bg-card);border:1px solid var(--border);border-radius:13px;padding:13px 16px;display:flex;align-items:center;gap:10px;animation:slideDown .28s ease;font-size:13px;box-shadow:0 8px 28px #00000066}
-.toast.success{border-color:#22d6a040}.toast.error{border-color:#ff4d6d40}.toast.info{border-color:#38bdf840}
-@keyframes slideDown{from{transform:translateY(-16px);opacity:0}to{transform:none;opacity:1}}
-
-.spinner{display:inline-block;width:15px;height:15px;border:2px solid var(--border);border-top-color:var(--purple-2);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
-@keyframes spin{to{transform:rotate(360deg)}}
-.ico{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+/* login */
+#login{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% -10%,#1a1335,var(--bg) 60%);z-index:300;padding:20px}
+.lbox{width:380px;max-width:100%;background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:34px 28px}
+.lbox h1{font-size:28px;letter-spacing:3px;text-align:center}.lbox p{font-size:11px;color:var(--t3);text-align:center;letter-spacing:3px;margin:4px 0 26px}
+.inp{width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:11px;padding:12px 14px;color:var(--t1);font-size:14px;outline:none;margin-bottom:12px}
+.inp:focus{border-color:var(--p1);box-shadow:0 0 0 3px var(--glow)}
+#lerr{color:var(--red);font-size:12.5px;text-align:center;margin-top:10px;min-height:16px}
+/* layout */
+#app{display:none;grid-template-columns:232px 1fr;min-height:100vh}
+aside{background:var(--panel);border-right:1px solid var(--bd);padding:22px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px}
+.brand{font-size:18px;font-weight:800;letter-spacing:2px;padding:0 10px 18px}.brand small{display:block;font-size:10px;color:var(--t3);letter-spacing:2px;font-weight:400;margin-top:2px}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;border-radius:11px;color:var(--t2);font-size:13.5px;font-weight:600;cursor:pointer}
+.nav:hover{background:var(--card)}.nav.on{background:var(--glow);color:var(--p3)}
+.n{font-size:10.5px;font-weight:800;background:var(--red);color:#fff;border-radius:10px;padding:1px 7px}
+.side-foot{margin-top:auto;font-size:11.5px;color:var(--t3);padding:0 10px}
+main{padding:28px 38px 60px;max-width:1280px;width:100%}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;gap:12px}
+.top h2{font-size:24px;font-weight:800}.top .sub{font-size:12.5px;color:var(--t2);margin-top:3px}
+.btn.mo{display:none}
+.page{display:none}.page.on{display:block;animation:fi .25s ease}@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:18px}
+.stat{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px}.stat b{display:block;font-size:28px;font-weight:800;line-height:1;margin-bottom:5px}.stat span{font-size:12px;color:var(--t2)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px;margin-bottom:16px}
+.card h3{font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:16px}.cols .card{margin:0}
+.bar{display:flex;height:12px;border-radius:8px;overflow:hidden;background:var(--card2);margin:4px 0 12px}
+.legend{display:flex;gap:6px 18px;flex-wrap:wrap;font-size:12px;color:var(--t2)}.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+/* tabelas (viram cards no celular) */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--t3);padding:9px 12px;border-bottom:1px solid var(--bd)}
+td{padding:11px 12px;border-bottom:1px solid #2a254566}tr:hover td{background:var(--hover)}
+.id{color:var(--p3);font-size:12.5px}.empty{text-align:center;color:var(--t3);padding:30px;font-size:13px}
+.badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.g{background:#22d6a018;color:var(--green)}.r{background:#ff4d6d18;color:var(--red)}.y{background:#f59e0b18;color:var(--yellow)}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:none;border-radius:10px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--p1),var(--p2));min-height:40px}
+.btn:hover{filter:brightness(1.1)}.btn:active{transform:scale(.97)}.btn:disabled{opacity:.5;cursor:default}
+.btn.gh{background:var(--card2);color:var(--t2);border:1px solid var(--bd)}.btn.rd{background:#ff4d6d18;color:var(--red);border:1px solid #ff4d6d40}.btn.gn{background:#22d6a018;color:var(--green);border:1px solid #22d6a040}
+.btn.sm{padding:6px 11px;font-size:12px;min-height:34px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row .inp{margin:0;flex:1;min-width:130px}
+.note{font-size:12px;color:var(--t2);line-height:1.5;margin:0 0 12px}.note code{color:var(--p3);font-size:11px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:14px}
+.kv div{background:var(--bg);border:1px solid var(--bd);border-radius:12px;padding:12px}.kv b{display:block;font-size:20px}.kv span{font-size:11px;color:var(--t2)}
+.prog{height:6px;background:var(--card2);border-radius:6px;overflow:hidden;margin-top:12px}.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--p1),var(--p3));transition:width .4s}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.chip{background:var(--card2);border:1px solid var(--bd);border-radius:10px;padding:8px 12px;font-size:12.5px;color:var(--t2);cursor:pointer}.chip.on{background:var(--glow);border-color:#6c3fff44;color:var(--p3);font-weight:700}
+#toasts{position:fixed;top:18px;right:18px;display:flex;flex-direction:column;gap:8px;z-index:999;pointer-events:none}
+.toast{background:var(--card);border:1px solid var(--bd);border-left:3px solid var(--green);border-radius:11px;padding:12px 16px;font-size:13px;box-shadow:0 8px 28px #0008;max-width:380px}.toast.e{border-left-color:var(--red)}
+/* barra de abas e folha "Mais" (só no celular) */
+.tabbar,.ov{display:none}
+@media(max-width:899px){
+  #app{grid-template-columns:1fr}aside{display:none}.btn.mo{display:inline-flex}.dk{display:none}
+  main{padding:0 16px calc(var(--tab) + 28px + var(--sb))}
+  .top{position:sticky;top:0;z-index:80;background:#0f0d1acc;backdrop-filter:blur(14px);margin:0 -16px 16px;padding:calc(12px + var(--st)) 16px 12px;border-bottom:1px solid var(--bd)}
+  .top h2{font-size:18px}.top .sub{display:none}
+  .stats{grid-template-columns:repeat(2,1fr);gap:10px}.stat{padding:15px}.stat b{font-size:24px}
+  .card{padding:16px}.inp{font-size:16px}.row .inp{min-width:100%}.row .btn{flex:1}
+  table,thead,tbody,tr,td{display:block;width:100%}thead{display:none}
+  tr{background:var(--bg);border:1px solid var(--bd);border-radius:14px;padding:8px 14px;margin-bottom:9px}
+  td{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0;border:none;text-align:right}
+  td::before{content:attr(data-l);color:var(--t3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;text-align:left;flex-shrink:0}
+  td[data-l=""]::before{content:none}td[data-l=""]{justify-content:flex-end}td:empty{display:none}tr:hover td{background:none}
+  #toasts{top:calc(12px + var(--st));left:16px;right:16px}.toast{max-width:none}
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:80;height:calc(var(--tab) + var(--sb));background:#0f0d1aee;backdrop-filter:blur(16px);border-top:1px solid var(--bd);padding-bottom:var(--sb)}
+  .tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--t3);font-size:10px;font-weight:600;position:relative;cursor:pointer}
+  .tab em{font-style:normal;font-size:19px;line-height:1}.tab.on{color:var(--p3)}.tab.on::before{content:'';position:absolute;top:0;width:28px;height:2.5px;background:var(--p2);border-radius:0 0 3px 3px}
+  .tab .n{position:absolute;top:5px;right:calc(50% - 22px)}
+  .ov{display:block;position:fixed;inset:0;background:#09080fcc;backdrop-filter:blur(4px);z-index:200;opacity:0;pointer-events:none;transition:opacity .22s}.ov.on{opacity:1;pointer-events:all}
+  .sheet{position:fixed;left:0;right:0;bottom:0;background:var(--panel);border:1px solid var(--bd);border-bottom:none;border-radius:22px 22px 0 0;padding:10px 20px calc(22px + var(--sb));transform:translateY(100%);transition:transform .28s cubic-bezier(.32,.72,0,1)}
+  .ov.on .sheet{transform:none}.hd{width:36px;height:4px;border-radius:3px;background:var(--bd);margin:0 auto 16px}
+  .sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;font-weight:800;font-size:16px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .gi{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px 6px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;font-weight:600}.gi em{font-style:normal;font-size:22px}
+}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="login-screen">
-  <div class="login-logo"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2l7 7-13 13-3-1-1-3 13-13z"/><path d="M3.5 20.5l2-2"/><path d="M18 8l-2 2"/></svg></div>
-  <div class="login-title">BERSERK</div>
-  <div class="login-sub">ADMIN · MOBILE</div>
-  <div class="login-url-label">URL DA API</div>
-  <input class="login-url-input" id="api-url-input" type="text" placeholder="https://berserk-oficial.squareweb.app" autocapitalize="off" autocorrect="off">
-  <input class="login-input" id="login-senha" type="password" placeholder="Senha do painel">
-  <button class="login-btn" onclick="fazerLogin()" id="login-btn">ENTRAR</button>
-  <div class="login-err" id="login-err">Senha ou URL incorreta. Verifique e tente novamente.</div>
-</div>
+<div id="login"><div class="lbox">
+  <h1>BERSERK</h1><p>ADMIN</p>
+  <input class="inp" id="l-url" placeholder="URL da API (https://seu-app.squareweb.app)" autocapitalize="off" autocorrect="off">
+  <input class="inp" id="l-pw" type="password" placeholder="Senha do painel">
+  <button class="btn" style="width:100%;padding:13px" onclick="login()">ENTRAR</button>
+  <div id="lerr"></div>
+</div></div>
 
-<!-- ICONS -->
-<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
-<symbol id="ic-sword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2l7 7-13 13-3-1-1-3 13-13z"/><path d="M3.5 20.5l2-2"/><path d="M18 8l-2 2"/></symbol>
-<symbol id="ic-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
-<symbol id="ic-diamond" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M2 9h20"/></symbol>
-<symbol id="ic-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></symbol>
-<symbol id="ic-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5" rx="1"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></symbol>
-<symbol id="ic-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
-<symbol id="ic-unlock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></symbol>
-<symbol id="ic-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></symbol>
-<symbol id="ic-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
-<symbol id="ic-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol>
-<symbol id="ic-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
-<symbol id="ic-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
-<symbol id="ic-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></symbol>
-<symbol id="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
-<symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
-<symbol id="ic-dollar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></symbol>
-<symbol id="ic-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
-<symbol id="ic-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
-<symbol id="ic-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-2"/><rect x="6" y="18" width="12" height="4"/></symbol>
-<symbol id="ic-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
-<symbol id="ic-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
-<symbol id="ic-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
-<symbol id="ic-pie" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></symbol>
-<symbol id="ic-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></symbol>
-<symbol id="ic-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
-</svg>
-
-<!-- APP -->
 <div id="app">
-  <div class="topbar">
-    <div class="topbar-logo"><svg width="17" height="17" color="#fff"><use href="#ic-sword"/></svg></div>
-    <div>
-      <div class="topbar-title">BERSERK</div>
-      <div class="topbar-page" id="topbar-page">Dashboard</div>
-    </div>
-    <div class="topbar-right">
-      <div class="icon-btn" onclick="toggleSearch()"><svg width="16" height="16"><use href="#ic-search"/></svg></div>
-      <div class="icon-btn" onclick="recarregarTudo()"><div class="status-dot-sm" id="status-dot"></div></div>
-      <div class="icon-btn" onclick="logout()"><svg width="15" height="15"><use href="#ic-logout"/></svg></div>
-    </div>
-  </div>
+  <aside>
+    <div class="brand">BERSERK<small>PAINEL ADMIN</small></div>
+    <div class="nav on" data-p="dash">Dashboard</div>
+    <div class="nav" data-p="subs">Assinaturas <span class="n" id="n-subs" style="background:var(--p1)">0</span></div>
+    <div class="nav" data-p="rest">Restritos <span class="n" id="n-rest">0</span></div>
+    <div class="nav" data-p="testes">Testes grátis</div>
+    <div class="nav" data-p="afil">Afiliados</div>
+    <div class="nav" data-p="acoes">Ações</div>
+    <div class="nav" data-p="var">Varredura</div>
+    <div class="nav" data-p="bkp">Backup</div>
+    <div class="side-foot"><div id="conn">● conectando...</div><a href="#" onclick="logout();return false" style="color:var(--t2);display:inline-block;margin-top:8px">Sair</a></div>
+  </aside>
 
-  <div class="search-overlay" id="search-overlay">
-    <input class="search-input" id="global-search" placeholder="Buscar por ID do usuário..." autofocus>
-    <div class="icon-btn" onclick="toggleSearch()"><svg width="15" height="15"><use href="#ic-x"/></svg></div>
-  </div>
+  <main>
+    <div class="top"><div><h2 id="ttl">Dashboard</h2><div class="sub" id="sub-ttl"></div></div>
+      <div class="row" style="flex-wrap:nowrap"><button class="btn gh" onclick="reloadAll()">↻<span class="dk">&nbsp;Atualizar</span></button><button class="btn gh mo" onclick="logout()">⎋</button></div></div>
 
-  <div class="content">
+    <section class="page on" id="p-dash">
+      <div class="stats">
+        <div class="stat"><b id="s-ativas" style="color:var(--p3)">—</b><span>Assinantes ativos</span></div>
+        <div class="stat"><b id="s-rest" style="color:var(--red)">—</b><span>Restritos</span></div>
+        <div class="stat"><b id="s-testes" style="color:var(--green)">—</b><span>Testes grátis</span></div>
+        <div class="stat"><b id="s-users" style="color:var(--blue)">—</b><span>Usuários no bot</span></div>
+        <div class="stat"><b id="s-tele" style="font-size:17px;padding:5px 0 7px">—</b><span>Conta Telethon</span></div>
+      </div>
+      <div class="card"><h3>Distribuição</h3><div class="bar" id="dist"></div>
+        <div class="legend"><span><i style="background:var(--p2)"></i>Ativos <b id="lg-a"></b></span><span><i style="background:var(--red)"></i>Restritos <b id="lg-r"></b></span><span><i style="background:var(--green)"></i>Testes <b id="lg-t"></b></span><span><i style="background:var(--blue)"></i>Sem plano <b id="lg-s"></b></span></div></div>
+      <div class="card"><h3>A expirar em 7 dias</h3><div id="t-exp"></div></div>
+    </section>
 
-    <!-- DASHBOARD -->
-    <div class="page active" id="page-dashboard">
-      <div class="page-title">Dashboard</div>
-      <div class="page-sub" id="dash-date">Carregando...</div>
+    <section class="page" id="p-subs"><div class="card"><h3>Assinantes</h3><input class="inp" id="f-subs" placeholder="Filtrar por ID ou username" oninput="renderSubs()"><div id="t-subs"></div></div></section>
 
-      <div class="donut-card">
-        <div class="card-header">
-          <div class="card-title"><svg width="14" height="14" color="var(--purple-3)"><use href="#ic-pie"/></svg>Distribuição</div>
-          <button class="refresh-btn" onclick="recarregarTudo()"><svg width="13" height="13"><use href="#ic-refresh"/></svg></button>
-        </div>
-        <div class="donut-flex">
-          <div class="donut-canvas-wrap">
-            <canvas id="donut-chart" width="170" height="170"></canvas>
-            <div class="donut-center"><div class="donut-center-value" id="donut-total">—</div><div class="donut-center-label">Total</div></div>
-          </div>
-          <div class="donut-legend">
-            <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6;box-shadow:0 0 8px #8b5cf688"></div><div class="legend-info"><div class="legend-name">Ativos</div><div class="legend-val" id="leg-ativas">—</div></div><div class="legend-pct" style="color:#a78bfa" id="leg-ativas-pct">—%</div></div>
-            <div class="legend-item"><div class="legend-dot" style="background:#ff4d6d;box-shadow:0 0 8px #ff4d6d88"></div><div class="legend-info"><div class="legend-name">Restritos</div><div class="legend-val" id="leg-restritos">—</div></div><div class="legend-pct" style="color:#ff4d6d" id="leg-restritos-pct">—%</div></div>
-            <div class="legend-item"><div class="legend-dot" style="background:#22d6a0;box-shadow:0 0 8px #22d6a088"></div><div class="legend-info"><div class="legend-name">Testes</div><div class="legend-val" id="leg-testes">—</div></div><div class="legend-pct" style="color:#22d6a0" id="leg-testes-pct">—%</div></div>
-            <div class="legend-item"><div class="legend-dot" style="background:#38bdf8;box-shadow:0 0 8px #38bdf888"></div><div class="legend-info"><div class="legend-name">Sem plano</div><div class="legend-val" id="leg-sem">—</div></div><div class="legend-pct" style="color:#38bdf8" id="leg-sem-pct">—%</div></div>
-          </div>
-        </div>
-      </div>
+    <section class="page" id="p-rest">
+      <div class="card"><h3>Restringir manualmente</h3>
+        <div class="row"><input class="inp" id="rs-uid" type="number" inputmode="numeric" placeholder="ID do usuário"><button class="btn rd" onclick="restringir('rs-uid')">Restringir</button></div>
+        <p class="note" style="margin:10px 0 0">Quem tem plano ativo não é restringido (cancele antes). Teste grátis ativo é encerrado. O bot aplica no Telegram em até 30s.</p></div>
+      <div class="card"><h3>Lista de restritos</h3><p class="note">Liberar aqui remove só dos dados. Use <code>/desrestringir &lt;ID&gt;</code> no bot para liberar no Telegram também.</p><div id="t-rest"></div></div>
+    </section>
 
-      <div class="stat-scroll">
-        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-diamond"/></svg></div><div class="stat-value" id="ins-ativas">—</div><div class="stat-label">Assinantes ativos</div></div>
-        <div class="stat-card red"><div class="stat-icon-wrap red"><svg width="16" height="16" color="var(--red)"><use href="#ic-mute"/></svg></div><div class="stat-value" id="ins-restritos">—</div><div class="stat-label">Restritos</div></div>
-        <div class="stat-card green"><div class="stat-icon-wrap green"><svg width="16" height="16" color="var(--green)"><use href="#ic-gift"/></svg></div><div class="stat-value" id="ins-testes">—</div><div class="stat-label">Testes grátis</div></div>
-        <div class="stat-card blue"><div class="stat-icon-wrap blue"><svg width="16" height="16" color="var(--blue)"><use href="#ic-users"/></svg></div><div class="stat-value" id="ins-usuarios">—</div><div class="stat-label">Total no bot</div></div>
-      </div>
+    <section class="page" id="p-testes"><div class="card"><h3>Trials ativos</h3><div id="t-testes"></div></div></section>
 
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title"><svg width="14" height="14" color="var(--yellow)"><use href="#ic-clock"/></svg>A expirar (7 dias)</div>
-          <button class="refresh-btn" onclick="carregarAssinaturas()"><svg width="13" height="13"><use href="#ic-refresh"/></svg></button>
-        </div>
-        <div id="dash-expirar" class="row-list"><div class="loading-state"><div class="spinner"></div>Carregando...</div></div>
-      </div>
+    <section class="page" id="p-afil">
+      <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+        <div class="stat"><b id="a-tot">—</b><span>Afiliados</span></div><div class="stat"><b id="a-ind" style="color:var(--green)">—</b><span>Indicações</span></div><div class="stat"><b id="a-gan" style="color:var(--yellow);font-size:20px;padding:3px 0">—</b><span>Comissões</span></div></div>
+      <div class="card"><h3>Ranking</h3><div id="t-afil"></div></div>
+    </section>
 
-      <div class="card">
-        <div class="card-title" style="margin-bottom:13px"><svg width="14" height="14" color="var(--purple-3)"><use href="#ic-zap"/></svg>Ações rápidas</div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <button class="btn btn-primary btn-block" onclick="goTab('liberar')"><svg width="14" height="14"><use href="#ic-unlock"/></svg>Liberar usuário</button>
-          <div class="btn-row">
-            <button class="btn btn-ghost" onclick="openSheet('sheet-cancelar')"><svg width="13" height="13"><use href="#ic-x"/></svg>Cancelar</button>
-            <button class="btn btn-ghost" onclick="openSheet('sheet-estender')"><svg width="13" height="13"><use href="#ic-plus"/></svg>Estender</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <section class="page" id="p-acoes"><div class="cols">
+      <div class="card"><h3>Liberar usuário</h3><input class="inp" id="lb-uid" type="number" inputmode="numeric" placeholder="ID do usuário">
+        <div class="chips" id="chips"><div class="chip" data-d="7">7d</div><div class="chip" data-d="15">15d</div><div class="chip on" data-d="30">30d</div><div class="chip" data-d="60">60d</div><div class="chip" data-d="90">90d</div><div class="chip" data-d="365">365d</div></div>
+        <input class="inp" id="lb-dias" type="number" inputmode="numeric" value="30" placeholder="Dias"><div class="row"><button class="btn" onclick="liberar()">Liberar</button><button class="btn gh" onclick="status('lb-uid')">Ver status</button></div><div id="st-out" class="note" style="margin-top:12px"></div></div>
+      <div class="card"><h3>Cancelar plano</h3><div class="row"><input class="inp" id="cn-uid" type="number" inputmode="numeric" placeholder="ID"><button class="btn rd" onclick="cancelar(val('cn-uid'))">Cancelar</button></div></div>
+      <div class="card"><h3>Restringir</h3><div class="row"><input class="inp" id="rs2-uid" type="number" inputmode="numeric" placeholder="ID"><button class="btn rd" onclick="restringir('rs2-uid')">Restringir</button></div></div>
+      <div class="card"><h3>Desrestringir</h3><div class="row"><input class="inp" id="dr-uid" type="number" inputmode="numeric" placeholder="ID"><button class="btn gn" onclick="desrest(val('dr-uid'))">Remover restrição</button></div></div>
+      <div class="card"><h3>Estender todas</h3><div class="row"><input class="inp" id="ex-dias" type="number" inputmode="numeric" value="30"><button class="btn" onclick="estender()">+ dias</button></div></div>
+    </div></section>
 
-    <!-- PLANOS -->
-    <div class="page" id="page-planos">
-      <div class="page-title">Planos</div>
-      <div class="page-sub">Tabela de preços e comissões (50% por venda)</div>
-      <div class="planos-grid" id="planos-grid"></div>
-      <div class="card">
-        <div class="card-title" style="margin-bottom:12px"><svg width="14" height="14" color="var(--purple-3)"><use href="#ic-dollar"/></svg>Resumo de comissões</div>
-        <div class="row-list" id="planos-list"></div>
-      </div>
-    </div>
+    <section class="page" id="p-var">
+      <div class="card"><h3>Conta Telethon <button class="btn gh sm" onclick="loadTele()">↻</button></h3><div id="tele"></div></div>
+      <div class="card"><h3>Varredura de membros</h3>
+        <p class="note">Lê todos os membros dos grupos pela conta conectada e acha quem fala sem plano nem teste. Gere o relatório primeiro; depois restrinja.</p>
+        <div class="row"><button class="btn" id="b-rel" onclick="startVar(false)">Gerar relatório</button><button class="btn rd" id="b-apl" onclick="startVar(true)">Restringir todos os livres</button><button class="btn gh" onclick="api('/api/varredura/parar','POST')">Parar</button></div>
+        <div id="var-out"></div></div>
+    </section>
 
-    <!-- ASSINATURAS -->
-    <div class="page" id="page-assinaturas">
-      <div class="page-title">Assinaturas</div>
-      <div class="page-sub">Endpoint <code>/api/assinaturas</code></div>
-      <div class="stat-scroll">
-        <div class="stat-card green"><div class="stat-icon-wrap green"><svg width="16" height="16" color="var(--green)"><use href="#ic-check"/></svg></div><div class="stat-value" id="sub-ativas">—</div><div class="stat-label">Ativas agora</div></div>
-        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-diamond"/></svg></div><div class="stat-value" id="sub-total">—</div><div class="stat-label">Total histórico</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title"><svg width="14" height="14" color="var(--purple-3)"><use href="#ic-diamond"/></svg>Assinantes</div>
-          <button class="btn btn-primary btn-sm" onclick="openSheet('sheet-liberar')"><svg width="12" height="12"><use href="#ic-plus"/></svg>Novo</button>
-        </div>
-        <input class="input-field" style="margin-bottom:12px" placeholder="Filtrar por ID ou username..." id="filter-sub" oninput="renderSubTable()">
-        <div class="row-list" id="sub-list"><div class="loading-state"><div class="spinner"></div>Carregando...</div></div>
-      </div>
-    </div>
-
-    <!-- RESTRITOS -->
-    <div class="page" id="page-restritos">
-      <div class="page-title">Restritos</div>
-      <div class="page-sub">Endpoint <code>/api/restritos</code></div>
-      <div class="info-box"><svg width="15" height="15" color="var(--yellow)" style="flex-shrink:0;margin-top:1px"><use href="#ic-info"/></svg><span>Desrestringir aqui remove só dos dados. Use <code>/desrestringir &lt;ID&gt;</code> no bot para liberar no Telegram também.</span></div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title"><svg width="14" height="14" color="var(--red)"><use href="#ic-mute"/></svg>Lista de restritos</div>
-          <button class="refresh-btn" onclick="carregarRestritos()"><svg width="13" height="13"><use href="#ic-refresh"/></svg></button>
-        </div>
-        <div class="row-list" id="rest-list"><div class="loading-state"><div class="spinner"></div>Carregando...</div></div>
-      </div>
-    </div>
-
-    <!-- TESTES -->
-    <div class="page" id="page-testes">
-      <div class="page-title">Testes Grátis</div>
-      <div class="page-sub">Endpoint <code>/api/testes</code></div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title"><svg width="14" height="14" color="var(--green)"><use href="#ic-gift"/></svg>Trials ativos</div>
-          <button class="refresh-btn" onclick="carregarTestes()"><svg width="13" height="13"><use href="#ic-refresh"/></svg></button>
-        </div>
-        <div id="trial-list" class="row-list"><div class="loading-state"><div class="spinner"></div>Carregando...</div></div>
-      </div>
-    </div>
-
-    <!-- LIBERAR -->
-    <div class="page" id="page-liberar">
-      <div class="page-title">Liberar Usuário</div>
-      <div class="page-sub">Ative ou renove assinaturas manualmente</div>
-      <div class="info-box"><svg width="15" height="15" color="var(--yellow)" style="flex-shrink:0;margin-top:1px"><use href="#ic-info"/></svg><span>Use também <code>/liberar &lt;ID&gt;</code> no bot para liberar no Telegram.</span></div>
-      <div class="card">
-        <div class="input-group"><div class="input-label"><svg width="12" height="12"><use href="#ic-user"/></svg>ID do usuário Telegram</div><input class="input-field" type="number" inputmode="numeric" placeholder="Ex: 123456789" id="lib-uid"></div>
-        <div class="input-group">
-          <div class="input-label"><svg width="12" height="12"><use href="#ic-calendar"/></svg>Plano / duração</div>
-          <div class="chip-row">
-            <div class="chip" onclick="setDias(1)">🟢 1d</div><div class="chip" onclick="setDias(3)">🔵 3d</div>
-            <div class="chip" onclick="setDias(7)">🟣 7d</div><div class="chip" onclick="setDias(15)">🟡 15d</div>
-            <div class="chip selected" onclick="setDias(30)">🔴 30d</div><div class="chip" onclick="setDias(60)">🟠 60d</div>
-            <div class="chip" onclick="setDias(90)">⚫ 90d</div><div class="chip" onclick="setDias(180)">💎 180d</div>
-            <div class="chip" onclick="setDias(365)">👑 365d</div>
-          </div>
-          <input class="input-field" type="number" inputmode="numeric" placeholder="Ou digite os dias" id="lib-dias" value="30">
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="liberarUsuario()" id="btn-liberar"><svg width="14" height="14"><use href="#ic-unlock"/></svg>Liberar</button>
-          <button class="btn btn-ghost" onclick="checkStatus()"><svg width="14" height="14"><use href="#ic-search"/></svg>Status</button>
-        </div>
-        <div id="status-result" style="margin-top:14px;display:none">
-          <div class="card" style="margin:0;background:var(--bg-base)"><div id="status-content"></div></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title" style="margin-bottom:13px"><svg width="14" height="14" color="var(--red)"><use href="#ic-x"/></svg>Cancelar assinatura</div>
-        <div class="input-group"><input class="input-field" type="number" inputmode="numeric" placeholder="ID do usuário" id="cancel-uid"></div>
-        <button class="btn btn-danger btn-block" onclick="cancelarAssinatura()"><svg width="14" height="14"><use href="#ic-x"/></svg>Cancelar plano</button>
-      </div>
-      <div class="card">
-        <div class="card-title" style="margin-bottom:13px"><svg width="14" height="14" color="var(--green)"><use href="#ic-unlock"/></svg>Desrestringir</div>
-        <div class="input-group"><input class="input-field" type="number" inputmode="numeric" placeholder="ID do usuário" id="desrest-uid"></div>
-        <button class="btn btn-success btn-block" onclick="desrestringirUsuario()"><svg width="14" height="14"><use href="#ic-unlock"/></svg>Remover restrição</button>
-      </div>
-    </div>
-
-    <!-- AFILIADOS -->
-    <div class="page" id="page-afiliados">
-      <div class="page-title">Afiliados</div>
-      <div class="page-sub">50% de comissão por venda — <code>/api/afiliados</code></div>
-      <div class="stat-scroll">
-        <div class="stat-card"><div class="stat-icon-wrap purple"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-users"/></svg></div><div class="stat-value" id="afil-total">—</div><div class="stat-label">Afiliados</div></div>
-        <div class="stat-card green"><div class="stat-icon-wrap green"><svg width="16" height="16" color="var(--green)"><use href="#ic-check"/></svg></div><div class="stat-value" id="afil-indicados">—</div><div class="stat-label">Indicações</div></div>
-        <div class="stat-card yellow"><div class="stat-icon-wrap yellow"><svg width="16" height="16" color="var(--yellow)"><use href="#ic-dollar"/></svg></div><div class="stat-value" id="afil-ganhos">—</div><div class="stat-label">Comissões pagas</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title"><svg width="14" height="14" color="var(--yellow)"><use href="#ic-trophy"/></svg>Ranking</div>
-          <button class="refresh-btn" onclick="carregarAfiliados()"><svg width="13" height="13"><use href="#ic-refresh"/></svg></button>
-        </div>
-        <div class="row-list" id="afiliados-list"><div class="loading-state"><div class="spinner"></div>Carregando...</div></div>
-      </div>
-    </div>
-
-    <!-- A EXPIRAR -->
-    <div class="page" id="page-expirar">
-      <div class="page-title">A Expirar</div>
-      <div class="page-sub">Assinaturas que vencem nos próximos 7 dias</div>
-      <button class="btn btn-primary btn-block" style="margin-bottom:14px" onclick="openSheet('sheet-estender')"><svg width="14" height="14"><use href="#ic-plus"/></svg>Estender todas</button>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title"><svg width="14" height="14" color="var(--yellow)"><use href="#ic-clock"/></svg>Próximos 7 dias</div>
-          <button class="refresh-btn" onclick="carregarAssinaturas()"><svg width="13" height="13"><use href="#ic-refresh"/></svg></button>
-        </div>
-        <div id="expirar-list" class="row-list"><div class="loading-state"><div class="spinner"></div>Carregando...</div></div>
-      </div>
-    </div>
-
-    <!-- BACKUP -->
-    <div class="page" id="page-backup">
-      <div class="page-title">Backup</div>
-      <div class="page-sub">Exporte e verifique os dados do sistema</div>
-      <div class="card" style="text-align:center">
-        <div style="width:48px;height:48px;border-radius:13px;background:var(--purple-glow);border:1px solid var(--border-glow);display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><svg width="22" height="22" color="var(--purple-3)"><use href="#ic-save"/></svg></div>
-        <div style="font-weight:700;margin-bottom:6px">Backup completo</div>
-        <div style="font-size:12px;color:var(--text-2);margin-bottom:14px">Exporta assinaturas, restritos e afiliados em JSON</div>
-        <button class="btn btn-primary btn-block" onclick="gerarBackup()"><svg width="14" height="14"><use href="#ic-download"/></svg>Gerar JSON</button>
-      </div>
-      <div class="card" style="text-align:center">
-        <div style="width:48px;height:48px;border-radius:13px;background:#22d6a018;border:1px solid #22d6a030;display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><svg width="22" height="22" color="var(--green)"><use href="#ic-dollar"/></svg></div>
-        <div style="font-weight:700;margin-bottom:6px">Exportar assinaturas</div>
-        <div style="font-size:12px;color:var(--text-2);margin-bottom:14px">Gera CSV com todos os assinantes</div>
-        <button class="btn btn-ghost btn-block" onclick="exportarCSVAssinaturas()"><svg width="14" height="14"><use href="#ic-download"/></svg>Exportar CSV</button>
-      </div>
-      <div class="card" style="text-align:center">
-        <div style="width:48px;height:48px;border-radius:13px;background:#38bdf818;border:1px solid #38bdf830;display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><svg width="22" height="22" color="var(--blue)"><use href="#ic-info"/></svg></div>
-        <div style="font-weight:700;margin-bottom:6px">Verificar conexão</div>
-        <div style="font-size:12px;color:var(--text-2);margin-bottom:14px">Testa conectividade com a API do bot</div>
-        <button class="btn btn-success btn-block" onclick="verificarConexao()"><svg width="14" height="14"><use href="#ic-check"/></svg>Verificar</button>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- BOTTOM TAB BAR -->
-  <div class="tabbar">
-    <div class="tab-item active" data-tab="dashboard" onclick="goTab('dashboard')"><svg width="21" height="21"><use href="#ic-dashboard"/></svg><span class="tab-label">Início</span></div>
-    <div class="tab-item" data-tab="planos" onclick="goTab('planos')"><svg width="21" height="21"><use href="#ic-tag"/></svg><span class="tab-label">Planos</span></div>
-    <div class="tab-item" data-tab="assinaturas" onclick="goTab('assinaturas')" style="position:relative"><svg width="21" height="21"><use href="#ic-diamond"/></svg><span class="tab-label">Ativas</span><span class="tab-dot" id="badge-ativas" style="display:none">0</span></div>
-    <div class="tab-item" data-tab="restritos" onclick="goTab('restritos')" style="position:relative"><svg width="21" height="21"><use href="#ic-mute"/></svg><span class="tab-label">Restritos</span><span class="tab-dot" id="badge-restritos" style="display:none">0</span></div>
-    <div class="tab-item" data-tab="mais" onclick="openSheet('sheet-mais')"><svg width="21" height="21"><use href="#ic-grid"/></svg><span class="tab-label">Mais</span></div>
-  </div>
+    <section class="page" id="p-bkp"><div class="cols">
+      <div class="card"><h3>Backup completo</h3><p class="note">Assinaturas, restritos e afiliados em JSON.</p><button class="btn" onclick="backup()">Baixar JSON</button></div>
+      <div class="card"><h3>Assinaturas em CSV</h3><p class="note">Todos os assinantes carregados.</p><button class="btn gh" onclick="csv()">Exportar CSV</button></div>
+    </div></section>
+  </main>
 </div>
 
-<!-- SHEET: MAIS -->
-<div class="sheet-overlay" id="sheet-mais">
-  <div class="sheet">
-    <div class="sheet-handle"></div>
-    <div class="sheet-header"><div class="sheet-title">Mais opções</div><div class="sheet-close" onclick="closeSheet('sheet-mais')"><svg width="13" height="13"><use href="#ic-x"/></svg></div></div>
-    <div class="mais-grid">
-      <div class="mais-item" onclick="goTab('testes');closeSheet('sheet-mais')"><div class="mais-icon"><svg width="19" height="19"><use href="#ic-gift"/></svg></div><div class="mais-label">Testes Grátis</div></div>
-      <div class="mais-item" onclick="goTab('liberar');closeSheet('sheet-mais')"><div class="mais-icon"><svg width="19" height="19"><use href="#ic-unlock"/></svg></div><div class="mais-label">Liberar Usuário</div></div>
-      <div class="mais-item" onclick="goTab('afiliados');closeSheet('sheet-mais')"><div class="mais-icon"><svg width="19" height="19"><use href="#ic-users"/></svg></div><div class="mais-label">Afiliados</div></div>
-      <div class="mais-item" onclick="goTab('expirar');closeSheet('sheet-mais')"><div class="mais-icon"><svg width="19" height="19"><use href="#ic-clock"/></svg></div><div class="mais-label">A Expirar</div></div>
-      <div class="mais-item" onclick="goTab('backup');closeSheet('sheet-mais')"><div class="mais-icon"><svg width="19" height="19"><use href="#ic-save"/></svg></div><div class="mais-label">Backup</div></div>
-    </div>
-  </div>
+<div class="tabbar" id="tabbar">
+  <div class="tab on" data-p="dash"><em>🏠</em>Início</div>
+  <div class="tab" data-p="subs"><em>💎</em>Ativas<span class="n" id="n-a" style="background:var(--p1)">0</span></div>
+  <div class="tab" data-p="rest"><em>🔇</em>Restritos<span class="n" id="n-r">0</span></div>
+  <div class="tab" data-p="var"><em>🔎</em>Varredura</div>
+  <div class="tab" id="t-mais" onclick="$('s-mais').classList.add('on')"><em>☰</em>Mais</div>
 </div>
-
-<!-- SHEET: LIBERAR (rápido, usado pelo botão "Novo" em Assinaturas) -->
-<div class="sheet-overlay" id="sheet-liberar">
-  <div class="sheet">
-    <div class="sheet-handle"></div>
-    <div class="sheet-header"><div class="sheet-title"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-unlock"/></svg>Liberar usuário</div><div class="sheet-close" onclick="closeSheet('sheet-liberar')"><svg width="13" height="13"><use href="#ic-x"/></svg></div></div>
-    <div class="input-group"><div class="input-label">ID do usuário Telegram</div><input class="input-field" type="number" inputmode="numeric" id="m-lib-uid" placeholder="123456789"></div>
-    <div class="input-group"><div class="input-label">Dias de acesso</div><input class="input-field" type="number" inputmode="numeric" id="m-lib-dias" value="30"></div>
-    <div class="btn-row">
-      <button class="btn btn-ghost" onclick="closeSheet('sheet-liberar')">Cancelar</button>
-      <button class="btn btn-primary" onclick="liberarModal()"><svg width="13" height="13"><use href="#ic-unlock"/></svg>Liberar</button>
-    </div>
-  </div>
-</div>
-
-<!-- SHEET: CANCELAR -->
-<div class="sheet-overlay" id="sheet-cancelar">
-  <div class="sheet">
-    <div class="sheet-handle"></div>
-    <div class="sheet-header"><div class="sheet-title"><svg width="16" height="16" color="var(--red)"><use href="#ic-x"/></svg>Cancelar assinatura</div><div class="sheet-close" onclick="closeSheet('sheet-cancelar')"><svg width="13" height="13"><use href="#ic-x"/></svg></div></div>
-    <div class="input-group"><div class="input-label">ID do usuário</div><input class="input-field" type="number" inputmode="numeric" id="m-cancel-uid" placeholder="123456789"></div>
-    <div class="btn-row">
-      <button class="btn btn-ghost" onclick="closeSheet('sheet-cancelar')">Voltar</button>
-      <button class="btn btn-danger" onclick="cancelarModal()"><svg width="13" height="13"><use href="#ic-x"/></svg>Confirmar</button>
-    </div>
-  </div>
-</div>
-
-<!-- SHEET: ESTENDER -->
-<div class="sheet-overlay" id="sheet-estender">
-  <div class="sheet">
-    <div class="sheet-handle"></div>
-    <div class="sheet-header"><div class="sheet-title"><svg width="16" height="16" color="var(--purple-3)"><use href="#ic-plus"/></svg>Estender todas</div><div class="sheet-close" onclick="closeSheet('sheet-estender')"><svg width="13" height="13"><use href="#ic-x"/></svg></div></div>
-    <div class="info-box"><svg width="14" height="14" color="var(--yellow)" style="flex-shrink:0"><use href="#ic-info"/></svg><span>Adiciona dias a <b>todos</b> os assinantes ativos.</span></div>
-    <div class="chip-row">
-      <div class="chip" onclick="setExtDias(7)">7 dias</div><div class="chip" onclick="setExtDias(15)">15 dias</div>
-      <div class="chip selected" onclick="setExtDias(30)">30 dias</div><div class="chip" onclick="setExtDias(60)">60 dias</div>
-    </div>
-    <div class="input-group"><div class="input-label">Dias a adicionar</div><input class="input-field" type="number" inputmode="numeric" id="m-ext-dias" value="30"></div>
-    <div class="btn-row">
-      <button class="btn btn-ghost" onclick="closeSheet('sheet-estender')">Cancelar</button>
-      <button class="btn btn-primary" onclick="estenderModal()"><svg width="13" height="13"><use href="#ic-plus"/></svg>Estender</button>
-    </div>
-  </div>
-</div>
-
-<!-- SHEET: DESRESTRINGIR -->
-<div class="sheet-overlay" id="sheet-desrest">
-  <div class="sheet">
-    <div class="sheet-handle"></div>
-    <div class="sheet-header"><div class="sheet-title"><svg width="16" height="16" color="var(--green)"><use href="#ic-unlock"/></svg>Desrestringir</div><div class="sheet-close" onclick="closeSheet('sheet-desrest')"><svg width="13" height="13"><use href="#ic-x"/></svg></div></div>
-    <div class="input-group"><div class="input-label">ID do usuário</div><input class="input-field" type="number" inputmode="numeric" id="m-desrest-uid" placeholder="123456789"></div>
-    <div class="btn-row">
-      <button class="btn btn-ghost" onclick="closeSheet('sheet-desrest')">Cancelar</button>
-      <button class="btn btn-success" onclick="desrestModal()"><svg width="13" height="13"><use href="#ic-unlock"/></svg>Remover</button>
-    </div>
-  </div>
-</div>
-
-<div class="toast-container" id="toasts"></div>
+<div class="ov" id="s-mais" onclick="if(event.target===this)this.classList.remove('on')"><div class="sheet"><div class="hd"></div><div class="sh">Mais opções<button class="btn gh sm" onclick="$('s-mais').classList.remove('on')">✕</button></div>
+  <div class="grid"><div class="gi" data-go="testes"><em>🎁</em>Testes grátis</div><div class="gi" data-go="afil"><em>👥</em>Afiliados</div><div class="gi" data-go="acoes"><em>⚙️</em>Ações</div><div class="gi" data-go="bkp"><em>💾</em>Backup</div></div></div></div>
+<div id="toasts"></div>
 
 <script>
-// ============================================================
-// PLANOS (espelho do bot)
-// ============================================================
-const PLANOS = [
-  { id:'plano_1h',   emoji:'⏱️', nome:'1 Hora',             dias:1/24, valor:6.00,   comissao:3.00   },
-  { id:'plano_3d',   emoji:'🔵', nome:'1 Dia',              dias:1,   valor:10.00,  comissao:5.00   },
-  { id:'plano_7d',   emoji:'🟣', nome:'7 Dias',             dias:7,   valor:15.00,  comissao:7.50   },
-  { id:'plano_15d',  emoji:'🟡', nome:'15 Dias',            dias:15,  valor:18.00,  comissao:9.00   },
-  { id:'plano_30d',  emoji:'🔴', nome:'30 Dias ⭐ Popular', dias:30,  valor:25.00,  comissao:12.50  },
-  { id:'plano_60d',  emoji:'🟠', nome:'60 Dias',            dias:60,  valor:45.00,  comissao:22.50  },
-  { id:'plano_90d',  emoji:'⚫', nome:'90 Dias',            dias:90,  valor:65.00,  comissao:32.50  },
-  { id:'plano_180d', emoji:'💎', nome:'180 Dias',           dias:180, valor:110.00, comissao:55.00  },
-  { id:'plano_365d', emoji:'👑', nome:'365 Dias',           dias:365, valor:180.00, comissao:90.00  },
-];
+const $=id=>document.getElementById(id),val=id=>parseInt($(id).value)||0;
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fd=d=>{try{return d?new Date(d).toLocaleDateString('pt-BR'):'—'}catch(e){return d}};
+let API='',TOKEN='',SUBS=[],poll=null;
 
-function renderPlanos() {
-  document.getElementById('planos-grid').innerHTML = PLANOS.map(p => `
-    <div class="plano-card">
-      <div class="plano-emoji">${p.emoji}</div>
-      <div class="plano-nome">${p.nome}</div>
-      <div class="plano-valor">R$ ${p.valor.toFixed(2)}</div>
-      <div class="plano-comissao">Com.: R$ ${p.comissao.toFixed(2)}</div>
-    </div>`).join('');
+async function api(p,m='GET',b){
+  const r=await fetch(API+p,{method:m,headers:{'X-Auth-Token':TOKEN,'Content-Type':'application/json'},body:b?JSON.stringify(b):undefined});
+  if(r.status===401){logout();throw new Error('Sessão expirada')}
+  return r.json();
+}
+function toast(m,e){const t=document.createElement('div');t.className='toast'+(e?' e':'');t.textContent=m;$('toasts').appendChild(t);setTimeout(()=>t.remove(),4200)}
+/* tabela no desktop, cards no celular (o CSS troca; data-l vira o rótulo) */
+const tbl=(h,rows,empty)=>rows.length?`<table><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map((c,i)=>`<td data-l="${h[i]}">${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`:`<div class="empty">${empty}</div>`;
 
-  document.getElementById('planos-list').innerHTML = PLANOS.map(p => `
-    <div class="row-card">
-      <div class="row-top"><div class="row-uname">${p.emoji} ${p.nome}</div><div class="row-id" style="color:var(--purple-3)">R$ ${p.valor.toFixed(2)}</div></div>
-      <div class="row-meta"><span>Comissão: <b style="color:var(--green)">R$ ${p.comissao.toFixed(2)}</b></span></div>
-    </div>`).join('');
+/* login */
+async function login(){
+  const url=$('l-url').value.trim().replace(/\/$/,''),senha=$('l-pw').value.trim();
+  if(!url||!senha){$('lerr').textContent='Informe a URL e a senha';return}
+  try{
+    const r=await fetch(url+'/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({senha})}),d=await r.json();
+    if(d.ok&&d.token){API=url;TOKEN=d.token;sessionStorage.setItem('bk_url',url);sessionStorage.setItem('bk_token',TOKEN);start()}
+    else $('lerr').textContent=d.erro||'Senha incorreta';
+  }catch(e){$('lerr').textContent='Não foi possível conectar. Confira a URL.'}
 }
+function logout(){TOKEN='';sessionStorage.clear();$('app').style.display='none';$('login').style.display='flex';clearInterval(poll)}
+function start(){$('login').style.display='none';$('app').style.display='grid';$('sub-ttl').textContent=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});reloadAll()}
+['l-url','l-pw'].forEach(i=>$(i).addEventListener('keydown',e=>{if(e.key==='Enter')login()}));
+(()=>{const u=sessionStorage.getItem('bk_url'),t=sessionStorage.getItem('bk_token');$('l-url').value=u||'';if(u&&t){API=u;TOKEN=t;start()}})();
 
-// ============================================================
-// ESTADO GLOBAL
-// ============================================================
-let API_BASE = '';
-let AUTH_TOKEN = '';
-let dadosAssinaturas = [];
+/* navegação (barra lateral no desktop, abas no celular) */
+const TT={dash:'Dashboard',subs:'Assinaturas',rest:'Restritos',testes:'Testes grátis',afil:'Afiliados',acoes:'Ações',var:'Varredura',bkp:'Backup'};
+function show(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.toggle('on',x.id==='p-'+p));
+  document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('on',x.dataset.p===p));
+  document.querySelectorAll('.tab[data-p]').forEach(x=>x.classList.toggle('on',x.dataset.p===p));
+  $('t-mais').classList.toggle('on',!document.querySelector('.tab[data-p].on'));
+  $('ttl').textContent=TT[p];window.scrollTo(0,0);if(p==='var')loadTele();
+}
+document.querySelectorAll('.nav,.tab[data-p]').forEach(n=>n.onclick=()=>show(n.dataset.p));
+document.querySelectorAll('.gi').forEach(g=>g.onclick=()=>{$('s-mais').classList.remove('on');show(g.dataset.go)});
+document.querySelectorAll('#chips .chip').forEach(c=>c.onclick=()=>{$('lb-dias').value=c.dataset.d;document.querySelectorAll('#chips .chip').forEach(x=>x.classList.toggle('on',x===c))});
 
-// ============================================================
-// LOGIN
-// ============================================================
-async function fazerLogin() {
-  const url   = (document.getElementById('api-url-input').value||'').trim().replace(/\/$/, '');
-  const senha = (document.getElementById('login-senha').value||'').trim();
-  if (!url)   { erroLogin('Informe a URL da API'); return; }
-  if (!senha) { erroLogin('Informe a senha'); return; }
-  const btn = document.getElementById('login-btn');
-  btn.disabled = true; btn.textContent = 'Entrando...';
-  try {
-    const res  = await fetch(`${url}/api/login`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({senha}) });
-    const data = await res.json();
-    if (data.ok && data.token) {
-      API_BASE = url; AUTH_TOKEN = data.token;
-      sessionStorage.setItem('bk_token', AUTH_TOKEN);
-      sessionStorage.setItem('bk_url',   API_BASE);
-      mostrarApp();
-    } else { erroLogin(data.erro || 'Senha ou URL incorreta'); }
-  } catch(e) { erroLogin('Não foi possível conectar. Verifique a URL.'); }
-  btn.disabled = false; btn.textContent = 'ENTRAR';
+/* dados */
+const reloadAll=()=>Promise.all([loadStats(),loadSubs(),loadRest(),loadTestes(),loadAfil()]);
+async function loadStats(){
+  try{
+    const d=await api('/api/stats');if(!d.ok)return;
+    $('s-ativas').textContent=d.ativas;$('s-rest').textContent=d.restritos;$('s-testes').textContent=d.testes;$('s-users').textContent=d.usuarios;
+    ['n-subs','n-a'].forEach(i=>$(i).textContent=d.ativas);['n-rest','n-r'].forEach(i=>{$(i).textContent=d.restritos;$(i).style.display=d.restritos?'':'none'});
+    $('s-tele').innerHTML=d.telethon?'<span style="color:var(--green)">● Conectada</span>':'<span style="color:var(--red)">● Desconectada</span>';
+    const sem=Math.max(0,d.usuarios-d.ativas-d.restritos-d.testes),tot=Math.max(1,d.ativas+d.restritos+d.testes+sem);
+    $('dist').innerHTML=[[d.ativas,'var(--p2)'],[d.restritos,'var(--red)'],[d.testes,'var(--green)'],[sem,'var(--blue)']].map(([v,c])=>`<i style="width:${v/tot*100}%;background:${c}"></i>`).join('');
+    $('lg-a').textContent=d.ativas;$('lg-r').textContent=d.restritos;$('lg-t').textContent=d.testes;$('lg-s').textContent=sem;
+    $('conn').innerHTML='<span style="color:var(--green)">●</span> online';
+  }catch(e){$('conn').innerHTML='<span style="color:var(--red)">●</span> offline'}
 }
-function erroLogin(msg) {
-  const el = document.getElementById('login-err');
-  el.textContent = msg; el.style.display = 'block';
-  setTimeout(() => el.style.display = 'none', 5000);
+async function loadSubs(){
+  const d=await api('/api/assinaturas');if(!d.ok)return;SUBS=d.assinaturas||[];renderSubs();
+  const exp=SUBS.filter(s=>s.ativa&&s.dias_rest<=7).sort((a,b)=>a.dias_rest-b.dias_rest);
+  $('t-exp').innerHTML=tbl(['ID','Username','Expira','Restam'],exp.map(s=>[`<span class="id">${s.uid}</span>`,esc(s.username)||'—',fd(s.data_fim),`<span class="badge ${s.dias_rest<=1?'r':'y'}">${s.dias_rest}d</span>`]),'Nenhuma assinatura expira em 7 dias');
 }
-function mostrarApp() {
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'flex';
-  document.getElementById('dash-date').textContent = new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});
-  renderPlanos();
-  recarregarTudo();
+function renderSubs(){
+  const f=($('f-subs').value||'').toLowerCase(),rows=SUBS.filter(s=>!f||String(s.uid).includes(f)||(s.username||'').toLowerCase().includes(f));
+  $('t-subs').innerHTML=tbl(['ID','Username','Expira','Restam','Status',''],rows.map(s=>[`<span class="id">${s.uid}</span>`,esc(s.username)||'—',fd(s.data_fim),s.dias_rest+'d',
+    s.ativa?`<span class="badge ${s.dias_rest<=2?'y':'g'}">${s.dias_rest<=2?'Expirando':'Ativa'}</span>`:'<span class="badge r">Expirada</span>',
+    `<button class="btn rd sm" onclick="cancelar(${s.uid})">Cancelar</button>`]),'Nenhum resultado');
 }
-function logout() {
-  AUTH_TOKEN = ''; API_BASE = '';
-  sessionStorage.removeItem('bk_token'); sessionStorage.removeItem('bk_url');
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('login-senha').value = '';
+async function loadRest(){
+  const d=await api('/api/restritos');if(!d.ok)return;
+  $('t-rest').innerHTML=tbl(['ID','Restringido em','Libera em',''],(d.restritos||[]).map(r=>[`<span class="id">${r.uid}</span>`,fd(r.data_restricao),fd(r.data_liberacao),`<button class="btn gn sm" onclick="desrest(${r.uid})">Liberar</button>`]),'Nenhum usuário restrito ✅');
 }
-(function restaurarSessao() {
-  const t = sessionStorage.getItem('bk_token'), u = sessionStorage.getItem('bk_url');
-  if (t && u) { AUTH_TOKEN=t; API_BASE=u; document.getElementById('api-url-input').value=u; mostrarApp(); }
-})();
-
-// ============================================================
-// API
-// ============================================================
-async function api(path, method='GET', body=null) {
-  const opts = { method, headers:{'X-Auth-Token':AUTH_TOKEN,'Content-Type':'application/json'} };
-  if (body) opts.body = JSON.stringify(body);
-  const res = await fetch(`${API_BASE}${path}`, opts);
-  if (res.status === 401) { logout(); throw new Error('Sessão expirada'); }
-  return res.json();
+async function loadTestes(){
+  const d=await api('/api/testes');if(!d.ok)return;
+  $('t-testes').innerHTML=tbl(['ID','Username','Termina','Restam'],(d.testes||[]).map(t=>[`<span class="id">${t.uid}</span>`,esc(t.username)||'—',fd(t.data_fim),`<span class="badge ${t.dias_rest<=1?'y':'g'}">+${t.dias_rest}d</span>`]),'Nenhum trial ativo');
+}
+async function loadAfil(){
+  const d=await api('/api/afiliados');if(!d.ok)return;
+  $('a-tot').textContent=d.total;$('a-ind').textContent=d.total_indicados;$('a-gan').textContent='R$ '+(d.total_ganhos||0).toFixed(2);
+  $('t-afil').innerHTML=tbl(['#','ID','Username','Indicações','Saldo','Ganhos'],(d.afiliados||[]).map((a,i)=>[i+1,`<span class="id">${a.uid}</span>`,a.username?'@'+esc(a.username):'—',a.indicados,
+    `<span class="badge ${a.saldo>0?'y':'g'}">R$ ${(a.saldo||0).toFixed(2)}</span>`,'R$ '+(a.ganhos_total||0).toFixed(2)]),'Nenhum afiliado ainda');
 }
 
-// ============================================================
-// CARREGAMENTO
-// ============================================================
-async function recarregarTudo() {
-  await Promise.all([carregarStats(),carregarAssinaturas(),carregarRestritos(),carregarTestes(),carregarAfiliados()]);
+/* ações */
+async function act(path,body,ok){
+  try{const d=await api(path,'POST',body);if(d.ok){toast(ok+(d.aviso?' — '+d.aviso:''));reloadAll()}else toast(d.erro||'Erro','e');return d}
+  catch(e){toast('Erro de conexão','e')}
+}
+const liberar=()=>{const u=val('lb-uid'),d=val('lb-dias')||30;if(!u)return toast('Informe o ID','e');act('/api/acao/liberar',{uid:u,dias:d},`${u} liberado por ${d} dias`)};
+const cancelar=u=>{if(!u)return toast('Informe o ID','e');if(confirm(`Cancelar o plano de ${u}?`))act('/api/acao/cancelar',{uid:u},`Plano de ${u} cancelado`)};
+const desrest=u=>{if(!u)return toast('Informe o ID','e');act('/api/acao/desrestringir',{uid:u},`Restrição de ${u} removida`)};
+const restringir=i=>{const u=val(i);if(!u)return toast('Informe o ID','e');if(confirm(`Restringir ${u}?`))act('/api/acao/restringir',{uid:u},`${u} restringido`)};
+const estender=()=>{const d=val('ex-dias');if(d&&confirm(`Adicionar ${d} dias a TODAS as assinaturas ativas?`))act('/api/acao/estender_todas',{dias:d},`Assinaturas estendidas em ${d} dias`)};
+async function status(i){
+  const u=val(i);if(!u)return toast('Informe o ID','e');
+  const d=await api('/api/status_user/'+u);if(!d.ok)return toast(d.erro||'Erro','e');const s=d.assinatura;
+  let h=`<b>${u}</b><br>`+(s&&s.ativa?`Plano ativo até ${fd(s.data_fim)} (${s.dias_rest} dias)<br>`:'Sem plano ativo<br>');
+  if(d.restrito)h+='<span style="color:var(--red)">Restrito</span><br>';
+  if(d.trial)h+=d.trial.ativo?`Teste ativo até ${fd(d.trial.data_fim)}<br>`:'Teste já utilizado<br>';
+  if(d.afiliado)h+=`Afiliado: ${d.afiliado.indicados} indicações, saldo R$ ${d.afiliado.saldo.toFixed(2)}`;
+  $('st-out').innerHTML=h;
 }
 
-async function carregarStats() {
-  try {
-    const d = await api('/api/stats');
-    if (!d.ok) return;
-    setBadge('badge-ativas', d.ativas);
-    setBadge('badge-restritos', d.restritos);
-    set('ins-ativas', d.ativas); set('ins-restritos', d.restritos);
-    set('ins-testes', d.testes); set('ins-usuarios', d.usuarios);
-    desenharDonut(d.ativas, d.restritos, d.testes, d.usuarios);
-    setStatusOnline(true);
-  } catch(e) { setStatusOnline(false); }
+/* Telethon / varredura */
+async function loadTele(){
+  $('tele').innerHTML='<div class="empty">Consultando...</div>';
+  try{const d=await api('/api/telethon');
+    if(!d.ok)return $('tele').innerHTML=`<div class="empty">Erro: ${esc(d.erro)}</div>`;
+    if(!d.conectado)return $('tele').innerHTML='<div class="empty">Conta não conectada. Envie <code>/login</code> no privado do bot.</div>';
+    $('tele').innerHTML=`<p class="note"><span class="badge g">Conectada</span> &nbsp;${esc(d.nome)} <span class="id">(${d.id})</span></p>`+
+      tbl(['Grupo','Papel','Membros'],d.grupos.map(g=>[`<span class="id">${g.gid}</span>`,g.erro?`<span class="badge r">${esc(g.erro)}</span>`:g.admin?'<span class="badge g">Admin</span>':'<span class="badge y">Precisa ser admin</span>',g.membros??'?']),'Sem grupos');
+  }catch(e){$('tele').innerHTML='<div class="empty">Falha ao consultar</div>'}
 }
-function setBadge(id, v) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.textContent = v;
-  el.style.display = v > 0 ? 'flex' : 'none';
+async function startVar(aplicar){
+  if(aplicar&&!confirm('Restringir TODOS os usuários sem plano nem teste que ainda podem falar?'))return;
+  const d=await api('/api/varredura','POST',{aplicar});if(!d.ok)return toast(d.erro||'Erro','e');
+  clearInterval(poll);poll=setInterval(pollVar,2500);pollVar();
 }
-
-async function carregarAssinaturas() {
-  try {
-    const d = await api('/api/assinaturas');
-    if (!d.ok) return;
-    dadosAssinaturas = d.assinaturas || [];
-    set('sub-total', dadosAssinaturas.length);
-    renderSubTable();
-    renderExpirar();
-    renderDashExpirar();
-  } catch(e) { console.error('carregarAssinaturas:',e); }
+async function pollVar(){
+  const d=await api('/api/varredura');if(!d.ok)return;const v=d.varredura||{},run=v.estado==='escaneando'||v.estado==='aplicando';
+  $('b-rel').disabled=$('b-apl').disabled=run;
+  const L={ocioso:'Nenhuma varredura executada.',escaneando:'Lendo membros dos grupos...',aplicando:'Restringindo usuários...',concluido:'Concluída.',erro:'Erro: '+esc(v.erro)};
+  let h=`<p class="note" style="margin:14px 0 0"><span class="badge ${v.estado==='erro'?'r':run?'y':'g'}">${L[v.estado]||v.estado}</span></p>`;
+  if(v.grupos&&v.grupos.length)h+=tbl(['Grupo','Membros','Bots','Admins','Com acesso','Já restritos','Livres'],v.grupos.map(g=>[`<span class="id">${g.gid}</span>`,`${g.total} <small>(lidos ${g.lidos})</small>`,g.bots,g.admins,g.com_acesso,g.ja_restritos,`<span class="badge ${g.livres?'r':'g'}">${g.livres}</span>`]),'');
+  if(v.aplicar){const f=v.restringidos+v.pendentes+v.pulados;
+    h+=`<div class="prog"><i style="width:${Math.min(100,f/Math.max(1,v.livres)*100)}%"></i></div><div class="kv"><div><b>${v.restringidos}</b><span>Restringidos</span></div><div><b>${v.pendentes}</b><span>Pendentes (bot repete)</span></div><div><b>${v.pulados}</b><span>Pulados</span></div></div>`}
+  else if(v.estado==='concluido'&&v.livres)h+=`<p class="note" style="margin-top:12px">${v.livres} usuários livres sem acesso. Use <b>Restringir todos os livres</b> para aplicar.</p>`;
+  $('var-out').innerHTML=h;
+  if(!run){clearInterval(poll);if(v.estado==='concluido'&&v.aplicar)reloadAll()}
 }
 
-async function carregarRestritos() {
-  try {
-    const d = await api('/api/restritos');
-    if (!d.ok) return;
-    const lista = d.restritos || [];
-    const el = document.getElementById('rest-list');
-    if (!lista.length) { el.innerHTML = emptyState('ic-check','Nenhum usuário restrito','var(--green)'); return; }
-    el.innerHTML = lista.map(r => `
-      <div class="row-card">
-        <div class="row-top"><div class="row-id">${r.uid}</div><span style="color:var(--red);font-weight:700;font-size:12px">${Number(r.horas_rest).toLocaleString()}h</span></div>
-        <div class="row-meta"><span>Desde <b>${fmtDate(r.data_restricao)}</b></span><span>Expira <b>${fmtDate(r.data_liberacao)}</b></span></div>
-        <div class="row-actions"><button class="btn btn-success btn-sm" style="flex:1" onclick="desrestRapido('${r.uid}')"><svg width="12" height="12"><use href="#ic-unlock"/></svg>Liberar</button></div>
-      </div>`).join('');
-  } catch(e) { console.error('carregarRestritos:',e); }
-}
-
-async function carregarTestes() {
-  try {
-    const d = await api('/api/testes');
-    if (!d.ok) return;
-    const lista = d.testes || [];
-    document.getElementById('trial-list').innerHTML = lista.length
-      ? lista.map(t => {
-          const pct = Math.max(2,(t.dias_rest/3)*100);
-          const cor = t.dias_rest<=0?'var(--red)':t.dias_rest<=1?'var(--yellow)':'var(--green)';
-          return `<div class="row-card">
-            <div class="row-top"><div><div class="row-id">${t.uid}</div><div class="row-uname">${t.username||'Sem username'}</div></div>
-              <div style="text-align:right"><div style="font-size:12px;font-weight:700;color:${cor}">+${t.dias_rest}d</div><div style="font-size:10.5px;color:var(--text-3)">até ${fmtDate(t.data_fim)}</div></div>
-            </div>
-            <div class="progress-bar"><div class="progress-fill green" style="width:${pct}%"></div></div>
-          </div>`;
-        }).join('')
-      : emptyState('ic-gift','Nenhum trial ativo no momento','var(--text-3)');
-  } catch(e) { console.error('carregarTestes:',e); }
-}
-
-async function carregarAfiliados() {
-  try {
-    const d = await api('/api/afiliados');
-    if (!d.ok) return;
-    set('afil-total', d.total);
-    set('afil-indicados', d.total_indicados);
-    set('afil-ganhos', 'R$ '+(d.total_ganhos||0).toFixed(2));
-    const lista = d.afiliados || [];
-    document.getElementById('afiliados-list').innerHTML = lista.length
-      ? lista.map((a,i) => `
-          <div class="row-card">
-            <div class="row-top"><div><span style="color:var(--text-3);font-weight:700;font-size:11px">#${i+1}</span> <span class="row-id">${a.uid}</span></div>
-              <span class="badge ${a.saldo>0?'yellow':'green'}"><div class="badge-dot"></div>R$ ${(a.saldo||0).toFixed(2)}</span></div>
-            <div class="row-meta"><span>${a.username?'@'+a.username:'—'}</span><span><b style="color:var(--purple-3)">${a.indicados}</b> indicações</span><span>Ganhos: <b style="color:var(--green)">R$ ${(a.ganhos_total||0).toFixed(2)}</b></span></div>
-          </div>`).join('')
-      : emptyState('ic-users','Nenhum afiliado cadastrado ainda','var(--text-3)');
-  } catch(e) { console.error('carregarAfiliados:',e); }
-}
-
-function emptyState(icon,msg,color){
-  return `<div class="empty-state"><svg width="30" height="30" color="${color}"><use href="#${icon}"/></svg><div>${msg}</div></div>`;
-}
-
-// ============================================================
-// RENDERS LOCAIS
-// ============================================================
-function renderSubTable() {
-  const filter = (document.getElementById('filter-sub')?.value||'').toLowerCase();
-  const ativas = dadosAssinaturas.filter(s=>s.ativa).length;
-  set('sub-ativas', ativas);
-  const rows = dadosAssinaturas.filter(s =>
-    !filter || String(s.uid).includes(filter) || (s.username||'').toLowerCase().includes(filter));
-  const el = document.getElementById('sub-list');
-  if (!rows.length) { el.innerHTML = emptyState('ic-search','Nenhum resultado','var(--text-3)'); return; }
-  el.innerHTML = rows.map(s => {
-    const d = s.dias_rest;
-    const badge = s.ativa
-      ? (d<=2?'<span class="badge yellow"><div class="badge-dot"></div>Expirando</span>'
-             :'<span class="badge green"><div class="badge-dot"></div>Ativa</span>')
-      : '<span class="badge red"><div class="badge-dot"></div>Expirada</span>';
-    return `<div class="row-card">
-      <div class="row-top"><div><div class="row-id">${s.uid}</div><div class="row-uname">${s.username||'—'}</div></div>${badge}</div>
-      <div class="row-meta"><span>Expira <b>${fmtDate(s.data_fim)}</b></span><span style="color:${d<=3?'var(--red)':d<=7?'var(--yellow)':'var(--green)'};font-weight:700">${d} dias rest.</span></div>
-      <div class="row-actions"><button class="btn btn-danger btn-sm" style="flex:1" onclick="cancelarRapido('${s.uid}')"><svg width="12" height="12"><use href="#ic-x"/></svg>Cancelar</button></div>
-    </div>`;
-  }).join('');
-}
-
-function renderExpirar() {
-  const exp = dadosAssinaturas.filter(s=>s.ativa&&s.dias_rest<=7).sort((a,b)=>a.dias_rest-b.dias_rest);
-  const el = document.getElementById('expirar-list');
-  el.innerHTML = exp.length
-    ? exp.map(x=>`
-        <div class="row-card">
-          <div class="row-top"><div><div class="row-id">${x.uid}</div><div class="row-uname">${x.username||''}</div></div>
-            <span style="font-weight:800;font-size:15px;color:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'var(--text-1)'}">${x.dias_rest}d</span></div>
-          <div class="row-meta"><span>Expira <b>${fmtDate(x.data_fim)}</b></span></div>
-        </div>`).join('')
-    : emptyState('ic-check','Nenhuma expira em 7 dias','var(--green)');
-}
-
-function renderDashExpirar() {
-  const exp = dadosAssinaturas.filter(s=>s.ativa&&s.dias_rest<=7).sort((a,b)=>a.dias_rest-b.dias_rest).slice(0,5);
-  const el = document.getElementById('dash-expirar');
-  el.innerHTML = exp.length
-    ? exp.map(x=>`
-        <div class="row-card">
-          <div class="row-top"><span class="row-id">${x.uid}${x.username?' · '+x.username:''}</span>
-            <span style="font-size:11.5px;font-weight:700;color:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'var(--text-2)'}">${x.dias_rest}d</span></div>
-          <div class="progress-bar"><div class="progress-fill" style="width:${Math.max(2,x.dias_rest/30*100)}%;background:${x.dias_rest<=1?'var(--red)':x.dias_rest<=3?'var(--yellow)':'linear-gradient(90deg,var(--purple-1),var(--purple-3))'}"></div></div>
-        </div>`).join('')
-    : emptyState('ic-check','Nenhum expira em 7 dias','var(--green)');
-}
-
-// ============================================================
-// AÇÕES
-// ============================================================
-async function liberarUsuario() {
-  const uid=parseInt(document.getElementById('lib-uid').value);
-  const dias=parseInt(document.getElementById('lib-dias').value)||30;
-  if (!uid){toast('Informe o ID!','error');return;}
-  const btn=document.getElementById('btn-liberar'); btn.disabled=true;
-  try {
-    const d=await api('/api/acao/liberar','POST',{uid,dias});
-    if(d.ok){toast(`${uid} liberado por ${dias} dias`,'success');document.getElementById('lib-uid').value='';await carregarStats();await carregarAssinaturas();}
-    else toast('Erro: '+d.erro,'error');
-  } catch(e){toast('Erro de conexão','error');}
-  btn.disabled=false;
-}
-
-async function checkStatus() {
-  const uid=parseInt(document.getElementById('lib-uid').value);
-  if(!uid){toast('Informe o ID!','error');return;}
-  try {
-    const d=await api(`/api/status_user/${uid}`);
-    const el=document.getElementById('status-content');
-    if(!d.ok){el.innerHTML=`<div style="color:var(--red)">Erro: ${d.erro}</div>`;document.getElementById('status-result').style.display='block';return;}
-    const sub=d.assinatura, at=sub&&sub.ativa;
-    let html=`<div style="font-size:11px;color:var(--text-3);margin-bottom:8px;font-family:'JetBrains Mono',monospace">ID: ${uid}</div>`;
-    html+=`<div style="margin-bottom:6px;display:flex;align-items:center;gap:6px"><svg width="13" height="13" color="${at?'var(--green)':'var(--red)'}"><use href="${at?'#ic-check':'#ic-x'}"/></svg>${at?'<b>Assinatura ativa</b>':'Sem assinatura ativa'}</div>`;
-    if(sub) html+=`<div style="font-size:12px;color:var(--text-2);margin-bottom:4px">Expira: ${fmtDate(sub.data_fim)} (${sub.dias_rest} dias)</div>`;
-    if(d.restrito) html+=`<div style="display:flex;align-items:center;gap:5px;color:var(--red);margin-top:4px"><svg width="13" height="13" color="var(--red)"><use href="#ic-mute"/></svg><b>Usuário restrito</b></div>`;
-    if(d.trial) html+=`<div style="display:flex;align-items:center;gap:5px;color:var(--purple-3);margin-top:4px"><svg width="13" height="13" color="var(--purple-3)"><use href="#ic-gift"/></svg>${d.trial.ativo?'Trial ativo até '+fmtDate(d.trial.data_fim):'Trial já utilizado'}</div>`;
-    if(d.afiliado) html+=`<div style="display:flex;align-items:center;gap:5px;color:var(--green);margin-top:4px"><svg width="13" height="13" color="var(--green)"><use href="#ic-users"/></svg>Indicações: ${d.afiliado.indicados} | Saldo: R$ ${d.afiliado.saldo.toFixed(2)}</div>`;
-    el.innerHTML=html;
-    document.getElementById('status-result').style.display='block';
-  } catch(e){toast('Erro de conexão','error');}
-}
-
-async function cancelarAssinatura() {
-  const uid=parseInt(document.getElementById('cancel-uid').value);
-  if(!uid){toast('Informe o ID!','error');return;}
-  if(!confirm(`Cancelar assinatura de ${uid}?`))return;
-  try {
-    const d=await api('/api/acao/cancelar','POST',{uid});
-    if(d.ok){toast(`Assinatura de ${uid} cancelada`);document.getElementById('cancel-uid').value='';await carregarStats();await carregarAssinaturas();}
-    else toast('Erro: '+d.erro,'error');
-  } catch(e){toast('Erro de conexão','error');}
-}
-
-async function desrestringirUsuario() {
-  const uid=parseInt(document.getElementById('desrest-uid').value);
-  if(!uid){toast('Informe o ID!','error');return;}
-  try {
-    const d=await api('/api/acao/desrestringir','POST',{uid});
-    if(d.ok){toast(`Restrição de ${uid} removida`);document.getElementById('desrest-uid').value='';await carregarStats();await carregarRestritos();}
-    else toast('Erro: '+d.erro,'error');
-  } catch(e){toast('Erro de conexão','error');}
-}
-
-async function cancelarRapido(uid) {
-  if(!confirm(`Cancelar assinatura de ${uid}?`))return;
-  try {
-    const d=await api('/api/acao/cancelar','POST',{uid:parseInt(uid)});
-    if(d.ok){toast(`Assinatura ${uid} cancelada`);await carregarStats();await carregarAssinaturas();}
-    else toast('Erro: '+d.erro,'error');
-  } catch(e){toast('Erro','error');}
-}
-
-async function desrestRapido(uid) {
-  try {
-    const d=await api('/api/acao/desrestringir','POST',{uid:parseInt(uid)});
-    if(d.ok){toast(`${uid} desrestringido`);await carregarRestritos();await carregarStats();}
-    else toast('Erro: '+d.erro,'error');
-  } catch(e){toast('Erro','error');}
-}
-
-async function liberarModal() {
-  const uid=parseInt(document.getElementById('m-lib-uid').value);
-  const dias=parseInt(document.getElementById('m-lib-dias').value)||30;
-  if(!uid){toast('Informe o ID!','error');return;}
-  try {
-    const d=await api('/api/acao/liberar','POST',{uid,dias});
-    if(d.ok){toast(`${uid} liberado por ${dias} dias`);closeSheet('sheet-liberar');await carregarStats();await carregarAssinaturas();}
-    else toast('Erro: '+d.erro,'error');
-  } catch(e){toast('Erro de conexão','error');}
-}
-
-async function cancelarModal() {
-  const uid=parseInt(document.getElementById('m-cancel-uid').value);
-  if(!uid){toast('ID inválido!','error');return;}
-  try {
-    const d=await api('/api/acao/cancelar','POST',{uid});
-    if(d.ok){toast('Cancelado');closeSheet('sheet-cancelar');await carregarStats();await carregarAssinaturas();}
-    else toast('Erro: '+d.erro,'error');
-  } catch(e){toast('Erro de conexão','error');}
-}
-
-async function estenderModal() {
-  const dias=parseInt(document.getElementById('m-ext-dias').value)||30;
-  try {
-    const d=await api('/api/acao/estender_todas','POST',{dias});
-    if(d.ok){toast(`${d.afetados} assinaturas estendidas por ${dias} dias`);closeSheet('sheet-estender');await carregarAssinaturas();}
-    else toast('Erro: '+d.erro,'error');
-  } catch(e){toast('Erro de conexão','error');}
-}
-
-async function desrestModal() {
-  const uid=parseInt(document.getElementById('m-desrest-uid').value);
-  if(!uid){toast('ID inválido!','error');return;}
-  try {
-    const d=await api('/api/acao/desrestringir','POST',{uid});
-    if(d.ok){toast(`${uid} desrestringido`);closeSheet('sheet-desrest');await carregarRestritos();await carregarStats();}
-    else toast('Erro: '+d.erro,'error');
-  } catch(e){toast('Erro de conexão','error');}
-}
-
-async function gerarBackup() {
-  try {
-    toast('Gerando backup...','info');
-    const res=await fetch(`${API_BASE}/api/backup`,{headers:{'X-Auth-Token':AUTH_TOKEN}});
-    const blob=await res.blob();
-    const a=document.createElement('a');
-    a.href=URL.createObjectURL(blob);
-    a.download=`berserk_backup_${new Date().toISOString().slice(0,10)}.json`;
-    a.click();
-    toast('Backup baixado com sucesso!');
-  } catch(e){toast('Erro ao gerar backup','error');}
-}
-
-function exportarCSVAssinaturas() {
-  if(!dadosAssinaturas.length){toast('Carregue os dados primeiro','error');return;}
-  let csv='user_id,username,data_inicio,data_fim,dias_restantes,ativa\n';
-  dadosAssinaturas.forEach(s=>{csv+=`${s.uid},${s.username||''},${s.data_inicio||''},${fmtDate(s.data_fim)},${s.dias_rest},${s.ativa}\n`;});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
-  a.download=`berserk_assinaturas_${new Date().toISOString().slice(0,10)}.csv`;
-  a.click();
-  toast('CSV exportado!');
-}
-
-async function verificarConexao() {
-  try {
-    const d=await api('/api/stats');
-    if(d.ok){toast(`Bot online — ${d.ativas} ativos, ${d.restritos} restritos`);setStatusOnline(true);}
-    else{toast('Bot respondeu com erro','error');setStatusOnline(false);}
-  } catch(e){toast('Sem conexão com a API','error');setStatusOnline(false);}
-}
-
-// ============================================================
-// NAVEGAÇÃO / UI
-// ============================================================
-function goTab(id) {
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab-item').forEach(n=>n.classList.remove('active'));
-  const pg=document.getElementById('page-'+id);
-  if(pg) pg.classList.add('active');
-  const tab=document.querySelector(`.tab-item[data-tab="${id}"]`);
-  if(tab) tab.classList.add('active');
-  const labels={dashboard:'Dashboard',planos:'Planos',assinaturas:'Assinaturas',restritos:'Restritos',testes:'Testes Grátis',liberar:'Liberar Usuário',afiliados:'Afiliados',expirar:'A Expirar',backup:'Backup'};
-  set('topbar-page', labels[id]||id);
-  document.querySelector('.content').scrollTo(0,0);
-  window.scrollTo(0,0);
-}
-function openSheet(id){document.getElementById(id).classList.add('open');}
-function closeSheet(id){document.getElementById(id).classList.remove('open');}
-document.querySelectorAll('.sheet-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
-
-function toggleSearch(){
-  const el=document.getElementById('search-overlay');
-  el.classList.toggle('open');
-  if(el.classList.contains('open')) document.getElementById('global-search').focus();
-}
-document.getElementById('global-search').addEventListener('keydown',e=>{
-  if(e.key==='Enter'){
-    const uid=e.target.value.trim();
-    if(!uid)return;
-    document.getElementById('lib-uid').value=uid;
-    toggleSearch();
-    goTab('liberar');
-    setTimeout(checkStatus,150);
-  }
-});
-
-function toast(msg,type='success') {
-  const el=document.createElement('div'); el.className=`toast ${type}`;
-  const ico=type==='success'?'#ic-check':type==='info'?'#ic-info':'#ic-x';
-  const clr=type==='success'?'var(--green)':type==='info'?'var(--blue)':'var(--red)';
-  el.innerHTML=`<svg width="16" height="16" color="${clr}"><use href="${ico}"/></svg>${msg}`;
-  document.getElementById('toasts').appendChild(el);
-  setTimeout(()=>el.remove(),4000);
-}
-function setStatusOnline(online) {
-  document.getElementById('status-dot').className='status-dot-sm'+(online?'':' offline');
-}
-function setDias(n) {
-  document.getElementById('lib-dias').value=n;
-  document.querySelectorAll('#page-liberar .chip').forEach(c=>c.classList.toggle('selected',c.getAttribute('onclick')===`setDias(${n})`));
-}
-function setExtDias(n) {
-  document.getElementById('m-ext-dias').value=n;
-  document.querySelectorAll('#sheet-estender .chip').forEach(c=>c.classList.toggle('selected',c.getAttribute('onclick')===`setExtDias(${n})`));
-}
-function set(id,html){const el=document.getElementById(id);if(el)el.innerHTML=html;}
-function fmtDate(d){if(!d)return '—';try{return new Date(d).toLocaleDateString('pt-BR');}catch(e){return d;}}
-
-// ============================================================
-// DONUT CHART
-// ============================================================
-let _donutAnim=null;
-function desenharDonut(ativas,restritos,testes,usuarios) {
-  const canvas=document.getElementById('donut-chart');
-  if(!canvas)return;
-  const ctx=canvas.getContext('2d');
-  const W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,R=72,r=45;
-  const semPlano=Math.max(0,usuarios-ativas-restritos-testes);
-  const total=ativas+restritos+testes+semPlano||1;
-  const segments=[
-    {val:ativas,   color:'#8b5cf6',glow:'#6c3fff'},
-    {val:restritos,color:'#ff4d6d',glow:'#ff4d6d'},
-    {val:testes,   color:'#22d6a0',glow:'#22d6a0'},
-    {val:semPlano, color:'#38bdf8',glow:'#38bdf8'},
-  ];
-  let progress=0;
-  if(_donutAnim)cancelAnimationFrame(_donutAnim);
-  function draw(p) {
-    ctx.clearRect(0,0,W,H);
-    ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.arc(cx,cy,r,0,Math.PI*2,true);ctx.fillStyle='#1a1730';ctx.fill();
-    let startAngle=-Math.PI/2; const gap=0.045;
-    segments.forEach(seg=>{
-      if(seg.val<=0)return;
-      const sweep=(seg.val/total)*Math.PI*2*p;
-      if(sweep<0.01)return;
-      ctx.shadowColor=seg.glow; ctx.shadowBlur=12;
-      ctx.beginPath();ctx.arc(cx,cy,R,startAngle+gap/2,startAngle+sweep-gap/2);ctx.arc(cx,cy,r,startAngle+sweep-gap/2,startAngle+gap/2,true);ctx.closePath();ctx.fillStyle=seg.color;ctx.fill();
-      ctx.shadowBlur=0; startAngle+=sweep;
-    });
-    ctx.beginPath();ctx.arc(cx,cy,r-1,0,Math.PI*2);ctx.strokeStyle='#2a2545';ctx.lineWidth=1;ctx.stroke();
-  }
-  function animate(){progress+=0.038;if(progress>=1){progress=1;draw(1);return;}draw(progress);_donutAnim=requestAnimationFrame(animate);}
-  animate();
-  const pct=v=>total>1?Math.round(v/total*100):0;
-  const setleg=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
-  setleg('leg-ativas',    ativas);
-  setleg('leg-restritos', restritos);
-  setleg('leg-testes',    testes);
-  setleg('leg-sem',       semPlano);
-  setleg('leg-ativas-pct',    pct(ativas)+'%');
-  setleg('leg-restritos-pct', pct(restritos)+'%');
-  setleg('leg-testes-pct',    pct(testes)+'%');
-  setleg('leg-sem-pct',       pct(semPlano)+'%');
-  setleg('donut-total', usuarios);
-}
+/* backup */
+function baixar(b,n){const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=n;a.click()}
+async function backup(){try{const r=await fetch(API+'/api/backup',{headers:{'X-Auth-Token':TOKEN}});baixar(await r.blob(),`berserk_backup_${new Date().toISOString().slice(0,10)}.json`);toast('Backup baixado')}catch(e){toast('Erro ao gerar backup','e')}}
+function csv(){if(!SUBS.length)return toast('Sem dados carregados','e');
+  baixar(new Blob(['user_id,username,data_fim,dias_restantes,ativa\n'+SUBS.map(s=>`${s.uid},${s.username||''},${fd(s.data_fim)},${s.dias_rest},${s.ativa}`).join('\n')],{type:'text/csv'}),`berserk_assinaturas_${new Date().toISOString().slice(0,10)}.csv`)}
 </script>
 </body>
 </html>
