@@ -61,6 +61,14 @@ td{padding:11px 12px;border-bottom:1px solid #2a254566}tr:hover td{background:va
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.chip{background:var(--card2);border:1px solid var(--bd);border-radius:10px;padding:8px 12px;font-size:12.5px;color:var(--t2);cursor:pointer}.chip.on{background:var(--glow);border-color:#6c3fff44;color:var(--p3);font-weight:700}
 #toasts{position:fixed;top:18px;right:18px;display:flex;flex-direction:column;gap:8px;z-index:999;pointer-events:none}
 .toast{background:var(--card);border:1px solid var(--bd);border-left:3px solid var(--green);border-radius:11px;padding:12px 16px;font-size:13px;box-shadow:0 8px 28px #0008;max-width:380px}.toast.e{border-left-color:var(--red)}
+/* busca global + perfil do usuário */
+.srch{display:flex;gap:8px;flex:1;max-width:440px}.srch .inp{margin:0}
+.p{background:var(--glow);color:var(--p3)}
+.ov2{position:fixed;inset:0;background:#09080fcc;backdrop-filter:blur(4px);z-index:250;display:none;align-items:center;justify-content:center;padding:20px}.ov2.on{display:flex}
+.modal{background:var(--panel);border:1px solid var(--bd);border-radius:20px;width:560px;max-width:100%;max-height:88vh;overflow-y:auto;padding:22px}
+.sh2{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;font-weight:800;font-size:16px}
+.ph{font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--t3);margin:18px 0 4px}
+.pr{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #2a254566;font-size:13px}.pr span{color:var(--t2)}.pr b{font-weight:600;text-align:right}
 /* barra de abas e folha "Mais" (só no celular) */
 .tabbar,.ov{display:none}
 @media(max-width:899px){
@@ -76,6 +84,8 @@ td{padding:11px 12px;border-bottom:1px solid #2a254566}tr:hover td{background:va
   td::before{content:attr(data-l);color:var(--t3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;text-align:left;flex-shrink:0}
   td[data-l=""]::before{content:none}td[data-l=""]{justify-content:flex-end}td:empty{display:none}tr:hover td{background:none}
   #toasts{top:calc(12px + var(--st));left:16px;right:16px}.toast{max-width:none}
+  .top{flex-wrap:wrap;row-gap:10px}.srch{order:3;flex-basis:100%;max-width:none}
+  .ov2{align-items:flex-end;padding:0}.modal{border-radius:22px 22px 0 0;width:100%;padding-bottom:calc(22px + var(--sb))}
   .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:80;height:calc(var(--tab) + var(--sb));background:#0f0d1aee;backdrop-filter:blur(16px);border-top:1px solid var(--bd);padding-bottom:var(--sb)}
   .tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--t3);font-size:10px;font-weight:600;position:relative;cursor:pointer}
   .tab em{font-style:normal;font-size:19px;line-height:1}.tab.on{color:var(--p3)}.tab.on::before{content:'';position:absolute;top:0;width:28px;height:2.5px;background:var(--p2);border-radius:0 0 3px 3px}
@@ -115,6 +125,7 @@ td{padding:11px 12px;border-bottom:1px solid #2a254566}tr:hover td{background:va
 
   <main>
     <div class="top"><div><h2 id="ttl">Dashboard</h2><div class="sub" id="sub-ttl"></div></div>
+      <form class="srch" onsubmit="event.preventDefault();pesquisar()"><input class="inp" id="g-q" placeholder="🔍 Buscar usuário por ID ou @username" autocomplete="off"><button class="btn" type="submit">Buscar</button></form>
       <div class="row" style="flex-wrap:nowrap"><button class="btn gh" onclick="reloadAll()">↻<span class="dk">&nbsp;Atualizar</span></button><button class="btn gh mo" onclick="logout()">⎋</button></div></div>
 
     <section class="page on" id="p-dash">
@@ -150,7 +161,7 @@ td{padding:11px 12px;border-bottom:1px solid #2a254566}tr:hover td{background:va
     <section class="page" id="p-acoes"><div class="cols">
       <div class="card"><h3>Liberar usuário</h3><input class="inp" id="lb-uid" type="number" inputmode="numeric" placeholder="ID do usuário">
         <div class="chips" id="chips"><div class="chip" data-d="7">7d</div><div class="chip" data-d="15">15d</div><div class="chip on" data-d="30">30d</div><div class="chip" data-d="60">60d</div><div class="chip" data-d="90">90d</div><div class="chip" data-d="365">365d</div></div>
-        <input class="inp" id="lb-dias" type="number" inputmode="numeric" value="30" placeholder="Dias"><div class="row"><button class="btn" onclick="liberar()">Liberar</button><button class="btn gh" onclick="status('lb-uid')">Ver status</button></div><div id="st-out" class="note" style="margin-top:12px"></div></div>
+        <input class="inp" id="lb-dias" type="number" inputmode="numeric" value="30" placeholder="Dias"><div class="row"><button class="btn" onclick="liberar()">Liberar</button><button class="btn gh" onclick="buscar(val('lb-uid'))">Ver perfil</button></div></div>
       <div class="card"><h3>Cancelar plano</h3><div class="row"><input class="inp" id="cn-uid" type="number" inputmode="numeric" placeholder="ID"><button class="btn rd" onclick="cancelar(val('cn-uid'))">Cancelar</button></div></div>
       <div class="card"><h3>Restringir</h3><div class="row"><input class="inp" id="rs2-uid" type="number" inputmode="numeric" placeholder="ID"><button class="btn rd" onclick="restringir('rs2-uid')">Restringir</button></div></div>
       <div class="card"><h3>Desrestringir</h3><div class="row"><input class="inp" id="dr-uid" type="number" inputmode="numeric" placeholder="ID"><button class="btn gn" onclick="desrest(val('dr-uid'))">Remover restrição</button></div></div>
@@ -181,6 +192,9 @@ td{padding:11px 12px;border-bottom:1px solid #2a254566}tr:hover td{background:va
 </div>
 <div class="ov" id="s-mais" onclick="if(event.target===this)this.classList.remove('on')"><div class="sheet"><div class="hd"></div><div class="sh">Mais opções<button class="btn gh sm" onclick="$('s-mais').classList.remove('on')">✕</button></div>
   <div class="grid"><div class="gi" data-go="testes"><em>🎁</em>Testes grátis</div><div class="gi" data-go="afil"><em>👥</em>Afiliados</div><div class="gi" data-go="acoes"><em>⚙️</em>Ações</div><div class="gi" data-go="bkp"><em>💾</em>Backup</div></div></div></div>
+<div class="ov2" id="s-user" onclick="if(event.target===this)this.classList.remove('on')"><div class="modal">
+  <div class="sh2"><span>Perfil do usuário</span><span class="row" style="flex-wrap:nowrap;gap:6px"><button class="btn gh sm" onclick="buscar(CUR)">↻</button><button class="btn gh sm" onclick="$('s-user').classList.remove('on')">✕</button></span></div>
+  <div id="u-body"></div></div></div>
 <div id="toasts"></div>
 
 <script>
@@ -276,15 +290,57 @@ const cancelar=u=>{if(!u)return toast('Informe o ID','e');if(confirm(`Cancelar o
 const desrest=u=>{if(!u)return toast('Informe o ID','e');act('/api/acao/desrestringir',{uid:u},`Restrição de ${u} removida`)};
 const restringir=i=>{const u=val(i);if(!u)return toast('Informe o ID','e');if(confirm(`Restringir ${u}?`))act('/api/acao/restringir',{uid:u},`${u} restringido`)};
 const estender=()=>{const d=val('ex-dias');if(d&&confirm(`Adicionar ${d} dias a TODAS as assinaturas ativas?`))act('/api/acao/estender_todas',{dias:d},`Assinaturas estendidas em ${d} dias`)};
-async function status(i){
-  const u=val(i);if(!u)return toast('Informe o ID','e');
-  const d=await api('/api/status_user/'+u);if(!d.ok)return toast(d.erro||'Erro','e');const s=d.assinatura;
-  let h=`<b>${u}</b><br>`+(s&&s.ativa?`Plano ativo até ${fd(s.data_fim)} (${s.dias_rest} dias)<br>`:'Sem plano ativo<br>');
-  if(d.restrito)h+='<span style="color:var(--red)">Restrito</span><br>';
-  if(d.trial)h+=d.trial.ativo?`Teste ativo até ${fd(d.trial.data_fim)}<br>`:'Teste já utilizado<br>';
-  if(d.afiliado)h+=`Afiliado: ${d.afiliado.indicados} indicações, saldo R$ ${d.afiliado.saldo.toFixed(2)}`;
-  $('st-out').innerHTML=h;
+/* busca global + perfil do usuário */
+let CUR=0;
+const kvr=(k,v)=>`<div class="pr"><span>${k}</span><b>${v}</b></div>`;
+const TGS={member:['Membro','g'],administrator:['Admin','g'],creator:['Dono','g'],restricted:['Restrito','r'],left:['Fora do grupo','y'],kicked:['Banido','r']};
+function pesquisar(){
+  const q=$('g-q').value.trim().replace(/^@/,'');if(!q)return;
+  let u=/^\d+$/.test(q)?parseInt(q):0;
+  if(!u){const m=SUBS.find(s=>(s.username||'').replace(/^@/,'').toLowerCase()===q.toLowerCase());u=m?parseInt(m.uid):0}
+  if(!u)return toast('Informe o ID numérico (ou o @username de um assinante)','e');
+  buscar(u);
 }
+async function buscar(u){
+  if(!u)return toast('Informe o ID','e');CUR=u;
+  try{const d=await api('/api/status_user/'+u);if(!d.ok)return toast(d.erro||'Erro','e');
+    $('u-body').innerHTML=perfil(d);$('s-user').classList.add('on')}catch(e){toast('Erro de conexão','e')}
+}
+function perfil(d){
+  const s=d.assinatura,t=d.trial,r=d.restricao,a=d.afiliado,u=d.usuario,w=d.uid;
+  let h=`<div class="row" style="margin-bottom:8px"><span class="id" style="font-size:17px">${w}</span>${d.admin?'<span class="badge p">Admin</span>':''}<span class="badge ${d.acesso?'g':'r'}">${d.acesso?'Pode falar (plano ou teste)':'Sem acesso'}</span></div>`;
+  h+=`<div class="note" style="margin:0">${u?esc(u.first_name)+(u.username?` <span class="id">@${esc(u.username)}</span>`:''):'Nunca iniciou o bot'}</div>`;
+  h+='<div class="ph">No Telegram (agora)</div>';
+  if(!d.telegram)h+=kvr('Grupos','indisponível');
+  else d.telegram.forEach(g=>{const x=TGS[g.status]||[g.status,'y'];
+    h+=kvr(`Grupo <span class="id">${g.gid}</span>`,g.erro?`<span class="badge y">${esc(g.erro)}</span>`:`<span class="badge ${x[1]}">${x[0]}</span>`+(g.no_grupo?` <span class="badge ${g.pode_falar?'g':'r'}">${g.pode_falar?'pode falar':'bloqueado'}</span>`:''))});
+  h+='<div class="ph">Assinatura</div>';
+  if(!s)h+=kvr('Situação','Nunca assinou');
+  else{h+=kvr('Situação',s.ativa?'<span class="badge g">Ativa</span>':'<span class="badge r">Expirada</span>');
+    h+=kvr(s.ativa?'Expira em':'Expirou em',fd(s.data_fim)+(s.ativa?` (${s.dias_rest} dias)`:''));
+    h+=kvr('Última ativação',fd(s.data_inicio));if(s.dias_total)h+=kvr('Dias acumulados',s.dias_total)}
+  h+='<div class="ph">Teste grátis</div>';
+  if(!t)h+=kvr('Situação','Nunca usou');
+  else{h+=kvr('Situação',t.ativo?'<span class="badge g">Ativo</span>':'<span class="badge y">Já utilizado</span>');
+    h+=kvr('Início',fd(t.data_inicio));h+=kvr(t.ativo?'Termina em':'Terminou em',fd(t.data_fim))}
+  h+='<div class="ph">Restrição</div>';
+  if(!r)h+=kvr('Situação','Fora da lista de restritos');
+  else{h+=kvr('Situação','<span class="badge r">Restrito</span>');h+=kvr('Desde',fd(r.data_restricao));
+    h+=kvr('Registro libera em',fd(r.data_liberacao));h+=kvr('Aplicado no Telegram',r.aplicado===false?'<span class="badge y">Pendente</span>':'Sim')}
+  if(a||(u&&u.indicado_por)){h+='<div class="ph">Afiliados</div>';
+    if(u&&u.indicado_por)h+=kvr('Indicado por',`<span class="id">${u.indicado_por}</span>`);
+    if(a){h+=kvr('Indicações',a.indicados);h+=kvr('Saldo','R$ '+a.saldo.toFixed(2));h+=kvr('Ganhos totais','R$ '+a.ganhos_total.toFixed(2))}}
+  if(u&&u.data_inicio)h+=kvr('No bot desde',fd(u.data_inicio));
+  h+=`<div class="ph">Ações</div><div class="row"><input class="inp" id="pa-d" type="number" inputmode="numeric" value="30" style="max-width:90px;flex:none;min-width:0"><button class="btn" onclick="pLib(${w})">Liberar</button><button class="btn rd" onclick="pCan(${w})">Cancelar plano</button></div>
+    <div class="row" style="margin-top:10px"><button class="btn rd" onclick="pRes(${w})">Restringir</button><button class="btn gn" onclick="pDes(${w})">Desrestringir</button></div>`;
+  return h;
+}
+const pa=async(path,body,ok,u)=>{await act(path,body,ok);buscar(u)};
+const pLib=u=>pa('/api/acao/liberar',{uid:u,dias:val('pa-d')||30},`${u} liberado`,u);
+const pCan=u=>confirm(`Cancelar o plano de ${u}?`)&&pa('/api/acao/cancelar',{uid:u},`Plano de ${u} cancelado`,u);
+const pRes=u=>confirm(`Restringir ${u}?`)&&pa('/api/acao/restringir',{uid:u},`${u} restringido`,u);
+const pDes=u=>pa('/api/acao/desrestringir',{uid:u},`Restrição de ${u} removida`,u);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('s-user').classList.remove('on')});
 
 /* Telethon / varredura */
 async function loadTele(){
