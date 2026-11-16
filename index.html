@@ -68,6 +68,9 @@ td{padding:11px 12px;border-bottom:1px solid #2a254566}tr:hover td{background:va
 .modal{background:var(--panel);border:1px solid var(--bd);border-radius:20px;width:560px;max-width:100%;max-height:88vh;overflow-y:auto;padding:22px}
 .sh2{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;font-weight:800;font-size:16px}
 .ph{font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--t3);margin:18px 0 4px}
+.sum{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 2px}
+.sc{border-radius:14px;padding:12px 14px;border:1px solid var(--bd);background:var(--bg)}.sc small{display:block;font-size:10.5px;letter-spacing:.6px;color:var(--t3);margin-bottom:4px}.sc b{display:block;font-size:15px;margin-bottom:2px}.sc span{font-size:11.5px;color:var(--t2)}
+.sc.g{border-color:#22d6a050}.sc.g b{color:var(--green)}.sc.r{border-color:#ff4d6d50}.sc.r b{color:var(--red)}.sc.y{border-color:#f59e0b50}.sc.y b{color:var(--yellow)}
 .pr{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #2a254566;font-size:13px}.pr span{color:var(--t2)}.pr b{font-weight:600;text-align:right}
 /* barra de abas e folha "Mais" (só no celular) */
 .tabbar,.ov{display:none}
@@ -310,6 +313,10 @@ function perfil(d){
   const s=d.assinatura,t=d.trial,r=d.restricao,a=d.afiliado,u=d.usuario,w=d.uid;
   let h=`<div class="row" style="margin-bottom:8px"><span class="id" style="font-size:17px">${w}</span>${d.admin?'<span class="badge p">Admin</span>':''}<span class="badge ${d.acesso?'g':'r'}">${d.acesso?'Pode falar (plano ou teste)':'Sem acesso'}</span></div>`;
   h+=`<div class="note" style="margin:0">${u?esc(u.first_name)+(u.username?` <span class="id">@${esc(u.username)}</span>`:''):'Nunca iniciou o bot'}</div>`;
+  const pl=s&&s.ativa?['g','Plano ativo',`até ${fd(s.data_fim)} (${s.dias_rest} dias)`]:s?['r','Plano expirado',`expirou em ${fd(s.data_fim)}`]:['y','Sem plano','nunca assinou'];
+  const usado=d.teste_usado??!!t;
+  const te=t&&t.ativo?['g','Teste ativo',`até ${fd(t.data_fim)}`]:usado?['r','Teste já utilizado',t?`de ${fd(t.data_inicio)} a ${fd(t.data_fim)}`:'não pode usar de novo']:['y','Teste não utilizado','ainda disponível para ele'];
+  h+=`<div class="sum"><div class="sc ${pl[0]}"><small>PLANO</small><b>${pl[1]}</b><span>${pl[2]}</span></div><div class="sc ${te[0]}"><small>TESTE GRÁTIS</small><b>${te[1]}</b><span>${te[2]}</span></div></div>`;
   h+='<div class="ph">No Telegram (agora)</div>';
   if(!d.telegram)h+=kvr('Grupos','indisponível');
   else d.telegram.forEach(g=>{const x=TGS[g.status]||[g.status,'y'];
